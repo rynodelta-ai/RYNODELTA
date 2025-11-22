@@ -2,61 +2,483 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Equipo táctico Ryno Delta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo Táctico Ryno Delta</title>
+    
+    <!-- Estilos base de la página -->
     <style>
+        /* Variables de color para un estilo minimalista y táctico */
+        :root {
+            --color-primary: #C5A67C; /* Arena Táctica / Coyote para destacar */
+            --color-dark: #111111;    /* Fondo muy oscuro para secciones */
+            --color-text: #e0e0e0;    /* Texto claro */
+            --color-accent: #333333;  /* Fondo de secciones */
+        }
+        
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #0a0a0a;
-            color: #e5e5e5;
+            background-color: var(--color-dark);
+            color: var(--color-text);
             text-align: center;
-            padding: 40px;
+        }
+
+        /* ESTILOS DEL BANNER PRINCIPAL (HOME) */
+        #main-banner {
+            height: 100vh;
+            position: relative; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; /* Centrado vertical */
+            align-items: center; /* Centrado horizontal */
+            
+            /* --- CÓDIGO RESTAURADO PARA EL FONDO GIF/IMAGEN --- */
+            background-color: #000000; /* Fondo negro sólido como fallback */
+            background-image: url('uploaded:BANNERRYNO.gif-00e6ab87-212f-4401-8500-f1968cbb9626');
+            background-size: cover; 
+            background-position: center center; 
+            background-repeat: no-repeat; 
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6); /* Overlay oscuro para legibilidad */
+            /* ------------------------------------------------ */
+            
+            overflow: hidden; 
+        }
+
+        /* El contenido (Texto y Botón) es el centro de atención */
+        #main-banner .banner-content {
+            z-index: 3; 
+            position: relative; 
+            padding: 20px 40px;
+            border-radius: 10px;
         }
 
         h1 {
-            font-size: 48px;
-            letter-spacing: 2px;
+            font-size: 80px; 
+            letter-spacing: 6px; 
             text-transform: uppercase;
-            color: #d4af37;
+            color: var(--color-primary); /* Color Arena Táctica */
+            margin-bottom: 5px;
+            /* Efecto sutil de brillo, ajustado al nuevo color primario */
+            text-shadow: 0 0 15px rgba(197, 166, 124, 1); 
         }
 
         h2 {
-            font-size: 22px;
-            color: #bbbbbb;
+            font-size: 32px; 
+            color: var(--color-text); 
+            margin-top: 0;
+            margin-bottom: 50px; 
+            font-weight: 300;
         }
-
-        p {
-            font-size: 18px;
-            color: #cccccc;
-        }
-
+        
+        /* Estilo base para el botón de acción */
         .boton {
             display: inline-block;
-            padding: 15px 25px;
-            background-color: #d4af37;
+            padding: 15px 30px;
+            background-color: var(--color-primary); /* Color Arena Táctica */
             color: #000;
             font-weight: bold;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px; 
+            font-size: 22px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            /* Sombra ajustada al nuevo color primario */
+            box-shadow: 0 5px 15px rgba(197, 166, 124, 0.5); 
+            cursor: pointer;
+        }
+        .boton:hover {
+            background-color: #A3835B; /* Tono más oscuro de arena para hover */
+            transform: translateY(-2px);
+            /* Sombra ajustada al nuevo color primario */
+            box-shadow: 0 8px 20px rgba(197, 166, 124, 0.7);
+        }
+        
+        /* Estilos generales de las secciones de contenido */
+        section {
+            padding: 80px 20px;
+            min-height: 80vh;
+            border-bottom: 1px solid var(--color-accent);
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .content-box {
+            max-width: 900px; 
+            margin: 0 auto;
+            text-align: left;
+            padding: 40px;
+            background-color: var(--color-accent);
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+        }
+        
+        .content-box h2 {
+            text-align: center;
+            color: var(--color-primary); /* Color Arena Táctica */
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--color-primary); /* Color Arena Táctica */
+            padding-bottom: 10px;
+        }
+        
+        /* Estilos para tarjetas de servicio */
+        .service-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
             margin-top: 40px;
-            font-size: 20px;
+        }
+        
+        .service-card {
+            flex: 1 1 300px;
+            background-color: var(--color-dark);
+            padding: 25px;
+            border-radius: 10px;
+            /* Sombra ajustada al nuevo color primario */
+            box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
+            text-align: center;
+            border-left: 3px solid var(--color-primary); /* Color Arena Táctica */
         }
 
-        .boton:hover {
-            background-color: #b8942e;
+        .service-card h3 {
+            color: var(--color-primary); /* Color Arena Táctica */
+            text-transform: uppercase;
+            margin-top: 0;
+        }
+
+        /* CLASES DE VISIBILIDAD */
+        .oculto {
+            display: none;
+            pointer-events: none;
+        }
+        
+        /* Las secciones de contenido visibles usan 'block' (excepto el banner) */
+        .contenido-pagina.visible {
+            display: block;
+            pointer-events: auto;
+        }
+        
+        /* El banner principal debe ser flex cuando está visible */
+        #main-banner.visible {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        
+        /* Estilo del botón de Volver */
+        .boton-volver {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 40px auto; 
+            padding: 10px 20px;
+            background-color: #222;
+            color: var(--color-primary); /* Color Arena Táctica */
+            border: 1px solid var(--color-primary); /* Color Arena Táctica */
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .boton-volver:hover {
+            background-color: var(--color-primary); /* Color Arena Táctica */
+            color: #000;
+        }
+
+        /* Estilos del Menú Hamburguesa */
+        .menu-icon {
+            cursor: pointer;
+            padding: 10px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            /* Sombra ajustada al nuevo color primario */
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.2); 
+        }
+        .menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-primary); /* Color Arena Táctica */
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        
+        /* El menú en sí, que se despliega sobre la pantalla */
+        .nav-menu {
+            height: 100%;
+            width: 0; /* Inicialmente cerrado */
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.98);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 100px;
+            text-align: center;
+        }
+        .nav-menu a {
+            padding: 15px 8px 15px 32px;
+            text-decoration: none;
+            font-size: 30px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .nav-menu a:hover {
+            color: var(--color-primary); /* Color Arena Táctica */
+            letter-spacing: 1px;
+        }
+
+        /* Media Query para responsividad en pantallas más pequeñas */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 50px;
+                letter-spacing: 4px;
+            }
+            h2 {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+            .nav-menu a {
+                font-size: 22px;
+            }
+            section {
+                padding: 60px 10px;
+            }
+            .content-box {
+                padding: 20px;
+            }
         }
     </style>
+    
+    <!-- Funcionalidad de Navegación (JavaScript Único) -->
+    <script>
+        
+        // Función para alternar la visibilidad del menú hamburguesa
+        function toggleNav() {
+            var menu = document.getElementById("myNav");
+            if (menu.style.width === "100%") { 
+                menu.style.width = "0%";
+            } else { 
+                menu.style.width = "100%";
+            }
+        }
+        
+        // Función principal para cambiar a la sección seleccionada
+        function mostrarSeccion(seccionId) {
+            // 1. Cierra el menú desplegable
+            document.getElementById("myNav").style.width = "0%";
+            
+            // 2. Oculta el banner principal y todas las secciones de contenido
+            document.getElementById('main-banner').classList.remove('visible'); 
+            document.getElementById('main-banner').classList.add('oculto');
+            
+            const secciones = document.querySelectorAll('.contenido-pagina');
+            secciones.forEach(seccion => {
+                seccion.classList.remove('visible');
+                seccion.classList.add('oculto');
+            });
+
+            // 3. Muestra solo la sección seleccionada
+            const seccionSeleccionada = document.getElementById(seccionId);
+            if (seccionSeleccionada) {
+                // Las secciones de contenido usan 'block' cuando son visibles
+                seccionSeleccionada.classList.remove('oculto'); 
+                seccionSeleccionada.classList.add('visible'); 
+                
+                // Desplázate al inicio de la página para ver el nuevo contenido
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        // Función para volver al banner principal (Home)
+        function volverInicio() {
+            // 1. Oculta todas las secciones de contenido
+            const secciones = document.querySelectorAll('.contenido-pagina');
+            secciones.forEach(seccion => {
+                seccion.classList.remove('visible');
+                seccion.classList.add('oculto');
+            });
+            
+            // 2. Muestra el banner principal (que es un flex container)
+            document.getElementById('main-banner').classList.remove('oculto');
+            document.getElementById('main-banner').classList.add('visible');
+            
+            // 3. Desplázate al inicio del banner
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Función para inicializar el estado de la página al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Asegura que las secciones de contenido estén ocultas al inicio
+            const secciones = document.querySelectorAll('.contenido-pagina');
+            secciones.forEach(seccion => {
+                seccion.classList.remove('visible'); 
+                seccion.classList.add('oculto');
+            });
+            
+            // 2. Asegura que el banner principal está visible al cargar
+            document.getElementById('main-banner').classList.add('visible');
+        });
+        
+    </script>
+    
 </head>
 <body>
+    
+    <!-- Bloque 1: HTML del Menú Desplegable (Hamburguesa) -->
+    <div id="myNav" class="nav-menu">
+        <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
+        <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
+        <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
+        <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
+    </div>
 
-    <h1>RYNO DELTA</h1>
-    <h2>Equipo táctico — Para misiones de verdad</h2>
+    <!-- Ícono Hamburguesa (Fijo a la izquierda) -->
+    <div class="menu-icon" onclick="toggleNav()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <!-- BANNER PRINCIPAL (HOME) -->
+    <section id="main-banner" class="visible">
+        <div class="banner-content">
+            
+            <!-- Texto de la marca -->
+            <h1>RYNO DELTA</h1>
+            <h2>Equipo Táctico para Misiones de Verdad</h2>
+            
+            <!-- Botón de acción principal -->
+            <a class="boton" href="#" onclick="mostrarSeccion('servicios'); return false;">VER PRODUCTOS &gt;</a>
+        </div>
+    </section>
 
-    <p>Bienvenido operador. Estamos construyendo la tienda oficial de Ryno Delta.</p>
+    <!-- SECCIÓN 1: QUIÉNES SOMOS -->
+    <section id="quienes-somos" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
-    <a class="boton" href="formulario.html">Comprar / Hacer pedido</a>
+        <div class="content-box">
+            <h2>QUIÉNES SOMOS</h2>
+            
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
+            </p>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
+            </p>
+            <p style="font-size: 1.1em; line-height: 1.8; color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
+                Equipamos tu confianza en cada despliegue.
+            </p>
+        </div>
+    </section>
 
-    <!-- Recompilación forzada Skynet -->
+    <!-- SECCIÓN 2: SERVICIOS -->
+    <section id="servicios" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
+        <div class="content-box" style="background-color: var(--color-accent);">
+            <h2>NUESTROS SERVICIOS Y ENVÍOS</h2>
+            
+            <p style="font-size: 1.1em; line-height: 1.8; text-align: center;">
+                Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
+            </p>
+
+            <div class="service-card-container">
+                <!-- Tarjeta 1: Pago Contra Entrega -->
+                <div class="service-card">
+                    <h3>PAGO CONTRA ENTREGA</h3>
+                    <p>
+                        Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                        *El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad.
+                    </p>
+                </div>
+                
+                <!-- Tarjeta 2: Pago en Línea (Rápido y Bonos) -->
+                <div class="service-card">
+                    <h3>PAGO EN LÍNEA SEGURO</h3>
+                    <p>
+                        Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                        *Obtenga tiempo de entrega preferencial y recompensas exclusivas.
+                    </p>
+                </div>
+            </div>
+            
+            <h3 style="color: var(--color-primary); text-align: center; margin-top: 50px;">Logística y Envíos Nacionales</h3>
+            <ul style="list-style-type: '&#9679; '; padding: 0 0 0 20px; max-width: 700px; margin: 20px auto; text-align: left; font-size: 1.0em;">
+                <li style="margin-bottom: 10px;">Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
+                <li style="margin-bottom: 10px;">Tiempo de entrega estándar: 3-5 días hábiles.</li>
+                <li style="margin-bottom: 10px;">En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
+                <li style="margin-bottom: 10px;">**Recomendación:** Confirme su cobertura antes de realizar la compra.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- SECCIÓN 3: CONTACTO -->
+    <section id="contacto" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+
+        <div class="content-box" style="text-align: center;">
+            <h2>CONTACTO RYNO DELTA</h2>
+            <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
+                Estamos listos para atender sus requerimientos.
+            </p>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
+                
+                <!-- Botón de WhatsApp Business. Usa el color verde de WhatsApp. -->
+                <a class="boton" href="https://wa.me/xxxxxxxxxx" target="_blank" style="background-color: #25d366; color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);">
+                    <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
+                </a>
+                
+                <!-- Correo Electrónico. Usa un contraste con el fondo oscuro. -->
+                <a class="boton" href="mailto:soporte@rynodelata.com" style="background-color: var(--color-text); color: var(--color-dark); box-shadow: 0 5px 15px rgba(224, 224, 224, 0.3);">
+                    <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> Enviar Correo Electrónico
+                </a>
+                
+            </div>
+            
+            <p style="margin-top: 40px; font-size: 0.9em; color: #888;">
+                Nuestro equipo de soporte está disponible de Lunes a Viernes (8am - 6pm COL).
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: POLÍTICAS -->
+    <section id="politicas" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+
+        <div class="content-box" style="background-color: var(--color-accent);">
+            <h2>POLÍTICAS Y GARANTÍA</h2>
+            
+            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
+            <p style="font-size: 1.0em; line-height: 1.6;">
+                Cumplimos estrictamente con la Ley 1581 de 2012. Sus datos son tratados con la máxima confidencialidad, utilizados exclusivamente para la gestión de su pedido y servicio al cliente. Su privacidad es nuestra prioridad táctica.
+            </p>
+            
+            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">GARANTÍA Y DEVOLUCIONES</h3>
+            <ul style="font-size: 1.0em; line-height: 1.8; text-align: left; list-style-type: '&#10003; '; padding: 0 0 0 20px;">
+                <li style="margin-bottom: 10px;">**Respuesta Rápida:** Máximo **siete días** para la resolución de cualquier reclamo de garantía.</li>
+                <li style="margin-bottom: 10px;">**Condición de Devolución:** El artículo debe ser devuelto en su **empaque original** y sin daño estructural o estético.</li>
+                <li style="margin-bottom: 10px;">**Fletes:** Los costos de transporte por devoluciones o garantías son asumidos por el cliente.</li>
+                <li style="margin-bottom: 10px;">**Exclusiones:** La garantía no cubre daños por mal uso o desgaste natural.</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer style="padding: 30px; background-color: #000; color: #444; font-size: 0.9em;">
+        &copy; 2025 RYNO DELTA - Todos los derechos reservados.
+    </footer>
+    
 </body>
 </html>
