@@ -42,6 +42,7 @@
             /* ---------------------------------- */
             
             overflow: hidden; 
+            transition: all 0.3s ease; /* Transición para que la desaparición sea suave */
         }
 
         /* El contenido (Texto y Botón) es el centro de atención */
@@ -100,6 +101,9 @@
             border-bottom: 1px solid var(--color-accent);
             position: relative; 
             overflow: hidden; 
+            display: flex; /* Mantenemos flex para centrar el contenido */
+            flex-direction: column;
+            justify-content: center; /* Mantenemos centrado vertical */
         }
         
         .content-box {
@@ -112,6 +116,7 @@
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
         
+        /* RESTAURAMOS LA VISIBILIDAD Y ESTILO DEL TÍTULO H2 */
         .content-box h2 {
             text-align: center;
             color: var(--color-primary); /* Color Arena Táctica */
@@ -147,27 +152,34 @@
         }
 
         /* CLASES DE VISIBILIDAD */
+        /* La clase 'oculto' ahora SÍ elimina el espacio del elemento */
         .oculto {
-            display: none;
+            display: none !important; /* Importante para asegurar que no ocupe espacio */
             pointer-events: none;
+            height: 0; /* Aseguramos que el banner pierda su altura al ser ocultado */
+            padding: 0;
         }
         
-        /* Las secciones de contenido visibles usan 'block' (excepto el banner) */
+        /* Las secciones de contenido visibles usan 'flex' */
         .contenido-pagina.visible {
-            display: block;
+            display: flex;
             pointer-events: auto;
+            height: auto;
+            min-height: 80vh; /* Restauramos la altura mínima de la sección */
         }
         
         /* El banner principal debe ser flex cuando está visible */
         #main-banner.visible {
             display: flex;
             pointer-events: auto;
+            height: 100vh; /* Restauramos la altura al volver al inicio */
+            padding: 0;
         }
 
         
-        /* Estilo del botón de Volver */
+        /* RESTAURAMOS LA VISIBILIDAD Y ESTILO DEL BOTÓN DE VOLVER */
         .boton-volver {
-            display: block;
+            display: block; /* Vuelve a ser visible */
             width: fit-content;
             margin: 0 auto 40px auto; 
             padding: 10px 20px;
@@ -275,10 +287,11 @@
             // 1. Cierra el menú desplegable
             document.getElementById("myNav").style.width = "0%";
             
-            // 2. Oculta el banner principal y todas las secciones de contenido
+            // 2. Oculta el banner principal y le QUITA el espacio (haciéndolo 'oculto')
             document.getElementById('main-banner').classList.remove('visible'); 
             document.getElementById('main-banner').classList.add('oculto');
             
+            // Oculta todas las secciones de contenido
             const secciones = document.querySelectorAll('.contenido-pagina');
             secciones.forEach(seccion => {
                 seccion.classList.remove('visible');
@@ -288,7 +301,7 @@
             // 3. Muestra solo la sección seleccionada
             const seccionSeleccionada = document.getElementById(seccionId);
             if (seccionSeleccionada) {
-                // Las secciones de contenido usan 'block' cuando son visibles
+                // Mantenemos la sección de contenido como visible
                 seccionSeleccionada.classList.remove('oculto'); 
                 seccionSeleccionada.classList.add('visible'); 
                 
@@ -297,7 +310,7 @@
             }
         }
         
-        // Función para volver al banner principal (Home)
+        // FUNCIÓN volverInicio()
         function volverInicio() {
             // 1. Oculta todas las secciones de contenido
             const secciones = document.querySelectorAll('.contenido-pagina');
@@ -306,12 +319,18 @@
                 seccion.classList.add('oculto');
             });
             
-            // 2. Muestra el banner principal (que es un flex container)
+            // 2. Muestra el banner principal (quitándole la clase 'oculto')
             document.getElementById('main-banner').classList.remove('oculto');
             document.getElementById('main-banner').classList.add('visible');
             
             // 3. Desplázate al inicio del banner
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* NUEVA FUNCIÓN QUE CIERRA EL MENÚ Y VUELVE AL INICIO */
+        function navegarInicio() {
+            toggleNav(); // Cierra el menú hamburguesa
+            volverInicio(); // Ejecuta la función de volver al banner principal
         }
         
         // Función para inicializar el estado de la página al cargar
@@ -334,6 +353,8 @@
     
     <!-- Bloque 1: HTML del Menú Desplegable (Hamburguesa) -->
     <div id="myNav" class="nav-menu">
+        <!-- CORRECCIÓN: Llamamos a la nueva función navegarInicio() y detenemos el comportamiento predeterminado del enlace -->
+        <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
         <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
         <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
@@ -356,16 +377,17 @@
             <h2>Equipo Táctico para Misiones de Verdad</h2>
             
             <!-- Botón de acción principal -->
-            <a class="boton" href="#" onclick="mostrarSeccion('servicios'); return false;">VER PRODUCTOS &gt;</a>
+            <a class="boton" href="#" onclick="mostrarSeccion('servicios'); return false;">VER PRODUCTOS &gt;</a> 
         </div>
     </section>
 
     <!-- SECCIÓN 1: QUIÉNES SOMOS -->
     <section id="quienes-somos" class="contenido-pagina oculto">
+        <!-- Botón Volver Restaurado -->
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box">
-            <h2>QUIÉNES SOMOS</h2>
+            <h2>QUIÉNES SOMOS</h2> <!-- Título Restaurado -->
             
             <p style="font-size: 1.1em; line-height: 1.8;">
                 **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
@@ -381,10 +403,11 @@
 
     <!-- SECCIÓN 2: SERVICIOS -->
     <section id="servicios" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
+        <!-- Botón Volver Restaurado -->
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box" style="background-color: var(--color-accent);">
-            <h2>NUESTROS SERVICIOS Y ENVÍOS</h2>
+            <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> <!-- Título Restaurado -->
             
             <p style="font-size: 1.1em; line-height: 1.8; text-align: center;">
                 Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
@@ -426,10 +449,11 @@
     
     <!-- SECCIÓN 3: CONTACTO -->
     <section id="contacto" class="contenido-pagina oculto">
+        <!-- Botón Volver Restaurado -->
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box" style="text-align: center;">
-            <h2>CONTACTO RYNO DELTA</h2>
+            <h2>CONTACTO RYNO DELTA</h2> <!-- Título Restaurado -->
             <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
                 Estamos listos para atender sus requerimientos.
             </p>
@@ -447,10 +471,10 @@
                     <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
                 </a>
                 
-                <!-- Correo Electrónico. Usa un contraste con el fondo oscuro. -->
-                <a class="boton" href="mailto:soporte@rynodelata.com" style="background-color: var(--color-text); color: var(--color-dark); box-shadow: 0 5px 15px rgba(224, 224, 224, 0.3);">
-                    <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> Enviar Correo Electrónico
-                </a>
+                <!-- Correo Electrónico. Ahora es solo texto informativo inerte. -->
+                <span class="boton" style="background-color: var(--color-text); color: var(--color-dark); box-shadow: 0 5px 15px rgba(224, 224, 224, 0.3); cursor: default;">
+                    <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> rynodelta@gmail.com
+                </span>
                 
             </div>
             
@@ -462,10 +486,11 @@
 
     <!-- SECCIÓN 4: POLÍTICAS -->
     <section id="politicas" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
+        <!-- Botón Volver Restaurado -->
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box" style="background-color: var(--color-accent);">
-            <h2>POLÍTICAS Y GARANTÍA</h2>
+            <h2>POLÍTICAS Y GARANTÍA</h2> <!-- Título Restaurado -->
             
             <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
             <p style="font-size: 1.0em; line-height: 1.6;">
