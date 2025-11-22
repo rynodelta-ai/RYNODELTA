@@ -21,6 +21,7 @@
             background-color: var(--color-dark);
             color: var(--color-text);
             text-align: center;
+            line-height: 1.6; /* Mejora la legibilidad general para párrafos */
         }
 
         /* BANNER PRINCIPAL (HOME) - Ocupa toda la vista */
@@ -44,17 +45,18 @@
             background-color: var(--color-accent);
         }
 
+        /* Contenedor centralizado para todo el contenido de la sección */
         .seccion-contenido {
             max-width: 900px; 
-            margin: 0 auto;
-            text-align: left;
-            padding: 0;
+            margin: 0 auto; /* Centraliza el bloque de contenido */
+            text-align: left; /* Alineación de texto por defecto para mejor lectura */
+            padding: 20px; /* Padding interno para separación del borde */
             background-color: var(--color-accent); 
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
 
-        /* BOTÓN VOLVER (Única navegación fuera del inicio) */
+        /* BOTÓN VOLVER (Navegación táctica) */
         .boton-volver {
             display: block; 
             width: fit-content;
@@ -86,17 +88,17 @@
             padding-bottom: 10px;
         }
         
-        /* TARJETAS DE SERVICIO */
+        /* TARJETAS DE SERVICIO (Flexbox responsive) */
         .service-card-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Permite que las tarjetas se apilen en móvil */
             justify-content: center;
             gap: 25px;
             margin-top: 40px;
         }
         
         .service-card {
-            flex: 1 1 300px;
+            flex: 1 1 300px; /* Base de 300px, crece y se encoge */
             background-color: var(--color-dark);
             padding: 25px;
             border-radius: 10px;
@@ -109,9 +111,19 @@
             color: var(--color-primary); 
             text-transform: uppercase;
             margin-top: 0;
+            margin-bottom: 15px; 
         }
 
-        /* CLASES DE VISIBILIDAD (Single Page Application - SPA) */
+        /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
+        .centered-list {
+            max-width: 700px; 
+            margin: 20px auto; /* Centraliza la lista dentro del contenedor */
+            padding: 0 0 0 20px;
+            text-align: left;
+            font-size: 1.0em;
+        }
+
+        /* CLASES DE VISIBILIDAD (SPA) */
         .oculto {
             display: none !important; 
             pointer-events: none;
@@ -127,36 +139,35 @@
             min-height: 80vh;
         }
         
-        /* ELEMENTOS DE NAVEGACIÓN FIJOS (Menú y Logo) */
+        /* NAVEGACIÓN FIJA (Menú y Logo) */
+        .menu-icon, .header-logo {
+            position: fixed; 
+            z-index: 9999; 
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
         .menu-icon {
             cursor: pointer;
             padding: 10px;
-            position: fixed; 
             top: 20px;
             left: 20px;
-            z-index: 9999; 
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(197, 166, 124, 0.2); 
-            transition: opacity 0.3s; 
         }
         .menu-icon div {
             width: 30px;
             height: 3px;
             background-color: var(--color-primary); 
             margin: 6px 0;
-            transition: 0.4s;
         }
         
         .header-logo {
-            position: fixed; 
             top: 20px;
             right: 20px;
             width: 106px; 
             height: auto;
-            z-index: 9999; 
             cursor: pointer;
-            transition: opacity 0.3s, transform 0.3s;
         }
         .header-logo:hover {
             transform: scale(1.05); 
@@ -198,23 +209,6 @@
             letter-spacing: 1px;
         }
 
-        /* MEDIA QUERY (MÓVIL) */
-        @media (max-width: 768px) {
-            .nav-menu a {
-                font-size: 22px;
-            }
-            .header-logo {
-                width: 80px; 
-            }
-            /* Ajuste de variable para offset móvil */
-            :root {
-                --header-height: 100px;
-            }
-            .boton-volver {
-                 margin: calc(var(--header-height) - 20px) auto 20px auto; 
-            }
-        }
-        
         /* ESTILOS DE CONTACTO */
         .contact-link {
             display: block;
@@ -249,11 +243,40 @@
             color: #444; 
             font-size: 0.9em;
         }
+        
+        /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .nav-menu a {
+                font-size: 22px;
+            }
+            .header-logo {
+                width: 80px; 
+            }
+            /* Reducción del padding de sección para optimizar el espacio en móvil */
+            section {
+                padding: 30px 10px; 
+            }
+            .seccion-contenido {
+                padding: 15px;
+            }
+            /* Ajuste de variable para offset móvil */
+            :root {
+                --header-height: 100px; /* Reducimos la altura para el cálculo de scroll */
+            }
+            .boton-volver {
+                 /* Ajusta el margen superior del botón para el nuevo header-height móvil */
+                 margin: calc(var(--header-height) - 30px) auto 30px auto; 
+            }
+             /* Asegura que las tarjetas de servicio ocupen todo el ancho en móvil */
+            .service-card {
+                 flex: 1 1 100%; 
+            }
+        }
     </style>
     
     <script>
         // Altura de los elementos fijos (constante de control de scroll)
-        const FIXED_HEADER_HEIGHT = 120; 
+        const FIXED_HEADER_HEIGHT = 120; // Altura base para desktop
 
         // Alterna la visibilidad del menú hamburguesa
         function toggleNav() {
@@ -282,9 +305,10 @@
                 seccionSeleccionada.classList.remove('oculto'); 
                 seccionSeleccionada.classList.add('visible'); 
                 
-                // Cálculo de scroll con offset manual
+                // Cálculo de scroll inteligente: usa 100px para móvil y 120px para desktop
+                const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 100 : FIXED_HEADER_HEIGHT;
                 const rect = seccionSeleccionada.getBoundingClientRect();
-                const targetScrollPosition = window.scrollY + rect.top - FIXED_HEADER_HEIGHT;
+                const targetScrollPosition = window.scrollY + rect.top - currentHeaderHeight;
                 
                 window.scrollTo({ 
                     top: targetScrollPosition, 
@@ -353,7 +377,6 @@
         <div></div>
         <div></div>
     </div>
-    <!-- Nota: Asume que "logoryno33.png" es un archivo existente en el entorno. -->
     <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
 
     <!-- BANNER PRINCIPAL (HOME) -->
@@ -366,13 +389,13 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
-            <p style="font-size: 1.1em; line-height: 1.8;">
+            <p>
                 **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
             </p>
-            <p style="font-size: 1.1em; line-height: 1.8;">
+            <p>
                 Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
             </p>
-            <p style="font-size: 1.1em; line-height: 1.8; color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
+            <p style="color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
                 Equipamos tu confianza en cada despliegue.
             </p>
         </div>
@@ -383,7 +406,7 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
-            <p style="font-size: 1.1em; line-height: 1.8; text-align: center;">
+            <p style="text-align: center;">
                 Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
             </p>
             <div class="service-card-container">
@@ -407,7 +430,7 @@
                 </div>
             </div>
             <h3 style="color: var(--color-primary); text-align: center; margin-top: 50px;">Logística y Envíos Nacionales</h3>
-            <ul style="list-style-type: '&#9679; '; padding: 0 0 0 20px; max-width: 700px; margin: 20px auto; text-align: left; font-size: 1.0em;">
+            <ul class="centered-list" style="list-style-type: '&#9679; '; ">
                 <li style="margin-bottom: 10px;">Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
                 <li style="margin-bottom: 10px;">Tiempo de entrega estándar: 3-5 días hábiles.</li>
                 <li style="margin-bottom: 10px;">En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
@@ -446,11 +469,11 @@
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
             <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
-            <p style="font-size: 1.0em; line-height: 1.6;">
+            <p>
                 Cumplimos estrictamente con la Ley 1581 de 2012. Sus datos son tratados con la máxima confidencialidad, utilizados exclusivamente para la gestión de su pedido y servicio al cliente. Su privacidad es nuestra prioridad táctica.
             </p>
             <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">GARANTÍA Y DEVOLUCIONES</h3>
-            <ul style="font-size: 1.0em; line-height: 1.8; text-align: left; list-style-type: '&#10003; '; padding: 0 0 0 20px;">
+            <ul class="centered-list" style="list-style-type: '&#10003; '; ">
                 <li style="margin-bottom: 10px;">**Respuesta Rápida:** Máximo **siete días** para la resolución de cualquier reclamo de garantía.</li>
                 <li style="margin-bottom: 10px;">**Condición de Devolución:** El artículo debe ser devuelto en su **empaque original** y sin daño estructural o estético.</li>
                 <li style="margin-bottom: 10px;">**Fletes:** Los costos de transporte por devoluciones o garantías son asumidos por el cliente.</li>
