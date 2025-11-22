@@ -163,7 +163,25 @@
             transition: 0.4s;
         }
         
-        /* SE ELIMINA LA CLASE .header-logo ya que no se usará. */
+        /* --- NUEVOS ESTILOS DEL LOGO FIJO --- */
+        .header-logo {
+            position: fixed;
+            top: 15px; 
+            right: 20px;
+            width: 110px; /* Nuevo ancho fijo (40% más grande que el menú hamburguesa) */
+            height: auto;
+            z-index: 1000; 
+            /* Efecto de resplandor sutil */
+            box-shadow: 0 0 20px rgba(197, 166, 124, 0.8); 
+            border-radius: 50%; /* Intento de redondear la sombra */
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.05);
+        }
+        /* ------------------------------------- */
         
         .nav-menu {
             height: 100%;
@@ -203,6 +221,12 @@
             }
             .content-box {
                 padding: 20px;
+            }
+            /* Ajuste de tamaño para móviles */
+            .header-logo {
+                width: 85px; /* Reducción de tamaño en móvil para que no sea demasiado grande */
+                top: 20px;
+                right: 15px;
             }
         }
         
@@ -333,6 +357,9 @@
         <div></div>
     </div>
     
+    <!-- NUEVO LOGO FIJO en la Esquina Superior Derecha -->
+    <img src="./logopng2.png" alt="Logo Ryno Delta" class="header-logo" onclick="volverInicio()">
+
     <!-- BANNER PRINCIPAL (HOME) --><section id="main-banner" class="visible">
         <div class="banner-content">
             
