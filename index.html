@@ -31,17 +31,15 @@
             justify-content: center; /* Centrado vertical */
             align-items: center; /* Centrado horizontal */
             
-            /* Fondo negro sólido (sin imagen de banner) */
+            /* Fondo negro sólido */
             background-color: #000000;
             
             overflow: hidden; 
             transition: all 0.3s ease; /* Transición para que la desaparición sea suave */
         }
 
-        /* ELIMINADO EL ESTILO .banner-logo (el logo grande y centrado ya no existe) */
-
         h1, h2, .boton {
-            /* Estos elementos estaban ocultos, los mantenemos ocultos para un diseño limpio de "solo logo" o "solo gif" si lo añades más tarde. */
+            /* Estos elementos estaban ocultos */
             display: none; 
         }
         
@@ -157,25 +155,8 @@
             transition: 0.4s;
         }
         
-        /* --- ESTILOS DEL LOGO FIJO PEQUEÑO (EN ESQUINA) --- */
-        .header-logo {
-            position: fixed;
-            top: 15px; 
-            right: 20px;
-            width: 80px; /* Tamaño más pequeño para el logo de navegación */
-            height: auto;
-            z-index: 1000; 
-            /* Efecto de resplandor sutil */
-            box-shadow: 0 0 15px rgba(197, 166, 124, 0.8); 
-            border-radius: 0; /* Asegura que no se recorte un PNG cuadrado */
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .header-logo:hover {
-            transform: scale(1.05);
-        }
-        /* ------------------------------------- */
+        /* ESTILOS ELIMINADOS PARA EL LOGO FIJO DE LA ESQUINA */
+        /* Eliminada la clase .header-logo y sus estilos asociados */
         
         .nav-menu {
             height: 100%;
@@ -215,12 +196,6 @@
             }
             .content-box {
                 padding: 20px;
-            }
-            /* Ajuste de tamaño para móviles */
-            .header-logo {
-                width: 70px; /* Reducción de tamaño en móvil */
-                top: 20px;
-                right: 15px;
             }
         }
         
@@ -296,7 +271,7 @@
             }
         }
         
-        // FUNCIÓN volverInicio()
+        // FUNCIÓN volverInicio() - Llama al Banner principal
         function volverInicio() {
             // 1. Oculta todas las secciones de contenido
             const secciones = document.querySelectorAll('.contenido-pagina');
@@ -351,16 +326,13 @@
         <div></div>
     </div>
     
-    <!-- LOGO FIJO PEQUEÑO en la Esquina Superior Derecha (ÚNICO LOGO) -->
-    <!-- Actúa como botón de "Volver al Inicio" y siempre está visible. -->
-    <img src="./logopng2.png" alt="Logo Ryno Delta" class="header-logo" onclick="volverInicio()">
+    <!-- ELEMENTO LOGO FIJO ELIMINADO -->
 
-    <!-- BANNER PRINCIPAL (HOME) - Ahora solo con fondo negro --><section id="main-banner" class="visible">
-        <!-- Contenido vacío para el banner principal. Solo se ve el fondo negro y el logo fijo de la esquina. -->
-    </section>
+    <!-- BANNER PRINCIPAL (HOME) - Solo fondo negro --><section id="main-banner" class="visible">
+        <!-- Contenido vacío para el banner principal. Es solo una pantalla negra para empezar. --></section>
 
     <!-- SECCIÓN 1: QUIÉNES SOMOS --><section id="quienes-somos" class="contenido-pagina oculto">
-        <!-- Botón Volver Restaurado --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <!-- Botón Volver (Ahora la única forma de volver al Home desde las secciones) --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box">
             <h2>QUIÉNES SOMOS</h2> <!-- Título Restaurado --><p style="font-size: 1.1em; line-height: 1.8;">
@@ -376,7 +348,7 @@
     </section>
 
     <!-- SECCIÓN 2: SERVICIOS --><section id="servicios" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
-        <!-- Botón Volver Restaurado --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <!-- Botón Volver --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box" style="background-color: var(--color-accent);">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> <!-- Título Restaurado --><p style="font-size: 1.1em; line-height: 1.8; text-align: center;">
@@ -416,7 +388,7 @@
     </section>
     
     <!-- SECCIÓN 3: CONTACTO --><section id="contacto" class="contenido-pagina oculto">
-        <!-- Botón Volver Restaurado --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <!-- Botón Volver --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> <!-- Título Restaurado --><p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
@@ -444,7 +416,7 @@
     </section>
 
     <!-- SECCIÓN 4: POLÍTICAS --><section id="politicas" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
-        <!-- Botón Volver Restaurado --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <!-- Botón Volver --><button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
 
         <div class="content-box" style="background-color: var(--color-accent);">
             <h2>POLÍTICAS Y GARANTÍA</h2> <!-- Título Restaurado --><h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
