@@ -32,14 +32,14 @@
             justify-content: center; /* Centrado vertical */
             align-items: center; /* Centrado horizontal */
             
-            /* --- CÓDIGO RESTAURADO PARA EL FONDO GIF/IMAGEN --- */
+            /* --- RUTA CORREGIDA PARA GITHUB --- */
             background-color: #000000; /* Fondo negro sólido como fallback */
-            background-image: url('uploaded:BANNERRYNO.gif-00e6ab87-212f-4401-8500-f1968cbb9626');
+            background-image: url('./BANNERRYNO.gif'); /* ¡IMPORTANTE! Sube el GIF a la misma carpeta que este HTML. */
             background-size: cover; 
             background-position: center center; 
             background-repeat: no-repeat; 
             box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6); /* Overlay oscuro para legibilidad */
-            /* ------------------------------------------------ */
+            /* ---------------------------------- */
             
             overflow: hidden; 
         }
@@ -437,7 +437,13 @@
             <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
                 
                 <!-- Botón de WhatsApp Business. Usa el color verde de WhatsApp. -->
-                <a class="boton" href="https://wa.me/xxxxxxxxxx" target="_blank" style="background-color: #25d366; color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);">
+                <a class="boton" 
+                   href="https://wa.me/573148172002" 
+                   target="_blank" 
+                   style="background-color: #25d366; color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);">
+                    
+                    <!-- ENLACE DE WHATSAPP INTEGRADO -->
+                    
                     <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
                 </a>
                 
