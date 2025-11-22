@@ -29,14 +29,14 @@
             height: 100vh;
             position: relative; 
             display: flex; 
-            flex-direction: column; /* Para centrar el logo verticalmente */
+            flex-direction: column; /* Se mantiene para posible futuro contenido */
             justify-content: center; 
             align-items: center; 
             background-color: #000000;
             overflow: hidden; 
             
             /* ESTILOS DEL GIF DE FONDO */
-            background-image: url('BANNERRYNO.gif'); /* <--- GIF IMPLEMENTADO AQUI */
+            background-image: url('BANNERRYNO.gif'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -55,19 +55,7 @@
             z-index: 1;
         }
 
-        /* Logo principal en el centro del banner */
-        .main-logo-center {
-            width: 300px; /* Tamaño del logo en el centro */
-            height: auto;
-            z-index: 2; /* Asegura que esté sobre el overlay y el GIF */
-            animation: fadeIn 2s ease-out; /* Animación de entrada */
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* (Se eliminó la clase .main-logo-center y sus estilos) */
 
 
         /* SECCIONES DE CONTENIDO GENERALES */
@@ -287,9 +275,7 @@
             .header-logo {
                 width: 80px; 
             }
-            .main-logo-center {
-                width: 200px; /* Reduce el tamaño del logo central en móvil */
-            }
+            /* (Se eliminó el estilo .main-logo-center para móvil) */
             /* Reducción del padding de sección para optimizar el espacio en móvil */
             section {
                 padding: 30px 10px; 
@@ -400,8 +386,7 @@
 </head>
 <body>
     
-    <!-- MENÚ DESPLEGABLE -->
-    <div id="myNav" class="nav-menu">
+    <!-- MENÚ DESPLEGABLE --><div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
         <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
@@ -409,22 +394,17 @@
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- NAVEGACIÓN FIJA (Solo visible en INICIO) -->
-    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+    <!-- NAVEGACIÓN FIJA (Solo visible en INICIO) --><div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
     <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
 
-    <!-- BANNER PRINCIPAL (HOME) -->
-    <section id="main-banner" class="visible">
-        <!-- Logo principal centrado sobre el GIF de fondo -->
-        <img src="logoryno33.png" alt="Logo Ryno Delta - Principal" class="main-logo-center">
-    </section>
+    <!-- BANNER PRINCIPAL (HOME) --><section id="main-banner" class="visible">
+        <!-- Contenido principal del banner, ahora sin logo central --><!-- El GIF BANNERRYNO.gif se muestra como fondo de esta sección --></section>
 
-    <!-- SECCIÓN 1: QUIÉNES SOMOS -->
-    <section id="quienes-somos" class="contenido-pagina oculto">
+    <!-- SECCIÓN 1: QUIÉNES SOMOS --><section id="quienes-somos" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
@@ -440,8 +420,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 2: SERVICIOS -->
-    <section id="servicios" class="contenido-pagina oculto">
+    <!-- SECCIÓN 2: SERVICIOS --><section id="servicios" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
@@ -478,8 +457,7 @@
         </div>
     </section>
     
-    <!-- SECCIÓN 3: CONTACTO -->
-    <section id="contacto" class="contenido-pagina oculto">
+    <!-- SECCIÓN 3: CONTACTO --><section id="contacto" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> 
@@ -502,8 +480,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 4: POLÍTICAS -->
-    <section id="politicas" class="contenido-pagina oculto">
+    <!-- SECCIÓN 4: POLÍTICAS --><section id="politicas" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
