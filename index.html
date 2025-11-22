@@ -38,16 +38,10 @@
             transition: all 0.3s ease; /* Transición para que la desaparición sea suave */
         }
 
-        /* El contenido (Ahora solo el Logo) es el centro de atención */
-        #main-banner .banner-content {
-            z-index: 3; 
-            position: relative; 
-            padding: 20px 40px;
-            border-radius: 10px;
-        }
+        /* ELIMINADO EL ESTILO .banner-logo (el logo grande y centrado ya no existe) */
 
         h1, h2, .boton {
-            /* Estilos de texto y botón que ahora están vacíos en el banner */
+            /* Estos elementos estaban ocultos, los mantenemos ocultos para un diseño limpio de "solo logo" o "solo gif" si lo añades más tarde. */
             display: none; 
         }
         
@@ -163,17 +157,17 @@
             transition: 0.4s;
         }
         
-        /* --- NUEVOS ESTILOS DEL LOGO FIJO --- */
+        /* --- ESTILOS DEL LOGO FIJO PEQUEÑO (EN ESQUINA) --- */
         .header-logo {
             position: fixed;
             top: 15px; 
             right: 20px;
-            width: 110px; /* Nuevo ancho fijo (40% más grande que el menú hamburguesa) */
+            width: 80px; /* Tamaño más pequeño para el logo de navegación */
             height: auto;
             z-index: 1000; 
             /* Efecto de resplandor sutil */
-            box-shadow: 0 0 20px rgba(197, 166, 124, 0.8); 
-            border-radius: 50%; /* Intento de redondear la sombra */
+            box-shadow: 0 0 15px rgba(197, 166, 124, 0.8); 
+            border-radius: 0; /* Asegura que no se recorte un PNG cuadrado */
             transition: transform 0.3s;
             cursor: pointer;
         }
@@ -224,7 +218,7 @@
             }
             /* Ajuste de tamaño para móviles */
             .header-logo {
-                width: 85px; /* Reducción de tamaño en móvil para que no sea demasiado grande */
+                width: 70px; /* Reducción de tamaño en móvil */
                 top: 20px;
                 right: 15px;
             }
@@ -357,16 +351,12 @@
         <div></div>
     </div>
     
-    <!-- NUEVO LOGO FIJO en la Esquina Superior Derecha -->
+    <!-- LOGO FIJO PEQUEÑO en la Esquina Superior Derecha (ÚNICO LOGO) -->
+    <!-- Actúa como botón de "Volver al Inicio" y siempre está visible. -->
     <img src="./logopng2.png" alt="Logo Ryno Delta" class="header-logo" onclick="volverInicio()">
 
-    <!-- BANNER PRINCIPAL (HOME) --><section id="main-banner" class="visible">
-        <div class="banner-content">
-            
-            <!-- CONTENIDO DEL BANNER: (Título y Botón) -->
-            <!-- Aquí podrías volver a añadir el logo principal si lo deseas. -->
-            
-        </div>
+    <!-- BANNER PRINCIPAL (HOME) - Ahora solo con fondo negro --><section id="main-banner" class="visible">
+        <!-- Contenido vacío para el banner principal. Solo se ve el fondo negro y el logo fijo de la esquina. -->
     </section>
 
     <!-- SECCIÓN 1: QUIÉNES SOMOS --><section id="quienes-somos" class="contenido-pagina oculto">
