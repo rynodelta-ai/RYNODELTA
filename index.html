@@ -7,17 +7,14 @@
     
     <!-- Estilos base de la página -->
     <style>
-        /* Variables de color para un estilo minimalista y táctico */
         :root {
-            --color-primary: #C5A67C; /* Arena Táctica / Coyote para destacar */
-            --color-dark: #111111;    /* Fondo muy oscuro para secciones */
-            --color-text: #e0e0e0;    /* Texto claro */
-            --color-accent: #333333;  /* Fondo de secciones */
+            --color-primary: #C5A67C;
+            --color-dark: #111111;
+            --color-text: #e0e0e0;
+            --color-accent: #333333;
         }
         
-        html, body {
-            height: 100%;
-        }
+        html, body { height: 100%; }
 
         body {
             margin: 0;
@@ -27,170 +24,83 @@
             text-align: center;
         }
 
-        /* ESTILOS DEL BANNER PRINCIPAL (HOME) */
+        /* BANNER con GIF */
         #main-banner {
             height: 100vh;
             min-height: 420px;
-            position: relative; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
 
-            /* Fondo con tu GIF */
-            background-color: #000000;
-            background-image: url('BANNERRYNO.gif'); /* GIF en la raíz del repo */
-            background-size: cover; 
-            background-position: center center; 
+            background-color: #000;
+            background-image: url('BANNERRYNO.gif');
+            background-size: cover;
+            background-position: center;
             background-repeat: no-repeat;
-
-            /* Overlay oscuro suave para legibilidad */
-            /* uso de pseudo-elemento para mejor control visual */
         }
 
-        /* Overlay oscuro para asegurar contraste (usa pseudo-elemento) */
         #main-banner::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 100%);
-            pointer-events: none;
+            background: rgba(0,0,0,0.45);
             z-index: 1;
         }
 
-        /* Contenedor de contenido dentro del banner (ahora vacío por tu pedido) */
+        /* Se eliminó contenido interno del banner */
         #main-banner .banner-content {
-            z-index: 2; 
-            position: relative; 
-            padding: 20px 40px;
-            border-radius: 10px;
-            /* si quieres que aparezca algo en el futuro, mantener estilos */
-            display: none; /* ocultamos todo el contenido del banner por pedido */
+            display: none !important;
         }
 
-        /* Titulares globales (secciones) */
-        h1, h2 {
-            margin: 0;
-        }
+        h1, h2 { margin: 0; }
+        h1 { font-size: 80px; letter-spacing: 6px; text-transform: uppercase; color: var(--color-primary); }
+        h2 { font-size: 32px; color: var(--color-text); }
 
-        h1 {
-            font-size: 80px; 
-            letter-spacing: 6px; 
-            text-transform: uppercase;
-            color: var(--color-primary);
-            text-shadow: 0 0 15px rgba(197, 166, 124, 1); 
-        }
-
-        h2 {
-            font-size: 32px; 
-            color: var(--color-text); 
-            font-weight: 300;
-        }
-        
         .boton {
             display: inline-block;
             padding: 15px 30px;
             background-color: var(--color-primary);
             color: #000;
-            font-weight: bold;
             text-decoration: none;
-            border-radius: 50px; 
+            border-radius: 50px;
             font-size: 22px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(197, 166, 124, 0.5); 
+            font-weight: bold;
+            transition: 0.3s;
             cursor: pointer;
         }
-        .boton:hover {
-            background-color: #A3835B;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(197, 166, 124, 0.7);
-        }
-        
+
         section {
             padding: 80px 20px;
             min-height: 80vh;
             border-bottom: 1px solid var(--color-accent);
-            position: relative; 
-            overflow: hidden; 
+            position: relative;
         }
-        
+
         .content-box {
-            max-width: 900px; 
+            max-width: 900px;
             margin: 0 auto;
             text-align: left;
             padding: 40px;
             background-color: var(--color-accent);
             border-radius: 10px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-        }
-        
-        .content-box h2 {
-            text-align: center;
-            color: var(--color-primary);
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--color-primary);
-            padding-bottom: 10px;
-        }
-        
-        .service-card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
-        }
-        
-        .service-card {
-            flex: 1 1 300px;
-            background-color: var(--color-dark);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
-            text-align: center;
-            border-left: 3px solid var(--color-primary);
-        }
-
-        .service-card h3 {
-            color: var(--color-primary);
-            text-transform: uppercase;
-            margin-top: 0;
-        }
-
-        .oculto {
-            display: none;
-            pointer-events: none;
-        }
-        
-        .contenido-pagina.visible {
-            display: block;
-            pointer-events: auto;
-        }
-        
-        #main-banner.visible {
-            display: flex;
-            pointer-events: auto;
+            box-shadow: 0 0 25px rgba(0,0,0,0.7);
         }
 
         .boton-volver {
             display: block;
-            width: fit-content;
-            margin: 0 auto 40px auto; 
+            margin: 0 auto 40px auto;
             padding: 10px 20px;
             background-color: #222;
             color: var(--color-primary);
             border: 1px solid var(--color-primary);
-            font-weight: bold;
-            text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s;
             cursor: pointer;
-        }
-        .boton-volver:hover {
-            background-color: var(--color-primary);
-            color: #000;
+            font-weight: bold;
         }
 
+        /* Icono menú */
         .menu-icon {
             cursor: pointer;
             padding: 10px;
@@ -198,278 +108,135 @@
             top: 20px;
             left: 20px;
             z-index: 9999;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0,0,0,0.7);
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(197, 166, 124, 0.2); 
         }
         .menu-icon div {
             width: 30px;
             height: 3px;
             background-color: var(--color-primary);
             margin: 6px 0;
-            transition: 0.4s;
         }
-        
+
+        /* Menú lateral */
         .nav-menu {
             height: 100%;
             width: 0;
             position: fixed;
-            z-index: 9998;
             top: 0;
             left: 0;
-            background-color: rgba(0, 0, 0, 0.98);
-            overflow-x: hidden;
-            transition: 0.5s;
+            background-color: rgba(0,0,0,0.98);
             padding-top: 100px;
             text-align: center;
+            transition: 0.5s;
+            z-index: 9998;
         }
         .nav-menu a {
-            padding: 15px 8px 15px 32px;
+            padding: 15px 32px;
             text-decoration: none;
             font-size: 30px;
             color: var(--color-text);
             display: block;
-            transition: 0.3s;
             text-transform: uppercase;
-            font-weight: 500;
-        }
-        .nav-menu a:hover {
-            color: var(--color-primary);
-            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        /* Ajustes para móviles: banner más corto, GIF responsivo, ocultar contenido del banner */
+        .oculto { display: none; }
+
         @media (max-width: 768px) {
             #main-banner {
                 height: 60vh;
                 min-height: 320px;
                 background-position: center top;
             }
-
-            /* Ocultar cualquier contenido en el banner (pediste eliminar títulos y botón) */
-            #main-banner .banner-content {
-                display: none !important;
-            }
-
-            h1 {
-                font-size: 40px;
-                letter-spacing: 3px;
-            }
-
-            h2 {
-                font-size: 18px;
-            }
-
-            .nav-menu a {
-                font-size: 22px;
-            }
-
-            section {
-                padding: 50px 12px;
-            }
-
-            .content-box {
-                padding: 18px;
-            }
-
-            .service-card {
-                padding: 18px;
-            }
+            section { padding: 50px 12px; }
+            .content-box { padding: 18px; }
         }
 
-        /* Pequeños ajustes para pantallas ultrapequeñas */
         @media (max-width: 420px) {
-            #main-banner {
-                height: 50vh;
-            }
-            .menu-icon { top: 12px; left: 12px; padding: 8px; }
+            #main-banner { height: 50vh; }
+            .menu-icon { top: 12px; left: 12px; }
         }
     </style>
-    
-    <!-- Funcionalidad de Navegación -->
+
+    <!-- Funcionalidad -->
     <script>
         function toggleNav() {
-            var menu = document.getElementById("myNav");
+            const menu = document.getElementById("myNav");
             menu.style.width = (menu.style.width === "100%") ? "0%" : "100%";
         }
-        
-        function mostrarSeccion(seccionId) {
+
+        function mostrarSeccion(id) {
             document.getElementById("myNav").style.width = "0%";
-            
-            document.getElementById('main-banner').classList.remove('visible'); 
             document.getElementById('main-banner').classList.add('oculto');
-            
-            const secciones = document.querySelectorAll('.contenido-pagina');
-            secciones.forEach(seccion => {
-                seccion.classList.remove('visible');
-                seccion.classList.add('oculto');
+
+            document.querySelectorAll('.contenido-pagina').forEach(s => {
+                s.classList.add('oculto');
             });
 
-            const seccionSeleccionada = document.getElementById(seccionId);
-            if (seccionSeleccionada) {
-                seccionSeleccionada.classList.remove('oculto'); 
-                seccionSeleccionada.classList.add('visible'); 
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-        
-        function volverInicio() {
-            const secciones = document.querySelectorAll('.contenido-pagina');
-            secciones.forEach(seccion => {
-                seccion.classList.remove('visible');
-                seccion.classList.add('oculto');
-            });
-            
-            document.getElementById('main-banner').classList.remove('oculto');
-            document.getElementById('main-banner').classList.add('visible');
+            document.getElementById(id).classList.remove('oculto');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            const secciones = document.querySelectorAll('.contenido-pagina');
-            secciones.forEach(seccion => {
-                seccion.classList.add('oculto');
+
+        function volverInicio() {
+            document.querySelectorAll('.contenido-pagina').forEach(s => {
+                s.classList.add('oculto');
             });
-            document.getElementById('main-banner').classList.add('visible');
-        });
+            document.getElementById('main-banner').classList.remove('oculto');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
-    
+
 </head>
 <body>
     
     <div id="myNav" class="nav-menu">
-        <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
-        <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
-        <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
-        <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
+        <a onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
+        <a onclick="mostrarSeccion('servicios')">SERVICIOS</a>
+        <a onclick="mostrarSeccion('contacto')">CONTACTO</a>
+        <a onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
     <div class="menu-icon" onclick="toggleNav()">
-        <div></div>
-        <div></div>
-        <div></div>
+        <div></div><div></div><div></div>
     </div>
     
-    <!-- BANNER: GIF como fondo. Contenido removido según pediste -->
-    <section id="main-banner" class="visible">
-        <div class="banner-content">
-            <!-- Contenido del banner eliminado a pedido -->
-        </div>
-    </section>
+    <!-- BANNER SOLO GIF -->
+    <section id="main-banner"></section>
 
+    <!-- CONTENIDO -->
     <section id="quienes-somos" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-
+        <button class="boton-volver" onclick="volverInicio()">‹ Volver</button>
         <div class="content-box">
             <h2>QUIÉNES SOMOS</h2>
-            
-            <p style="font-size: 1.1em; line-height: 1.8;">
-                <b>RYNO DELTA</b> es tu fuente confiable de equipo táctico y de supervivencia. Con más de <b>13 años de experiencia</b>, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
-            </p>
-
-            <p style="font-size: 1.1em; line-height: 1.8;">
-                Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
-            </p>
-
-            <p style="font-size: 1.1em; line-height: 1.8; color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
-                Equipamos tu confianza en cada despliegue.
-            </p>
+            <p><b>RYNO DELTA</b> es tu fuente confiable de equipo táctico y de supervivencia.</p>
         </div>
     </section>
 
-    <section id="servicios" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-
-        <div class="content-box" style="background-color: var(--color-accent);">
-            <h2>NUESTROS SERVICIOS Y ENVÍOS</h2>
-            
-            <p style="font-size: 1.1em; line-height: 1.8; text-align: center;">
-                Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
-            </p>
-
-            <div class="service-card-container">
-                <div class="service-card">
-                    <h3>PAGO CONTRA ENTREGA</h3>
-                    <p>
-                        Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
-                    </p>
-                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
-                        *El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad.
-                    </p>
-                </div>
-                
-                <div class="service-card">
-                    <h3>PAGO EN LÍNEA SEGURO</h3>
-                    <p>
-                        Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento.
-                    </p>
-                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
-                        *Obtenga tiempo de entrega preferencial y recompensas exclusivas.
-                    </p>
-                </div>
-            </div>
-            
-            <h3 style="color: var(--color-primary); text-align: center; margin-top: 50px;">Logística y Envíos Nacionales</h3>
-            <ul style="list-style-type: '&#9679; '; padding: 0 0 0 20px; max-width: 700px; margin: 20px auto; text-align: left; font-size: 1.0em;">
-                <li style="margin-bottom: 10px;">Envío Gratuito para órdenes que superen los <b>$80.000 COP</b>.</li>
-                <li style="margin-bottom: 10px;">Tiempo de entrega estándar: 3-5 días hábiles.</li>
-                <li style="margin-bottom: 10px;">En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
-                <li style="margin-bottom: 10px;"><b>Recomendación:</b> Confirme su cobertura antes de realizar la compra.</li>
-            </ul>
+    <section id="servicios" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">‹ Volver</button>
+        <div class="content-box">
+            <h2>NUESTROS SERVICIOS</h2>
         </div>
     </section>
-    
+
     <section id="contacto" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-
-        <div class="content-box" style="text-align: center;">
-            <h2>CONTACTO RYNO DELTA</h2>
-            <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
-                Estamos listos para atender sus requerimientos.
-            </p>
-            
-            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
-                
-                <a class="boton" href="https://wa.me/xxxxxxxxxx" target="_blank" style="background-color: #25d366; color: white; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);">
-                    <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
-                </a>
-                
-                <a class="boton" href="mailto:soporte@rynodelta.com" style="background-color: var(--color-text); color: var(--color-dark); box-shadow: 0 5px 15px rgba(224, 224, 224, 0.3);">
-                    <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> Enviar Correo Electrónico
-                </a>
-                
-            </div>
-            
-            <p style="margin-top: 40px; font-size: 0.9em; color: #888;">
-                Nuestro equipo de soporte está disponible de Lunes a Viernes (8am - 6pm COL).
-            </p>
+        <button class="boton-volver" onclick="volverInicio()">‹ Volver</button>
+        <div class="content-box">
+            <h2>CONTACTO</h2>
         </div>
     </section>
 
-    <section id="politicas" class="contenido-pagina oculto" style="background-color: var(--color-dark);">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-
-        <div class="content-box" style="background-color: var(--color-accent);">
-            <h2>POLÍTICAS Y GARANTÍA</h2>
-            
-            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
-            <p style="font-size: 1.0em; line-height: 1.6;">
-                Cumplimos estrictamente con la Ley 1581 de 2012. Sus datos son tratados con la máxima confidencialidad, utilizados exclusivamente para la gestión de su pedido y servicio al cliente. Su privacidad es nuestra prioridad táctica.
-            </p>
-            
-            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">GARANTÍA Y DEVOLUCIONES</h3>
-            <ul style="font-size: 1.0em; line-height: 1.8; text-align: left; list-style-type: '&#10003; '; padding: 0 0 0 20px;">
-                <li style="margin-bottom: 10px;"><b>Respuesta Rápida:</b> Máximo <b>siete días</b> para la resolución de cualquier reclamo de garantía.</li>
-                <li style="margin-bottom: 10px;"><b>Condición de Devolución:</b> El artículo debe ser devuelto en su <b>empaque original</b> y sin daño estructural o estético.</li>
-                <li style="margin-bottom: 10px;"><b>Fletes:</b> Los costos de transporte por devoluciones o garantías son asumidos por el cliente.</li>
-                <li style="margin-bottom: 10px;"><b>Exclusiones:</b> La garantía no cubre daños por mal uso o desgaste natural.</li>
-            </ul>
+    <section id="politicas" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">‹ Volver</button>
+        <div class="content-box">
+            <h2>POLÍTICAS</h2>
         </div>
     </section>
 
-    <footer style="padding: 30px; background-color: #000; color: #444; font-size: 0.9em;">
-        &copy; 2025 RYNO DELTA - Todos los derechos reservados.
+    <footer style="padding: 30px; background-color:#000; color:#444;">
+        © 2025 RYNO DELTA - Todos los derechos reservados.
     </footer>
-    
+
 </body>
 </html>
