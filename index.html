@@ -155,8 +155,21 @@
             transition: 0.4s;
         }
         
-        /* ESTILOS ELIMINADOS PARA EL LOGO FIJO DE LA ESQUINA */
-        /* Eliminada la clase .header-logo y sus estilos asociados */
+        /* ESTILOS AÑADIDOS PARA EL LOGO FIJO DE LA ESQUINA */
+        .header-logo {
+            position: fixed; /* Mantiene el logo visible al hacer scroll */
+            top: 20px;
+            right: 20px;
+            width: 60px; /* Tamaño por defecto para escritorio */
+            height: auto;
+            z-index: 1000;
+            cursor: pointer;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .header-logo:hover {
+            transform: scale(1.05); /* Ligeramente más grande al pasar el cursor */
+            opacity: 0.8;
+        }
         
         .nav-menu {
             height: 100%;
@@ -196,6 +209,10 @@
             }
             .content-box {
                 padding: 20px;
+            }
+            /* Ajustamos el tamaño del logo para móviles */
+            .header-logo {
+                width: 45px; 
             }
         }
         
@@ -326,7 +343,9 @@
         <div></div>
     </div>
     
-    <!-- ELEMENTO LOGO FIJO ELIMINADO -->
+    <!-- NUEVO LOGO FIJO EN LA ESQUINA DERECHA (Funciona como botón de inicio) -->
+    <!-- El `volverInicio()` asegura que al hacer clic se navegue al home -->
+    <img src="logoryno3.png" alt="Logo Ryno Delta - Inicio" class="header-logo" onclick="volverInicio()">
 
     <!-- BANNER PRINCIPAL (HOME) - Solo fondo negro --><section id="main-banner" class="visible">
         <!-- Contenido vacío para el banner principal. Es solo una pantalla negra para empezar. --></section>
