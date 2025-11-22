@@ -29,20 +29,24 @@
             height: 100vh;
             position: relative; 
             display: flex; 
-            flex-direction: column; /* Se mantiene para posible futuro contenido */
             justify-content: center; 
             align-items: center; 
             background-color: #000000;
             overflow: hidden; 
-            
-            /* ESTILOS DEL GIF DE FONDO */
-            background-image: url('BANNERRYNO.gif'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
         }
         
-        /* Overlay oscuro y desenfocado para darle el efecto táctico y de enfoque */
+        /* Nuevo contenedor/elemento para el GIF que garantiza la proporción correcta */
+        .banner-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* CLAVE: Asegura que el GIF cubra toda el área sin distorsionarse */
+            z-index: 0; /* Capa más baja */
+        }
+        
+        /* Overlay oscuro y desenfocado (se mantiene) */
         #main-banner::before {
             content: '';
             position: absolute;
@@ -52,10 +56,8 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7); /* Oscurece el fondo */
             backdrop-filter: blur(2px); /* Añade un ligero desenfoque sobre el GIF */
-            z-index: 1;
+            z-index: 1; /* Sobre el GIF */
         }
-
-        /* (Se eliminó la clase .main-logo-center y sus estilos) */
 
 
         /* SECCIONES DE CONTENIDO GENERALES */
@@ -71,9 +73,9 @@
         /* Contenedor centralizado para todo el contenido de la sección */
         .seccion-contenido {
             max-width: 900px; 
-            margin: 0 auto; /* Centraliza el bloque de contenido */
-            text-align: left; /* Alineación de texto por defecto para mejor lectura */
-            padding: 20px; /* Padding interno para separación del borde */
+            margin: 0 auto; 
+            text-align: left; 
+            padding: 20px; 
             background-color: var(--color-accent); 
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
@@ -94,6 +96,8 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             cursor: pointer;
+            z-index: 10; /* Asegura que esté sobre la sección */
+            position: relative;
         }
 
         .boton-volver:hover {
@@ -114,14 +118,14 @@
         /* TARJETAS DE SERVICIO (Flexbox responsive) */
         .service-card-container {
             display: flex;
-            flex-wrap: wrap; /* Permite que las tarjetas se apilen en móvil */
+            flex-wrap: wrap; 
             justify-content: center;
             gap: 25px;
             margin-top: 40px;
         }
         
         .service-card {
-            flex: 1 1 300px; /* Base de 300px, crece y se encoge */
+            flex: 1 1 300px; 
             background-color: var(--color-dark);
             padding: 25px;
             border-radius: 10px;
@@ -140,7 +144,7 @@
         /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
         .centered-list {
             max-width: 700px; 
-            margin: 20px auto; /* Centraliza la lista dentro del contenedor */
+            margin: 20px auto; 
             padding: 0 0 0 20px;
             text-align: left;
             font-size: 1.0em;
@@ -275,7 +279,6 @@
             .header-logo {
                 width: 80px; 
             }
-            /* (Se eliminó el estilo .main-logo-center para móvil) */
             /* Reducción del padding de sección para optimizar el espacio en móvil */
             section {
                 padding: 30px 10px; 
@@ -285,7 +288,7 @@
             }
             /* Ajuste de variable para offset móvil */
             :root {
-                --header-height: 100px; /* Reducimos la altura para el cálculo de scroll */
+                --header-height: 100px; 
             }
             .boton-volver {
                  /* Ajusta el margen superior del botón para el nuevo header-height móvil */
@@ -386,7 +389,8 @@
 </head>
 <body>
     
-    <!-- MENÚ DESPLEGABLE --><div id="myNav" class="nav-menu">
+    <!-- MENÚ DESPLEGABLE -->
+    <div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
         <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
@@ -394,17 +398,22 @@
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- NAVEGACIÓN FIJA (Solo visible en INICIO) --><div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+    <!-- NAVEGACIÓN FIJA (Solo visible en INICIO) -->
+    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
     <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
 
-    <!-- BANNER PRINCIPAL (HOME) --><section id="main-banner" class="visible">
-        <!-- Contenido principal del banner, ahora sin logo central --><!-- El GIF BANNERRYNO.gif se muestra como fondo de esta sección --></section>
+    <!-- BANNER PRINCIPAL (HOME) -->
+    <section id="main-banner" class="visible">
+        <!-- GIF ahora como elemento IMG para mayor compatibilidad y control de tamaño -->
+        <img src="BANNERRYNO.gif" alt="Fondo Animado Ryno Delta" class="banner-gif">
+    </section>
 
-    <!-- SECCIÓN 1: QUIÉNES SOMOS --><section id="quienes-somos" class="contenido-pagina oculto">
+    <!-- SECCIÓN 1: QUIÉNES SOMOS -->
+    <section id="quienes-somos" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
@@ -420,7 +429,8 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 2: SERVICIOS --><section id="servicios" class="contenido-pagina oculto">
+    <!-- SECCIÓN 2: SERVICIOS -->
+    <section id="servicios" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
@@ -457,7 +467,8 @@
         </div>
     </section>
     
-    <!-- SECCIÓN 3: CONTACTO --><section id="contacto" class="contenido-pagina oculto">
+    <!-- SECCIÓN 3: CONTACTO -->
+    <section id="contacto" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> 
@@ -480,7 +491,8 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 4: POLÍTICAS --><section id="politicas" class="contenido-pagina oculto">
+    <!-- SECCIÓN 4: POLÍTICAS -->
+    <section id="politicas" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
