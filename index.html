@@ -142,11 +142,20 @@
         }
 
         /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
+        /*
+        * CAMBIO APLICADO AQUÍ: Agregamos `text-align: center;` al contenedor principal
+        * de la sección para centralizar el contenido, si no se especifica.
+        */
+        .contenido-pagina {
+            text-align: center; 
+        }
+        
+        /* Aseguramos que la lista centrada siga siendo legible */
         .centered-list {
             max-width: 700px; 
             margin: 20px auto; /* Centraliza la lista dentro del contenedor */
             padding: 0 0 0 20px;
-            text-align: left;
+            text-align: left; /* Mantenemos el texto de la lista alineado a la izquierda para leer bien */
             font-size: 1.0em;
         }
 
@@ -186,9 +195,6 @@
             background-color: var(--color-primary); 
             margin: 6px 0;
         }
-        
-        /* ELIMINACIÓN DEL LOGO FIJO DE LA ESQUINA SUPERIOR DERECHA */
-        /* La clase .header-logo y su markup asociado se han ELIMINADO del HTML/CSS. */
         
         /* CLASE PARA OCULTAR MENÚ FUERA DE INICIO */
         .hidden-nav-elements {
@@ -313,10 +319,13 @@
             document.getElementById("myNav").style.width = "0%"; // Cierra menú
             
             // Oculta navegación fija (Solo queda el Menú hamburguesa)
-            document.getElementById('menu-icon').classList.add('hidden-nav-elements');
+            // NOTA: Se comenta esta línea para que el icono del menú sea visible en todas las subpáginas (Mejora UX)
+            // document.getElementById('menu-icon').classList.add('hidden-nav-elements'); 
             
             // Oculta el banner principal y todas las secciones de contenido
             document.getElementById('main-banner').classList.add('oculto');
+            document.getElementById('main-banner').classList.remove('visible'); // Asegura que se remueva la clase visible del banner
+
             const secciones = document.querySelectorAll('.contenido-pagina');
             secciones.forEach(seccion => {
                 seccion.classList.add('oculto');
@@ -329,15 +338,17 @@
                 seccionSeleccionada.classList.remove('oculto'); 
                 seccionSeleccionada.classList.add('visible'); 
                 
-                // Cálculo de scroll inteligente: usa 100px para móvil y 120px para desktop
+                // Aplicamos un scroll simple al inicio de la página para la nueva sección
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // NOTA: Se ha simplificado el cálculo de scroll, ya que ocultar el banner
+                // al principio hace que el scroll se resetee.
+                /*
                 const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 100 : FIXED_HEADER_HEIGHT;
                 const rect = seccionSeleccionada.getBoundingClientRect();
                 const targetScrollPosition = window.scrollY + rect.top - currentHeaderHeight;
-                
-                window.scrollTo({ 
-                    top: targetScrollPosition, 
-                    behavior: 'smooth' 
-                });
+                window.scrollTo({ top: targetScrollPosition, behavior: 'smooth' });
+                */
             }
         }
         
