@@ -21,7 +21,7 @@
             background-color: var(--color-dark);
             color: var(--color-text);
             text-align: center;
-            line-height: 1.6; 
+            line-height: 1.6; /* Mejora la legibilidad general para párrafos */
         }
 
         /* BANNER PRINCIPAL (HOME) - Ocupa toda la vista */
@@ -34,32 +34,7 @@
             background-color: #000000;
             overflow: hidden; 
         }
-        
-        /* Contenedor/elemento para el GIF (IMG) */
-        .banner-gif {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* CLAVE: Asegura que el GIF cubra toda el área sin distorsionarse y corrige la desproporción */
-            object-fit: cover; 
-            z-index: 1; /* Bajo el overlay */
-        }
-        
-        /* Overlay oscuro y desenfocado */
-        #main-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Oscurece el fondo */
-            backdrop-filter: blur(2px); /* Añade un ligero desenfoque sobre el GIF */
-            z-index: 2; /* Sobre el GIF */
-        }
-        
+
         /* SECCIONES DE CONTENIDO GENERALES */
         section {
             padding: 40px 20px; 
@@ -73,9 +48,9 @@
         /* Contenedor centralizado para todo el contenido de la sección */
         .seccion-contenido {
             max-width: 900px; 
-            margin: 0 auto; 
-            text-align: left; 
-            padding: 20px; 
+            margin: 0 auto; /* Centraliza el bloque de contenido */
+            text-align: left; /* Alineación de texto por defecto para mejor lectura */
+            padding: 20px; /* Padding interno para separación del borde */
             background-color: var(--color-accent); 
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
@@ -85,6 +60,7 @@
         .boton-volver {
             display: block; 
             width: fit-content;
+            /* Compensación del offset fijo */
             margin: calc(var(--header-height) - 40px) auto 40px auto; 
             padding: 10px 20px;
             background-color: #222;
@@ -95,8 +71,6 @@
             border-radius: 5px;
             transition: background-color 0.3s;
             cursor: pointer;
-            z-index: 10; 
-            position: relative;
         }
 
         .boton-volver:hover {
@@ -117,14 +91,14 @@
         /* TARJETAS DE SERVICIO (Flexbox responsive) */
         .service-card-container {
             display: flex;
-            flex-wrap: wrap; 
+            flex-wrap: wrap; /* Permite que las tarjetas se apilen en móvil */
             justify-content: center;
             gap: 25px;
             margin-top: 40px;
         }
         
         .service-card {
-            flex: 1 1 300px; 
+            flex: 1 1 300px; /* Base de 300px, crece y se encoge */
             background-color: var(--color-dark);
             padding: 25px;
             border-radius: 10px;
@@ -143,7 +117,7 @@
         /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
         .centered-list {
             max-width: 700px; 
-            margin: 20px auto; 
+            margin: 20px auto; /* Centraliza la lista dentro del contenedor */
             padding: 0 0 0 20px;
             text-align: left;
             font-size: 1.0em;
@@ -151,7 +125,6 @@
 
         /* CLASES DE VISIBILIDAD (SPA) */
         .oculto {
-            /* Clase usada para ocultar secciones, anulando cualquier estilo de bloque o flex */
             display: none !important; 
             pointer-events: none;
             height: 0; 
@@ -159,9 +132,8 @@
             overflow: hidden; 
         }
         
-        .visible {
-            /* Clase usada para mostrar secciones de contenido */
-            display: block !important; 
+        .contenido-pagina.visible {
+            display: block; 
             pointer-events: auto;
             height: auto;
             min-height: 80vh;
@@ -289,9 +261,10 @@
             }
             /* Ajuste de variable para offset móvil */
             :root {
-                --header-height: 100px; 
+                --header-height: 100px; /* Reducimos la altura para el cálculo de scroll */
             }
             .boton-volver {
+                 /* Ajusta el margen superior del botón para el nuevo header-height móvil */
                  margin: calc(var(--header-height) - 30px) auto 30px auto; 
             }
              /* Asegura que las tarjetas de servicio ocupen todo el ancho en móvil */
@@ -320,12 +293,9 @@
             document.getElementById('header-logo').classList.add('hidden-nav-elements');
             
             // Oculta el banner principal y todas las secciones de contenido
-            document.getElementById('main-banner').classList.remove('visible');
             document.getElementById('main-banner').classList.add('oculto');
-            
             const secciones = document.querySelectorAll('.contenido-pagina');
             secciones.forEach(seccion => {
-                seccion.classList.remove('visible');
                 seccion.classList.add('oculto');
             });
 
@@ -351,7 +321,6 @@
         function volverInicio() {
             // Oculta todas las secciones
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
-                seccion.classList.remove('visible');
                 seccion.classList.add('oculto');
             });
             
@@ -375,17 +344,17 @@
         
         // Configuración inicial al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Oculta todas las demás secciones al inicio (estado por defecto)
+            // 1. Inicializa el Banner principal como visible
+            document.getElementById('main-banner').classList.add('visible');
+            
+            // 2. Inicializa la navegación fija como visible
+            document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
+            document.getElementById('header-logo').classList.remove('hidden-nav-elements');
+            
+            // 3. Oculta todas las demás secciones al inicio
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
             });
-            
-            // 2. Muestra solo el Banner principal
-            document.getElementById('main-banner').classList.add('visible');
-            
-            // 3. Muestra navegación fija (Menú y Logo)
-            document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
-            document.getElementById('header-logo').classList.remove('hidden-nav-elements');
         });
         
     </script>
@@ -408,19 +377,16 @@
         <div></div>
         <div></div>
     </div>
-    <!-- logopng2.png es el nombre de archivo que subiste que parece ser el logo -->
-    <img src="logopng2.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
+    <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
 
     <!-- BANNER PRINCIPAL (HOME) -->
-    <section id="main-banner">
-        <!-- GIF con corrección de compatibilidad y ajuste de proporción -->
-        <img src="BANNERRYNO.gif" alt="Fondo Animado Ryno Delta" class="banner-gif">
-        <!-- El overlay se crea con ::before en CSS -->
+    <section id="main-banner" class="visible" style="padding: 0; background-color: #000;">
+        <!-- Espacio para el contenido visual o la imagen de fondo del banner principal -->
     </section>
 
     <!-- SECCIÓN 1: QUIÉNES SOMOS -->
     <section id="quienes-somos" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="navegarInicio()">&#9664; Volver al Inicio</button>
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
             <p>
@@ -437,7 +403,7 @@
 
     <!-- SECCIÓN 2: SERVICIOS -->
     <section id="servicios" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="navegarInicio()">&#9664; Volver al Inicio</button>
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
             <p style="text-align: center;">
@@ -475,7 +441,7 @@
     
     <!-- SECCIÓN 3: CONTACTO -->
     <section id="contacto" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="navegarInicio()">&#9664; Volver al Inicio</button>
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> 
             <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
@@ -499,7 +465,7 @@
 
     <!-- SECCIÓN 4: POLÍTICAS -->
     <section id="politicas" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="navegarInicio()">&#9664; Volver al Inicio</button>
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
             <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
