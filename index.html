@@ -3,77 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYNO DELTA - Tactical Gear</title>
-    <!-- Incluir Tailwind CSS para utilidades -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* Configuración base para el scroll y fuente */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Variables CSS para manejo de la altura del header (desktop y mobile) */
+        /* VARIABLES DE COLOR */
         :root {
-            --header-height: 120px; /* Altura del header para desktop */
+            --color-primary: #C5A67C; /* Dorado/Cobre para acentos */
+            --color-accent: #111; /* Negro oscuro/Gris carbón para secciones */
+            --color-dark: #000; /* Negro absoluto */
+            --color-text: #E0E0E0; /* Blanco suave para texto principal */
+            --header-height: 120px; /* Altura fija para el cálculo de scroll en desktop */
         }
 
-        /* Estilos generales */
+        /* ESTILOS BASE Y TIPOGRAFÍA */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d; /* Fondo oscuro casi negro */
-            color: #ffffff;
             margin: 0;
-            padding-top: var(--header-height); /* Espacio para el header fijo */
+            padding: 0;
+            background-color: var(--color-dark);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita el scroll horizontal */
         }
 
-        /* --- Estilos para el Header Fijo y Navegación --- */
-
-        .fixed-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            z-index: 1000;
-            background-color: rgba(13, 13, 13, 0.95); /* Fondo oscuro semitransparente */
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-        }
-
-        .logo-container img {
-            height: 80px; /* Tamaño del logo en desktop */
-        }
-
-        .nav-menu a {
-            color: #ffffff;
-            text-transform: uppercase;
-            font-weight: 600;
-            padding: 10px 15px;
-            transition: color 0.3s ease, background-color 0.3s ease;
-            border-radius: 8px;
-        }
-
-        .nav-menu a:hover {
-            color: #A98C46; /* Color marrón/dorado de RYNO DELTA */
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        /* --- Hero Banner (Video Background) --- */
-
-        #hero {
+        /* BANNER PRINCIPAL (Video de fondo) */
+        #main-banner {
             position: relative;
             width: 100%;
-            /* En desktop, el alto será 100vh menos la altura del header */
-            height: calc(100vh - var(--header-height)); 
+            height: 100vh; /* Ocupa toda la altura del viewport */
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Importante para el video */
-            background-color: #000;
+            text-align: center;
         }
 
         .banner-video {
@@ -85,363 +47,496 @@
             object-fit: cover; /* Asegura que el video cubra todo el contenedor */
             z-index: 1;
         }
-        
+
         .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Degradado oscuro para bajar la intensidad del rojo en el centro y ser más oscuro en los bordes */
-            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 80%, rgba(0, 0, 0, 0.8) 100%);
+            background-color: rgba(0, 0, 0, 0.4); /* Capa oscura */
             z-index: 2;
         }
 
-        /* --- Estilos para Secciones Generales --- */
-
+        .banner-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+        }
+        
+        /* SECCIONES DE CONTENIDO */
         section {
-            padding: 60px 50px;
-            min-height: 400px;
+            padding: 50px 20px; 
+            min-height: 80vh; /* Asegura que la sección tenga altura mínima */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .section-title {
-            color: #A98C46;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
+        .seccion-contenido {
+            max-width: 900px;
+            width: 100%;
+            text-align: left; /* Alineación de texto por defecto para mejor lectura */
+            padding: 20px; /* Padding interno para separación del borde */
+            background-color: var(--color-accent); 
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+        }
+
+        /* BOTÓN VOLVER (Navegación táctica) */
+        .boton-volver {
+            display: block; 
+            width: fit-content;
+            /* Compensación del offset fijo */
+            margin: calc(var(--header-height) - 40px) auto 40px auto; 
+            padding: 10px 20px;
+            background-color: #222;
+            color: var(--color-primary); 
+            border: 1px solid var(--color-primary); 
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .boton-volver:hover {
+            background-color: var(--color-primary); 
+            color: #000;
+        }
+
+        /* ESTILOS DE TÍTULOS EN SECCIONES */
+        .seccion-contenido h2 {
+            display: block; 
             text-align: center;
-            border-bottom: 2px solid rgba(169, 140, 70, 0.3);
+            color: var(--color-primary); 
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--color-primary); 
             padding-bottom: 10px;
         }
-
-        /* Contenedor de Servicios o Productos */
-        .services-grid {
+        
+        /* TARJETAS DE SERVICIO (Flexbox responsive) */
+        .service-card-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-wrap: wrap; /* Permite que las tarjetas se apilen en móvil */
             justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
         }
-
+        
         .service-card {
-            background-color: #1a1a1a;
-            border-radius: 12px;
+            flex: 1 1 300px; /* Base de 300px, crece y se encoge */
+            background-color: var(--color-dark);
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            flex: 1 1 calc(33% - 20px); /* 3 columnas en desktop */
-            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
             text-align: center;
-            border: 1px solid rgba(169, 140, 70, 0.1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(169, 140, 70, 0.2);
-        }
-
-        .service-icon {
-            color: #A98C46;
-            font-size: 3rem;
-            margin-bottom: 15px;
+            border-left: 3px solid var(--color-primary); 
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 10px;
+            color: var(--color-primary); 
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 15px; 
         }
 
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+        /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
+        .centered-list {
+            max-width: 700px; 
+            margin: 20px auto; /* Centraliza la lista dentro del contenedor */
+            padding: 0 0 0 20px;
+            text-align: left;
+            font-size: 1.0em;
         }
 
-        /* --- Footer --- */
-
-        footer {
-            background-color: #000000;
-            color: #666666;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(169, 140, 70, 0.1);
-        }
-
-
-        /* --- Menú Móvil (Hamburguesa) y Responsividad --- */
-
-        .menu-icon {
-            display: none; /* Oculto en desktop */
-            font-size: 30px;
-            cursor: pointer;
-            color: #ffffff;
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            z-index: 9999;
-            background-color: rgba(13, 13, 13, 0.95);
-            padding: 5px 10px;
-            border-radius: 8px;
-            border: 1px solid #A98C46;
-        }
-
-        .bar {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            background-color: #A98C46;
-            transition: all 0.3s ease-in-out;
-            border-radius: 2px;
-        }
-
-        /* El menú se oculta por defecto en móviles */
-        .nav-menu {
-            transition: transform 0.3s ease-in-out;
+        /* CLASES DE VISIBILIDAD (SPA) */
+        .oculto {
+            display: none !important; 
+            pointer-events: none;
+            height: 0; 
+            padding: 0;
+            overflow: hidden; 
         }
         
+        .contenido-pagina.visible {
+            display: block; 
+            pointer-events: auto;
+            height: auto;
+            min-height: 80vh;
+        }
+        
+        /* NAVEGACIÓN FIJA (Menú) */
+        .menu-icon {
+            position: fixed; 
+            z-index: 9999; 
+            transition: opacity 0.3s, transform 0.3s;
+            cursor: pointer;
+            padding: 10px;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.2); 
+        }
+        
+        .menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-primary); 
+            margin: 6px 0;
+        }
+        
+        /* ELIMINACIÓN DEL LOGO FIJO DE LA ESQUINA SUPERIOR DERECHA */
+        /* La clase .header-logo y su markup asociado se han ELIMINADO del HTML/CSS. */
+        
+        /* CLASE PARA OCULTAR MENÚ FUERA DE INICIO */
+        .hidden-nav-elements {
+            opacity: 0; 
+            pointer-events: none;
+        }
+        
+        /* MENÚ DESPLEGABLE */
+        .nav-menu {
+            height: 100%;
+            width: 0; 
+            position: fixed;
+            z-index: 9998; 
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.98);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 100px;
+            text-align: center;
+        }
+        .nav-menu a {
+            padding: 15px 8px 15px 32px;
+            text-decoration: none;
+            font-size: 30px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .nav-menu a:hover {
+            color: var(--color-primary); 
+            letter-spacing: 1px;
+        }
+
+        /* ESTILOS DE CONTACTO */
+        .contact-link {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        .email-info {
+             background-color: var(--color-text);
+            color: var(--color-dark);
+            box-shadow: 0 5px 15px rgba(224, 224, 224, 0.3);
+            cursor: default;
+        }
+        
+        footer {
+            padding: 30px; 
+            background-color: #000; 
+            color: #444; 
+            font-size: 0.9em;
+        }
+        
+        /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
         @media (max-width: 768px) {
-            
-            /* Ajuste de variables y padding para móvil */
-            :root {
-                --header-height: 100px; /* Menor altura en móvil */
-            }
-            
-            body {
-                padding-top: 0; /* Ya no necesitamos padding-top en el body, lo manejamos con el header fijo */
-            }
-
-            .fixed-header {
-                height: var(--header-height);
-                padding: 0 10px;
-                /* Eliminamos el display flex de la versión desktop para permitir que el menú se superponga */
-                display: block; 
-                text-align: right;
-            }
-
-            .logo-container {
-                display: block;
-                padding-top: 10px;
-            }
-
-            .logo-container img {
-                height: 60px; /* Logo más pequeño en móvil */
-            }
-
-            /* Mostrar icono de menú */
-            .menu-icon {
-                display: block; 
-                top: 20px;
-                left: 20px;
-            }
-
-            /* Ocultar menú en desktop y hacerlo un menú desplegable en móvil */
-            .nav-menu {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background-color: rgba(0, 0, 0, 0.98);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transform: translateX(-100%); /* Oculto fuera de pantalla */
-                z-index: 9000;
-            }
-
-            .nav-menu.active {
-                transform: translateX(0); /* Mostrar menú */
-            }
-
             .nav-menu a {
                 font-size: 22px;
-                padding: 15px 0;
-                width: 80%;
-                text-align: center;
             }
-            
-            /* Ajustes de secciones en móvil */
+            /* Reducción del padding de sección para optimizar el espacio en móvil */
             section {
-                padding: 30px 10px;
+                padding: 30px 10px; 
             }
-
-            .section-title {
-                font-size: 2rem;
+            .seccion-contenido {
+                padding: 15px;
             }
-            
+            /* Ajuste de variable para offset móvil */
+            :root {
+                --header-height: 100px; /* Reducimos la altura para el cálculo de scroll */
+            }
+            .boton-volver {
+                 /* Ajusta el margen superior del botón para el nuevo header-height móvil */
+                 margin: calc(var(--header-height) - 30px) auto 30px auto; 
+            }
+             /* Asegura que las tarjetas de servicio ocupen todo el ancho en móvil */
             .service-card {
-                flex: 1 1 100%; /* Una columna por tarjeta */
-                padding: 20px;
+                 flex: 1 1 100%; 
             }
             
-            /* Ajuste del hero banner para que el video no se corte horizontalmente */
-            #hero {
-                 /* Altura completa en móvil ya que el header es solo un overlay */
+            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL --- */
+            #main-banner {
+                /* Vuelve a ocupar toda la altura del viewport */
                 height: 100vh; 
             }
             
             .banner-video {
-                object-fit: contain; /* Asegura que el video se vea entero en móvil */
+                /* Vuelve a 'contain' para mostrar el video completo y evitar el recorte */
+                object-fit: contain; 
             }
         }
     </style>
+    
+    <script>
+        // Altura de los elementos fijos (constante de control de scroll)
+        const FIXED_HEADER_HEIGHT = 120; // Altura base para desktop
+
+        // Alterna la visibilidad del menú hamburguesa
+        function toggleNav() {
+            var menu = document.getElementById("myNav");
+            menu.style.width = (menu.style.width === "100%") ? "0%" : "100%";
+        }
+        
+        // Muestra la sección seleccionada y oculta los elementos fijos
+        function mostrarSeccion(seccionId) {
+            document.getElementById("myNav").style.width = "0%"; // Cierra menú
+            
+            // Oculta navegación fija (Solo queda el Menú hamburguesa)
+            document.getElementById('menu-icon').classList.add('hidden-nav-elements');
+            
+            // Oculta el banner principal y todas las secciones de contenido
+            document.getElementById('main-banner').classList.add('oculto');
+            const secciones = document.querySelectorAll('.contenido-pagina');
+            secciones.forEach(seccion => {
+                seccion.classList.add('oculto');
+                seccion.classList.remove('visible'); // Asegura que se remueva la clase visible
+            });
+
+            // Muestra la sección y aplica el offset de scroll
+            const seccionSeleccionada = document.getElementById(seccionId);
+            if (seccionSeleccionada) {
+                seccionSeleccionada.classList.remove('oculto'); 
+                seccionSeleccionada.classList.add('visible'); 
+                
+                // Cálculo de scroll inteligente: usa 100px para móvil y 120px para desktop
+                const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 100 : FIXED_HEADER_HEIGHT;
+                const rect = seccionSeleccionada.getBoundingClientRect();
+                const targetScrollPosition = window.scrollY + rect.top - currentHeaderHeight;
+                
+                window.scrollTo({ 
+                    top: targetScrollPosition, 
+                    behavior: 'smooth' 
+                });
+            }
+        }
+        
+        // Vuelve al Banner principal y muestra el icono de menú
+        function volverInicio() {
+            // Oculta todas las secciones
+            document.querySelectorAll('.contenido-pagina').forEach(seccion => {
+                seccion.classList.add('oculto');
+                seccion.classList.remove('visible');
+            });
+            
+            // Muestra el banner principal 
+            document.getElementById('main-banner').classList.remove('oculto');
+            document.getElementById('main-banner').classList.add('visible');
+            
+            // Muestra el icono de menú
+            document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
+            
+            // Desplázate al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Cierra el menú y ejecuta volverInicio
+        function navegarInicio() {
+            toggleNav(); 
+            volverInicio(); 
+        }
+        
+        // Configuración inicial al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Inicializa el Banner principal como visible
+            document.getElementById('main-banner').classList.add('visible');
+            
+            // 2. Inicializa el icono de menú como visible
+            document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
+            
+            // 3. Oculta todas las demás secciones al inicio
+            document.querySelectorAll('.contenido-pagina').forEach(seccion => {
+                seccion.classList.add('oculto');
+            });
+        });
+        
+    </script>
+    
 </head>
 <body>
-
-    <!-- Header Fijo (Contenedor del Logo) -->
-    <header class="fixed-header">
-        <div class="logo-container">
-            <!-- Usamos un placeholder temporal para el logo -->
-            <img src="https://placehold.co/150x80/0d0d0d/A98C46?text=RYNO+DELTA" onerror="this.src='https://placehold.co/150x80/0d0d0d/A98C46?text=RYNO+DELTA';" alt="Logo RYNO DELTA">
-        </div>
-        
-        <!-- Menú de Navegación (Desktop) -->
-        <nav class="nav-menu">
-            <a href="#hero" onclick="mostrarSeccion('hero')">Inicio</a>
-            <a href="#about" onclick="mostrarSeccion('about')">Acerca de</a>
-            <a href="#services" onclick="mostrarSeccion('services')">Servicios</a>
-            <a href="#contact" onclick="mostrarSeccion('contact')">Contacto</a>
-        </nav>
-    </header>
-
-    <!-- Icono de Menú Hamburguesa (Mobile) -->
-    <div class="menu-icon" onclick="toggleMenu()">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+    
+    <!-- MENÚ DESPLEGABLE -->
+    <div id="myNav" class="nav-menu">
+        <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
+        <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
+        <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
+        <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
+        <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- 1. Sección Principal (Hero Banner con Video) -->
-    <section id="hero" class="hero-banner">
-        <video autoplay muted loop playsinline class="banner-video">
-            <!-- Usamos un video placeholder temporal con la temática de "tactical gear" -->
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-man-with-rifle-in-a-training-drill-42654-large.mp4" type="video/mp4">
-            Tu navegador no soporta el tag de video.
+    <!-- NAVEGACIÓN FIJA (Solo icono de menú visible) -->
+    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <!-- ELIMINADO: <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()"> -->
+
+    <!-- BANNER PRINCIPAL (HOME) - AHORA CON VIDEO DE FONDO -->
+    <section id="main-banner" class="visible" style="padding: 0; background-color: #000;">
+        <!-- Video de Fondo (Reproducción automática, loop, sin sonido) -->
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+            <source src="VIDEO1.mp4" type="video/mp4">
+            <!-- Si tienes el video en formato WEBM (recomendado para más compatibilidad), agrégalo aquí: -->
+            <!-- <source src="VIDEO1.webm" type="video/webm"> -->
+            Tu navegador no soporta videos en HTML5.
         </video>
+
+        <!-- Capa de Oscurecimiento (Overlay) para mejorar la visibilidad del logo/menú -->
         <div class="video-overlay"></div>
-        <!-- NOTA: Los títulos de texto están incrustados en el video, por lo que no hay H1/H2 aquí. -->
+
+        <!-- Contenido del Banner (Elementos que deben estar SOBRE el video) -->
+        <div class="banner-content">
+            <!-- Contenido intencionalmente vacío, solo se ven los elementos de navegación fija -->
+        </div>
     </section>
 
-    <!-- 2. Sección Acerca de Nosotros -->
-    <section id="about" class="bg-gray-900">
-        <div class="about-content">
-            <h2 class="section-title">Nuestra Misión</h2>
-            <p class="text-lg mb-4 text-gray-400">
-                RYNO DELTA está forjado en la convicción de que el equipo táctico no es un lujo, sino una necesidad vital. Desarrollamos indumentaria y accesorios con un enfoque implacable en la durabilidad, la funcionalidad y la capacidad de respuesta bajo las condiciones más extremas.
+    <!-- SECCIÓN 1: QUIÉNES SOMOS -->
+    <section id="quienes-somos" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>QUIÉNES SOMOS</h2> 
+            <p>
+                **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
             </p>
-            <p class="text-lg text-gray-400">
-                Desde las misiones de verdad hasta el entrenamiento más riguroso, nuestro compromiso es con la élite que no acepta compromisos.
+            <p>
+                Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
+            </p>
+            <p style="color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
+                Equipamos tu confianza en cada despliegue.
             </p>
         </div>
     </section>
 
-    <!-- 3. Sección de Servicios/Productos -->
-    <section id="services" class="bg-gray-800">
-        <h2 class="section-title">Líneas de Equipo Táctico</h2>
-        <div class="services-grid">
-            
-            <!-- Tarjeta 1 -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <!-- Icono SVG de un casco táctico -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 3.31 2.21 6.13 5.3 7.55A10 10 0 0 0 12 22c3.31 0 6.13-2.21 7.55-5.3A10 10 0 0 0 22 12A10 10 0 0 0 12 2m4.8 11.2a.8.8 0 0 1 0 1.6H7.2a.8.8 0 0 1 0-1.6h9.6m0-3.2a.8.8 0 0 1 0 1.6H7.2a.8.8 0 0 1 0-1.6h9.6Z"/></svg>
+    <!-- SECCIÓN 2: SERVICIOS -->
+    <section id="servicios" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
+            <p style="text-align: center;">
+                Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
+            </p>
+            <div class="service-card-container">
+                <div class="service-card">
+                    <h3>PAGO CONTRA ENTREGA</h3>
+                    <p>
+                        Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                        *El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad.
+                    </p>
                 </div>
-                <h3>Indumentaria Blindada</h3>
-                <p class="text-gray-400">Chalecos de alta movilidad, protecciones balísticas de nivel III y IV. Máxima discreción y rendimiento.</p>
-            </div>
-            
-            <!-- Tarjeta 2 -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <!-- Icono SVG de unos binoculares -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 16a6 6 0 0 1-6-6c0-1.78.78-3.41 2-4.52V6h8v1.48c1.22 1.11 2 2.74 2 4.52a6 6 0 0 1-6 6m2-7a2 2 0 1 0-4 0a2 2 0 0 0 4 0"/></svg>
+                <div class="service-card">
+                    <h3>PAGO EN LÍNEA SEGURO</h3>
+                    <p>
+                        Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                        *Obtenga tiempo de entrega preferencial y recompensas exclusivas.
+                    </p>
                 </div>
-                <h3>Óptica Avanzada</h3>
-                <p class="text-gray-400">Visión nocturna de tercera generación, telémetros láser y miras de punto rojo con cero paralaje.</p>
             </div>
-            
-            <!-- Tarjeta 3 -->
-            <div class="service-card">
-                <div class="service-icon">
-                    <!-- Icono SVG de una mochila / kit -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 24 24"><path fill="currentColor" d="M21 17h-1.5V11H21V9h-3V7.5a1.5 1.5 0 0 0-1.5-1.5H15V4h-2V2H9v2H7.5A1.5 1.5 0 0 0 6 5.5V7H3v2h3v6h-1.5a1.5 1.5 0 0 0 0 3H19.5a1.5 1.5 0 0 0 0-3H21v-2ZM8 7h8v10H8V7Zm11 10.5V17h-2.5v1.5h2.5Z"/></svg>
-                </div>
-                <h3>Sistemas de Carga</h3>
-                <p class="text-gray-400">Mochilas modulares con tecnología de distribución de peso para misiones de largo alcance.</p>
+            <h3 style="color: var(--color-primary); text-align: center; margin-top: 50px;">Logística y Envíos Nacionales</h3>
+            <ul class="centered-list" style="list-style-type: '&#9679; '; ">
+                <li style="margin-bottom: 10px;">Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
+                <li style="margin-bottom: 10px;">Tiempo de entrega estándar: 3-5 días hábiles.</li>
+                <li style="margin-bottom: 10px;">En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
+                <li style="margin-bottom: 10px;">**Recomendación:** Confirme su cobertura antes de realizar la compra.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- SECCIÓN 3: CONTACTO -->
+    <section id="contacto" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido" style="text-align: center;">
+            <h2>CONTACTO RYNO DELTA</h2> 
+            <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
+                Estamos listos para atender sus requerimientos.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
+                <a class="contact-link whatsapp-btn" 
+                    href="https://wa.me/573148172002" 
+                    target="_blank">
+                     <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
+                </a>
+                <span class="contact-link email-info">
+                     <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> rynodelta@gmail.com
+                </span>
             </div>
+            <p style="margin-top: 40px; font-size: 0.9em; color: #888;">
+                Nuestro equipo de soporte está disponible de Lunes a Viernes (8am - 6pm COL).
+            </p>
         </div>
     </section>
 
-    <!-- 4. Sección de Contacto -->
-    <section id="contact" class="bg-gray-900">
-        <h2 class="section-title">Contacto y Distribución</h2>
-        <div class="max-w-md mx-auto">
-            <p class="text-center mb-6 text-gray-400">¿Tienes un requerimiento especializado o deseas formar parte de nuestra red de distribución autorizada? Contáctanos.</p>
-            <form class="space-y-4">
-                <input type="text" placeholder="Nombre completo" required class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-1 focus:ring-amber-600 focus:border-amber-600 text-white">
-                <input type="email" placeholder="Correo electrónico" required class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-1 focus:ring-amber-600 focus:border-amber-600 text-white">
-                <textarea placeholder="Mensaje o Requerimiento" rows="4" required class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-1 focus:ring-amber-600 focus:border-amber-600 text-white"></textarea>
-                <button type="submit" class="w-full py-3 rounded-lg bg-amber-600 text-white font-bold hover:bg-amber-700 transition duration-300">Enviar Mensaje</button>
-            </form>
+    <!-- SECCIÓN 4: POLÍTICAS -->
+    <section id="politicas" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>POLÍTICAS Y GARANTÍA</h2> 
+            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
+            <p>
+                En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
+            </p>
+            <ul class="centered-list" style="list-style-type: circle;">
+                <li>Procesamiento y envío de pedidos.</li>
+                <li>Gestión de pagos y emisión de facturas.</li>
+                <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
+                <li>Mejora de nuestros servicios y la experiencia de compra.</li>
+            </ul>
+            <p>
+                Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.
+            </p>
+            
+            <h3 style="color: var(--color-primary); text-align: left; margin-top: 40px;">POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h3>
+            <p>
+                Todos nuestros productos cuentan con una garantía de **60 días** a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
+            </p>
+            <ul class="centered-list" style="list-style-type: circle;">
+                <li>Daños causados por mal uso, accidentes o desgaste normal.</li>
+                <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
+                <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
+            </ul>
+            <p>
+                Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a **5 días hábiles** desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
+            </p>
         </div>
     </section>
-
-    <!-- Footer -->
+    
     <footer>
-        © 2025 RYNO DELTA - Todos los derechos reservados.
+        <p style="text-align: center;">© 2024 RYNO DELTA. Todos los derechos reservados. | Desarrollado con enfoque en la seguridad y la eficiencia.</p>
     </footer>
 
-    <script>
-        // Altura fija del header para cálculos de scroll offset
-        const FIXED_HEADER_HEIGHT = 120; // Valor en desktop
-
-        function toggleMenu() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('active');
-            const menuIcon = document.querySelector('.menu-icon');
-            menuIcon.classList.toggle('change'); // Puedes añadir un CSS para animar el ícono si quieres
-        }
-
-        function mostrarSeccion(id) {
-            // 1. Oculta el menú móvil si está abierto
-            const navMenu = document.querySelector('.nav-menu');
-            if (navMenu.classList.contains('active')) {
-                toggleMenu();
-            }
-
-            // 2. Determina la altura del header para el cálculo del offset
-            // Usa 100px para móvil y 120px para desktop
-            const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 100 : FIXED_HEADER_HEIGHT;
-
-            // 3. Obtiene el elemento y calcula la posición de desplazamiento
-            const targetElement = document.getElementById(id);
-            if (targetElement) {
-                // Calcula la posición para que el elemento quede justo debajo del header fijo
-                const offsetPosition = targetElement.offsetTop - currentHeaderHeight;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-        
-        // Función para asegurar que el video se reproduce en iOS/Chrome (por las restricciones de autoplay)
-        window.addEventListener('load', () => {
-            const video = document.querySelector('.banner-video');
-            if (video) {
-                video.play().catch(error => {
-                    // Esto maneja el error si el navegador bloquea el autoplay.
-                    // En este caso, el video simplemente se queda estático en el primer frame.
-                    console.log("Autoplay bloqueado, el video no se reproducirá automáticamente.");
-                });
-            }
-        });
-
-    </script>
 </body>
 </html>
