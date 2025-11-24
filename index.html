@@ -33,9 +33,11 @@
             height: 100vh; /* Ocupa toda la altura del viewport */
             overflow: hidden;
             display: flex;
-            align-items: center;
+            /* En desktop, centramos todo para el logo */
+            align-items: center; 
             justify-content: center;
             text-align: center;
+            padding: 0; /* Asegura que no haya padding que afecte la altura */
         }
 
         .banner-video {
@@ -44,7 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Asegura que el video cubra todo el contenedor */
+            object-fit: cover; /* Asegura que el video cubra todo el contenedor en desktop */
             z-index: 1;
         }
 
@@ -282,19 +284,23 @@
                  flex: 1 1 100%; 
             }
             
-            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL --- */
+            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
             #main-banner {
-                /* Vuelve a ocupar toda la altura del viewport */
-                height: 100vh; 
-                
-                /* CAMBIO SOLICITADO: Ajustar la alineación vertical para "subir" el contenido */
-                align-items: flex-start; /* Alinea el contenido en la parte superior */
-                padding-top: 10vh; /* Añade un espacio superior para que no toque el borde */
+                /* Forzamos la alineación hacia arriba para el flexbox */
+                align-items: flex-start; 
+                /* Reducimos la altura total del banner para que el contenido superior tenga más protagonismo, 
+                   y le damos padding para empujar el contenido hacia abajo (pero el video lo ignora) */
+                height: 90vh; /* Ligeramente más pequeño que 100vh */
+                padding-top: 10vh; /* Esto añade un espacio vacío arriba del video */
             }
             
             .banner-video {
                 /* Vuelve a 'contain' para mostrar el video completo y evitar el recorte */
                 object-fit: contain; 
+                /* Alineamos a la parte superior para que no se centre verticalmente */
+                object-position: top center; 
+                /* Ajustamos la posición para compensar el padding del contenedor, moviéndolo arriba. */
+                top: -10vh; /* Sube el video 10vh para compensar el padding-top del contenedor. */
             }
         }
     </style>
@@ -401,10 +407,9 @@
         <div></div>
         <div></div>
     </div>
-    <!-- ELIMINADO: <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()"> -->
 
     <!-- BANNER PRINCIPAL (HOME) - AHORA CON VIDEO DE FONDO -->
-    <section id="main-banner" class="visible" style="padding: 0; background-color: #000;">
+    <section id="main-banner" class="visible" style="background-color: #000;">
         <!-- Video de Fondo (Reproducción automática, loop, sin sonido) -->
         <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
