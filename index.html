@@ -187,9 +187,6 @@
             margin: 6px 0;
         }
         
-        /* ELIMINACIÓN DEL LOGO FIJO DE LA ESQUINA SUPERIOR DERECHA */
-        /* La clase .header-logo y su markup asociado se han ELIMINADO del HTML/CSS. */
-        
         /* CLASE PARA OCULTAR MENÚ FUERA DE INICIO */
         .hidden-nav-elements {
             opacity: 0; 
@@ -289,6 +286,10 @@
             #main-banner {
                 /* Vuelve a ocupar toda la altura del viewport */
                 height: 100vh; 
+                
+                /* CAMBIO SOLICITADO: Ajustar la alineación vertical para "subir" el contenido */
+                align-items: flex-start; /* Alinea el contenido en la parte superior */
+                padding-top: 10vh; /* Añade un espacio superior para que no toque el borde */
             }
             
             .banner-video {
