@@ -308,15 +308,15 @@
                  flex: 1 1 100%; 
             }
             
-            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL --- */
+            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (RESTAURADOS) --- */
             #main-banner {
-                /* Reduce la altura del banner para que sea más compacto */
-                height: 60vh; 
+                /* Vuelve a ocupar toda la altura del viewport */
+                height: 100vh; 
             }
             
             .banner-video {
-                /* Cambia a 'cover' para que el video llene completamente el área definida por 'height' */
-                object-fit: cover; 
+                /* Vuelve a 'contain' para mostrar el video completo y evitar el recorte */
+                object-fit: contain; 
             }
             /* --- FIN AJUSTES DE BANNER --- */
         }
