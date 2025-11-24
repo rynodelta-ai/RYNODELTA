@@ -2,49 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipo Táctico Ryno Delta</title>
-
-    <!-- SEO / Social -->
-    <meta name="description" content="Ryno Delta Tactical Gear — equipo táctico y de supervivencia. Envíos nacionales, pago contra entrega y atención en Colombia.">
-    <link rel="canonical" href="https://rynodelta.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Ryno Delta Tactical Gear">
-    <meta property="og:description" content="Equipo táctico real para operadores reales — morrales, ropa y accesorios.">
-    <meta property="og:url" content="https://rynodelta.com/">
-    <meta property="og:image" content="https://rynodelta.com/logoryno33.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ryno Delta Tactical Gear">
-    <meta name="twitter:description" content="Equipo táctico real para operadores reales.">
-    <meta name="twitter:image" content="https://rynodelta.com/logoryno33.png">
-
-    <!-- iOS app-mode helpers (mejor compatibilidad con iPhone/iPad) -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <!-- Icon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-    <!-- Structured Data (LocalBusiness) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Store",
-      "name": "Ryno Delta",
-      "image": "https://rynodelta.com/logoryno33.png",
-      "telephone": "+57-314-8172002",
-      "email": "rynodelta@gmail.com",
-      "url": "https://rynodelta.com",
-      "openingHours": ["Mo-Fr 08:00-18:00"],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Pereira",
-        "addressRegion": "Risaralda",
-        "addressCountry": "CO"
-      }
-    }
-    </script>
-
+    
     <style>
         /* VARIABLES DE ESTILO */
         :root {
@@ -54,15 +14,529 @@
             --color-accent: #333333;    /* Fondo de secciones secundarias */
             --header-height: 120px;     /* Altura de offset fija para scroll (Desktop) */
         }
-
-        /* RESET / BASE */
-        * { box-sizing: border-box; }
+        
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: var(--color-dark);
             color: var(--color-text);
             text-align: center;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: gr
+            line-height: 1.6; /* Mejora la legibilidad general para párrafos */
+        }
+
+        /* BANNER PRINCIPAL (HOME) - Ocupa toda la vista */
+        #main-banner {
+            height: 100vh;
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #000000;
+            overflow: hidden; 
+        }
+
+        /* --- CSS PARA EL VIDEO DE FONDO Y OVERLAY --- */
+
+        /* Estilos para el Video de Fondo: Cubre toda la pantalla y se mantiene detrás */
+        .banner-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0; /* Capa más baja */
+            transform: translate(-50%, -50%); /* Centrado perfecto */
+            background-size: cover;
+            object-fit: cover; /* Asegura que el video cubra el contenedor sin distorsión */
+        }
+
+        /* Capa de Oscurecimiento (Overlay) para asegurar el contraste del texto */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Opacidad media */
+            z-index: 1; /* Encima del video */
+        }
+
+        /* Contenido del Banner (Debe estar VACÍO según tu solicitud) */
+        .banner-content {
+            position: relative;
+            z-index: 2; /* Encima del overlay */
+            /* Este div está intencionalmente vacío ahora */
+        }
+        
+        /* --- FIN CSS --- */
+
+        /* SECCIONES DE CONTENIDO GENERALES */
+        section {
+            padding: 40px 20px; 
+            min-height: 80vh;
+            border-bottom: 1px solid var(--color-accent);
+            position: relative; 
+            overflow: hidden; 
+            background-color: var(--color-accent);
+        }
+
+        /* Contenedor centralizado para todo el contenido de la sección */
+        .seccion-contenido {
+            max-width: 900px; 
+            margin: 0 auto; /* Centraliza el bloque de contenido */
+            text-align: left; /* Alineación de texto por defecto para mejor lectura */
+            padding: 20px; /* Padding interno para separación del borde */
+            background-color: var(--color-accent); 
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+        }
+
+        /* BOTÓN VOLVER (Navegación táctica) */
+        .boton-volver {
+            display: block; 
+            width: fit-content;
+            /* Compensación del offset fijo */
+            margin: calc(var(--header-height) - 40px) auto 40px auto; 
+            padding: 10px 20px;
+            background-color: #222;
+            color: var(--color-primary); 
+            border: 1px solid var(--color-primary); 
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .boton-volver:hover {
+            background-color: var(--color-primary); 
+            color: #000;
+        }
+
+        /* ESTILOS DE TÍTULOS EN SECCIONES */
+        .seccion-contenido h2 {
+            display: block; 
+            text-align: center;
+            color: var(--color-primary); 
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--color-primary); 
+            padding-bottom: 10px;
+        }
+        
+        /* TARJETAS DE SERVICIO (Flexbox responsive) */
+        .service-card-container {
+            display: flex;
+            flex-wrap: wrap; /* Permite que las tarjetas se apilen en móvil */
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            flex: 1 1 300px; /* Base de 300px, crece y se encoge */
+            background-color: var(--color-dark);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
+            text-align: center;
+            border-left: 3px solid var(--color-primary); 
+        }
+
+        .service-card h3 {
+            color: var(--color-primary); 
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 15px; 
+        }
+
+        /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
+        .centered-list {
+            max-width: 700px; 
+            margin: 20px auto; /* Centraliza la lista dentro del contenedor */
+            padding: 0 0 0 20px;
+            text-align: left;
+            font-size: 1.0em;
+        }
+
+        /* CLASES DE VISIBILIDAD (SPA) */
+        .oculto {
+            display: none !important; 
+            pointer-events: none;
+            height: 0; 
+            padding: 0;
+            overflow: hidden; 
+        }
+        
+        .contenido-pagina.visible {
+            display: block; 
+            pointer-events: auto;
+            height: auto;
+            min-height: 80vh;
+        }
+        
+        /* NAVEGACIÓN FIJA (Menú y Logo) */
+        .menu-icon, .header-logo {
+            position: fixed; 
+            z-index: 9999; 
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .menu-icon {
+            cursor: pointer;
+            padding: 10px;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.2); 
+        }
+        .menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-primary); 
+            margin: 6px 0;
+        }
+        
+        .header-logo {
+            top: 20px;
+            right: 20px;
+            width: 106px; 
+            height: auto;
+            cursor: pointer;
+        }
+        .header-logo:hover {
+            transform: scale(1.05); 
+            opacity: 0.8;
+        }
+        
+        /* CLASE PARA OCULTAR MENÚ/LOGO FUERA DE INICIO */
+        .hidden-nav-elements {
+            opacity: 0; 
+            pointer-events: none;
+        }
+        
+        /* MENÚ DESPLEGABLE */
+        .nav-menu {
+            height: 100%;
+            width: 0; 
+            position: fixed;
+            z-index: 9998; 
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.98);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 100px;
+            text-align: center;
+        }
+        .nav-menu a {
+            padding: 15px 8px 15px 32px;
+            text-decoration: none;
+            font-size: 30px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .nav-menu a:hover {
+            color: var(--color-primary); 
+            letter-spacing: 1px;
+        }
+
+        /* ESTILOS DE CONTACTO */
+        .contact-link {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        .email-info {
+             background-color: var(--color-text);
+            color: var(--color-dark);
+            box-shadow: 0 5px 15px rgba(224, 224, 224, 0.3);
+            cursor: default;
+        }
+        
+        footer {
+            padding: 30px; 
+            background-color: #000; 
+            color: #444; 
+            font-size: 0.9em;
+        }
+        
+        /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .nav-menu a {
+                font-size: 22px;
+            }
+            .header-logo {
+                width: 80px; 
+            }
+            /* Reducción del padding de sección para optimizar el espacio en móvil */
+            section {
+                padding: 30px 10px; 
+            }
+            .seccion-contenido {
+                padding: 15px;
+            }
+            /* Ajuste de variable para offset móvil */
+            :root {
+                --header-height: 100px; /* Reducimos la altura para el cálculo de scroll */
+            }
+            .boton-volver {
+                 /* Ajusta el margen superior del botón para el nuevo header-height móvil */
+                 margin: calc(var(--header-height) - 30px) auto 30px auto; 
+            }
+             /* Asegura que las tarjetas de servicio ocupen todo el ancho en móvil */
+            .service-card {
+                 flex: 1 1 100%; 
+            }
+        }
+    </style>
+    
+    <script>
+        // Altura de los elementos fijos (constante de control de scroll)
+        const FIXED_HEADER_HEIGHT = 120; // Altura base para desktop
+
+        // Alterna la visibilidad del menú hamburguesa
+        function toggleNav() {
+            var menu = document.getElementById("myNav");
+            menu.style.width = (menu.style.width === "100%") ? "0%" : "100%";
+        }
+        
+        // Muestra la sección seleccionada y oculta los elementos fijos
+        function mostrarSeccion(seccionId) {
+            document.getElementById("myNav").style.width = "0%"; // Cierra menú
+            
+            // Oculta navegación fija (Menú y Logo)
+            document.getElementById('menu-icon').classList.add('hidden-nav-elements');
+            document.getElementById('header-logo').classList.add('hidden-nav-elements');
+            
+            // Oculta el banner principal y todas las secciones de contenido
+            document.getElementById('main-banner').classList.add('oculto');
+            const secciones = document.querySelectorAll('.contenido-pagina');
+            secciones.forEach(seccion => {
+                seccion.classList.add('oculto');
+            });
+
+            // Muestra la sección y aplica el offset de scroll
+            const seccionSeleccionada = document.getElementById(seccionId);
+            if (seccionSeleccionada) {
+                seccionSeleccionada.classList.remove('oculto'); 
+                seccionSeleccionada.classList.add('visible'); 
+                
+                // Cálculo de scroll inteligente: usa 100px para móvil y 120px para desktop
+                const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 100 : FIXED_HEADER_HEIGHT;
+                const rect = seccionSeleccionada.getBoundingClientRect();
+                const targetScrollPosition = window.scrollY + rect.top - currentHeaderHeight;
+                
+                window.scrollTo({ 
+                    top: targetScrollPosition, 
+                    behavior: 'smooth' 
+                });
+            }
+        }
+        
+        // Vuelve al Banner principal y muestra los elementos fijos
+        function volverInicio() {
+            // Oculta todas las secciones
+            document.querySelectorAll('.contenido-pagina').forEach(seccion => {
+                seccion.classList.add('oculto');
+            });
+            
+            // Muestra el banner principal 
+            document.getElementById('main-banner').classList.remove('oculto');
+            document.getElementById('main-banner').classList.add('visible');
+            
+            // Muestra navegación fija (Menú y Logo)
+            document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
+            document.getElementById('header-logo').classList.remove('hidden-nav-elements');
+            
+            // Desplázate al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Cierra el menú y ejecuta volverInicio
+        function navegarInicio() {
+            toggleNav(); 
+            volverInicio(); 
+        }
+        
+        // Configuración inicial al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Inicializa el Banner principal como visible
+            document.getElementById('main-banner').classList.add('visible');
+            
+            // 2. Inicializa la navegación fija como visible
+            document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
+            document.getElementById('header-logo').classList.remove('hidden-nav-elements');
+            
+            // 3. Oculta todas las demás secciones al inicio
+            document.querySelectorAll('.contenido-pagina').forEach(seccion => {
+                seccion.classList.add('oculto');
+            });
+        });
+        
+    </script>
+    
+</head>
+<body>
+    
+    <!-- MENÚ DESPLEGABLE -->
+    <div id="myNav" class="nav-menu">
+        <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
+        <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
+        <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
+        <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
+        <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
+    </div>
+
+    <!-- NAVEGACIÓN FIJA (Solo visible en INICIO) -->
+    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
+
+    <!-- BANNER PRINCIPAL (HOME) - AHORA CON VIDEO DE FONDO -->
+    <section id="main-banner" class="visible" style="padding: 0; background-color: #000;">
+        <!-- Video de Fondo (Reproducción automática, loop, sin sonido) -->
+        <!-- NOTA: Se añadió 'poster="logoryno33.png"' para mostrar una imagen fija si el video no carga en móvil. -->
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+            <source src="VIDEO1.mp4" type="video/mp4">
+            <!-- Si tienes el video en formato WEBM (recomendado para más compatibilidad), agrégalo aquí: -->
+            <!-- <source src="VIDEO1.webm" type="video/webm"> -->
+            Tu navegador no soporta videos en HTML5.
+        </video>
+
+        <!-- Capa de Oscurecimiento (Overlay) para mejorar la visibilidad del logo/menú -->
+        <div class="video-overlay"></div>
+
+        <!-- Contenido del Banner (Elementos que deben estar SOBRE el video) -->
+        <div class="banner-content">
+            <!-- Contenido intencionalmente vacío, solo se ven los elementos de navegación fija -->
+        </div>
+    </section>
+
+    <!-- SECCIÓN 1: QUIÉNES SOMOS -->
+    <section id="quienes-somos" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>QUIÉNES SOMOS</h2> 
+            <p>
+                **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
+            </p>
+            <p>
+                Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
+            </p>
+            <p style="color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
+                Equipamos tu confianza en cada despliegue.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: SERVICIOS -->
+    <section id="servicios" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
+            <p style="text-align: center;">
+                Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
+            </p>
+            <div class="service-card-container">
+                <div class="service-card">
+                    <h3>PAGO CONTRA ENTREGA</h3>
+                    <p>
+                        Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                        *El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <h3>PAGO EN LÍNEA SEGURO</h3>
+                    <p>
+                        Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento.
+                    </p>
+                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                        *Obtenga tiempo de entrega preferencial y recompensas exclusivas.
+                    </p>
+                </div>
+            </div>
+            <h3 style="color: var(--color-primary); text-align: center; margin-top: 50px;">Logística y Envíos Nacionales</h3>
+            <ul class="centered-list" style="list-style-type: '&#9679; '; ">
+                <li style="margin-bottom: 10px;">Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
+                <li style="margin-bottom: 10px;">Tiempo de entrega estándar: 3-5 días hábiles.</li>
+                <li style="margin-bottom: 10px;">En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
+                <li style="margin-bottom: 10px;">**Recomendación:** Confirme su cobertura antes de realizar la compra.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- SECCIÓN 3: CONTACTO -->
+    <section id="contacto" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido" style="text-align: center;">
+            <h2>CONTACTO RYNO DELTA</h2> 
+            <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
+                Estamos listos para atender sus requerimientos.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
+                <a class="contact-link whatsapp-btn" 
+                    href="https://wa.me/573148172002" 
+                    target="_blank">
+                     <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
+                </a>
+                <span class="contact-link email-info">
+                     <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> rynodelta@gmail.com
+                </span>
+            </div>
+            <p style="margin-top: 40px; font-size: 0.9em; color: #888;">
+                Nuestro equipo de soporte está disponible de Lunes a Viernes (8am - 6pm COL).
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: POLÍTICAS -->
+    <section id="politicas" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>POLÍTICAS Y GARANTÍA</h2> 
+            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
+            <p>
+                Cumplimos estrictamente con la Ley 1581 de 2012. Sus datos son tratados con la máxima confidencialidad, utilizados exclusivamente para la gestión de su pedido y servicio al cliente. Su privacidad es nuestra prioridad táctica.
+            </p>
+            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">GARANTÍA Y DEVOLUCIONES</h3>
+            <ul class="centered-list" style="list-style-type: '&#10003; '; ">
+                <li style="margin-bottom: 10px;">**Respuesta Rápida:** Máximo **siete días** para la resolución de cualquier reclamo de garantía.</li>
+                <li style="margin-bottom: 10px;">**Condición de Devolución:** El artículo debe ser devuelto en su **empaque original** y sin daño estructural o estético.</li>
+                <li style="margin-bottom: 10px;">**Fletes:** Los costos de transporte por devoluciones o garantías son asumidos por el cliente.</li>
+                <li style="margin-bottom: 10px;">**Exclusiones:** La garantía no cubre daños por mal uso o desgaste natural.</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 RYNO DELTA - Todos los derechos reservados.
+    </footer>
+    
+</body>
+</html>
