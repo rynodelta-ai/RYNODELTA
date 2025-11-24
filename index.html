@@ -35,6 +35,42 @@
             overflow: hidden; 
         }
 
+        /* --- NUEVO CSS PARA EL VIDEO DE FONDO Y OVERLAY --- */
+
+        /* Estilos para el Video de Fondo: Cubre toda la pantalla y se mantiene detrás */
+        .banner-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0; /* Capa más baja */
+            transform: translate(-50%, -50%); /* Centrado perfecto */
+            background-size: cover;
+        }
+
+        /* Capa de Oscurecimiento (Overlay) para asegurar el contraste del texto */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Opacidad media */
+            z-index: 1; /* Encima del video */
+        }
+
+        /* Contenido del Banner (Para el logo y otros elementos) */
+        .banner-content {
+            position: relative;
+            z-index: 2; /* Encima del overlay */
+            /* Puedes añadir aquí estilos para centrar tu logo grande si decides incluirlo */
+        }
+        
+        /* --- FIN NUEVO CSS --- */
+
         /* SECCIONES DE CONTENIDO GENERALES */
         section {
             padding: 40px 20px; 
@@ -379,9 +415,25 @@
     </div>
     <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
 
-    <!-- BANNER PRINCIPAL (HOME) -->
+    <!-- BANNER PRINCIPAL (HOME) - AHORA CON VIDEO DE FONDO -->
     <section id="main-banner" class="visible" style="padding: 0; background-color: #000;">
-        <!-- Espacio para el contenido visual o la imagen de fondo del banner principal -->
+        <!-- Video de Fondo (Reproducción automática, loop, sin sonido) -->
+        <!-- Usa el nombre de archivo VIDEO1.mp4 -->
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+            <source src="VIDEO1.mp4" type="video/mp4">
+            <!-- Si tienes el video en formato WEBM (recomendado para más compatibilidad), agrégalo aquí: -->
+            <!-- <source src="VIDEO1.webm" type="video/webm"> -->
+            Tu navegador no soporta videos en HTML5.
+        </video>
+
+        <!-- Capa de Oscurecimiento (Overlay) para mejorar la visibilidad del logo/menú -->
+        <div class="video-overlay"></div>
+
+        <!-- Contenido del Banner (Elementos que deben estar SOBRE el video) -->
+        <div class="banner-content">
+            <!-- Aquí puedes añadir elementos visuales, como un logo grande centrado, si lo deseas. -->
+            <!-- De momento, el logo fijo arriba a la derecha sigue funcionando perfectamente. -->
+        </div>
     </section>
 
     <!-- SECCIÓN 1: QUIÉNES SOMOS -->
@@ -449,12 +501,12 @@
             </p>
             <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
                 <a class="contact-link whatsapp-btn" 
-                   href="https://wa.me/573148172002" 
-                   target="_blank">
-                    <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
+                    href="https://wa.me/573148172002" 
+                    target="_blank">
+                     <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
                 </a>
                 <span class="contact-link email-info">
-                    <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> rynodelta@gmail.com
+                     <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> rynodelta@gmail.com
                 </span>
             </div>
             <p style="margin-top: 40px; font-size: 0.9em; color: #888;">
