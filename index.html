@@ -1,37 +1,14 @@
-/* --- Mejora de Contraste y Resalte para el Header Principal --- */
+Entendido, Skaylet. Revertiré el último cambio y regresaré al estado donde el texto (`RYNO DELTA` y `PARA MISIONES DE VERDAD`) **está en el código HTML/CSS** (superpuesto sobre el video), lo cual nos permite arreglar el problema de contraste en el subtítulo para que se vea bien en todos los dispositivos.
 
-/* Aplicar la sombra al título principal (RYNO DELTA) */
-.hero-title {
-    color: #A98C46; /* Color Dorado/Marrón */
-    /* Sombra de texto suave para darle profundidad y hacerlo resaltar */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4),  /* Luz blanca sutil */
-                 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra dura para separarlo del rojo */
-}
+El pantallazo que me envías ahora parece ser de un error, ya que muestra el código CSS de una sección y no la página web. Sin embargo, basándome en los problemas de contraste confirmados en tus capturas anteriores (móvil y escritorio), la solución es volver a tener el texto en el HTML y aplicar el *fix* de contraste.
 
-/* Aplicar una sombra de texto dura al subtítulo (PARA MISIONES DE VERDAD) */
-/* Esto es crucial, ya que el texto es oscuro sobre un fondo claro (rojo) */
-.hero-subtitle {
-    color: #000000; /* Asumiendo que es negro o un color muy oscuro */
-    font-weight: 700;
-    /* Aplicamos una sombra muy densa y clara para forzar la separación */
-    text-shadow: 
-        -1px -1px 0 #FFFFFF,  /* Contorno blanco en 8 direcciones */
-         1px -1px 0 #FFFFFF,
-        -1px  1px 0 #FFFFFF,
-         1px  1px 0 #FFFFFF,
-         0 0 20px rgba(255, 255, 255, 0.8); /* Sombra para que "brille" sobre el rojo */
-}
+A continuación, te presento el código HTML/CSS/JS con el texto restaurado y la corrección de contraste aplicada al subtítulo (`PARA MISIONES DE VERDAD`) para garantizar su legibilidad en todos los tonos de luz de tu video.
 
-/* Opcional: Usar un degradado para oscurecer el fondo donde está el texto */
-/* Esto se aplicaría al contenedor del video */
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Degradado oscuro para bajar la intensidad del rojo en el centro */
-    background: radial-gradient(circle at center, 
-                                rgba(0, 0, 0, 0.2) 0%, /* Ligeramente oscuro en el centro */
-                                rgba(0, 0, 0, 0.6) 80%); /* Más oscuro en los bordes */
-}
+
+http://googleusercontent.com/immersive_entry_chip/0
+
+**Verificación Final:**
+
+* **Texto restaurado en HTML:** Sí, `<h1>` y `<p>` están de vuelta.
+* **Contraste arreglado:** Sí, la clase `.hero-subtitle` tiene un `text-shadow` con un contorno blanco que lo hará legible sobre el fondo rojo brillante del video en cualquier dispositivo.
+* **Diseño responsivo:** Los tamaños de fuente se ajustan para móvil (`3rem`) y escritorio (`6rem`) manteniendo el diseño que ya habíamos acordado.
