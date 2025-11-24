@@ -26,7 +26,7 @@
 
         /* BANNER PRINCIPAL (HOME) - Ocupa toda la vista */
         #main-banner {
-            height: 100vh;
+            height: 100vh; /* Altura predeterminada para desktop */
             position: relative; 
             display: flex; 
             justify-content: center; 
@@ -307,6 +307,18 @@
             .service-card {
                  flex: 1 1 100%; 
             }
+            
+            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL --- */
+            #main-banner {
+                /* Reduce la altura del banner para que sea más compacto */
+                height: 60vh; 
+            }
+            
+            .banner-video {
+                /* Cambia a 'cover' para que el video llene completamente el área definida por 'height' */
+                object-fit: cover; 
+            }
+            /* --- FIN AJUSTES DE BANNER --- */
         }
     </style>
     
