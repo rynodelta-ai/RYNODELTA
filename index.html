@@ -3,88 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipo Táctico Ryno Delta</title>
-    
+    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* VARIABLES DE ESTILO */
+        /* VARIABLES DE COLOR */
         :root {
-            --color-primary: #C5A67C;   /* Arena Táctica / Coyote */
-            --color-dark: #111111;      /* Fondo muy oscuro */
-            --color-text: #e0e0e0;      /* Texto claro */
-            --color-accent: #333333;    /* Fondo de secciones secundarias */
-            --header-height: 120px;     /* Altura de offset fija para scroll (Desktop) */
+            --color-primary: #C5A67C; /* Dorado/Cobre para acentos */
+            --color-accent: #111; /* Negro oscuro/Gris carbón para secciones */
+            --color-dark: #000; /* Negro absoluto */
+            --color-text: #E0E0E0; /* Blanco suave para texto principal */
+            --header-height: 120px; /* Altura fija para el cálculo de scroll en desktop */
         }
-        
+
+        /* ESTILOS BASE Y TIPOGRAFÍA */
         body {
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            font-family: 'Arial', sans-serif;
+            padding: 0;
             background-color: var(--color-dark);
             color: var(--color-text);
-            text-align: center;
-            line-height: 1.6; /* Mejora la legibilidad general para párrafos */
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita el scroll horizontal */
         }
 
-        /* BANNER PRINCIPAL (HOME) - Ocupa toda la vista */
+        /* BANNER PRINCIPAL (Video de fondo) */
         #main-banner {
-            height: 100vh; /* Altura predeterminada para desktop */
-            position: relative; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background-color: #000000;
-            overflow: hidden; 
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Ocupa toda la altura del viewport */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
-        /* --- CSS PARA EL VIDEO DE FONDO Y OVERLAY --- */
-
-        /* Estilos para el Video de Fondo: Mostrar contenido completo sin recorte */
         .banner-video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            /* Asegura que el video ocupe el espacio para aplicar el 'contain' */
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100%; 
-            z-index: 0; /* Capa más baja */
-            transform: translate(-50%, -50%); /* Centrado perfecto */
-            /* Crucial: Muestra todo el video sin recortar, usando barras negras si es necesario */
-            object-fit: contain; 
+            height: 100%;
+            object-fit: cover; /* Asegura que el video cubra todo el contenedor */
+            z-index: 1;
         }
 
-        /* Capa de Oscurecimiento (Overlay) para asegurar el contraste del texto */
         .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Opacidad media */
-            z-index: 1; /* Encima del video */
+            background-color: rgba(0, 0, 0, 0.4); /* Capa oscura */
+            z-index: 2;
         }
 
-        /* Contenido del Banner (Debe estar VACÍO según tu solicitud) */
         .banner-content {
             position: relative;
-            z-index: 2; /* Encima del overlay */
-            /* Este div está intencionalmente vacío ahora */
+            z-index: 3;
+            color: white;
         }
         
-        /* --- FIN CSS --- */
-
-        /* SECCIONES DE CONTENIDO GENERALES */
+        /* SECCIONES DE CONTENIDO */
         section {
-            padding: 40px 20px; 
-            min-height: 80vh;
-            border-bottom: 1px solid var(--color-accent);
-            position: relative; 
-            overflow: hidden; 
-            background-color: var(--color-accent);
+            padding: 50px 20px; 
+            min-height: 80vh; /* Asegura que la sección tenga altura mínima */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Contenedor centralizado para todo el contenido de la sección */
         .seccion-contenido {
-            max-width: 900px; 
-            margin: 0 auto; /* Centraliza el bloque de contenido */
+            max-width: 900px;
+            width: 100%;
             text-align: left; /* Alineación de texto por defecto para mejor lectura */
             padding: 20px; /* Padding interno para separación del borde */
             background-color: var(--color-accent); 
@@ -175,14 +166,11 @@
             min-height: 80vh;
         }
         
-        /* NAVEGACIÓN FIJA (Menú y Logo) */
-        .menu-icon, .header-logo {
+        /* NAVEGACIÓN FIJA (Menú) */
+        .menu-icon {
             position: fixed; 
             z-index: 9999; 
             transition: opacity 0.3s, transform 0.3s;
-        }
-        
-        .menu-icon {
             cursor: pointer;
             padding: 10px;
             top: 20px;
@@ -191,6 +179,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(197, 166, 124, 0.2); 
         }
+        
         .menu-icon div {
             width: 30px;
             height: 3px;
@@ -198,19 +187,10 @@
             margin: 6px 0;
         }
         
-        .header-logo {
-            top: 20px;
-            right: 20px;
-            width: 106px; 
-            height: auto;
-            cursor: pointer;
-        }
-        .header-logo:hover {
-            transform: scale(1.05); 
-            opacity: 0.8;
-        }
+        /* ELIMINACIÓN DEL LOGO FIJO DE LA ESQUINA SUPERIOR DERECHA */
+        /* La clase .header-logo y su markup asociado se han ELIMINADO del HTML/CSS. */
         
-        /* CLASE PARA OCULTAR MENÚ/LOGO FUERA DE INICIO */
+        /* CLASE PARA OCULTAR MENÚ FUERA DE INICIO */
         .hidden-nav-elements {
             opacity: 0; 
             pointer-events: none;
@@ -285,9 +265,6 @@
             .nav-menu a {
                 font-size: 22px;
             }
-            .header-logo {
-                width: 80px; 
-            }
             /* Reducción del padding de sección para optimizar el espacio en móvil */
             section {
                 padding: 30px 10px; 
@@ -308,7 +285,7 @@
                  flex: 1 1 100%; 
             }
             
-            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (RESTAURADOS) --- */
+            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL --- */
             #main-banner {
                 /* Vuelve a ocupar toda la altura del viewport */
                 height: 100vh; 
@@ -318,7 +295,6 @@
                 /* Vuelve a 'contain' para mostrar el video completo y evitar el recorte */
                 object-fit: contain; 
             }
-            /* --- FIN AJUSTES DE BANNER --- */
         }
     </style>
     
@@ -336,15 +312,15 @@
         function mostrarSeccion(seccionId) {
             document.getElementById("myNav").style.width = "0%"; // Cierra menú
             
-            // Oculta navegación fija (Menú y Logo)
+            // Oculta navegación fija (Solo queda el Menú hamburguesa)
             document.getElementById('menu-icon').classList.add('hidden-nav-elements');
-            document.getElementById('header-logo').classList.add('hidden-nav-elements');
             
             // Oculta el banner principal y todas las secciones de contenido
             document.getElementById('main-banner').classList.add('oculto');
             const secciones = document.querySelectorAll('.contenido-pagina');
             secciones.forEach(seccion => {
                 seccion.classList.add('oculto');
+                seccion.classList.remove('visible'); // Asegura que se remueva la clase visible
             });
 
             // Muestra la sección y aplica el offset de scroll
@@ -365,20 +341,20 @@
             }
         }
         
-        // Vuelve al Banner principal y muestra los elementos fijos
+        // Vuelve al Banner principal y muestra el icono de menú
         function volverInicio() {
             // Oculta todas las secciones
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
+                seccion.classList.remove('visible');
             });
             
             // Muestra el banner principal 
             document.getElementById('main-banner').classList.remove('oculto');
             document.getElementById('main-banner').classList.add('visible');
             
-            // Muestra navegación fija (Menú y Logo)
+            // Muestra el icono de menú
             document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
-            document.getElementById('header-logo').classList.remove('hidden-nav-elements');
             
             // Desplázate al inicio
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -395,9 +371,8 @@
             // 1. Inicializa el Banner principal como visible
             document.getElementById('main-banner').classList.add('visible');
             
-            // 2. Inicializa la navegación fija como visible
+            // 2. Inicializa el icono de menú como visible
             document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
-            document.getElementById('header-logo').classList.remove('hidden-nav-elements');
             
             // 3. Oculta todas las demás secciones al inicio
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
@@ -419,18 +394,17 @@
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- NAVEGACIÓN FIJA (Solo visible en INICIO) -->
+    <!-- NAVEGACIÓN FIJA (Solo icono de menú visible) -->
     <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
-    <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()">
+    <!-- ELIMINADO: <img src="logoryno33.png" alt="Logo Ryno Delta - Inicio" id="header-logo" class="header-logo" onclick="volverInicio()"> -->
 
     <!-- BANNER PRINCIPAL (HOME) - AHORA CON VIDEO DE FONDO -->
     <section id="main-banner" class="visible" style="padding: 0; background-color: #000;">
         <!-- Video de Fondo (Reproducción automática, loop, sin sonido) -->
-        <!-- NOTA: Se añadió 'poster="logoryno33.png"' para mostrar una imagen fija si el video no carga en móvil. -->
         <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
             <!-- Si tienes el video en formato WEBM (recomendado para más compatibilidad), agrégalo aquí: -->
@@ -533,21 +507,36 @@
             <h2>POLÍTICAS Y GARANTÍA</h2> 
             <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
             <p>
-                Cumplimos estrictamente con la Ley 1581 de 2012. Sus datos son tratados con la máxima confidencialidad, utilizados exclusivamente para la gestión de su pedido y servicio al cliente. Su privacidad es nuestra prioridad táctica.
+                En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
             </p>
-            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">GARANTÍA Y DEVOLUCIONES</h3>
-            <ul class="centered-list" style="list-style-type: '&#10003; '; ">
-                <li style="margin-bottom: 10px;">**Respuesta Rápida:** Máximo **siete días** para la resolución de cualquier reclamo de garantía.</li>
-                <li style="margin-bottom: 10px;">**Condición de Devolución:** El artículo debe ser devuelto en su **empaque original** y sin daño estructural o estético.</li>
-                <li style="margin-bottom: 10px;">**Fletes:** Los costos de transporte por devoluciones o garantías son asumidos por el cliente.</li>
-                <li style="margin-bottom: 10px;">**Exclusiones:** La garantía no cubre daños por mal uso o desgaste natural.</li>
+            <ul class="centered-list" style="list-style-type: circle;">
+                <li>Procesamiento y envío de pedidos.</li>
+                <li>Gestión de pagos y emisión de facturas.</li>
+                <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
+                <li>Mejora de nuestros servicios y la experiencia de compra.</li>
             </ul>
+            <p>
+                Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.
+            </p>
+            
+            <h3 style="color: var(--color-primary); text-align: left; margin-top: 40px;">POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h3>
+            <p>
+                Todos nuestros productos cuentan con una garantía de **60 días** a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
+            </p>
+            <ul class="centered-list" style="list-style-type: circle;">
+                <li>Daños causados por mal uso, accidentes o desgaste normal.</li>
+                <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
+                <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
+            </ul>
+            <p>
+                Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a **5 días hábiles** desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
+            </p>
         </div>
     </section>
-
-    <footer>
-        &copy; 2025 RYNO DELTA - Todos los derechos reservados.
-    </footer>
     
+    <footer>
+        <p style="text-align: center;">© 2024 RYNO DELTA. Todos los derechos reservados. | Desarrollado con enfoque en la seguridad y la eficiencia.</p>
+    </footer>
+
 </body>
 </html>
