@@ -72,7 +72,7 @@
         /* ESTILO PARA LA NUEVA TARJETA DE MORRALES */
         .morrales-card {
             position: absolute; /* Posicionamiento absoluto para flotar sobre el video */
-            bottom: 30px; /* 30px desde el fondo del banner */
+            bottom: 30px; /* POSICIÓN POR DEFECTO (DESKTOP) */
             z-index: 4; /* Sobre el video y el overlay */
             width: 90%; /* Ancho en móvil */
             max-width: 350px; /* Ancho máximo en desktop */
@@ -369,6 +369,8 @@
                 width: 90%; 
                 /* Reducimos el tamaño de fuente */
                 font-size: 1.2em;
+                /* --- CAMBIO CLAVE: SUBIR LA TARJETA EN MÓVIL --- */
+                bottom: 5px; /* Subida significativa para pegarla al video, como se ve en el pantallazo */
             }
         }
     </style>
@@ -471,40 +473,52 @@
 </head>
 <body>
     
-    <!-- Menú de Navegación (Hamburguesa) - SIN la opción MORRALES --><div id="myNav" class="nav-menu">
+    <!-- Menú de Navegación (Hamburguesa) - SIN la opción MORRALES -->
+    <div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
-        <!-- Opción MORRALES eliminada por instrucción del usuario --><a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
+        <!-- Opción MORRALES eliminada por instrucción del usuario -->
+        <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
         <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- Icono de Menú Hamburguesa --><div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+    <!-- Icono de Menú Hamburguesa -->
+    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
 
-    <!-- SECCIÓN 1: Banner Principal (Inicio) --><section id="main-banner" class="visible" style="background-color: #000;">
-        <!-- Video de Fondo (Placeholder) --><video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+    <!-- SECCIÓN 1: Banner Principal (Inicio) -->
+    <section id="main-banner" class="visible" style="background-color: #000;">
+        <!-- Video de Fondo (Placeholder) -->
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
-            <!-- Mensaje de fallback para navegadores sin soporte de video -->Tu navegador no soporta videos en HTML5.
+            <!-- Mensaje de fallback para navegadores sin soporte de video -->
+            Tu navegador no soporta videos en HTML5.
         </video>
 
-        <!-- Capa Oscura sobre el Video --><div class="video-overlay"></div>
+        <!-- Capa Oscura sobre el Video -->
+        <div class="video-overlay"></div>
 
-        <!-- Contenido Central del Banner (Vacío, pero mantiene el margen) --><div class="banner-content">
-            <!-- Título o Logo aquí si es necesario --></div>
+        <!-- Contenido Central del Banner (Vacío, pero mantiene el margen) -->
+        <div class="banner-content">
+            <!-- Título o Logo aquí si es necesario -->
+        </div>
 
-        <!-- NUEVA TARJETA DE NAVEGACIÓN - MORRALES --><div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
-            <!-- Eliminado el texto 350x200 del placeholder --><img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
+        <!-- NUEVA TARJETA DE NAVEGACIÓN - MORRALES -->
+        <div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
+            <!-- Texto del placeholder ELIMINADO según la instrucción -->
+            <img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
             <div class="morrales-text">
                 MORRALES
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 2: Quiénes Somos --><section id="quienes-somos" class="contenido-pagina oculto">
+    <!-- SECCIÓN 2: Quiénes Somos -->
+    <section id="quienes-somos" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
@@ -520,7 +534,8 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: MORRALES (Inicialmente vacía, solo es accesible desde la tarjeta del banner) --><section id="morrales" class="contenido-pagina oculto">
+    <!-- NUEVA SECCIÓN: MORRALES (Inicialmente vacía, solo es accesible desde la tarjeta del banner) -->
+    <section id="morrales" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>MORRALES TÁCTICOS</h2> 
@@ -533,7 +548,8 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 3: Servicios y Envíos --><section id="servicios" class="contenido-pagina oculto">
+    <!-- SECCIÓN 3: Servicios y Envíos -->
+    <section id="servicios" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
@@ -570,7 +586,8 @@
         </div>
     </section>
     
-    <!-- SECCIÓN 4: Contacto --><section id="contacto" class="contenido-pagina oculto">
+    <!-- SECCIÓN 4: Contacto -->
+    <section id="contacto" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> 
@@ -593,7 +610,8 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 5: Políticas --><section id="politicas" class="contenido-pagina oculto">
+    <!-- SECCIÓN 5: Políticas -->
+    <section id="politicas" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
