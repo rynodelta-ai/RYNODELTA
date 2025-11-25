@@ -13,6 +13,7 @@
             --color-dark: #000; /* Negro absoluto */
             --color-text: #E0E0E0; /* Blanco suave para texto principal */
             --header-height: 120px; /* Altura fija para el cálculo de scroll en desktop */
+            --menu-offset: 70px; /* Altura de la barra superior donde está el menú */
         }
 
         /* ESTILOS BASE Y TIPOGRAFÍA */
@@ -33,11 +34,11 @@
             height: 100vh; /* Ocupa toda la altura del viewport */
             overflow: hidden;
             display: flex;
-            /* En desktop, centramos todo para el logo */
             align-items: center; 
             justify-content: center;
             text-align: center;
-            padding: 0; /* Asegura que no haya padding que afecte la altura */
+            padding: 0; 
+            /* En móvil, esta sección será manipulada para iniciar justo después del menú */
         }
 
         .banner-video {
@@ -64,12 +65,14 @@
             position: relative;
             z-index: 3;
             color: white;
+            /* Agregamos un margen superior para que el logo, que está dentro del video, baje un poco */
+            margin-top: 15vh; 
         }
         
         /* SECCIONES DE CONTENIDO */
         section {
             padding: 50px 20px; 
-            min-height: 80vh; /* Asegura que la sección tenga altura mínima */
+            min-height: 80vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -78,8 +81,8 @@
         .seccion-contenido {
             max-width: 900px;
             width: 100%;
-            text-align: left; /* Alineación de texto por defecto para mejor lectura */
-            padding: 20px; /* Padding interno para separación del borde */
+            text-align: left; 
+            padding: 20px; 
             background-color: var(--color-accent); 
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
@@ -89,7 +92,6 @@
         .boton-volver {
             display: block; 
             width: fit-content;
-            /* Compensación del offset fijo */
             margin: calc(var(--header-height) - 40px) auto 40px auto; 
             padding: 10px 20px;
             background-color: #222;
@@ -120,14 +122,14 @@
         /* TARJETAS DE SERVICIO (Flexbox responsive) */
         .service-card-container {
             display: flex;
-            flex-wrap: wrap; /* Permite que las tarjetas se apilen en móvil */
+            flex-wrap: wrap; 
             justify-content: center;
             gap: 25px;
             margin-top: 40px;
         }
         
         .service-card {
-            flex: 1 1 300px; /* Base de 300px, crece y se encoge */
+            flex: 1 1 300px; 
             background-color: var(--color-dark);
             padding: 25px;
             border-radius: 10px;
@@ -146,7 +148,7 @@
         /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
         .centered-list {
             max-width: 700px; 
-            margin: 20px auto; /* Centraliza la lista dentro del contenedor */
+            margin: 20px auto; 
             padding: 0 0 0 20px;
             text-align: left;
             font-size: 1.0em;
@@ -276,7 +278,6 @@
                 --header-height: 100px; /* Reducimos la altura para el cálculo de scroll */
             }
             .boton-volver {
-                 /* Ajusta el margen superior del botón para el nuevo header-height móvil */
                  margin: calc(var(--header-height) - 30px) auto 30px auto; 
             }
              /* Asegura que las tarjetas de servicio ocupen todo el ancho en móvil */
@@ -286,21 +287,32 @@
             
             /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
             #main-banner {
-                /* Mantenemos 100vh de altura */
-                height: 100vh;
-                /* Forzamos la alineación hacia arriba */
+                /* Usamos el offset del menú para que el banner comience justo debajo de él */
+                margin-top: var(--menu-offset);
+                /* Ajustamos la altura total para que no se exceda el 100vh total de la pantalla */
+                height: calc(100vh - var(--menu-offset)); 
+                /* Alineación normal (arriba) */
                 align-items: flex-start; 
-                /* CAMBIO AQUÍ: Usamos 75vh para bajar el contenido casi al final del viewport */
-                padding-top: 75vh; 
+                /* Eliminamos el padding que empujaba el contenido, ahora lo controlamos con margin-top en banner-content */
+                padding-top: 0; 
             }
             
             .banner-video {
-                /* Vuelve a 'contain' para mostrar el video completo y evitar el recorte */
-                object-fit: contain; 
-                /* Alineamos a la parte superior para que no se centre verticalmente */
+                /* Aseguramos que el video comience desde el tope del contenedor (justo debajo del menú) */
                 object-position: top center; 
-                /* Aseguramos que el video comience desde el tope del contenedor */
-                top: 0vh; 
+                object-fit: contain; 
+            }
+
+            .menu-icon {
+                /* Aseguramos que el menú siempre esté en la parte superior */
+                top: 10px; 
+                left: 10px;
+                background-color: transparent; /* Hacemos que el fondo del menú sea transparente para que el video se vea por debajo */
+            }
+            
+            .banner-content {
+                /* Ajustamos el margen para que el logo quede centrado verticalmente dentro de la nueva área del banner (100vh - menu-offset) */
+                margin-top: 25vh; 
             }
         }
     </style>
@@ -420,9 +432,9 @@ Tu navegador no soporta videos en HTML5.
         <!-- CAPA OSCURA -->
 <div class="video-overlay"></div>
 
-        <!-- CONTENIDO DEL BANNER (Vacío, pero mantiene el centrado/alineación) -->
+        <!-- CONTENIDO DEL BANNER (Aquí está el logo) -->
 <div class="banner-content">
-            <!-- (Si se quisiera un logo o texto superpuesto Aparte del video, iría aquí) -->
+            <!-- (El logo o texto del video, que se mueve con margin-top) -->
 </div>
     </section>
 
