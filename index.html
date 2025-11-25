@@ -38,6 +38,7 @@
             justify-content: center;
             text-align: center;
             padding: 0; 
+            /* En móvil, esta sección será manipulada para iniciar justo después del menú */
         }
 
         .banner-video {
@@ -64,6 +65,7 @@
             position: relative;
             z-index: 3;
             color: white;
+            /* Agregamos un margen superior para que el logo, que está dentro del video, baje un poco */
             margin-top: 15vh; 
         }
         
@@ -76,16 +78,14 @@
             align-items: center;
         }
 
-        /* --- AJUSTE CLAVE PARA CENTRALIZAR Y PROPORCIONAR EL CONTENIDO --- */
         .seccion-contenido {
-            max-width: 700px; /* Reducción de 900px a 700px para mejor legibilidad */
+            max-width: 900px;
             width: 100%;
             text-align: left; 
-            padding: 30px; /* Aumentamos el padding interno para más "aire" */
+            padding: 20px; 
             background-color: var(--color-accent); 
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
-            font-size: 1.1em; /* Aumentamos el tamaño de fuente para comodidad */
         }
 
         /* BOTÓN VOLVER (Navegación táctica) */
@@ -136,7 +136,6 @@
             box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
             text-align: center;
             border-left: 3px solid var(--color-primary); 
-            font-size: 0.9em; /* Reducimos la fuente en las tarjetas para que encajen mejor */
         }
 
         .service-card h3 {
@@ -148,7 +147,7 @@
 
         /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
         .centered-list {
-            max-width: 650px; /* Ajustamos ligeramente para que no se extienda tanto */
+            max-width: 700px; 
             margin: 20px auto; 
             padding: 0 0 0 20px;
             text-align: left;
@@ -227,14 +226,7 @@
             letter-spacing: 1px;
         }
 
-        /* ESTILOS DE CONTACTO (Alineación y comodidad) */
-        .contact-link-container {
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            max-width: 350px; 
-            margin: 0 auto; 
-        }
+        /* ESTILOS DE CONTACTO */
         .contact-link {
             display: block;
             width: 100%;
@@ -280,7 +272,6 @@
             }
             .seccion-contenido {
                 padding: 15px;
-                font-size: 1em; /* Ajuste a tamaño normal para móvil */
             }
             /* Ajuste de variable para offset móvil */
             :root {
@@ -294,29 +285,33 @@
                  flex: 1 1 100%; 
             }
             
-            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL --- */
-            :root {
-                --menu-offset: 50px; /* Reducción de offset para móvil */
-            }
+            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
             #main-banner {
+                /* Usamos el offset del menú para que el banner comience justo debajo de él */
                 margin-top: var(--menu-offset);
+                /* Ajustamos la altura total para que no se exceda el 100vh total de la pantalla */
                 height: calc(100vh - var(--menu-offset)); 
+                /* Alineación normal (arriba) */
                 align-items: flex-start; 
+                /* Eliminamos el padding que empujaba el contenido, ahora lo controlamos con margin-top en banner-content */
                 padding-top: 0; 
             }
             
             .banner-video {
+                /* Aseguramos que el video comience desde el tope del contenedor (justo debajo del menú) */
                 object-position: top center; 
-                object-fit: cover; /* Cambiamos a cover para asegurar que no haya franjas */
+                object-fit: contain; 
             }
 
             .menu-icon {
+                /* Aseguramos que el menú siempre esté en la parte superior */
                 top: 10px; 
                 left: 10px;
-                background-color: transparent; 
+                background-color: transparent; /* Hacemos que el fondo del menú sea transparente para que el video se vea por debajo */
             }
             
             .banner-content {
+                /* Ajustamos el margen para que el logo quede centrado verticalmente dentro de la nueva área del banner (100vh - menu-offset) */
                 margin-top: 25vh; 
             }
         }
@@ -437,10 +432,10 @@ Tu navegador no soporta videos en HTML5.
         <!-- CAPA OSCURA -->
 <div class="video-overlay"></div>
 
-        <!-- CONTENIDO DEL BANNER (Aquí está el logo/texto) -->
+        <!-- CONTENIDO DEL BANNER (Aquí está el logo) -->
 <div class="banner-content">
-            <!-- Asumo que aquí se insertará el logo o texto de RYNO DELTA -->
-        </div>
+            <!-- (El logo o texto del video, que se mueve con margin-top) -->
+</div>
     </section>
 
     <!-- SECCIÓN 2: QUIÉNES SOMOS -->
@@ -506,7 +501,7 @@ Tu navegador no soporta videos en HTML5.
             <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
                 Estamos listos para atender sus requerimientos.
             </p>
-            <div class="contact-link-container">
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
                 <a class="contact-link whatsapp-btn" 
                     href="https://wa.me/573148172002" 
                     target="_blank">
@@ -537,6 +532,9 @@ Tu navegador no soporta videos en HTML5.
                 <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
                 <li>Mejora de nuestros servicios y la experiencia de compra.</li>
             </ul>
+            <p>
+                Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.
+            </p>
             
             <h3 style="color: var(--color-primary); text-align: left; margin-top: 40px;">POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h3>
             <p>
