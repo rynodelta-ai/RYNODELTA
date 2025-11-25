@@ -380,8 +380,8 @@
                 position: relative; /* Cambiado a relativo para que se posicione justo después del elemento anterior (que es el video) */
                 width: 90%; 
                 font-size: 1.2em;
-                /* Eliminamos bottom y usamos un margen negativo para subirlo ligeramente y compensar el padding o margen del banner */
-                margin-top: -30px; /* Margen negativo para solapar ligeramente con el video */
+                /* --- CAMBIO CLAVE: Aumentar el margen superior para despegarlo del video --- */
+                margin-top: 20px; /* Margen positivo para separar la tarjeta del video. (Antes era -30px) */
                 bottom: auto; /* Desactivamos el posicionamiento absoluto 'bottom' */
             }
         }
