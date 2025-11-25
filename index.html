@@ -34,8 +34,9 @@
             height: 100vh; /* Ocupa toda la altura del viewport */
             overflow: hidden;
             display: flex;
+            flex-direction: column; /* Cambiado a columna para apilar elementos */
             align-items: center; 
-            justify-content: center;
+            justify-content: flex-start; /* Alineado arriba para dar espacio al elemento inferior */
             text-align: center;
             padding: 0; 
         }
@@ -64,10 +65,58 @@
             position: relative;
             z-index: 3;
             color: white;
-            /* Agregamos un margen superior para que el logo, que está dentro del video, baje un poco */
+            /* Agregamos un margen superior para que el logo, que estaba dentro del video, baje un poco */
             margin-top: 15vh; 
         }
         
+        /* ESTILO PARA LA NUEVA TARJETA DE MORRALES */
+        .morrales-card {
+            position: absolute; /* Posicionamiento absoluto para flotar sobre el video */
+            bottom: 30px; /* 30px desde el fondo del banner */
+            z-index: 4; /* Sobre el video y el overlay */
+            width: 90%; /* Ancho en móvil */
+            max-width: 350px; /* Ancho máximo en desktop */
+            background-color: rgba(0, 0, 0, 0.85); /* Fondo semitransparente oscuro */
+            border: 2px solid var(--color-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            text-align: center;
+        }
+
+        .morrales-card:hover {
+            transform: translateY(-5px) scale(1.02); /* Efecto 3D al pasar el mouse */
+            box-shadow: 0 10px 30px rgba(197, 166, 124, 0.3); /* Sombra acentuada */
+        }
+
+        .morrales-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.8; /* Imagen ligeramente atenuada */
+            transition: opacity 0.3s;
+        }
+        
+        .morrales-card:hover img {
+            opacity: 1; /* Imagen más brillante al pasar el mouse */
+        }
+        
+        .morrales-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            /* Ajuste de fondo para que el texto sea más legible */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)); 
+            padding: 15px 10px 10px 10px;
+            color: white;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
         /* SECCIONES DE CONTENIDO */
         section {
             padding: 50px 20px; 
@@ -314,6 +363,13 @@
                 /* Ajustamos el margen para que el logo quede centrado verticalmente dentro de la nueva área del banner (100vh - menu-offset) */
                 margin-top: 25vh; 
             }
+            
+            .morrales-card {
+                /* Ocupa más espacio en móvil */
+                width: 90%; 
+                /* Reducimos el tamaño de fuente */
+                font-size: 1.2em;
+            }
         }
     </style>
     
@@ -385,6 +441,11 @@
             volverInicio(); 
         }
         
+        // Función específica para navegar a Morrales
+        function navegarMorrales() {
+            mostrarSeccion('morrales');
+        }
+        
         // Configuración inicial al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Inicializa el Banner principal como visible
@@ -397,6 +458,12 @@
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
             });
+
+             // 4. Agrega el listener para la tarjeta de morrales
+            const morralesCard = document.getElementById('morrales-card');
+            if(morralesCard) {
+                morralesCard.addEventListener('click', navegarMorrales);
+            }
         });
         
     </script>
@@ -404,43 +471,40 @@
 </head>
 <body>
     
-    <!-- Menú de Navegación (Hamburguesa) -->
-    <div id="myNav" class="nav-menu">
+    <!-- Menú de Navegación (Hamburguesa) - SIN la opción MORRALES --><div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
-        <!-- Opción "PRODUCTOS" eliminada aquí -->
-        <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
+        <!-- Opción MORRALES eliminada por instrucción del usuario --><a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
         <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- Icono de Menú Hamburguesa -->
-    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+    <!-- Icono de Menú Hamburguesa --><div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
 
-    <!-- SECCIÓN 1: Banner Principal (Inicio) -->
-    <section id="main-banner" class="visible" style="background-color: #000;">
-        <!-- Video de Fondo (Placeholder) -->
-        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+    <!-- SECCIÓN 1: Banner Principal (Inicio) --><section id="main-banner" class="visible" style="background-color: #000;">
+        <!-- Video de Fondo (Placeholder) --><video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
-            <!-- Mensaje de fallback para navegadores sin soporte de video -->
-            Tu navegador no soporta videos en HTML5.
+            <!-- Mensaje de fallback para navegadores sin soporte de video -->Tu navegador no soporta videos en HTML5.
         </video>
 
-        <!-- Capa Oscura sobre el Video -->
-        <div class="video-overlay"></div>
+        <!-- Capa Oscura sobre el Video --><div class="video-overlay"></div>
 
-        <!-- Contenido Central del Banner (Aquí estaba el texto "RYNO DELTA") -->
-        <div class="banner-content">
-            <!-- Contenido eliminado: Logo/Texto "RYNO DELTA" -->
+        <!-- Contenido Central del Banner (Vacío, pero mantiene el margen) --><div class="banner-content">
+            <!-- Título o Logo aquí si es necesario --></div>
+
+        <!-- NUEVA TARJETA DE NAVEGACIÓN - MORRALES --><div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
+            <!-- Eliminado el texto 350x200 del placeholder --><img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
+            <div class="morrales-text">
+                MORRALES
+            </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 2: Quiénes Somos -->
-    <section id="quienes-somos" class="contenido-pagina oculto">
+    <!-- SECCIÓN 2: Quiénes Somos --><section id="quienes-somos" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
@@ -456,11 +520,20 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE PRODUCTOS (Eliminada por completo) -->
-    
+    <!-- NUEVA SECCIÓN: MORRALES (Inicialmente vacía, solo es accesible desde la tarjeta del banner) --><section id="morrales" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>MORRALES TÁCTICOS</h2> 
+            <p style="text-align: center; color: #999;">
+                **¡Próximamente, el contenido detallado de nuestra línea de morrales!**
+            </p>
+            <p style="text-align: center; margin-top: 20px;">
+                Esta sección está lista para recibir la galería de productos.
+            </p>
+        </div>
+    </section>
 
-    <!-- SECCIÓN 3: Servicios y Envíos -->
-    <section id="servicios" class="contenido-pagina oculto">
+    <!-- SECCIÓN 3: Servicios y Envíos --><section id="servicios" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
@@ -497,8 +570,7 @@
         </div>
     </section>
     
-    <!-- SECCIÓN 4: Contacto -->
-    <section id="contacto" class="contenido-pagina oculto">
+    <!-- SECCIÓN 4: Contacto --><section id="contacto" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> 
@@ -521,8 +593,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 5: Políticas -->
-    <section id="politicas" class="contenido-pagina oculto">
+    <!-- SECCIÓN 5: Políticas --><section id="politicas" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
