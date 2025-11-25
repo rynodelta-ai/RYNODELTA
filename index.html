@@ -37,7 +37,6 @@
             flex-direction: column; /* Cambiado a columna para apilar elementos */
             align-items: center; 
             justify-content: flex-start; /* Alineado arriba para dar espacio al elemento inferior */
-            text-align: center;
             padding: 0; 
         }
 
@@ -369,8 +368,9 @@
                 width: 90%; 
                 /* Reducimos el tamaño de fuente */
                 font-size: 1.2em;
-                /* --- CAMBIO CLAVE: SUBIR LA TARJETA EN MÓVIL --- */
-                bottom: 5px; /* Subida significativa para pegarla al video, como se ve en el pantallazo */
+                /* --- CAMBIO CLAVE: SUBIR LA TARJETA EN MÓVIL AL 10% DEL VIEWPORT --- */
+                /* bottom: 5px; - Valor anterior */
+                bottom: 10vh; /* Ajuste para el 10% del viewport */
             }
         }
     </style>
