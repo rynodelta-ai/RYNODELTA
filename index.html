@@ -144,61 +144,6 @@
             margin-bottom: 15px; 
         }
         
-        /* --- ESTILOS DE PRODUCTOS DESTACADOS (NUEVOS) --- */
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-
-        .product-card {
-            background-color: var(--color-dark);
-            border: 1px solid rgba(197, 166, 124, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            width: 100%; /* Default for mobile */
-            max-width: 300px; /* Max width for desktop grid item */
-            text-align: center;
-            padding-bottom: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(197, 166, 124, 0.15);
-        }
-
-        .product-card h3 {
-            color: var(--color-text);
-            font-size: 1.3em;
-            margin: 15px 0 5px 0;
-            text-transform: uppercase;
-        }
-
-        .product-card p {
-            font-size: 0.9em;
-            color: #ccc;
-            padding: 0 15px;
-            min-height: 50px; 
-        }
-
-        .product-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-bottom: 2px solid var(--color-primary);
-        }
-
-        .price {
-            display: block;
-            font-size: 1.4em;
-            color: var(--color-primary);
-            font-weight: 700;
-            margin-top: 15px;
-        }
-        
         /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
         .centered-list {
             max-width: 700px; 
@@ -369,24 +314,6 @@
                 /* Ajustamos el margen para que el logo quede centrado verticalmente dentro de la nueva área del banner (100vh - menu-offset) */
                 margin-top: 25vh; 
             }
-            
-            /* Ajuste de galería en móvil */
-            .product-card {
-                max-width: none;
-            }
-        }
-        
-        /* Media Queries para el Grid de Productos */
-        @media (min-width: 600px) {
-            .product-card {
-                width: calc(50% - 10px); /* 2 columnas */
-            }
-        }
-
-        @media (min-width: 900px) {
-            .product-card {
-                width: calc(33.33% - 14px); /* 3 columnas */
-            }
         }
     </style>
     
@@ -477,44 +404,43 @@
 </head>
 <body>
     
-    <!-- MENÚ DE NAVEGACIÓN DESPLEGABLE -->
-<div id="myNav" class="nav-menu">
+    <!-- Menú de Navegación (Hamburguesa) -->
+    <div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
-        <a href="#productos" onclick="mostrarSeccion('productos')">PRODUCTOS</a> <!-- Nuevo Link de Productos -->
+        <!-- Opción "PRODUCTOS" eliminada aquí -->
         <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
         <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- ICONO DE MENÚ HAMBURGUESA -->
-<div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+    <!-- Icono de Menú Hamburguesa -->
+    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
 
-    <!-- SECCIÓN 1: BANNER PRINCIPAL (VIDEO) -->
-<section id="main-banner" class="visible" style="background-color: #000;">
-        <!-- VIDEO DE FONDO (NOTA: Asegúrate de que 'VIDEO1.mp4' y 'logoryno33.png' existan en tu servidor o reemplaza con URLs válidas) -->
-<video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+    <!-- SECCIÓN 1: Banner Principal (Inicio) -->
+    <section id="main-banner" class="visible" style="background-color: #000;">
+        <!-- Video de Fondo (Placeholder) -->
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
-            <!-- FALLBACK TEXTO -->
-Tu navegador no soporta videos en HTML5.
+            <!-- Mensaje de fallback para navegadores sin soporte de video -->
+            Tu navegador no soporta videos en HTML5.
         </video>
 
-        <!-- CAPA OSCURA -->
-<div class="video-overlay"></div>
+        <!-- Capa Oscura sobre el Video -->
+        <div class="video-overlay"></div>
 
-        <!-- CONTENIDO DEL BANNER (Aquí está el logo) -->
-<div class="banner-content">
-            <!-- Aquí iría la imagen del logo si estuviera fuera del video/poster -->
-            <img src="https://placehold.co/400x150/000/C5A67C?text=RYNO+DELTA" alt="Logo Ryno Delta" style="max-width: 80%; height: auto; display: block; margin: 0 auto; border-radius: 5px;">
+        <!-- Contenido Central del Banner (Aquí estaba el texto "RYNO DELTA") -->
+        <div class="banner-content">
+            <!-- Contenido eliminado: Logo/Texto "RYNO DELTA" -->
         </div>
     </section>
 
-    <!-- SECCIÓN 2: QUIÉNES SOMOS -->
-<section id="quienes-somos" class="contenido-pagina oculto">
+    <!-- SECCIÓN 2: Quiénes Somos -->
+    <section id="quienes-somos" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
@@ -530,59 +456,11 @@ Tu navegador no soporta videos en HTML5.
         </div>
     </section>
 
-    <!-- SECCIÓN 3: PRODUCTOS DESTACADOS (NUEVA SECCIÓN) -->
-<section id="productos" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-        <div class="seccion-contenido">
-            <h2>PRODUCTOS DESTACADOS</h2> 
-            <p style="text-align: center; color: #E0E0E0;">Explora nuestro inventario de equipo de alto rendimiento, diseñado para resistir las condiciones más exigentes.</p>
-            
-            <div class="product-grid">
-                <!-- Producto 1: Morral Táctico -->
-                <div class="product-card">
-                    <img src="https://placehold.co/400x300/111/C5A67C?text=Morral+Táctico" alt="Morral Táctico de Asalto" class="product-image">
-                    <h3>Morral Táctico Alpha</h3>
-                    <p>Capacidad de 45L. Impermeable, modular, y ergonómico. Ideal para misiones de 72 horas.</p>
-                    <span class="price">$185.000 COP</span>
-                </div>
-
-                <!-- Producto 2: Navaja Supervivencia -->
-                <div class="product-card">
-                    <img src="https://placehold.co/400x300/111/C5A67C?text=Navaja+Supervivencia" alt="Navaja de Supervivencia Pro" class="product-image">
-                    <h3>Navaja de Supervivencia Kilo</h3>
-                    <p>Acero al carbono D2. Hoja fija de 12cm. Funda Kydex. La herramienta esencial para el campo.</p>
-                    <span class="price">$95.000 COP</span>
-                </div>
-
-                <!-- Producto 3: Linterna Táctica -->
-                <div class="product-card">
-                    <img src="https://placehold.co/400x300/111/C5A67C?text=Linterna+LED" alt="Linterna Táctica de Alta Potencia" class="product-image">
-                    <h3>Linterna Táctica Delta</h3>
-                    <p>2000 lúmenes reales. Carcasa de aluminio aeroespacial. Resistencia al agua IPX8.</p>
-                    <span class="price">$65.000 COP</span>
-                </div>
-                
-                <!-- Producto 4: Guantes Kevlar -->
-                <div class="product-card">
-                    <img src="https://placehold.co/400x300/111/C5A67C?text=Guantes+Kevlar" alt="Guantes Tácticos Reforzados" class="product-image">
-                    <h3>Guantes Tácticos Raptor</h3>
-                    <p>Reforzados con Kevlar y nudillos de fibra de carbono. Máxima protección y destreza.</p>
-                    <span class="price">$55.000 COP</span>
-                </div>
-
-                <!-- Producto 5: Botas Trekking -->
-                <div class="product-card">
-                    <img src="https://placehold.co/400x300/111/C5A67C?text=Botas+Trekking" alt="Botas de Trekking Militares" class="product-image">
-                    <h3>Botas de Combate Sigma</h3>
-                    <p>Suela antideslizante, tobillo reforzado. Ligeras y resistentes para todo terreno.</p>
-                    <span class="price">$220.000 COP</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- SECCIÓN DE PRODUCTOS (Eliminada por completo) -->
     
-    <!-- SECCIÓN 4: SERVICIOS Y ENVÍOS (Mueve una posición abajo) -->
-<section id="servicios" class="contenido-pagina oculto">
+
+    <!-- SECCIÓN 3: Servicios y Envíos -->
+    <section id="servicios" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
@@ -619,8 +497,8 @@ Tu navegador no soporta videos en HTML5.
         </div>
     </section>
     
-    <!-- SECCIÓN 5: CONTACTO (Mueve una posición abajo) -->
-<section id="contacto" class="contenido-pagina oculto">
+    <!-- SECCIÓN 4: Contacto -->
+    <section id="contacto" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> 
@@ -643,8 +521,8 @@ Tu navegador no soporta videos en HTML5.
         </div>
     </section>
 
-    <!-- SECCIÓN 6: POLÍTICAS (Mueve una posición abajo) -->
-<section id="politicas" class="contenido-pagina oculto">
+    <!-- SECCIÓN 5: Políticas -->
+    <section id="politicas" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
