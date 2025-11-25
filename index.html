@@ -34,9 +34,9 @@
             height: 100vh; /* Ocupa toda la altura del viewport */
             overflow: hidden;
             display: flex;
-            flex-direction: column; /* Cambiado a columna para apilar elementos */
+            flex-direction: column; 
             align-items: center; 
-            justify-content: flex-start; /* Alineado arriba para dar espacio al elemento inferior */
+            justify-content: flex-start; 
             padding: 0; 
         }
 
@@ -64,7 +64,6 @@
             position: relative;
             z-index: 3;
             color: white;
-            /* Agregamos un margen superior para que el logo, que estaba dentro del video, baje un poco */
             margin-top: 15vh; 
         }
         
@@ -337,39 +336,53 @@
             #main-banner {
                 /* Usamos el offset del menú para que el banner comience justo debajo de él */
                 margin-top: var(--menu-offset);
-                /* Ajustamos la altura total para que no se exceda el 100vh total de la pantalla */
-                height: calc(100vh - var(--menu-offset)); 
-                /* Alineación normal (arriba) */
-                align-items: flex-start; 
-                /* Eliminamos el padding que empujaba el contenido, ahora lo controlamos con margin-top en banner-content */
-                padding-top: 0; 
+                /* IMPORTANTE: Eliminamos el height: 100vh para que el contenedor se ajuste al tamaño del video (que tiene object-fit: contain) */
+                height: auto; 
+                min-height: calc(100vh - var(--menu-offset)); /* Mantenemos un min-height para asegurar que ocupe la mayor parte de la pantalla */
+                align-items: center; /* Centramos el contenido de nuevo */
             }
             
             .banner-video {
-                /* Aseguramos que el video comience desde el tope del contenedor (justo debajo del menú) */
-                object-position: top center; 
+                /* Hacemos que el video no sea absoluto para que su altura se compute en el flujo normal */
+                position: relative; 
+                /* Ocupamos todo el ancho del contenedor del banner */
+                width: 100%; 
+                /* El object-fit: contain deja las barras negras, pero ahora la altura del #main-banner se ajustará a la altura real del video */
                 object-fit: contain; 
             }
 
+            .video-overlay {
+                 /* Lo hacemos relative al video para que se dimensione con él */
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            
             .menu-icon {
-                /* Aseguramos que el menú siempre esté en la parte superior */
                 top: 10px; 
                 left: 10px;
-                background-color: transparent; /* Hacemos que el fondo del menú sea transparente para que el video se vea por debajo */
+                background-color: transparent; 
             }
             
             .banner-content {
-                /* Ajustamos el margen para que el logo quede centrado verticalmente dentro de la nueva área del banner (100vh - menu-offset) */
-                margin-top: 25vh; 
+                /* Alineamos el contenido al centro */
+                 position: absolute;
+                 top: 50%;
+                 left: 50%;
+                 transform: translate(-50%, -50%);
+                 margin-top: 0; /* Ya no necesitamos el margen fijo */
             }
             
             .morrales-card {
-                /* Ocupa más espacio en móvil */
+                /* Lo ponemos relativo al final del video */
+                position: relative; /* Cambiado a relativo para que se posicione justo después del elemento anterior (que es el video) */
                 width: 90%; 
-                /* Reducimos el tamaño de fuente */
                 font-size: 1.2em;
-                /* --- CAMBIO CLAVE FINAL: SUBIR LA TARJETA EN MÓVIL A 1% DEL VIEWPORT --- */
-                bottom: 1vh; /* Mueve la tarjeta a solo 1% de la altura de la pantalla desde el fondo. */
+                /* Eliminamos bottom y usamos un margen negativo para subirlo ligeramente y compensar el padding o margen del banner */
+                margin-top: -30px; /* Margen negativo para solapar ligeramente con el video */
+                bottom: auto; /* Desactivamos el posicionamiento absoluto 'bottom' */
             }
         }
     </style>
@@ -522,7 +535,7 @@
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
             <p>
-                **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia** , nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
+                **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
             </p>
             <p>
                 Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
