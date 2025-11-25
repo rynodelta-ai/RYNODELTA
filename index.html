@@ -286,12 +286,12 @@
             
             /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
             #main-banner {
-                /* Forzamos la alineación hacia arriba para el flexbox */
+                /* Mantenemos 100vh de altura */
+                height: 100vh;
+                /* Forzamos la alineación hacia arriba */
                 align-items: flex-start; 
-                /* Reducimos la altura total del banner para que el contenido superior tenga más protagonismo, 
-                   y le damos padding para empujar el contenido hacia abajo. */
-                height: 90vh; 
-                padding-top: 20vh; /* Aumentado a 20vh para bajar el video un 10% más */
+                /* AUMENTAMOS el padding-top para empujar el contenido más abajo */
+                padding-top: 30vh; 
             }
             
             .banner-video {
@@ -299,8 +299,8 @@
                 object-fit: contain; 
                 /* Alineamos a la parte superior para que no se centre verticalmente */
                 object-position: top center; 
-                /* Ajustamos la posición para compensar el padding del contenedor, moviéndolo arriba. */
-                top: -10vh; /* Se mantiene en -10vh para compensar 10vh del padding del contenedor */
+                /* REVERTIDO: Aseguramos que el video comience desde el tope del contenedor */
+                top: 0vh; 
             }
         }
     </style>
@@ -392,7 +392,8 @@
 </head>
 <body>
     
-    <!-- MENÚ DESPLEGABLE --><div id="myNav" class="nav-menu">
+    <!-- MENÚ DE NAVEGACIÓN DESPLEGABLE -->
+<div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
         <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
@@ -400,25 +401,33 @@
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- NAVEGACIÓN FIJA (Solo icono de menú visible) --><div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+    <!-- ICONO DE MENÚ HAMBURGUESA -->
+<div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
 
-    <!-- BANNER PRINCIPAL (HOME) - AHORA CON VIDEO DE FONDO --><section id="main-banner" class="visible" style="background-color: #000;">
-        <!-- Video de Fondo (Reproducción automática, loop, sin sonido) --><video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+    <!-- SECCIÓN 1: BANNER PRINCIPAL (VIDEO) -->
+<section id="main-banner" class="visible" style="background-color: #000;">
+        <!-- VIDEO DE FONDO -->
+<video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
-            <!-- Si tienes el video en formato WEBM (recomendado para más compatibilidad), agrégalo aquí: --><!-- <source src="VIDEO1.webm" type="video/webm"> -->Tu navegador no soporta videos en HTML5.
+            <!-- FALLBACK TEXTO -->
+Tu navegador no soporta videos en HTML5.
         </video>
 
-        <!-- Capa de Oscurecimiento (Overlay) para mejorar la visibilidad del logo/menú --><div class="video-overlay"></div>
+        <!-- CAPA OSCURA -->
+<div class="video-overlay"></div>
 
-        <!-- Contenido del Banner (Elementos que deben estar SOBRE el video) --><div class="banner-content">
-            <!-- Contenido intencionalmente vacío, solo se ven los elementos de navegación fija --></div>
+        <!-- CONTENIDO DEL BANNER (Vacío, pero mantiene el centrado/alineación) -->
+<div class="banner-content">
+            <!-- (Si se quisiera un logo o texto superpuesto Aparte del video, iría aquí) -->
+</div>
     </section>
 
-    <!-- SECCIÓN 1: QUIÉNES SOMOS --><section id="quienes-somos" class="contenido-pagina oculto">
+    <!-- SECCIÓN 2: QUIÉNES SOMOS -->
+<section id="quienes-somos" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
@@ -434,7 +443,8 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 2: SERVICIOS --><section id="servicios" class="contenido-pagina oculto">
+    <!-- SECCIÓN 3: SERVICIOS Y ENVÍOS -->
+<section id="servicios" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
@@ -471,7 +481,8 @@
         </div>
     </section>
     
-    <!-- SECCIÓN 3: CONTACTO --><section id="contacto" class="contenido-pagina oculto">
+    <!-- SECCIÓN 4: CONTACTO -->
+<section id="contacto" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
             <h2>CONTACTO RYNO DELTA</h2> 
@@ -494,7 +505,8 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 4: POLÍTICAS --><section id="politicas" class="contenido-pagina oculto">
+    <!-- SECCIÓN 5: POLÍTICAS -->
+<section id="politicas" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
