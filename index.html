@@ -6,7 +6,7 @@
     <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* VARIABLES DE COLOR (Se mantienen para uso en CSS interno) */
+        /* VARIABLES DE COLOR */
         :root {
             --color-primary: #C5A67C; /* Dorado/Marrón */
             --color-dark: #000;
@@ -26,36 +26,22 @@
 
         html { margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (MARQUEE EN CSS INTERNO) --- */
+        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (MARQUEE HTML) --- */
         #promo-bar {
-            /* Los estilos críticos de color y posición se mueven INLINE */
+            position: fixed !important; 
+            top: 0 !important; 
+            width: 100% !important; 
+            height: var(--promo-bar-height); /* Se mantiene la altura */
+            line-height: var(--promo-bar-height);
             z-index: 10000 !important;
             overflow: hidden !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
         }
 
-        .promo-content {
-            display: inline-block !important;
-            white-space: nowrap !important; /* CRÍTICO para no apilar */
-            animation: marquee 30s linear infinite !important;
-            will-change: transform !important;
-            line-height: initial !important; 
-            
-            /* POSICIÓN INICIAL PARA MARQUEE */
-            padding-left: 100% !important; 
-        }
-        
         .promo-text {
-            padding: 0 40px !important;
-            font-weight: 600 !important;
-            display: inline-block !important;
-        }
-
-
-        /* Definición de la Animación Marquee - Funcional */
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); } 
-            100% { transform: translate3d(-100%, 0, 0); } 
+            padding: 0 40px;
+            font-weight: 600;
+            display: inline; /* Necesario para que marquee funcione bien */
+            color: var(--color-primary) !important; /* Forzamos el color */
         }
         /* ------------------------------------------- */
 
@@ -100,35 +86,18 @@
             margin-top: 15vh;
         }
         
-        /* CLASES DE VISIBILIDAD */
-        .oculto {
-            display: none !important; pointer-events: none; height: 0; padding: 0; overflow: hidden;
-        }
+        /* CLASES DE VISIBILIDAD y MEDIA QUERY (MÓVIL) */
+        .oculto { display: none !important; pointer-events: none; height: 0; padding: 0; overflow: hidden; }
+        .contenido-pagina.visible { display: block; pointer-events: auto; height: auto; min-height: 80vh; }
         
-        .contenido-pagina.visible {
-            display: block; pointer-events: auto; height: auto; min-height: 80vh;
-        }
-        
-        /* MEDIA QUERY (MÓVIL) */
         @media (max-width: 768px) {
-            
-            #main-banner {
-                margin-top: var(--promo-bar-height); height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center;
-            }
-            
-            .banner-video {
-                position: relative; width: 100%; object-fit: contain;
-            }
-
-            .banner-content {
-                position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0;
-            }
+            #main-banner { margin-top: var(--promo-bar-height); height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
+            .banner-video { position: relative; width: 100%; object-fit: contain; }
+            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
         }
     </style>
     
     <script>
-        const FIXED_OFFSET = 35; 
-
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('main-banner').classList.add('visible');
         });
@@ -138,22 +107,19 @@
 <body>
     
     <div id="promo-bar" style="
-        position: fixed !important; 
-        top: 0 !important; 
-        left: 0 !important; 
-        width: 100% !important; 
-        height: 35px !important; 
-        line-height: 35px !important;
-        background-color: rgba(0, 0, 0, 0.85) !important; 
-        color: #C5A67C !important;
-        font-size: 0.9em !important;
-        white-space: nowrap !important; /* Estilo extra in-line para no apilar */
+        background-color: rgba(0, 0, 0, 0.85) !important; /* Forzado de color */
     ">
-        <div class="promo-content">
+        <marquee 
+            behavior="scroll" 
+            direction="left" 
+            scrollamount="6" 
+            loop="infinite"
+            style="width: 100%; line-height: 35px; color: #C5A67C !important;"
+        >
             <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
             <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
             <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-        </div>
+        </marquee>
     </div>
     
     <section id="main-banner" class="visible" style="background-color: #000;">
