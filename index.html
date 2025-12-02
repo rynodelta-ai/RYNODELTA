@@ -71,6 +71,61 @@
         }
         /* ------------------------------------------- */
 
+        /* NAVEGACIÓN FIJA (Menú Hamburguesa) - NUEVO ESTILO */
+        .menu-icon {
+            position: fixed;
+            z-index: 10001;
+            transition: opacity 0.3s, transform 0.3s;
+            cursor: pointer;
+            padding: 10px;
+            top: 40px; /* Separado de la promo bar */
+            right: 20px; /* Posición Superior DERECHA */
+            left: auto; /* Anula posición izquierda anterior */
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.2);
+        }
+        
+        .menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: var(--color-primary);
+            margin: 6px 0;
+        }
+        
+        /* MENÚ DESPLEGABLE */
+        .nav-menu {
+            height: 100%;
+            width: 0; /* Cerrado por defecto */
+            position: fixed;
+            z-index: 9998;
+            top: 0;
+            right: 0; /* Abre desde la derecha */
+            background-color: rgba(0, 0, 0, 0.98);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 100px;
+            text-align: center;
+        }
+        
+        .nav-menu a {
+            padding: 15px 0;
+            width: 100%;
+            text-decoration: none;
+            font-size: 30px;
+            color: var(--color-text);
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--color-primary);
+            letter-spacing: 1px;
+        }
+        /* FIN NAVEGACIÓN FIJA */
+
         /* BANNER PRINCIPAL (Video de fondo) */
         #main-banner {
             position: relative;
@@ -112,53 +167,6 @@
             margin-top: 15vh;
         }
         
-        /* ESTILO PARA LA NUEVA TARJETA DE MORRALES */
-        .morrales-card {
-            position: absolute;
-            bottom: 30px;
-            z-index: 4;
-            width: 90%;
-            max-width: 350px;
-            background-color: rgba(0, 0, 0, 0.85);
-            border: 2px solid var(--color-primary);
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-            text-align: center;
-        }
-
-        .morrales-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(197, 166, 124, 0.3);
-        }
-
-        .morrales-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .morrales-card:hover img {
-            opacity: 1;
-        }
-        
-        .morrales-text {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
-            padding: 15px 10px 10px 10px;
-            color: white;
-            font-size: 1.5em;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
         /* SECCIONES DE CONTENIDO */
         section {
             padding: 50px 20px;
@@ -193,9 +201,8 @@
             text-align: left;
         }
         
-        /* Centrar completamente el texto en secciones cortas (Quiénes Somos, Morrales, Servicios intro) */
+        /* Centrar completamente el texto en secciones cortas (Quiénes Somos, Servicios intro) */
         #quienes-somos .seccion-contenido p,
-        #morrales .seccion-contenido p,
         #servicios .seccion-contenido > p:first-child {
             text-align: center;
         }
@@ -209,28 +216,59 @@
             text-align: left;
         }
         
-        /* Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
-        #contacto .contact-link {
-            display: block;
-            width: fit-content;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
         /* Ajuste de alineación forzada para las tarjetas de servicio */
         .service-card p {
             max-width: none; /* No limitar ancho dentro de la tarjeta */
             text-align: center; /* Forzar centrado del texto dentro de la tarjeta */
             margin: 0 auto;
         }
+        
+        /* --- ESTILOS PARA BOTONES DE CONTACTO --- */
+        .contact-button {
+            display: block;
+            width: 90%;
+            max-width: 350px;
+            margin: 15px auto;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
 
+        .whatsapp-button {
+            background-color: #25D366; /* Verde de WhatsApp */
+            color: #000;
+            border: 2px solid #25D366;
+        }
+        
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            color: #FFF;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+        }
+
+        .email-button {
+            background-color: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .email-button:hover {
+            background-color: var(--color-primary);
+            color: var(--color-dark);
+            box-shadow: 0 6px 15px rgba(197, 166, 124, 0.5);
+        }
         /* --------------------------------------------------------------------------------- */
 
-        /* BOTÓN VOLVER (Navegación táctica) - Simplificado sin necesidad de header-height variable*/
+        /* BOTÓN VOLVER (Navegación táctica) */
         .boton-volver {
             display: block;
             width: fit-content;
-            margin: 40px auto 40px auto; /* Eliminado el cálculo con variables de header */
+            margin: 40px auto 40px auto;
             padding: 10px 20px;
             background-color: #222;
             color: var(--color-primary);
@@ -302,8 +340,14 @@
         /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
         @media (max-width: 768px) {
             
+            .menu-icon {
+                top: 45px; /* Ajuste para móvil */
+                right: 10px;
+                background-color: transparent;
+            }
+
             .boton-volver {
-                margin: 40px auto 30px auto; /* Ajuste para móvil sin variables complejas */
+                margin: 40px auto 30px auto;
             }
             
             /* Ajuste del banner principal para móvil */
@@ -328,14 +372,6 @@
                 margin-top: 0;
             }
             
-            .morrales-card {
-                position: relative;
-                width: 90%;
-                font-size: 1.2em;
-                margin-top: 20px;
-                bottom: auto;
-            }
-            
             /* En móvil, el texto vuelve a la alineación izquierda simple */
             .seccion-contenido p {
                 max-width: none;
@@ -344,7 +380,6 @@
             
             /* Pero las secciones cortas se mantienen centradas */
             #quienes-somos .seccion-contenido p,
-            #morrales .seccion-contenido p,
             #servicios .seccion-contenido > p:first-child {
                 text-align: center;
             }
@@ -355,8 +390,17 @@
         // La altura de la promo bar es ahora la única referencia fija.
         const FIXED_OFFSET = 35; // Altura de promo-bar-height
 
+        // Alterna la visibilidad del menú hamburguesa
+        function toggleNav() {
+            var menu = document.getElementById("myNav");
+            // Usamos 100% para abrir el menú desde la derecha
+            menu.style.width = (menu.style.width === "100%") ? "0%" : "100%";
+        }
+
         // Muestra la sección seleccionada y oculta el banner principal
         function mostrarSeccion(seccionId) {
+            document.getElementById("myNav").style.width = "0%"; // Cierra el menú
+
             // Oculta el banner principal y todas las secciones de contenido
             document.getElementById('main-banner').classList.add('oculto');
             const secciones = document.querySelectorAll('.contenido-pagina');
@@ -384,6 +428,8 @@
         
         // Vuelve al Banner principal
         function volverInicio() {
+            document.getElementById("myNav").style.width = "0%"; // Cierra el menú
+
             // Oculta todas las secciones
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
@@ -397,11 +443,6 @@
             // Desplázate al inicio (por debajo de la promo bar)
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // Función específica para navegar a Morrales (desde la tarjeta)
-        function navegarMorrales() {
-            mostrarSeccion('morrales');
-        }
         
         // Configuración inicial al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
@@ -412,17 +453,7 @@
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
             });
-
-            // 3. Agrega el listener para la tarjeta de morrales
-            const morralesCard = document.getElementById('morrales-card');
-            if(morralesCard) {
-                morralesCard.addEventListener('click', navegarMorrales);
-            }
         });
-        
-        // Función para enlaces de texto directos
-        // NOTA: Para que esto funcione, tendrás que modificar los enlaces de texto que tenías en el menú (ahora eliminados)
-        // Por ejemplo: <a href="#" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
         
     </script>
     
@@ -437,6 +468,19 @@
         </div>
     </div>
     
+    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <div id="myNav" class="nav-menu">
+        <a href="#" onclick="volverInicio(); return false;">INICIO</a>
+        <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
+        <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
+        <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS Y GARANTÍAS</a>
+    </div>
+
     <section id="main-banner" class="visible" style="background-color: #000;">
         <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
@@ -446,14 +490,7 @@
         <div class="video-overlay"></div>
 
         <div class="banner-content">
-        </div>
-
-        <div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
-            <img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';">
-            <div class="morrales-text">
-                MORRALES
             </div>
-        </div>
     </section>
 
     <section id="quienes-somos" class="contenido-pagina oculto">
@@ -468,19 +505,6 @@
             </p>
             <p style="color: var(--color-primary); font-weight: bold; margin-top: 40px;">
                 Equipamos tu confianza en cada despliegue.
-            </p>
-        </div>
-    </section>
-
-    <section id="morrales" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-        <div class="seccion-contenido">
-            <h2>MORRALES TÁCTICOS</h2>
-            <p style="color: #999;">
-                **¡Próximamente, el contenido detallado de nuestra línea de morrales!**
-            </p>
-            <p style="margin-top: 20px;">
-                Esta sección está lista para recibir la galería de productos.
             </p>
         </div>
     </section>
@@ -529,15 +553,22 @@
             <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
                 Estamos listos para atender sus requerimientos.
             </p>
-            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
-                <a class="contact-link whatsapp-btn"
+            <div style="display: flex; flex-direction: column; gap: 15px; max-width: 350px; margin: 0 auto;">
+                
+                <a class="contact-button whatsapp-button"
                     href="https://wa.me/573148172002"
-                    target="_blank">
-                    <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
+                    target="_blank"
+                    role="button">
+                    <span style="font-size: 1.1em; margin-right: 8px;">&#9990;</span> Chatear por WhatsApp
                 </a>
-                <span class="contact-link email-info">
-                    <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> rynodelta@gmail.com
-                </span>
+                
+                <a class="contact-button email-button"
+                    href="mailto:rynodelta@gmail.com"
+                    target="_blank"
+                    role="button">
+                    <span style="font-size: 1.1em; margin-right: 8px;">&#9993;</span> rynodelta@gmail.com
+                </a>
+                
             </div>
             <p style="margin-top: 40px; font-size: 0.9em; color: #888;">
                 Nuestro equipo de soporte está disponible de Lunes a Viernes (8am - 6pm COL).
@@ -559,7 +590,7 @@
                 <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
                 <li>Mejora de nuestros servicios y la experiencia de compra.</li>
             </ul>
-            <p>
+            <p style="margin-bottom: 40px;">
                 Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.
             </p>
             
