@@ -19,12 +19,7 @@
         /* ESTILOS BASE Y TIPOGRAFÍA */
         body {
             font-family: 'Inter', sans-serif;
-            /* --- INICIO DE TU MODIFICACIÓN SOLICITADA --- */
-            /* Se ha eliminado el "margin: 0;" de aquí: */
-            /* margin: 0; */
-            /* Y se mueve la propiedad 'margin: 0;' al bloque de código que sigue */
-            /* para asegurar la compatibilidad con todos los navegadores */
-            /* --- FIN DE TU MODIFICACIÓN SOLICITADA --- */
+            margin: 0;
             padding: 0;
             background-color: var(--color-dark);
             color: var(--color-text);
@@ -33,12 +28,9 @@
         }
 
         /* ****************************************************** */
-        /* --- ÚNICA MODIFICACIÓN SOLICITADA PARA EL BANNER --- */
+        /* --- PRIMERA MODIFICACIÓN (Mantenida para compatibilidad base) --- */
         /* ****************************************************** */
-        /* Esta nueva regla es crucial para eliminar el margen que 
-           algunos navegadores (user-agent stylesheet) aplican por 
-           defecto, especialmente a los elementos de bloque y al <html>, 
-           asegurando que el banner comience desde el borde superior. */
+        /* Eliminamos margen del elemento raíz para asegurar el tope. */
         html, body {
             margin: 0;
             padding: 0;
@@ -352,12 +344,14 @@
             
             /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
             #main-banner {
-                /* Usamos el offset del menú para que el banner comience justo debajo de él */
-                margin-top: var(--menu-offset);
-                /* IMPORTANTE: Eliminamos el height: 100vh para que el contenedor se ajuste al tamaño del video (que tiene object-fit: contain) */
+                /* ANTES: margin-top: var(--menu-offset); <--- ESTE MARGEN GENERABA EL ESPACIO NEGRO */
+                /* AHORA: Lo ponemos en 0 para que el banner comience en el tope del viewport. */
+                margin-top: 0; /* <--- CRÍTICO PARA ELIMINAR EL ESPACIO SUPERIOR EN MÓVIL */
+                
                 height: auto; 
-                min-height: calc(100vh - var(--menu-offset)); /* Mantenemos un min-height para asegurar que ocupe la mayor parte de la pantalla */
-                align-items: center; /* Centramos el contenido de nuevo */
+                /* Mantenemos un min-height: 100vh para asegurar que ocupe toda la pantalla disponible */
+                min-height: 100vh; /* Cambiado de calc(100vh - var(--menu-offset)) a 100vh */
+                align-items: center; 
             }
             
             .banner-video {
