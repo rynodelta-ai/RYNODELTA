@@ -32,31 +32,29 @@
             overflow-x: hidden;
         }
         
-        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (REVISIÓN FINAL) --- */
+        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (CORRECCIÓN DEFINITIVA) --- */
         #promo-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: var(--promo-bar-height);
-            line-height: var(--promo-bar-height); /* <-- CAMBIO CLAVE: Centrado vertical */
+            line-height: var(--promo-bar-height); 
             background-color: rgba(0, 0, 0, 0.85);
             color: var(--color-primary);
             z-index: 10000;
-            overflow: hidden;
-            /* display: flex; y align-items: center; eliminados */
+            overflow: hidden; 
             font-size: 0.9em;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            padding: 0;
         }
 
         .promo-content {
             display: inline-block;
             animation: marquee 30s linear infinite;
-            padding-left: 100%;
+            /* ELIMINADO: padding-left: 100%; */
             will-change: transform;
-            white-space: nowrap; 
-            line-height: initial; /* Reinicia el line-height para que el texto no se vea estirado */
+            white-space: nowrap; /* Mantiene el texto en una sola línea */
+            line-height: initial; 
         }
         
         .promo-text {
@@ -66,10 +64,10 @@
         }
 
 
-        /* Definición de la Animación Marquee */
+        /* Definición de la Animación Marquee - AHORA MÁS ROBUSTA */
         @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
+            0% { transform: translate3d(100%, 0, 0); } /* <-- CORREGIDO: Inicia fuera de pantalla */
+            100% { transform: translate3d(-100%, 0, 0); } /* Desplaza hasta el final del contenido */
         }
         /* ------------------------------------------- */
 
