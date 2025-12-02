@@ -19,13 +19,31 @@
         /* ESTILOS BASE Y TIPOGRAFÍA */
         body {
             font-family: 'Inter', sans-serif;
-            margin: 0;
+            /* --- INICIO DE TU MODIFICACIÓN SOLICITADA --- */
+            /* Se ha eliminado el "margin: 0;" de aquí: */
+            /* margin: 0; */
+            /* Y se mueve la propiedad 'margin: 0;' al bloque de código que sigue */
+            /* para asegurar la compatibilidad con todos los navegadores */
+            /* --- FIN DE TU MODIFICACIÓN SOLICITADA --- */
             padding: 0;
             background-color: var(--color-dark);
             color: var(--color-text);
             line-height: 1.6;
             overflow-x: hidden; /* Evita el scroll horizontal */
         }
+
+        /* ****************************************************** */
+        /* --- ÚNICA MODIFICACIÓN SOLICITADA PARA EL BANNER --- */
+        /* ****************************************************** */
+        /* Esta nueva regla es crucial para eliminar el margen que 
+           algunos navegadores (user-agent stylesheet) aplican por 
+           defecto, especialmente a los elementos de bloque y al <html>, 
+           asegurando que el banner comience desde el borde superior. */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        /* ****************************************************** */
 
         /* BANNER PRINCIPAL (Video de fondo) */
         #main-banner {
@@ -485,43 +503,32 @@
 </head>
 <body>
     
-    <!-- Menú de Navegación (Hamburguesa) - SIN la opción MORRALES -->
     <div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
         <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
-        <!-- Opción MORRALES eliminada por instrucción del usuario -->
         <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
         <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
         <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
     </div>
 
-    <!-- Icono de Menú Hamburguesa -->
     <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
         <div></div>
         <div></div>
         <div></div>
     </div>
 
-    <!-- SECCIÓN 1: Banner Principal (Inicio) -->
     <section id="main-banner" class="visible" style="background-color: #000;">
-        <!-- Video de Fondo (Placeholder) -->
         <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
-            <!-- Mensaje de fallback para navegadores sin soporte de video -->
             Tu navegador no soporta videos en HTML5.
         </video>
 
-        <!-- Capa Oscura sobre el Video -->
         <div class="video-overlay"></div>
 
-        <!-- Contenido Central del Banner (Vacío, pero mantiene el margen) -->
         <div class="banner-content">
-            <!-- Título o Logo aquí si es necesario -->
-        </div>
+            </div>
 
-        <!-- NUEVA TARJETA DE NAVEGACIÓN - MORRALES -->
         <div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
-            <!-- Texto del placeholder ELIMINADO según la instrucción -->
             <img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
             <div class="morrales-text">
                 MORRALES
@@ -529,7 +536,6 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 2: Quiénes Somos -->
     <section id="quienes-somos" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
@@ -546,7 +552,6 @@
         </div>
     </section>
 
-    <!-- NUEVA SECCIÓN: MORRALES (Inicialmente vacía, solo es accesible desde la tarjeta del banner) -->
     <section id="morrales" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
@@ -560,7 +565,6 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 3: Servicios y Envíos -->
     <section id="servicios" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
@@ -598,7 +602,6 @@
         </div>
     </section>
     
-    <!-- SECCIÓN 4: Contacto -->
     <section id="contacto" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido" style="text-align: center;">
@@ -622,7 +625,6 @@
         </div>
     </section>
 
-    <!-- SECCIÓN 5: Políticas -->
     <section id="politicas" class="contenido-pagina oculto">
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
