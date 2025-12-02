@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=100..900&display=swap" rel="stylesheet">
     
     <style>
         /* VARIABLES DE COLOR */
         :root {
             --color-dark: #000;
-            --promo-bar-height: 35px;
+            --promo-bar-height-mobile: 35px;
+            /* Aumentado en 30%: 35px * 1.30 = 45.5px */
+            --promo-bar-height-desktop: 45px; 
         }
 
         body {
             font-family: 'Inter', sans-serif !important;
-            margin: 0 !important; /* CRÍTICO: Eliminar márgenes del cuerpo */
+            margin: 0 !important;
             padding: 0 !important;
             background-color: var(--color-dark) !important;
             color: #E0E0E0;
@@ -26,18 +28,84 @@
 
         html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
         
-        /* BANNER PRINCIPAL (Video de fondo) */
+        /* --- ESTILOS DE LA BARRA (POR DEFECTO: MÓVIL) --- */
+        #promo-bar {
+            position: fixed !important; 
+            top: 0 !important; 
+            left: 0 !important; 
+            width: 100% !important; 
+            
+            /* ALTURA MÓVIL */
+            height: var(--promo-bar-height-mobile) !important; 
+            line-height: var(--promo-bar-height-mobile) !important;
+            
+            background-color: rgba(0, 0, 0, 0.95) !important; 
+            z-index: 999999 !important; 
+            overflow: hidden !important;
+            white-space: nowrap !important;
+            font-size: 0.9em !important;
+        }
+        
+        .marquee-content {
+            display: inline-block !important;
+            white-space: nowrap !important;
+            will-change: transform !important;
+            line-height: inherit !important; 
+            padding-left: 100% !important; 
+            color: #C5A67C !important; 
+            
+            /* VELOCIDAD MÓVIL: 30 segundos (10% más lento que 27s) */
+            animation: marquee 30s linear infinite !important;
+        }
+        
+        .marquee-text {
+            padding: 0 40px !important;
+            font-weight: 600 !important;
+            display: inline-block !important;
+        }
+
+        /* Definición de la Animación (Marquee) */
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); } 
+            100% { transform: translate3d(-100%, 0, 0); } 
+        }
+
+        /* --- MEDIA QUERY (PC/ESCRITORIO: ANCHO > 768px) --- */
+        @media (min-width: 769px) {
+            #promo-bar {
+                /* ALTURA PC (30% más grande) */
+                height: var(--promo-bar-height-desktop) !important; 
+                line-height: var(--promo-bar-height-desktop) !important;
+                font-size: 1.1em !important; /* Texto ligeramente más grande para PC */
+            }
+            
+            .marquee-content {
+                /* VELOCIDAD PC: 27 segundos (10% más rápido que la móvil) */
+                animation: marquee 27s linear infinite !important;
+            }
+        }
+        
+        /* --- ESTILOS DEL BANNER PRINCIPAL --- */
         #main-banner {
             position: relative;
             width: 100%;
-            margin-top: var(--promo-bar-height) !important; /* Separación CRÍTICA para la barra fija */
-            height: calc(100vh - var(--promo-bar-height));
+            /* Usamos la variable móvil por defecto */
+            margin-top: var(--promo-bar-height-mobile) !important; 
+            height: calc(100vh - var(--promo-bar-height-mobile));
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             padding: 0;
+        }
+
+        /* Ajuste de margin-top para PC */
+        @media (min-width: 769px) {
+            #main-banner {
+                 margin-top: var(--promo-bar-height-desktop) !important; 
+                 height: calc(100vh - var(--promo-bar-height-desktop));
+            }
         }
 
         .banner-video {
@@ -52,9 +120,9 @@
             position: relative; z-index: 3; color: white; margin-top: 15vh;
         }
         
-        /* MEDIA QUERY (MÓVIL) */
+        /* MEDIA QUERY para Móvil */
         @media (max-width: 768px) {
-            #main-banner { margin-top: var(--promo-bar-height) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
+            #main-banner { margin-top: var(--promo-bar-height-mobile) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height-mobile)); align-items: center; }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
         }
@@ -69,37 +137,12 @@
 </head>
 <body>
     
-    <div id="promo-bar" style="
-        position: fixed !important; 
-        top: 0 !important; 
-        left: 0 !important; 
-        width: 100% !important; 
-        height: 35px !important; 
-        line-height: 35px !important;
-        background-color: rgba(0, 0, 0, 0.95) !important; /* FONDO NEGRO FORZADO */
-        z-index: 999999 !important; 
-        overflow: hidden !important;
-        white-space: nowrap !important; /* CRÍTICO: EVITA EL APILAMIENTO EN MÓVILES */
-    ">
-        <marquee 
-            behavior="scroll" 
-            direction="left" 
-            scrollamount="5" 
-            loop="infinite"
-            style="
-                width: 100%; 
-                height: 35px;
-                line-height: 35px !important; 
-                color: #C5A67C !important; /* COLOR DORADO FORZADO */
-                font-size: 0.9em !important;
-                white-space: nowrap !important;
-                display: inline-block !important;
-            "
-        >
-            <span style="padding: 0 40px;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span style="padding: 0 40px;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span style="padding: 0 40px;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-        </marquee>
+    <div id="promo-bar">
+        <div class="marquee-content">
+            <span class="marquee-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span class="marquee-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span class="marquee-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+        </div>
     </div>
     
     <section id="main-banner" class="visible" style="background-color: #000;">
