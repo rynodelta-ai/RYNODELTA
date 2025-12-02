@@ -6,12 +6,10 @@
     <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* VARIABLES DE COLOR */
+        /* VARIABLES DE COLOR (Se mantienen para uso en CSS interno) */
         :root {
             --color-primary: #C5A67C; /* Dorado/Marrón */
-            --color-accent: #111;
             --color-dark: #000;
-            --color-text: #E0E0E0;
             --promo-bar-height: 35px;
         }
 
@@ -21,39 +19,24 @@
             margin: 0;
             padding: 0;
             background-color: var(--color-dark) !important;
-            color: var(--color-text);
+            color: #E0E0E0;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        html {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+        html { margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (VERSIÓN 7.0 - MARQUEE FUNCIONAL) --- */
+        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (MARQUEE EN CSS INTERNO) --- */
         #promo-bar {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: var(--promo-bar-height) !important;
-            line-height: var(--promo-bar-height) !important;
-            
-            /* COLORES DESEADOS */
-            background-color: rgba(0, 0, 0, 0.85) !important; /* Fondo oscuro forzado */
-            color: var(--color-primary) !important; /* Color dorado forzado */
-            
+            /* Los estilos críticos de color y posición se mueven INLINE */
             z-index: 10000 !important;
-            overflow: hidden !important; /* ELIMINA BARRAS DE DESPLAZAMIENTO */
-            font-size: 0.9em !important;
+            overflow: hidden !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
         }
 
         .promo-content {
             display: inline-block !important;
-            white-space: nowrap !important; /* FUERZA una sola línea (CRÍTICO) */
+            white-space: nowrap !important; /* CRÍTICO para no apilar */
             animation: marquee 30s linear infinite !important;
             will-change: transform !important;
             line-height: initial !important; 
@@ -69,10 +52,10 @@
         }
 
 
-        /* Definición de la Animación Marquee - USAMOS TRANSLATE3D POR RENDIMIENTO */
+        /* Definición de la Animación Marquee - Funcional */
         @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); } /* Comienza en el borde (debido al padding-left: 100%) */
-            100% { transform: translate3d(-100%, 0, 0); } /* Desplaza -100% de la anchura del contenido */
+            0% { transform: translate3d(0, 0, 0); } 
+            100% { transform: translate3d(-100%, 0, 0); } 
         }
         /* ------------------------------------------- */
 
@@ -119,49 +102,32 @@
         
         /* CLASES DE VISIBILIDAD */
         .oculto {
-            display: none !important;
-            pointer-events: none;
-            height: 0;
-            padding: 0;
-            overflow: hidden;
+            display: none !important; pointer-events: none; height: 0; padding: 0; overflow: hidden;
         }
         
         .contenido-pagina.visible {
-            display: block;
-            pointer-events: auto;
-            height: auto;
-            min-height: 80vh;
+            display: block; pointer-events: auto; height: auto; min-height: 80vh;
         }
         
         /* MEDIA QUERY (MÓVIL) */
         @media (max-width: 768px) {
             
-            /* Ajuste del banner principal para móvil */
             #main-banner {
-                margin-top: var(--promo-bar-height);
-                height: auto;
-                min-height: calc(100vh - var(--promo-bar-height));
-                align-items: center;
+                margin-top: var(--promo-bar-height); height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center;
             }
             
             .banner-video {
-                position: relative;
-                width: 100%;
-                object-fit: contain;
+                position: relative; width: 100%; object-fit: contain;
             }
 
             .banner-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                margin-top: 0;
+                position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0;
             }
         }
     </style>
     
     <script>
-        const FIXED_OFFSET = 35;
+        const FIXED_OFFSET = 35; 
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('main-banner').classList.add('visible');
@@ -171,7 +137,18 @@
 </head>
 <body>
     
-    <div id="promo-bar">
+    <div id="promo-bar" style="
+        position: fixed !important; 
+        top: 0 !important; 
+        left: 0 !important; 
+        width: 100% !important; 
+        height: 35px !important; 
+        line-height: 35px !important;
+        background-color: rgba(0, 0, 0, 0.85) !important; 
+        color: #C5A67C !important;
+        font-size: 0.9em !important;
+        white-space: nowrap !important; /* Estilo extra in-line para no apilar */
+    ">
         <div class="promo-content">
             <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
             <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
