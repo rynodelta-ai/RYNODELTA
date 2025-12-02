@@ -31,7 +31,7 @@
         #main-banner {
             position: relative;
             width: 100%;
-            height: 100vh; 
+            height: 100vh; /* Ocupa toda la altura del viewport */
             overflow: hidden;
             display: flex;
             flex-direction: column; 
@@ -67,17 +67,14 @@
             margin-top: 15vh; 
         }
         
-        /* ESTILO PARA LA NUEVA TARJETA DE MORRALES (Desktop: Mantenemos el tamaño, pero ajustamos la posición) */
+        /* ESTILO PARA LA NUEVA TARJETA DE MORRALES */
         .morrales-card {
-            /* --- AJUSTE CLAVE PARA DESKTOP --- */
-            position: relative; /* Cambiado a relativo para que siga el flujo normal */
-            margin-top: 30px; /* Despegamos la tarjeta del video (Separación similar a la de móvil) */
-            /* --- FIN AJUSTE CLAVE PARA DESKTOP --- */
-            
+            position: absolute; /* Posicionamiento absoluto para flotar sobre el video */
+            bottom: 30px; /* POSICIÓN POR DEFECTO (DESKTOP) */
             z-index: 4; /* Sobre el video y el overlay */
-            width: 90%; 
+            width: 90%; /* Ancho en móvil */
             max-width: 350px; /* Ancho máximo en desktop */
-            background-color: rgba(0, 0, 0, 0.85); 
+            background-color: rgba(0, 0, 0, 0.85); /* Fondo semitransparente oscuro */
             border: 2px solid var(--color-primary);
             border-radius: 10px;
             overflow: hidden;
@@ -88,20 +85,20 @@
         }
 
         .morrales-card:hover {
-            transform: translateY(-5px) scale(1.02); 
-            box-shadow: 0 10px 30px rgba(197, 166, 124, 0.3); 
+            transform: translateY(-5px) scale(1.02); /* Efecto 3D al pasar el mouse */
+            box-shadow: 0 10px 30px rgba(197, 166, 124, 0.3); /* Sombra acentuada */
         }
 
         .morrales-card img {
             width: 100%;
             height: auto;
             display: block;
-            opacity: 0.8; 
+            opacity: 0.8; /* Imagen ligeramente atenuada */
             transition: opacity 0.3s;
         }
         
         .morrales-card:hover img {
-            opacity: 1; 
+            opacity: 1; /* Imagen más brillante al pasar el mouse */
         }
         
         .morrales-text {
@@ -109,32 +106,13 @@
             bottom: 0;
             left: 0;
             width: 100%;
+            /* Ajuste de fondo para que el texto sea más legible */
             background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)); 
             padding: 15px 10px 10px 10px;
             color: white;
             font-size: 1.5em;
             font-weight: 700;
             text-transform: uppercase;
-        }
-        
-        /* AJUSTE DEL TAMAÑO DEL BANNER PARA ACOMODAR LA TARJETA EN DESKTOP */
-        @media (min-width: 769px) {
-            #main-banner {
-                /* Altura ajustada para que el contenido de la tarjeta quede visible justo debajo del video. */
-                /* El video es 100vh, y la tarjeta va justo debajo con un margen de 30px. */
-                /* Usamos una altura mínima para asegurar que la sección debajo no se superponga. */
-                min-height: calc(100vh + 150px); /* 100vh del video + margen y altura de la tarjeta */
-                justify-content: flex-start; /* Aseguramos que los elementos empiecen arriba */
-                
-            }
-            
-            .banner-video {
-                /* El video vuelve a ser absoluto para que se dimensione a 100vh */
-                position: absolute;
-                height: 100%;
-                /* Aseguramos que el video no tape la tarjeta que ahora es relativa */
-                bottom: auto; 
-            }
         }
 
         /* SECCIONES DE CONTENIDO */
@@ -147,7 +125,7 @@
         }
 
         .seccion-contenido {
-            max-width: 1000px; 
+            max-width: 1000px; /* Aumentado ligeramente para la galería de productos */
             width: 100%;
             text-align: left; 
             padding: 20px; 
@@ -354,21 +332,27 @@
                  flex: 1 1 100%; 
             }
             
-            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL --- */
+            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
             #main-banner {
+                /* Usamos el offset del menú para que el banner comience justo debajo de él */
                 margin-top: var(--menu-offset);
+                /* IMPORTANTE: Eliminamos el height: 100vh para que el contenedor se ajuste al tamaño del video (que tiene object-fit: contain) */
                 height: auto; 
-                min-height: calc(100vh - var(--menu-offset)); 
-                align-items: center; 
+                min-height: calc(100vh - var(--menu-offset)); /* Mantenemos un min-height para asegurar que ocupe la mayor parte de la pantalla */
+                align-items: center; /* Centramos el contenido de nuevo */
             }
             
             .banner-video {
+                /* Hacemos que el video no sea absoluto para que su altura se compute en el flujo normal */
                 position: relative; 
+                /* Ocupamos todo el ancho del contenedor del banner */
                 width: 100%; 
+                /* El object-fit: contain deja las barras negras, pero ahora la altura del #main-banner se ajustará a la altura real del video */
                 object-fit: contain; 
             }
 
             .video-overlay {
+                 /* Lo hacemos relative al video para que se dimensione con él */
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -383,21 +367,22 @@
             }
             
             .banner-content {
+                /* Alineamos el contenido al centro */
                  position: absolute;
                  top: 50%;
                  left: 50%;
                  transform: translate(-50%, -50%);
-                 margin-top: 0; 
+                 margin-top: 0; /* Ya no necesitamos el margen fijo */
             }
             
             .morrales-card {
                 /* Lo ponemos relativo al final del video */
-                position: relative; 
+                position: relative; /* Cambiado a relativo para que se posicione justo después del elemento anterior (que es el video) */
                 width: 90%; 
                 font-size: 1.2em;
-                /* Margen positivo para separar la tarjeta del video, como solicitaste previamente. */
-                margin-top: 20px; 
-                bottom: auto; 
+                /* --- CAMBIO CLAVE: Aumentar el margen superior para despegarlo del video --- */
+                margin-top: 20px; /* Margen positivo para separar la tarjeta del video. (Antes era -30px) */
+                bottom: auto; /* Desactivamos el posicionamiento absoluto 'bottom' */
             }
         }
     </style>
@@ -529,14 +514,14 @@
         <!-- Capa Oscura sobre el Video -->
         <div class="video-overlay"></div>
 
-        <!-- Contenido Central del Banner (Títulos) -->
+        <!-- Contenido Central del Banner (Vacío, pero mantiene el margen) -->
         <div class="banner-content">
-            <h1 style="font-size: 6vw; text-transform: uppercase; margin: 0; color: var(--color-primary); font-weight: 900; letter-spacing: 5px; text-shadow: 0 0 10px rgba(197, 166, 124, 0.5);">RYNO DELTA</h1>
-            <p style="font-size: 2vw; margin-top: 5px; font-weight: 300; letter-spacing: 1px; text-align: center; color: #E0E0E0; text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);">PARA MISIONES DE VERDAD</p>
+            <!-- Título o Logo aquí si es necesario -->
         </div>
 
         <!-- NUEVA TARJETA DE NAVEGACIÓN - MORRALES -->
         <div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
+            <!-- Texto del placeholder ELIMINADO según la instrucción -->
             <img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
             <div class="morrales-text">
                 MORRALES
