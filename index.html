@@ -25,15 +25,15 @@
             background-color: var(--color-dark);
             color: var(--color-text);
             line-height: 1.6;
-            /* CORRECCIÓN 1: Evita la barra de scroll horizontal */
+            /* CORRECCIÓN FINAL: Evita la barra de scroll horizontal */
             overflow-x: hidden; 
         }
 
-        /* Eliminamos margen del elemento raíz para asegurar el tope. */
+        /* Eliminamos margen del elemento raíz para asegurar el tope y prevenir overflow */
         html {
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Seguridad adicional */
+            overflow-x: hidden; 
         }
         
         /* --- ESTILOS PARA BARRA DE PROMOCIÓN --- */
@@ -174,7 +174,8 @@
         .seccion-contenido {
             max-width: 1000px; 
             width: 100%;
-            text-align: left; 
+            /* Forzar todo el contenido interno a centrarse, luego anular para legibilidad si es necesario */
+            text-align: center; 
             padding: 20px; 
             background-color: var(--color-accent); 
             border-radius: 10px;
@@ -186,14 +187,14 @@
         /* Centrado de todos los encabezados */
         .seccion-contenido h2,
         .seccion-contenido h3 {
-             text-align: center !important; 
+             text-align: center; /* ¡Forzado al centro! */
         }
         
-        /* Centrar el BLOQUE de párrafo y mantener alineación izquierda para legibilidad de texto largo (default) */
+        /* Centrar el BLOQUE de párrafo */
         .seccion-contenido p {
             max-width: 800px; 
-            margin: 0 auto 20px auto; 
-            text-align: left; 
+            margin: 0 auto 20px auto; /* Centra el bloque de párrafo */
+            text-align: left; /* Mantenemos izquierda para la legibilidad del texto largo */
         }
         
         /* Centrar completamente el texto en secciones cortas (Quiénes Somos, Morrales, Servicios intro) */
@@ -206,12 +207,18 @@
         /* Asegurar que las listas también tengan un ancho máximo y estén centradas */
         .centered-list {
             max-width: 800px;
-            margin: 20px auto; 
+            margin: 20px auto; /* Centrar el bloque de la lista */
             list-style-type: circle; 
-            padding-left: 20px; 
-            text-align: left; 
+            padding-left: 0; /* Quitamos el padding para que la lista empiece justo después de margin: auto */
+            text-align: left; /* Alineación izquierda para que las viñetas se vean bien */
         }
         
+        /* Ajuste para que las viñetas se vean correctamente */
+        .centered-list li {
+            padding-left: 25px; /* Agregamos el padding solo al item para mantener la sangría de la viñeta */
+            text-align: left;
+        }
+
         /* Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
         #contacto .contact-link {
             display: block;
@@ -221,10 +228,14 @@
         }
         
         /* Ajuste de alineación forzada para las tarjetas de servicio */
+        .service-card {
+            text-align: center; /* Asegura que el contenido interno se centre */
+        }
+
         .service-card p {
             max-width: none; /* No limitar ancho dentro de la tarjeta */
             text-align: center; /* Forzar centrado del texto dentro de la tarjeta */
-            margin: 0 auto;
+            margin: 0 auto 15px auto;
         }
 
         /* --------------------------------------------------------------------------------- */
@@ -275,7 +286,6 @@
             padding: 25px;
             border-radius: 10px;
             box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
-            text-align: center;
             border-left: 3px solid var(--color-primary); 
         }
 
@@ -413,12 +423,21 @@
              #servicios .seccion-contenido > p:first-child { 
                 text-align: center; 
             }
+            
+            /* Ajuste de listas para móvil: mantienen sangría pero el bloque está centrado */
+            .centered-list {
+                padding-left: 0;
+            }
+
+            .centered-list li {
+                padding-left: 20px;
+                list-style-position: inside; /* Asegura que la viñeta no se salga */
+            }
         }
     </style>
     
     <script>
         // Altura de los elementos fijos (constante de control de scroll)
-        // 120px (Altura original de header) + 35px (Altura de promo bar) = 155px
         const FIXED_HEADER_HEIGHT = 155; 
 
         // Alterna la visibilidad del menú hamburguesa
@@ -427,14 +446,12 @@
             menu.style.width = (menu.style.width === "100%") ? "0%" : "100%";
         }
         
-        // Muestra la sección seleccionada y oculta los elementos fijos
+        // Muestra la sección seleccionada
         function mostrarSeccion(seccionId) {
             document.getElementById("myNav").style.width = "0%"; // Cierra menú
             
-            // Oculta navegación fija (Solo queda el Menú hamburguesa)
             document.getElementById('menu-icon').classList.add('hidden-nav-elements');
             
-            // Oculta el banner principal y todas las secciones de contenido
             document.getElementById('main-banner').classList.add('oculto');
             const secciones = document.querySelectorAll('.contenido-pagina');
             secciones.forEach(seccion => {
@@ -442,15 +459,11 @@
                 seccion.classList.remove('visible'); 
             });
 
-            // Muestra la sección y aplica el offset de scroll
             const seccionSeleccionada = document.getElementById(seccionId);
             if (seccionSeleccionada) {
                 seccionSeleccionada.classList.remove('oculto'); 
                 seccionSeleccionada.classList.add('visible'); 
                 
-                // Cálculo de scroll inteligente: 
-                // Móvil: 75px (Promo bar + Icono de menú) 
-                // Desktop: 155px (FIXED_HEADER_HEIGHT)
                 const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 75 : FIXED_HEADER_HEIGHT;
                 const rect = seccionSeleccionada.getBoundingClientRect();
                 const targetScrollPosition = window.scrollY + rect.top - currentHeaderHeight;
@@ -462,50 +475,38 @@
             }
         }
         
-        // Vuelve al Banner principal y muestra el icono de menú
+        // Vuelve al Banner principal
         function volverInicio() {
-            // Oculta todas las secciones
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
                 seccion.classList.remove('visible');
             });
             
-            // Muestra el banner principal 
             document.getElementById('main-banner').classList.remove('oculto');
             document.getElementById('main-banner').classList.add('visible');
             
-            // Muestra el icono de menú
             document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
             
-            // Desplázate al inicio
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Cierra el menú y ejecuta volverInicio
         function navegarInicio() {
             toggleNav(); 
             volverInicio(); 
         }
         
-        // Función específica para navegar a Morrales
         function navegarMorrales() {
             mostrarSeccion('morrales');
         }
         
-        // Configuración inicial al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Inicializa el Banner principal como visible
             document.getElementById('main-banner').classList.add('visible');
-            
-            // 2. Inicializa el icono de menú como visible
             document.getElementById('menu-icon').classList.remove('hidden-nav-elements');
             
-            // 3. Oculta todas las demás secciones al inicio
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
             });
 
-             // 4. Agrega el listener para la tarjeta de morrales
             const morralesCard = document.getElementById('morrales-card');
             if(morralesCard) {
                 morralesCard.addEventListener('click', navegarMorrales);
@@ -616,10 +617,10 @@
             </div>
             <h3 style="color: var(--color-primary); margin-top: 50px;">Logística y Envíos Nacionales</h3>
             <ul class="centered-list">
-                <li style="margin-bottom: 10px;">Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
-                <li style="margin-bottom: 10px;">Tiempo de entrega estándar: 3-5 días hábiles.</li>
-                <li style="margin-bottom: 10px;">En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
-                <li style="margin-bottom: 10px;">**Recomendación:** Confirme su cobertura antes de realizar la compra.</li>
+                <li>Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
+                <li>Tiempo de entrega estándar: 3-5 días hábiles.</li>
+                <li>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
+                <li>**Recomendación:** Confirme su cobertura antes de realizar la compra.</li>
             </ul>
         </div>
     </section>
