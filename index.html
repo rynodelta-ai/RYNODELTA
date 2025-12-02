@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
     <style>
-        /* VARIABLES DE COLOR */
+        /* ============================
+           VARIABLES DE COLOR
+        ============================ */
         :root {
-            --color-primary: #C5A67C; /* Dorado/Cobre para acentos */
-            --color-accent: #111; /* Negro oscuro/Gris carbón para secciones */
-            --color-dark: #000; /* Negro absoluto */
-            --color-text: #E0E0E0; /* Blanco suave para texto principal */
-            --header-height: 120px; 
+            --color-primary: #C5A67C;
+            --color-accent: #111;
+            --color-dark: #000;
+            --color-text: #E0E0E0;
+            --header-height: 120px;
             --menu-offset: 70px;
         }
 
-        /* ESTILOS BASE */
+        /* ============================
+           ESTILOS BASE
+        ============================ */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -27,7 +32,9 @@
             overflow-x: hidden;
         }
 
-        /* BANNER PRINCIPAL */
+        /* ============================
+           BANNER PRINCIPAL
+        ============================ */
         #main-banner {
             position: relative;
             width: 100%;
@@ -36,7 +43,7 @@
             display: flex;
             flex-direction: column; 
             align-items: center; 
-            justify-content: flex-start; 
+            justify-content: flex-start;
         }
 
         .banner-video {
@@ -62,10 +69,12 @@
         .banner-content {
             position: relative;
             z-index: 3;
-            margin-top: 15vh; 
+            margin-top: 15vh;
         }
 
-        /* TARJETA MORRALES */
+        /* ============================
+           TARJETA MORRALES
+        ============================ */
         .morrales-card {
             position: absolute;
             bottom: 30px;
@@ -77,9 +86,9 @@
             border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
             text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+            transition: 0.3s ease-out;
         }
 
         .morrales-card:hover {
@@ -92,10 +101,7 @@
             opacity: 0.8;
             transition: opacity 0.3s;
         }
-
-        .morrales-card:hover img {
-            opacity: 1;
-        }
+        .morrales-card:hover img { opacity: 1; }
 
         .morrales-text {
             position: absolute;
@@ -108,7 +114,9 @@
             text-transform: uppercase;
         }
 
-        /* SECCIONES GENERALES */
+        /* ============================
+           SECCIONES
+        ============================ */
         section {
             padding: 50px 20px;
             min-height: 80vh;
@@ -120,71 +128,63 @@
         .seccion-contenido {
             max-width: 1000px;
             width: 100%;
-            padding: 20px;
             background-color: var(--color-accent);
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0,0,0,0.7);
         }
 
-        /* BOTÓN VOLVER */
         .boton-volver {
-            margin: calc(var(--header-height) - 40px) auto 40px;
+            display: block;
+            margin: calc(var(--header-height) - 40px) auto 40px auto;
             padding: 10px 20px;
             background-color: #222;
             color: var(--color-primary);
             border: 1px solid var(--color-primary);
             border-radius: 5px;
-            font-weight: bold;
-            text-decoration: none;
             cursor: pointer;
+            font-weight: bold;
             transition: 0.3s;
         }
-
         .boton-volver:hover {
             background-color: var(--color-primary);
             color: #000;
         }
 
-        /* TÍTULOS */
         .seccion-contenido h2 {
             text-align: center;
             color: var(--color-primary);
-            margin-bottom: 40px;
             border-bottom: 2px solid var(--color-primary);
             padding-bottom: 10px;
+            margin-bottom: 40px;
         }
 
-        /* LISTAS */
-        .centered-list {
-            max-width: 700px;
-            margin: 20px auto;
-            padding-left: 20px;
-        }
-
-        /* VISIBILIDAD SPA */
+        /* ============================
+           VISIBILIDAD (SPA)
+        ============================ */
         .oculto {
             display: none !important;
             pointer-events: none;
         }
 
-        .contenido-pagina.visible {
-            display: block;
-            pointer-events: auto;
+        .visible {
+            display: block !important;
         }
 
-        /* MENÚ HAMBURGUESA */
+        /* ============================
+           MENÚ HAMBURGUESA
+        ============================ */
         .menu-icon {
             position: fixed;
-            z-index: 9999;
-            padding: 10px;
             top: 20px;
             left: 20px;
+            z-index: 9999;
+            padding: 10px;
             cursor: pointer;
             background-color: rgba(0,0,0,0.7);
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(197,166,124,0.2);
         }
-
         .menu-icon div {
             width: 30px;
             height: 3px;
@@ -192,37 +192,263 @@
             margin: 6px 0;
         }
 
-        .hidden-nav-elements {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* MENÚ DESPLEGABLE */
         .nav-menu {
             height: 100%;
             width: 0;
             position: fixed;
-            z-index: 9998;
             top: 0;
             left: 0;
             background-color: rgba(0,0,0,0.98);
             overflow-x: hidden;
             transition: 0.5s;
             padding-top: 100px;
+            z-index: 9998;
             text-align: center;
         }
 
         .nav-menu a {
-            padding: 15px 8px;
-            font-size: 30px;
-            text-transform: uppercase;
-            color: var(--color-text);
+            padding: 15px 32px;
             display: block;
+            font-size: 30px;
+            color: var(--color-text);
             text-decoration: none;
+            font-weight: 500;
             transition: 0.3s;
         }
-
         .nav-menu a:hover {
             color: var(--color-primary);
             letter-spacing: 1px;
         }
+
+        /* ============================
+           CONTACTO
+        ============================ */
+        .contact-link {
+            display: block;
+            padding: 15px;
+            margin: 15px 0;
+            width: 100%;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .contact-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+        .email-info {
+            background-color: var(--color-text);
+            color: #000;
+        }
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        /* ============================
+           MÓVIL
+        ============================ */
+        @media (max-width: 768px) {
+            #main-banner {
+                margin-top: var(--menu-offset);
+                height: auto;
+                min-height: calc(100vh - var(--menu-offset));
+            }
+
+            .banner-video {
+                position: relative;
+                object-fit: contain;
+                height: auto;
+            }
+
+            .banner-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin: 0;
+            }
+
+            .morrales-card {
+                position: relative;
+                margin-top: 20px;
+                bottom: auto;
+            }
+        }
+    </style>
+
+    <script>
+        const FIXED_HEADER_HEIGHT = 120;
+
+        function toggleNav() {
+            let menu = document.getElementById("myNav");
+            menu.style.width = (menu.style.width === "100%") ? "0%" : "100%";
+        }
+
+        function mostrarSeccion(id) {
+            document.getElementById("myNav").style.width = "0%";
+            document.getElementById("menu-icon").classList.add("hidden-nav-elements");
+
+            document.getElementById("main-banner").classList.add("oculto");
+
+            document.querySelectorAll(".contenido-pagina").forEach(s => {
+                s.classList.add("oculto");
+                s.classList.remove("visible");
+            });
+
+            const seccion = document.getElementById(id);
+            seccion.classList.remove("oculto");
+            seccion.classList.add("visible");
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function volverInicio() {
+            document.querySelectorAll(".contenido-pagina").forEach(s => s.classList.add("oculto"));
+            document.getElementById("main-banner").classList.remove("oculto");
+            document.getElementById("menu-icon").classList.remove("hidden-nav-elements");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function navegarInicio() {
+            toggleNav();
+            volverInicio();
+        }
+
+        function navegarMorrales() {
+            mostrarSeccion("morrales");
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("main-banner").classList.add("visible");
+
+            const morralesCard = document.getElementById("morrales-card");
+            if (morralesCard) morralesCard.addEventListener("click", navegarMorrales);
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- ============================
+         MENÚ
+    ============================ -->
+    <div id="myNav" class="nav-menu">
+        <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a>
+        <a href="#quienes-somos" onclick="mostrarSeccion('quienes-somos')">QUIÉNES SOMOS</a>
+        <a href="#servicios" onclick="mostrarSeccion('servicios')">SERVICIOS</a>
+        <a href="#contacto" onclick="mostrarSeccion('contacto')">CONTACTO</a>
+        <a href="#politicas" onclick="mostrarSeccion('politicas')">POLÍTICAS</a>
+    </div>
+
+    <div class="menu-icon" id="menu-icon" onclick="toggleNav()">
+        <div></div><div></div><div></div>
+    </div>
+
+    <!-- ============================
+         INICIO / VIDEO
+    ============================ -->
+    <section id="main-banner" class="visible">
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png">
+            <source src="VIDEO1.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+        </video>
+
+        <div class="video-overlay"></div>
+
+        <div class="banner-content"></div>
+
+        <div class="morrales-card" id="morrales-card">
+            <img src="morrales.jpg" alt="Morrales Tácticos"
+                 onerror="this.src='https://placehold.co/350x200/111/C5A67C?text=Morrales'">
+            <div class="morrales-text">MORRALES</div>
+        </div>
+    </section>
+
+    <!-- ============================
+         QUIÉNES SOMOS
+    ============================ -->
+    <section id="quienes-somos" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">⟵ Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>QUIÉNES SOMOS</h2>
+            <p>
+                <strong>RYNO DELTA</strong> es tu fuente confiable de equipo táctico y de supervivencia.
+                Con más de <strong>13 años de experiencia</strong>, nos dedicamos a importar e distribuir
+                herramientas confiables, duraderas y listas para misión.
+            </p>
+            <p>
+                Nuestro catálogo está diseñado para profesionales, operadores y entusiastas del outdoor.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================
+         MORRALES (SECCIÓN VACÍA)
+    ============================ -->
+    <section id="morrales" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">⟵ Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>MORRALES TÁCTICOS</h2>
+            <p style="text-align: center; color: #aaa;">
+                Próximamente: galería de morrales, fotos, precios y compra directa.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================
+         SERVICIOS
+    ============================ -->
+    <section id="servicios" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">⟵ Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>SERVICIOS</h2>
+            <p>Contenido próximo a agregar.</p>
+        </div>
+    </section>
+
+    <!-- ============================
+         CONTACTO
+    ============================ -->
+    <section id="contacto" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">⟵ Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>CONTACTO</h2>
+
+            <a href="https://wa.me/57XXXXXXXXXX" class="contact-link whatsapp-btn" target="_blank">
+                WhatsApp
+            </a>
+
+            <div class="contact-link email-info">
+                rynodelta@gmail.com
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         POLÍTICAS
+    ============================ -->
+    <section id="politicas" class="contenido-pagina oculto">
+        <button class="boton-volver" onclick="volverInicio()">⟵ Volver al Inicio</button>
+        <div class="seccion-contenido">
+            <h2>POLÍTICAS</h2>
+            <p>Contenido próximamente.</p>
+        </div>
+    </section>
+
+    <footer>
+        © 2025 RYNO DELTA Tactical Gear — Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
