@@ -56,6 +56,67 @@
             text-align: center;
         }
         
+        /* ESTILOS DEL MENÚ DE HAMBURGUESA */
+        #main-nav {
+            position: fixed;
+            top: var(--promo-bar-height, 45px); /* Posición debajo de la barra promocional */
+            left: 0; /* POSICIÓN IZQUIERDA */
+            z-index: 999998; 
+        }
+
+        /* Estilos del ícono de hamburguesa */
+        .hamburger {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 25px;
+            height: 20px;
+        }
+
+        .line {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: white; /* Color blanco para contraste */
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Estilos del menú desplegable */
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 50px; /* Separación del ícono */
+            left: 0; /* Asegura que el menú se despliegue desde la izquierda */
+            width: 250px; /* Ancho fijo para el menú */
+            background-color: rgba(0, 0, 0, 0.95); /* Fondo oscuro consistente */
+            border-top: 1px solid #C5A67C; /* Línea dorada */
+            transform: translateX(-100%); /* Oculto por defecto (a la izquierda) */
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra hacia la derecha */
+        }
+
+        .nav-menu.open {
+            transform: translateX(0); /* Visible al abrir */
+        }
+
+        .nav-menu li a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #E0E0E0;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-menu li a:hover {
+            background-color: #333;
+            color: #C5A67C; /* Efecto hover dorado */
+        }
+        
         /* MEDIA QUERY (MÓVIL) - Ajuste del banner */
         @media (max-width: 768px) {
             #main-banner { margin-top: var(--promo-bar-height) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
@@ -67,6 +128,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('main-banner').classList.add('visible');
+            
+            // Lógica del menú de hamburguesa
+            const hamburger = document.getElementById('hamburger-icon');
+            const navMenu = document.getElementById('nav-menu-list');
+
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('open');
+            });
         });
     </script>
     
@@ -106,6 +175,22 @@
         </marquee>
     </div>
     
+    <nav id="main-nav">
+        <div class="hamburger" id="hamburger-icon">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        
+        <ul class="nav-menu" id="nav-menu-list">
+            <li><a href="#" style="font-weight: 700;">INICIO</a></li>
+            <li><a href="#">QUIÉNES SOMOS</a></li>
+            <li><a href="#">SERVICIOS</a></li>
+            <li><a href="#">POLITICAS</a></li>
+            <li><a href="#">CONTACTO</a></li>
+        </ul>
+    </nav>
+
     <section id="main-banner" class="visible" style="background-color: #000;">
         <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
             <source src="VIDEO1.mp4" type="video/mp4">
