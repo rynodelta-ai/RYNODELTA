@@ -173,12 +173,30 @@
         .seccion-contenido {
             max-width: 1000px; 
             width: 100%;
+            /* Alineamos el contenido por defecto a la izquierda */
             text-align: left; 
             padding: 20px; 
             background-color: var(--color-accent); 
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
+        
+        /* --- MODIFICACIÓN: ALINEACIÓN DE PÁRRAFOS Y LISTAS --- */
+        /* Aseguramos que los párrafos se justifiquen para mejor lectura en desktop */
+        .seccion-contenido p {
+            text-align: justify;
+            margin-bottom: 20px; /* Espacio entre párrafos */
+        }
+        
+        /* Aseguramos que las listas tengan una mejor alineación */
+        .seccion-contenido ul {
+            list-style-position: inside; /* Mueve el marcador dentro del área de la lista */
+            padding-left: 20px; /* Asegura un pequeño margen para las viñetas */
+            /* En móvil, la justificación podría ser mala. Lo centramos para la lista. */
+            text-align: left; 
+            margin: 20px auto; /* Centra la lista horizontalmente si es corta */
+        }
+        /* ---------------------------------------------------- */
 
         /* BOTÓN VOLVER (Navegación táctica) */
         .boton-volver {
@@ -219,6 +237,7 @@
             justify-content: center;
             gap: 25px;
             margin-top: 40px;
+            text-align: center; /* Centra el texto dentro del contenedor de tarjetas */
         }
         
         .service-card {
@@ -262,7 +281,7 @@
             cursor: pointer;
             padding: 10px;
             /* Ajuste para que el icono de menú comience debajo de la barra de promoción */
-            top: 50px; /* Cambiado de 20px a 50px */
+            top: 50px; 
             left: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 5px;
@@ -290,15 +309,14 @@
             padding-top: 100px;
             text-align: center;
         }
-        /* --- MODIFICACIÓN CLAVE PARA FORZAR STACKING Y CENTRADO LIMPIO --- */
+        
         .nav-menu a {
-            /* Eliminamos el padding horizontal (antes 8px y 32px) para que el centrado sea perfecto */
             padding: 15px 0; 
-            width: 100%; /* Asegura que ocupe todo el ancho para el click y centrado */
+            width: 100%; 
             text-decoration: none;
             font-size: 30px;
             color: var(--color-text);
-            display: block; /* Mantiene la disposición vertical (ya estaba, pero es vital) */
+            display: block; 
             transition: 0.3s;
             text-transform: uppercase;
             font-weight: 500;
@@ -307,7 +325,6 @@
             color: var(--color-primary); 
             letter-spacing: 1px;
         }
-        /* ----------------------------------------------------------------- */
 
         /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
         @media (max-width: 768px) {
@@ -356,6 +373,12 @@
                 margin-top: 20px; 
                 bottom: auto; 
             }
+            
+            /* --- MODIFICACIÓN MÓVIL: Evitar justificación en pantallas muy pequeñas --- */
+            .seccion-contenido p {
+                 text-align: left; /* Volvemos a la alineación izquierda para que el texto no se vea "roto" en móvil */
+            }
+            /* -------------------------------------------------------------------------- */
         }
     </style>
     
