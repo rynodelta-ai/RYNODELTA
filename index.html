@@ -75,16 +75,17 @@
             width: 25px;
             height: 20px;
             /* ILUMINACIÓN SUTIL: Fondo oscuro y sombra tenue */
-            background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
-            border-radius: 0 0 5px 0; /* Borde redondeado solo abajo y derecha (se ajusta al borde de la pantalla) */
-            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); 
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-radius: 0 0 5px 0; 
+            /* CAMBIO CLAVE: MAYOR ILUMINACIÓN */
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); /* Dorado sutil en el borde */
         }
 
         .line {
             display: block;
             width: 100%;
             height: 3px;
-            background-color: var(--color-gold); /* CAMBIO: Color dorado */
+            background-color: var(--color-gold); 
             transition: all 0.3s ease-in-out;
         }
 
@@ -98,10 +99,11 @@
             left: 0; 
             width: 250px; 
             background-color: rgba(0, 0, 0, 0.95); 
-            border-top: 1px solid var(--color-gold); /* Color dorado en el borde superior */
+            border-top: 1px solid var(--color-gold); 
             transform: translateX(-100%); 
             transition: transform 0.3s ease-in-out;
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.9); /* Sombra más fuerte y sutilmente iluminada */
+            /* CAMBIO CLAVE: Sombra más suave y extendida */
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95); 
         }
 
         .nav-menu.open {
