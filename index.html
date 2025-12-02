@@ -173,7 +173,7 @@
         .seccion-contenido {
             max-width: 1000px; 
             width: 100%;
-            /* Alineamos el contenido por defecto a la izquierda */
+            /* El contenedor principal sigue alineado a la izquierda, pero centramos los bloques */
             text-align: left; 
             padding: 20px; 
             background-color: var(--color-accent); 
@@ -181,20 +181,40 @@
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
         
-        /* --- MODIFICACIÓN: ALINEACIÓN DE PÁRRAFOS Y LISTAS --- */
-        /* Aseguramos que los párrafos se justifiquen para mejor lectura en desktop */
+        /* --- MODIFICACIONES CLAVE PARA ALINEACIÓN/CENTRALIZACIÓN --- */
+        
+        /* Alineación izquierda para la legibilidad de párrafos largos */
         .seccion-contenido p {
-            text-align: justify;
-            margin-bottom: 20px; /* Espacio entre párrafos */
+            text-align: left; 
+            margin-bottom: 20px; 
         }
         
-        /* Aseguramos que las listas tengan una mejor alineación */
-        .seccion-contenido ul {
-            list-style-position: inside; /* Mueve el marcador dentro del área de la lista */
-            padding-left: 20px; /* Asegura un pequeño margen para las viñetas */
-            /* En móvil, la justificación podría ser mala. Lo centramos para la lista. */
+        /* Centrar párrafos clave en la sección Quiénes Somos */
+        #quienes-somos .seccion-contenido p {
+            text-align: center; 
+        }
+        
+        /* Alineación del bloque de listas (Servicios y Políticas) */
+        .centered-list {
+            /* Mantenemos la alineación izquierda del texto dentro de la lista para viñetas claras */
             text-align: left; 
-            margin: 20px auto; /* Centra la lista horizontalmente si es corta */
+            /* Para centrar el bloque de la lista, forzamos un ancho máximo */
+            max-width: 600px; 
+            margin: 20px auto; /* Centrar el bloque */
+            padding-left: 20px;
+        }
+        
+        /* Arreglo para la sección de Contacto */
+        .contact-link {
+            display: block;
+            width: 100%;
+            text-align: center; /* Asegura que el texto y el icono estén centrados en su bloque */
+        }
+        
+        .whatsapp-btn {
+            /* Mantenemos el contenedor de contacto centrado */
+            width: fit-content;
+            margin: 0 auto; 
         }
         /* ---------------------------------------------------- */
 
@@ -237,7 +257,7 @@
             justify-content: center;
             gap: 25px;
             margin-top: 40px;
-            text-align: center; /* Centra el texto dentro del contenedor de tarjetas */
+            text-align: center; 
         }
         
         .service-card {
@@ -276,11 +296,10 @@
         /* NAVEGACIÓN FIJA (Menú) */
         .menu-icon {
             position: fixed; 
-            z-index: 10001; /* Alto Z-index para estar sobre la barra de promoción */
+            z-index: 10001; 
             transition: opacity 0.3s, transform 0.3s;
             cursor: pointer;
             padding: 10px;
-            /* Ajuste para que el icono de menú comience debajo de la barra de promoción */
             top: 50px; 
             left: 20px;
             background-color: rgba(0, 0, 0, 0.7);
@@ -352,7 +371,6 @@
             }
 
             .menu-icon {
-                /* Ajuste en móvil para despejar la barra de promo */
                 top: 45px; 
                 left: 10px;
                 background-color: transparent; 
@@ -374,11 +392,10 @@
                 bottom: auto; 
             }
             
-            /* --- MODIFICACIÓN MÓVIL: Evitar justificación en pantallas muy pequeñas --- */
+            /* Aseguramos que los párrafos se lean bien en móvil (alineación izquierda) */
             .seccion-contenido p {
-                 text-align: left; /* Volvemos a la alineación izquierda para que el texto no se vea "roto" en móvil */
+                 text-align: left; 
             }
-            /* -------------------------------------------------------------------------- */
         }
     </style>
     
