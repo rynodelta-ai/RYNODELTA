@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ryno Delta Tactical Gear</title>
 
     <style>
+        :root {
+            --menu-offset: 60px;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
@@ -14,157 +19,199 @@
             color: white;
         }
 
-        /* CAMBIO #1: Asegurar que el banner esté pegado arriba y sin espacios */
-        #main-banner {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: hidden;
-        }
+        /* ================================
+           MENÚ SUPERIOR – HAMBURGUESA
+        ==================================*/
 
-        /* Video ajustado desde el borde superior */
-        #main-banner video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Overlay para contraste */
-        #main-banner .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        /* Texto del banner */
-        #main-banner .content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-        }
-
-        /* Menú hamburguesa (NO ALTERADO excepto por el z-index) */
-        .menu-toggle {
+        .menu-container {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 40px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--menu-offset);
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+        }
+
+        .hamburger {
+            width: 35px;
             height: 30px;
             cursor: pointer;
-            z-index: 999999; /* CAMBIO #2: Garantizar que esté encima del video */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .menu-toggle span {
-            display: block;
+        .hamburger div {
             width: 100%;
             height: 5px;
-            margin: 6px 0;
             background: white;
-            transition: 0.3s;
+            border-radius: 4px;
         }
 
-        /* Menú lateral */
-        nav {
+        .menu-panel {
             position: fixed;
-            top: 0;
-            right: -250px;
-            width: 250px;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            padding-top: 60px;
-            transition: 0.3s;
-            z-index: 99999; /* para estar encima del video también */
+            top: var(--menu-offset);
+            left: 0;
+            width: 260px;
+            height: calc(100% - var(--menu-offset));
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            transform: translateX(-100%);
+            transition: transform 0.33s ease;
+            padding-top: 10px;
+            z-index: 9998;
         }
 
-        nav a {
+        .menu-panel.open {
+            transform: translateX(0);
+        }
+
+        .menu-panel a {
             display: block;
-            padding: 15px;
-            font-size: 18px;
+            padding: 14px;
             color: white;
             text-decoration: none;
+            font-size: 18px;
         }
 
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.1);
+        /* ================================
+           BANNER CON VIDEO
+        ==================================*/
+
+        #main-banner {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: var(--menu-offset);
         }
 
-        .show-menu {
-            right: 0 !important;
+        .banner-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            z-index: -1;
         }
 
-        /* Contenido genérico (NO MODIFICADO) */
-        .section {
-            padding: 60px 20px;
+        .banner-overlay {
+            position: absolute;
+            bottom: 20%;
+            left: 5%;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        /* ================================
+           TARJETAS – MORRALES Y DEMÁS
+        ==================================*/
+
+        .card {
+            width: 95%;
+            background: #111;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        footer {
             text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        /* ================================
+           MÓVIL – REFORZADO
+        ==================================*/
+
+        @media (max-width: 768px) {
+            #main-banner {
+                height: 100vh !important;
+                margin-top: var(--menu-offset);
+            }
+
+            .banner-video {
+                object-fit: cover !important;
+                height: 100% !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Menú hamburguesa -->
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+    <!-- =========================
+         TOP MENU
+         ========================= -->
+    <div class="menu-container">
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
 
-    <!-- Menú lateral -->
-    <nav id="side-menu">
-        <a href="#main-banner">Inicio</a>
-        <a href="#productos">Productos</a>
-        <a href="#nosotros">Nosotros</a>
+    <div class="menu-panel" id="sideMenu">
+        <a href="#banner">Inicio</a>
+        <a href="#morrales">Morrales</a>
+        <a href="#otros">Equipos</a>
         <a href="#contacto">Contacto</a>
-    </nav>
+    </div>
 
+    <!-- =========================
+         BANNER CON VIDEO
+         ========================= -->
+    <section id="banner">
+        <div id="main-banner">
+            <video class="banner-video" autoplay muted loop playsinline>
+                <source src="video.mp4" type="video/mp4">
+            </video>
 
-    <!-- BANNER PRINCIPAL - VIDEO PEGADO A LA PARTE SUPERIOR -->
-    <section id="main-banner">
-        <video autoplay muted loop playsinline>
-            <source src="https://rynodelta.com/VIDEOS%20PRUEBA/DEF2.mp4" type="video/mp4">
-        </video>
-
-        <div class="overlay"></div>
-
-        <div class="content">
-            <h1>Ryno Delta Tactical Gear</h1>
-            <p>Equipo táctico — Para misiones de verdad</p>
+            <div class="banner-overlay">
+                RYNO DELTA<br>
+                Tactical Gear
+            </div>
         </div>
     </section>
 
-
-    <!-- Secciones inferiores (NO MODIFICADAS) -->
-    <section id="productos" class="section">
-        <h2>Productos</h2>
-        <p>Contenido de productos aquí...</p>
+    <!-- =========================
+         TARJETA MORRALES
+         ========================= -->
+    <section id="morrales" class="card">
+        <h2>Morrales</h2>
+        <img src="morrales.jpg" alt="Morrales tácticos">
+        <p>Equipo resistente y listo para misiones reales.</p>
     </section>
 
-    <section id="nosotros" class="section">
-        <h2>Nosotros</h2>
-        <p>Contenido de información aquí...</p>
+    <!-- =========================
+         OTRAS SECCIONES
+         ========================= -->
+    <section id="otros" class="card">
+        <h2>Equipos tácticos</h2>
+        <p>Contenido pronto…</p>
     </section>
 
-    <section id="contacto" class="section">
-        <h2>Contacto</h2>
-        <p>Contenido de contacto aquí...</p>
-    </section>
-
+    <footer>
+        © 2025 Ryno Delta Tactical Gear — Todos los derechos reservados.
+    </footer>
 
     <script>
         function toggleMenu() {
-            document.getElementById('side-menu').classList.toggle('show-menu');
+            document.getElementById("sideMenu").classList.toggle("open");
         }
     </script>
 
