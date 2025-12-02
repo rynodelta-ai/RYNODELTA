@@ -173,7 +173,7 @@
         .seccion-contenido {
             max-width: 1000px; 
             width: 100%;
-            /* El contenedor principal sigue alineado a la izquierda, pero centramos los bloques */
+            /* El contenedor principal está centrado por la etiqueta <section> */
             text-align: left; 
             padding: 20px; 
             background-color: var(--color-accent); 
@@ -181,48 +181,49 @@
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
         
-        /* --- MODIFICACIONES CLAVE PARA ALINEACIÓN/CENTRALIZACIÓN --- */
+        /* --- MODIFICACIONES CLAVE PARA ALINEACIÓN/CENTRALIZACIÓN DEL CONTENIDO INTERNO --- */
         
-        /* Alineación izquierda para la legibilidad de párrafos largos */
+        /* 1. Centrar el BLOQUE de párrafo y mantener alineación izquierda para legibilidad de texto largo (default) */
         .seccion-contenido p {
-            text-align: left; 
-            margin-bottom: 20px; 
+            max-width: 800px; /* Limita el ancho para que el bloque no se estire demasiado */
+            margin: 0 auto 20px auto; /* Centra el bloque de párrafo */
+            text-align: left; /* Alineación izquierda para evitar "huecos" en el texto */
         }
         
-        /* Centrar párrafos clave en la sección Quiénes Somos */
-        #quienes-somos .seccion-contenido p {
+        /* 2. Centrar completamente el texto en secciones cortas (Quiénes Somos, Morrales, Servicios intro) */
+        #quienes-somos .seccion-contenido p,
+        #morrales .seccion-contenido p,
+        #servicios .seccion-contenido > .seccion-contenido p:first-child { 
             text-align: center; 
         }
         
-        /* Alineación del bloque de listas (Servicios y Políticas) */
+        /* 3. Asegurar que las listas también tengan un ancho máximo y estén centradas */
         .centered-list {
-            /* Mantenemos la alineación izquierda del texto dentro de la lista para viñetas claras */
-            text-align: left; 
-            /* Para centrar el bloque de la lista, forzamos un ancho máximo */
-            max-width: 600px; 
-            margin: 20px auto; /* Centrar el bloque */
-            padding-left: 20px;
+            max-width: 800px;
+            margin: 20px auto; /* Centrar el bloque de la lista */
+            list-style-type: circle; /* Viñetas circulares claras */
+            padding-left: 20px; /* Espacio para las viñetas */
+            text-align: left; /* Alineación izquierda para que las viñetas se vean bien */
         }
         
-        /* Arreglo para la sección de Contacto */
-        .contact-link {
+        /* 4. Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
+        #contacto .contact-link {
             display: block;
-            width: 100%;
-            text-align: center; /* Asegura que el texto y el icono estén centrados en su bloque */
+            width: fit-content; /* El ancho se ajusta al contenido */
+            margin: 0 auto; /* Centra el bloque del enlace/información */
+            text-align: center;
         }
         
-        .whatsapp-btn {
-            /* Mantenemos el contenedor de contacto centrado */
-            width: fit-content;
-            margin: 0 auto; 
+        /* 5. Centrar los títulos de Nivel 3 */
+        .seccion-contenido h3 {
+             text-align: center; 
         }
-        /* ---------------------------------------------------- */
+        /* --------------------------------------------------------------------------------- */
 
         /* BOTÓN VOLVER (Navegación táctica) */
         .boton-volver {
             display: block; 
             width: fit-content;
-            /* Se ha ajustado el margen superior para compensar la nueva barra */
             margin: calc(var(--header-height) + var(--promo-bar-height) - 40px) auto 40px auto; 
             padding: 10px 20px;
             background-color: #222;
@@ -275,6 +276,7 @@
             text-transform: uppercase;
             margin-top: 0;
             margin-bottom: 15px; 
+            text-align: center;
         }
         
         /* CLASES DE VISIBILIDAD (SPA) */
@@ -392,9 +394,17 @@
                 bottom: auto; 
             }
             
-            /* Aseguramos que los párrafos se lean bien en móvil (alineación izquierda) */
+            /* En móvil, los párrafos regresan a la alineación izquierda simple */
             .seccion-contenido p {
+                 max-width: none; /* Quitamos el max-width en móvil para usar el 100% disponible */
                  text-align: left; 
+            }
+            
+            /* Pero las secciones cortas se mantienen centradas */
+             #quienes-somos .seccion-contenido p,
+             #morrales .seccion-contenido p,
+             #servicios .seccion-contenido > .seccion-contenido p:first-child { 
+                text-align: center; 
             }
         }
     </style>
@@ -551,7 +561,7 @@
             <p>
                 Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
             </p>
-            <p style="color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
+            <p style="color: var(--color-primary); font-weight: bold; margin-top: 40px;">
                 Equipamos tu confianza en cada despliegue.
             </p>
         </div>
@@ -561,10 +571,10 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>MORRALES TÁCTICOS</h2> 
-            <p style="text-align: center; color: #999;">
+            <p style="color: #999;">
                 **¡Próximamente, el contenido detallado de nuestra línea de morrales!**
             </p>
-            <p style="text-align: center; margin-top: 20px;">
+            <p style="margin-top: 20px;">
                 Esta sección está lista para recibir la galería de productos.
             </p>
         </div>
@@ -574,31 +584,31 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
-            <p style="text-align: center;">
+            <p>
                 Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
             </p>
             <div class="service-card-container">
                 <div class="service-card">
                     <h3>PAGO CONTRA ENTREGA</h3>
-                    <p>
+                    <p style="max-width: none; margin: 0; text-align: center;">
                         Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
                     </p>
-                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                    <p style="max-width: none; margin: 15px 0 0 0; font-weight: bold; color: #999; font-size: 0.9em; text-align: center;">
                         *El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad.
                     </p>
                 </div>
                 <div class="service-card">
                     <h3>PAGO EN LÍNEA SEGURO</h3>
-                    <p>
+                    <p style="max-width: none; margin: 0; text-align: center;">
                         Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento.
                     </p>
-                    <p style="margin-top: 15px; font-weight: bold; color: #999; font-size: 0.9em;">
+                    <p style="max-width: none; margin: 15px 0 0 0; font-weight: bold; color: #999; font-size: 0.9em; text-align: center;">
                         *Obtenga tiempo de entrega preferencial y recompensas exclusivas.
                     </p>
                 </div>
             </div>
-            <h3 style="color: var(--color-primary); text-align: center; margin-top: 50px;">Logística y Envíos Nacionales</h3>
-            <ul class="centered-list" style="list-style-type: '&#9679; '; ">
+            <h3 style="color: var(--color-primary); margin-top: 50px;">Logística y Envíos Nacionales</h3>
+            <ul class="centered-list">
                 <li style="margin-bottom: 10px;">Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
                 <li style="margin-bottom: 10px;">Tiempo de entrega estándar: 3-5 días hábiles.</li>
                 <li style="margin-bottom: 10px;">En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
@@ -634,11 +644,11 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>POLÍTICAS Y GARANTÍA</h2> 
-            <h3 style="color: var(--color-primary); text-align: left; margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
+            <h3 style="color: var(--color-primary); margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
             <p>
                 En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
             </p>
-            <ul class="centered-list" style="list-style-type: circle;">
+            <ul class="centered-list">
                 <li>Procesamiento y envío de pedidos.</li>
                 <li>Gestión de pagos y emisión de facturas.</li>
                 <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
@@ -648,11 +658,11 @@
                 Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.
             </p>
             
-            <h3 style="color: var(--color-primary); text-align: left; margin-top: 40px;">POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h3>
+            <h3 style="color: var(--color-primary); margin-top: 40px;">POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h3>
             <p>
                 Todos nuestros productos cuentan con una garantía de **60 días** a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
             </p>
-            <ul class="centered-list" style="list-style-type: circle;">
+            <ul class="centered-list">
                 <li>Daños causados por mal uso, accidentes o desgaste normal.</li>
                 <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
                 <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
