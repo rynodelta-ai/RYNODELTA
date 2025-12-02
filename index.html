@@ -11,6 +11,7 @@
         /* CRÍTICO: Variables para el cuerpo */
         :root {
             --color-dark: #000;
+            --color-gold: #C5A67C; /* Variable añadida para el color dorado */
             --promo-bar-height: 45px; /* TAMAÑO FORZADO PARA LEGIBILIDAD EN PC */
         }
 
@@ -60,7 +61,7 @@
         #main-nav {
             position: fixed;
             top: var(--promo-bar-height, 45px); /* Posición debajo de la barra promocional */
-            left: 0; /* POSICIÓN IZQUIERDA */
+            left: 0; 
             z-index: 999998; 
         }
 
@@ -73,13 +74,17 @@
             justify-content: space-around;
             width: 25px;
             height: 20px;
+            /* ILUMINACIÓN SUTIL: Fondo oscuro y sombra tenue */
+            background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+            border-radius: 0 0 5px 0; /* Borde redondeado solo abajo y derecha (se ajusta al borde de la pantalla) */
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); 
         }
 
         .line {
             display: block;
             width: 100%;
             height: 3px;
-            background-color: white; /* Color blanco para contraste */
+            background-color: var(--color-gold); /* CAMBIO: Color dorado */
             transition: all 0.3s ease-in-out;
         }
 
@@ -89,18 +94,18 @@
             padding: 0;
             margin: 0;
             position: absolute;
-            top: 50px; /* Separación del ícono */
-            left: 0; /* Asegura que el menú se despliegue desde la izquierda */
-            width: 250px; /* Ancho fijo para el menú */
-            background-color: rgba(0, 0, 0, 0.95); /* Fondo oscuro consistente */
-            border-top: 1px solid #C5A67C; /* Línea dorada */
-            transform: translateX(-100%); /* Oculto por defecto (a la izquierda) */
+            top: 50px; 
+            left: 0; 
+            width: 250px; 
+            background-color: rgba(0, 0, 0, 0.95); 
+            border-top: 1px solid var(--color-gold); /* Color dorado en el borde superior */
+            transform: translateX(-100%); 
             transition: transform 0.3s ease-in-out;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra hacia la derecha */
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.9); /* Sombra más fuerte y sutilmente iluminada */
         }
 
         .nav-menu.open {
-            transform: translateX(0); /* Visible al abrir */
+            transform: translateX(0); 
         }
 
         .nav-menu li a {
@@ -111,10 +116,10 @@
             font-weight: 500;
             transition: background-color 0.3s, color 0.3s;
         }
-
+        /* Color dorado en el hover del menú */
         .nav-menu li a:hover {
             background-color: #333;
-            color: #C5A67C; /* Efecto hover dorado */
+            color: var(--color-gold); 
         }
         
         /* MEDIA QUERY (MÓVIL) - Ajuste del banner */
