@@ -13,6 +13,7 @@
             --color-dark: #000; /* Negro absoluto */
             --color-text: #E0E0E0; /* Blanco suave para texto principal */
             --header-height: 120px; /* Altura fija para el cálculo de scroll en desktop */
+            --promo-bar-height: 35px; /* Altura de la nueva barra de promoción */
             --menu-offset: 70px; /* Altura de la barra superior donde está el menú */
         }
 
@@ -27,21 +28,57 @@
             overflow-x: hidden; /* Evita el scroll horizontal */
         }
 
-        /* ****************************************************** */
-        /* --- PRIMERA MODIFICACIÓN (Mantenida para compatibilidad base) --- */
-        /* ****************************************************** */
         /* Eliminamos margen del elemento raíz para asegurar el tope. */
         html, body {
             margin: 0;
             padding: 0;
         }
-        /* ****************************************************** */
+
+        /* --- ESTILOS PARA BARRA DE PROMOCIÓN --- */
+        #promo-bar {
+            position: fixed;
+            top: 0; /* Asegura que esté pegada al tope */
+            left: 0;
+            width: 100%;
+            height: var(--promo-bar-height); /* Altura de la barra */
+            background-color: rgba(0, 0, 0, 0.85); /* Fondo negro semitransparente */
+            color: var(--color-primary);
+            z-index: 10000; /* Alto Z-index para estar sobre todo */
+            overflow: hidden; /* Oculta el contenido que no está en la vista */
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+            white-space: nowrap; /* Impide que el texto se rompa */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 0;
+        }
+
+        .promo-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite; /* Aplica la animación */
+            padding-left: 100%; /* Inicia fuera de pantalla */
+            will-change: transform; /* Optimización de rendimiento */
+        }
+
+        .promo-text {
+            padding: 0 40px; /* Espacio entre cada mensaje repetido */
+            font-weight: 600;
+        }
+
+        /* Definición de la Animación Marquee (Movimiento de Izquierda a Derecha) */
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); } /* Desplaza el contenido un 100% de su ancho */
+        }
+        /* ------------------------------------------- */
 
         /* BANNER PRINCIPAL (Video de fondo) */
         #main-banner {
             position: relative;
             width: 100%;
-            height: 100vh; /* Ocupa toda la altura del viewport */
+            /* Ajuste para que el video comience debajo de la barra de promoción */
+            margin-top: var(--promo-bar-height); 
+            height: calc(100vh - var(--promo-bar-height)); /* Ocupa el resto de la altura */
             overflow: hidden;
             display: flex;
             flex-direction: column; 
@@ -56,7 +93,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Asegura que el video cubra todo el contenedor en desktop */
+            object-fit: cover; 
             z-index: 1;
         }
 
@@ -79,12 +116,12 @@
         
         /* ESTILO PARA LA NUEVA TARJETA DE MORRALES */
         .morrales-card {
-            position: absolute; /* Posicionamiento absoluto para flotar sobre el video */
-            bottom: 30px; /* POSICIÓN POR DEFECTO (DESKTOP) */
-            z-index: 4; /* Sobre el video y el overlay */
-            width: 90%; /* Ancho en móvil */
-            max-width: 350px; /* Ancho máximo en desktop */
-            background-color: rgba(0, 0, 0, 0.85); /* Fondo semitransparente oscuro */
+            position: absolute; 
+            bottom: 30px; 
+            z-index: 4; 
+            width: 90%; 
+            max-width: 350px; 
+            background-color: rgba(0, 0, 0, 0.85); 
             border: 2px solid var(--color-primary);
             border-radius: 10px;
             overflow: hidden;
@@ -95,20 +132,20 @@
         }
 
         .morrales-card:hover {
-            transform: translateY(-5px) scale(1.02); /* Efecto 3D al pasar el mouse */
-            box-shadow: 0 10px 30px rgba(197, 166, 124, 0.3); /* Sombra acentuada */
+            transform: translateY(-5px) scale(1.02); 
+            box-shadow: 0 10px 30px rgba(197, 166, 124, 0.3); 
         }
 
         .morrales-card img {
             width: 100%;
             height: auto;
             display: block;
-            opacity: 0.8; /* Imagen ligeramente atenuada */
+            opacity: 0.8; 
             transition: opacity 0.3s;
         }
         
         .morrales-card:hover img {
-            opacity: 1; /* Imagen más brillante al pasar el mouse */
+            opacity: 1; 
         }
         
         .morrales-text {
@@ -116,7 +153,6 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            /* Ajuste de fondo para que el texto sea más legible */
             background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)); 
             padding: 15px 10px 10px 10px;
             color: white;
@@ -135,7 +171,7 @@
         }
 
         .seccion-contenido {
-            max-width: 1000px; /* Aumentado ligeramente para la galería de productos */
+            max-width: 1000px; 
             width: 100%;
             text-align: left; 
             padding: 20px; 
@@ -148,7 +184,8 @@
         .boton-volver {
             display: block; 
             width: fit-content;
-            margin: calc(var(--header-height) - 40px) auto 40px auto; 
+            /* Se ha ajustado el margen superior para compensar la nueva barra */
+            margin: calc(var(--header-height) + var(--promo-bar-height) - 40px) auto 40px auto; 
             padding: 10px 20px;
             background-color: #222;
             color: var(--color-primary); 
@@ -201,15 +238,6 @@
             margin-bottom: 15px; 
         }
         
-        /* CLASES DE ALINEACIÓN DE LISTAS (Optimización) */
-        .centered-list {
-            max-width: 700px; 
-            margin: 20px auto; 
-            padding: 0 0 0 20px;
-            text-align: left;
-            font-size: 1.0em;
-        }
-
         /* CLASES DE VISIBILIDAD (SPA) */
         .oculto {
             display: none !important; 
@@ -229,11 +257,12 @@
         /* NAVEGACIÓN FIJA (Menú) */
         .menu-icon {
             position: fixed; 
-            z-index: 9999; 
+            z-index: 10001; /* Alto Z-index para estar sobre la barra de promoción */
             transition: opacity 0.3s, transform 0.3s;
             cursor: pointer;
             padding: 10px;
-            top: 20px;
+            /* Ajuste para que el icono de menú comience debajo de la barra de promoción */
+            top: 50px; /* Cambiado de 20px a 50px */
             left: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 5px;
@@ -245,12 +274,6 @@
             height: 3px;
             background-color: var(--color-primary); 
             margin: 6px 0;
-        }
-        
-        /* CLASE PARA OCULTAR MENÚ FUERA DE INICIO */
-        .hidden-nav-elements {
-            opacity: 0; 
-            pointer-events: none;
         }
         
         /* MENÚ DESPLEGABLE */
@@ -267,141 +290,62 @@
             padding-top: 100px;
             text-align: center;
         }
-        .nav-menu a {
-            padding: 15px 8px 15px 32px;
-            text-decoration: none;
-            font-size: 30px;
-            color: var(--color-text);
-            display: block;
-            transition: 0.3s;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-        .nav-menu a:hover {
-            color: var(--color-primary); 
-            letter-spacing: 1px;
-        }
 
-        /* ESTILOS DE CONTACTO */
-        .contact-link {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-align: center;
-            font-size: 1.1em;
-        }
-        .contact-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        .whatsapp-btn {
-            background-color: #25d366;
-            color: white;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-        }
-        .email-info {
-             background-color: var(--color-text);
-            color: var(--color-dark);
-            box-shadow: 0 5px 15px rgba(224, 224, 224, 0.3);
-            cursor: default;
-        }
-        
-        footer {
-            padding: 30px; 
-            background-color: #000; 
-            color: #444; 
-            font-size: 0.9em;
-            text-align: center;
-        }
-        
         /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
         @media (max-width: 768px) {
-            .nav-menu a {
-                font-size: 22px;
-            }
-            /* Reducción del padding de sección para optimizar el espacio en móvil */
-            section {
-                padding: 30px 10px; 
-            }
-            .seccion-contenido {
-                padding: 15px;
-            }
+            
             /* Ajuste de variable para offset móvil */
             :root {
-                --header-height: 100px; /* Reducimos la altura para el cálculo de scroll */
+                /* Altura del menú hamburguesa en móvil es menor, pero sumamos la barra de promo */
+                --header-height: 40px; 
             }
             .boton-volver {
-                 margin: calc(var(--header-height) - 30px) auto 30px auto; 
-            }
-             /* Asegura que las tarjetas de servicio ocupen todo el ancho en móvil */
-            .service-card {
-                 flex: 1 1 100%; 
+                 margin: calc(var(--header-height) + var(--promo-bar-height)) auto 30px auto; 
             }
             
-            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
+            /* Ajuste del banner principal para móvil */
             #main-banner {
-                /* ANTES: margin-top: var(--menu-offset); <--- ESTE MARGEN GENERABA EL ESPACIO NEGRO */
-                /* AHORA: Lo ponemos en 0 para que el banner comience en el tope del viewport. */
-                margin-top: 0; /* <--- CRÍTICO PARA ELIMINAR EL ESPACIO SUPERIOR EN MÓVIL */
-                
+                margin-top: var(--promo-bar-height); 
                 height: auto; 
-                /* Mantenemos un min-height: 100vh para asegurar que ocupe toda la pantalla disponible */
-                min-height: 100vh; /* Cambiado de calc(100vh - var(--menu-offset)) a 100vh */
+                min-height: calc(100vh - var(--promo-bar-height)); 
                 align-items: center; 
             }
             
             .banner-video {
-                /* Hacemos que el video no sea absoluto para que su altura se compute en el flujo normal */
                 position: relative; 
-                /* Ocupamos todo el ancho del contenedor del banner */
                 width: 100%; 
-                /* El object-fit: contain deja las barras negras, pero ahora la altura del #main-banner se ajustará a la altura real del video */
                 object-fit: contain; 
             }
 
-            .video-overlay {
-                 /* Lo hacemos relative al video para que se dimensione con él */
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-            
             .menu-icon {
-                top: 10px; 
+                /* Ajuste en móvil para despejar la barra de promo */
+                top: 45px; /* Cambiado de 10px a 45px */
                 left: 10px;
                 background-color: transparent; 
             }
             
             .banner-content {
-                /* Alineamos el contenido al centro */
                  position: absolute;
                  top: 50%;
                  left: 50%;
                  transform: translate(-50%, -50%);
-                 margin-top: 0; /* Ya no necesitamos el margen fijo */
+                 margin-top: 0; 
             }
             
             .morrales-card {
-                /* Lo ponemos relativo al final del video */
-                position: relative; /* Cambiado a relativo para que se posicione justo después del elemento anterior (que es el video) */
+                position: relative; 
                 width: 90%; 
                 font-size: 1.2em;
-                /* --- CAMBIO CLAVE: Aumentar el margen superior para despegarlo del video --- */
-                margin-top: 20px; /* Margen positivo para separar la tarjeta del video. (Antes era -30px) */
-                bottom: auto; /* Desactivamos el posicionamiento absoluto 'bottom' */
+                margin-top: 20px; 
+                bottom: auto; 
             }
         }
     </style>
     
     <script>
         // Altura de los elementos fijos (constante de control de scroll)
-        const FIXED_HEADER_HEIGHT = 120; // Altura base para desktop
+        // 120px (Altura original de header) + 35px (Altura de promo bar) = 155px
+        const FIXED_HEADER_HEIGHT = 155; 
 
         // Alterna la visibilidad del menú hamburguesa
         function toggleNav() {
@@ -421,7 +365,7 @@
             const secciones = document.querySelectorAll('.contenido-pagina');
             secciones.forEach(seccion => {
                 seccion.classList.add('oculto');
-                seccion.classList.remove('visible'); // Asegura que se remueva la clase visible
+                seccion.classList.remove('visible'); 
             });
 
             // Muestra la sección y aplica el offset de scroll
@@ -430,8 +374,10 @@
                 seccionSeleccionada.classList.remove('oculto'); 
                 seccionSeleccionada.classList.add('visible'); 
                 
-                // Cálculo de scroll inteligente: usa 100px para móvil y 120px para desktop
-                const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 100 : FIXED_HEADER_HEIGHT;
+                // Cálculo de scroll inteligente: 
+                // Móvil: 75px (Promo bar + Icono de menú) 
+                // Desktop: 155px (FIXED_HEADER_HEIGHT)
+                const currentHeaderHeight = window.matchMedia("(max-width: 768px)").matches ? 75 : FIXED_HEADER_HEIGHT;
                 const rect = seccionSeleccionada.getBoundingClientRect();
                 const targetScrollPosition = window.scrollY + rect.top - currentHeaderHeight;
                 
@@ -496,6 +442,14 @@
     
 </head>
 <body>
+    
+    <div id="promo-bar">
+        <div class="promo-content">
+            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+        </div>
+    </div>
     
     <div id="myNav" class="nav-menu">
         <a href="#inicio" onclick="navegarInicio(); return false;">INICIO</a> 
