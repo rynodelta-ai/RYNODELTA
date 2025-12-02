@@ -67,10 +67,12 @@
             margin-top: 15vh; 
         }
         
-        /* ESTILO PARA LA NUEVA TARJETA DE MORRALES */
+        /* ESTILO PARA LA TARJETA DE MORRALES (Desktop: Absolute) */
         .morrales-card {
-            position: absolute; /* Posicionamiento absoluto para flotar sobre el video (Mantenemos para Desktop) */
+            position: absolute; /* Posicionamiento absoluto para flotar sobre el video */
             bottom: 30px; /* POSICIÓN POR DEFECTO (DESKTOP) */
+            left: 50%; /* CENTRADO HORIZONTAL */
+            transform: translateX(-50%); /* Ajuste de centrado */
             z-index: 4; /* Sobre el video y el overlay */
             width: 90%; /* Ancho en móvil */
             max-width: 350px; /* Ancho máximo en desktop */
@@ -82,13 +84,11 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
             text-align: center;
-            /* Centrado horizontal por defecto en desktop */
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         .morrales-card:hover {
-            transform: translateY(-5px) scale(1.02) translateX(-50%); /* Ajuste el hover para no romper el centrado */
+            /* Mantiene el ajuste de centrado en el hover */
+            transform: translateY(-5px) scale(1.02) translateX(-50%);
             box-shadow: 0 10px 30px rgba(197, 166, 124, 0.3); /* Sombra acentuada */
         }
 
@@ -335,32 +335,29 @@
                  flex: 1 1 100%; 
             }
             
-            /* --- AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Modificación clave) --- */
+            /* AJUSTES DEL BANNER PRINCIPAL PARA MÓVIL (Estructura Original) */
             #main-banner {
-                /* Usamos el offset del menú para que el banner comience justo debajo de él */
                 margin-top: var(--menu-offset);
-                /* IMPORTANTE: Eliminamos el height: 100vh para que el contenedor se ajuste al tamaño del video (que tiene object-fit: contain) */
                 height: auto; 
-                min-height: calc(100vh - var(--menu-offset)); /* Mantenemos un min-height para asegurar que ocupe la mayor parte de la pantalla */
-                align-items: center; /* Centramos el contenido de nuevo */
+                min-height: calc(100vh - var(--menu-offset));
+                align-items: center;
             }
             
             .banner-video {
-                /* Hacemos que el video no sea absoluto para que su altura se compute en el flujo normal */
-                position: relative; 
-                /* Ocupamos todo el ancho del contenedor del banner */
+                position: relative; /* El video es contenido de flujo normal en móvil */
                 width: 100%; 
-                /* El object-fit: contain deja las barras negras, pero ahora la altura del #main-banner se ajustará a la altura real del video */
                 object-fit: contain; 
+                height: auto; /* Para que la altura se ajuste al video */
             }
 
             .video-overlay {
-                 /* Lo hacemos relative al video para que se dimensione con él */
+                /* El overlay cubre la posición donde estaba el video absoluto */
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
+                z-index: 2; /* Asegura que el overlay siga por debajo del contenido */
             }
             
             .menu-icon {
@@ -370,27 +367,27 @@
             }
             
             .banner-content {
-                /* Alineamos el contenido al centro */
-                 position: absolute;
-                 top: 50%;
-                 left: 50%;
-                 transform: translate(-50%, -50%);
-                 margin-top: 0; /* Ya no necesitamos el margen fijo */
+                /* Centrado absoluto sobre el área del video */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin-top: 0;
             }
             
-            /* MODIFICACIÓN: AJUSTE PARA MÓVIL (Mantenemos posicionamiento absoluto) */
+            /* CORRECCIÓN EN MORRALES CARD (Móvil: Relative) */
             .morrales-card {
-                /* Hereda position: absolute; de la base */
-                width: 90%;
-                font-size: 1.2em;
-                
-                /* Nueva Lógica de Posicionamiento (Centrado Abajo) */
-                top: auto;
-                bottom: 20px; /* Posición desde el fondo de la pantalla (un poco más arriba) */
-                left: 50%;
-                transform: translateX(-50%); /* Ajuste de centrado horizontal */
-                
-                /* Eliminamos la lógica anterior de 'position: relative' y 'margin-top' que causaba inestabilidad. */
+                position: relative; /* CAMBIO CLAVE: Usa el flujo normal, aparece debajo del video */
+                bottom: auto; /* Desactivar coordenada absoluta */
+                left: auto; /* Desactivar centrado horizontal absoluto */
+                transform: none; /* Desactivar transform: translateX(-50%) */
+                max-width: none; /* Permitir que use el 90% del ancho */
+                margin: 20px auto 30px auto; /* Añade margen superior, centra horizontalmente y añade margen inferior */
+            }
+            
+            .morrales-card:hover {
+                /* Ajuste del hover para que no rompa el centrado (se eliminó el translateX) */
+                transform: translateY(-5px) scale(1.02); 
             }
         }
     </style>
@@ -519,7 +516,7 @@
                     </div>
 
                 <div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
-                        <img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
+            <img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
             <div class="morrales-text">
                 MORRALES
             </div>
