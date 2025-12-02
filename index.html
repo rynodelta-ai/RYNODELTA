@@ -290,13 +290,30 @@
             padding-top: 100px;
             text-align: center;
         }
+        /* --- MODIFICACIÓN CLAVE PARA FORZAR STACKING Y CENTRADO LIMPIO --- */
+        .nav-menu a {
+            /* Eliminamos el padding horizontal (antes 8px y 32px) para que el centrado sea perfecto */
+            padding: 15px 0; 
+            width: 100%; /* Asegura que ocupe todo el ancho para el click y centrado */
+            text-decoration: none;
+            font-size: 30px;
+            color: var(--color-text);
+            display: block; /* Mantiene la disposición vertical (ya estaba, pero es vital) */
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .nav-menu a:hover {
+            color: var(--color-primary); 
+            letter-spacing: 1px;
+        }
+        /* ----------------------------------------------------------------- */
 
         /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
         @media (max-width: 768px) {
             
             /* Ajuste de variable para offset móvil */
             :root {
-                /* Altura del menú hamburguesa en móvil es menor, pero sumamos la barra de promo */
                 --header-height: 40px; 
             }
             .boton-volver {
@@ -319,7 +336,7 @@
 
             .menu-icon {
                 /* Ajuste en móvil para despejar la barra de promo */
-                top: 45px; /* Cambiado de 10px a 45px */
+                top: 45px; 
                 left: 10px;
                 background-color: transparent; 
             }
