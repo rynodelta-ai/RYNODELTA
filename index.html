@@ -1,197 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        /* VARIABLES DE COLOR */
-        :root {
-            --color-primary: #C5A67C;
-            --color-accent: #111;
-            --color-dark: #000;
-            --color-text: #E0E0E0;
-            --promo-bar-height: 35px;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* VARIABLES DE COLOR */
+        :root {
+            --color-primary: #FFFFFF; /* Blanco para el diagnóstico */
+            --color-accent: #111;
+            --color-dark: #000;
+            --color-text: #E0E0E0;
+            --promo-bar-height: 35px;
+        }
 
-        /* ESTILOS BASE Y TIPOGRAFÍA */
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--color-dark);
-            color: var(--color-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        /* ESTILOS BASE Y TIPOGRAFÍA */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-dark) !important; /* Forzamos el fondo negro */
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        html {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-        
-        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (CORRECCIÓN DEFINITIVA) --- */
-        #promo-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--promo-bar-height);
-            line-height: var(--promo-bar-height); 
-            background-color: rgba(0, 0, 0, 0.85);
-            color: var(--color-primary);
-            z-index: 10000;
-            overflow: hidden; 
-            font-size: 0.9em;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
+        html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (DIAGNÓSTICO EXTREMO) --- */
+        #promo-bar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: var(--promo-bar-height) !important;
+            line-height: var(--promo-bar-height) !important;
+            
+            /* ESTILOS DE DIAGNÓSTICO: ROJO Y BLANCO */
+            background-color: red !important; /* COLOR ROJO PARA PRUEBA */
+            color: white !important; /* COLOR BLANCO PARA PRUEBA */
+            
+            z-index: 10000 !important;
+            overflow: hidden !important; 
+            font-size: 0.9em !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+            
+            /* CENTRADO Y NO-APILAMIENTO */
+            text-align: center !important; /* Centra el contenido */
+            white-space: nowrap !important; /* Fuerza una sola línea */
+        }
 
-        .promo-content {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-            /* ELIMINADO: padding-left: 100%; */
-            will-change: transform;
-            white-space: nowrap; /* Mantiene el texto en una sola línea */
-            line-height: initial; 
-        }
-        
-        .promo-text {
-            padding: 0 40px;
-            font-weight: 600;
-            display: inline-block;
-        }
+        .promo-content {
+            display: inline-block !important; /* Permite el centrado */
+            /* ANIMACIÓN MARQUEE DESACTIVADA TEMPORALMENTE */
+            animation: none !important; 
+            will-change: auto !important;
+            line-height: initial !important; 
+        }
+        
+        .promo-text {
+            /* Dejamos solo un texto para esta prueba */
+            padding: 0 15px !important;
+            font-weight: 600 !important;
+            display: inline !important; /* Máxima compatibilidad para no apilar */
+        }
 
+        /* Definición de la Animación Marquee - DEJAMOS LAS REGLAS VACÍAS (DESACTIVADO) */
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); } 
+            100% { transform: translate3d(0, 0, 0); } 
+        }
+        /* ------------------------------------------- */
 
-        /* Definición de la Animación Marquee - AHORA MÁS ROBUSTA */
-        @keyframes marquee {
-            0% { transform: translate3d(100%, 0, 0); } /* <-- CORREGIDO: Inicia fuera de pantalla */
-            100% { transform: translate3d(-100%, 0, 0); } /* Desplaza hasta el final del contenido */
-        }
-        /* ------------------------------------------- */
+        /* BANNER PRINCIPAL (Video de fondo) */
+        #main-banner {
+            position: relative;
+            width: 100%;
+            margin-top: var(--promo-bar-height);
+            height: calc(100vh - var(--promo-bar-height));
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+        }
 
-        /* BANNER PRINCIPAL (Video de fondo) */
-        #main-banner {
-            position: relative;
-            width: 100%;
-            margin-top: var(--promo-bar-height);
-            height: calc(100vh - var(--promo-bar-height));
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0;
-        }
+        .banner-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
 
-        .banner-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
 
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 2;
-        }
+        .banner-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+            margin-top: 15vh;
+        }
+        
+        /* CLASES DE VISIBILIDAD */
+        .oculto {
+            display: none !important;
+            pointer-events: none;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .contenido-pagina.visible {
+            display: block;
+            pointer-events: auto;
+            height: auto;
+            min-height: 80vh;
+        }
+        
+        /* MEDIA QUERY (MÓVIL) */
+        @media (max-width: 768px) {
+            
+            /* Ajuste del banner principal para móvil */
+            #main-banner {
+                margin-top: var(--promo-bar-height);
+                height: auto;
+                min-height: calc(100vh - var(--promo-bar-height));
+                align-items: center;
+            }
+            
+            .banner-video {
+                position: relative;
+                width: 100%;
+                object-fit: contain;
+            }
 
-        .banner-content {
-            position: relative;
-            z-index: 3;
-            color: white;
-            margin-top: 15vh;
-        }
-        
-        /* CLASES DE VISIBILIDAD */
-        .oculto {
-            display: none !important;
-            pointer-events: none;
-            height: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        .contenido-pagina.visible {
-            display: block;
-            pointer-events: auto;
-            height: auto;
-            min-height: 80vh;
-        }
-        
-        /* MEDIA QUERY (MÓVIL) */
-        @media (max-width: 768px) {
-            
-            /* Ajuste del banner principal para móvil */
-            #main-banner {
-                margin-top: var(--promo-bar-height);
-                height: auto;
-                min-height: calc(100vh - var(--promo-bar-height));
-                align-items: center;
-            }
-            
-            .banner-video {
-                position: relative;
-                width: 100%;
-                object-fit: contain;
-            }
+            .banner-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin-top: 0;
+            }
+        }
+    </style>
+    
+    <script>
+        const FIXED_OFFSET = 35; 
 
-            .banner-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                margin-top: 0;
-            }
-        }
-    </style>
-    
-    <script>
-        // La altura de la promo bar es ahora la única referencia fija.
-        const FIXED_OFFSET = 35; // Altura de promo-bar-height
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Inicializa el Banner principal como visible
-            document.getElementById('main-banner').classList.add('visible');
-        });
-    </script>
-    
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('main-banner').classList.add('visible');
+        });
+    </script>
+    
 </head>
 <body>
-    
-    <div id="promo-bar">
-        <div class="promo-content">
-            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-        </div>
-    </div>
-    
-    <section id="main-banner" class="visible" style="background-color: #000;">
-        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
-            <source src="VIDEO1.mp4" type="video/mp4">
-            Tu navegador no soporta videos en HTML5.
-        </video>
+    
+    <div id="promo-bar">
+        <div class="promo-content">
+            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            </div>
+    </div>
+    
+    <section id="main-banner" class="visible" style="background-color: #000;">
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+            <source src="VIDEO1.mp4" type="video/mp4">
+            Tu navegador no soporta videos en HTML5.
+        </video>
 
-        <div class="video-overlay"></div>
+        <div class="video-overlay"></div>
 
-        <div class="banner-content">
-        </div>
+        <div class="banner-content">
+        </div>
 
-    </section>
-    
-    <footer>
-        <p style="text-align: center;">© 2024 RYNO DELTA. Todos los derechos reservados.</p>
-    </footer>
+    </section>
+    
+    <footer>
+        <p style="text-align: center;">© 2024 RYNO DELTA. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
 </html>
