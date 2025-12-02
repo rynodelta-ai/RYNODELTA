@@ -1,143 +1,123 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        /* VARIABLES DE COLOR */
-        :root {
-            --color-primary: #C5A67C; /* Dorado/Marrón */
-            --color-dark: #000;
-            --promo-bar-height: 35px;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* VARIABLES DE COLOR */
+        :root {
+            --color-dark: #000;
+            --promo-bar-height: 35px;
+        }
 
-        /* ESTILOS BASE Y TIPOGRAFÍA */
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--color-dark) !important;
-            color: #E0E0E0;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        body {
+            font-family: 'Inter', sans-serif !important;
+            margin: 0 !important; /* CRÍTICO: Eliminar márgenes del cuerpo */
+            padding: 0 !important;
+            background-color: var(--color-dark) !important;
+            color: #E0E0E0;
+            line-height: 1.6;
+            overflow-x: hidden !important;
+        }
 
-        html { margin: 0; padding: 0; overflow-x: hidden; }
-        
-        /* --- ESTILOS PARA BARRA DE PROMOCIÓN (MARQUEE HTML) --- */
-        #promo-bar {
-            position: fixed !important; 
-            top: 0 !important; 
-            width: 100% !important; 
-            height: var(--promo-bar-height); /* Se mantiene la altura */
-            line-height: var(--promo-bar-height);
-            z-index: 10000 !important;
-            overflow: hidden !important;
-        }
+        html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
+        
+        /* BANNER PRINCIPAL (Video de fondo) */
+        #main-banner {
+            position: relative;
+            width: 100%;
+            margin-top: var(--promo-bar-height) !important; /* Separación CRÍTICA para la barra fija */
+            height: calc(100vh - var(--promo-bar-height));
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+        }
 
-        .promo-text {
-            padding: 0 40px;
-            font-weight: 600;
-            display: inline; /* Necesario para que marquee funcione bien */
-            color: var(--color-primary) !important; /* Forzamos el color */
-        }
-        /* ------------------------------------------- */
+        .banner-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
+        }
 
-        /* BANNER PRINCIPAL (Video de fondo) */
-        #main-banner {
-            position: relative;
-            width: 100%;
-            margin-top: var(--promo-bar-height);
-            height: calc(100vh - var(--promo-bar-height));
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0;
-        }
+        .video-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2;
+        }
 
-        .banner-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 2;
-        }
-
-        .banner-content {
-            position: relative;
-            z-index: 3;
-            color: white;
-            margin-top: 15vh;
-        }
-        
-        /* CLASES DE VISIBILIDAD y MEDIA QUERY (MÓVIL) */
-        .oculto { display: none !important; pointer-events: none; height: 0; padding: 0; overflow: hidden; }
-        .contenido-pagina.visible { display: block; pointer-events: auto; height: auto; min-height: 80vh; }
-        
-        @media (max-width: 768px) {
-            #main-banner { margin-top: var(--promo-bar-height); height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
-            .banner-video { position: relative; width: 100%; object-fit: contain; }
-            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
-        }
-    </style>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('main-banner').classList.add('visible');
-        });
-    </script>
-    
+        .banner-content {
+            position: relative; z-index: 3; color: white; margin-top: 15vh;
+        }
+        
+        /* MEDIA QUERY (MÓVIL) */
+        @media (max-width: 768px) {
+            #main-banner { margin-top: var(--promo-bar-height) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
+            .banner-video { position: relative; width: 100%; object-fit: contain; }
+            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
+        }
+    </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('main-banner').classList.add('visible');
+        });
+    </script>
+    
 </head>
 <body>
-    
-    <div id="promo-bar" style="
-        background-color: rgba(0, 0, 0, 0.85) !important; /* Forzado de color */
-    ">
-        <marquee 
-            behavior="scroll" 
-            direction="left" 
-            scrollamount="6" 
-            loop="infinite"
-            style="width: 100%; line-height: 35px; color: #C5A67C !important;"
-        >
-            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span class="promo-text">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-        </marquee>
-    </div>
-    
-    <section id="main-banner" class="visible" style="background-color: #000;">
-        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
-            <source src="VIDEO1.mp4" type="video/mp4">
-            Tu navegador no soporta videos en HTML5.
-        </video>
+    
+    <div id="promo-bar" style="
+        position: fixed !important; 
+        top: 0 !important; 
+        left: 0 !important; 
+        width: 100% !important; 
+        height: 35px !important; 
+        line-height: 35px !important;
+        background-color: rgba(0, 0, 0, 0.95) !important; /* FONDO NEGRO FORZADO */
+        z-index: 999999 !important; 
+        overflow: hidden !important;
+        white-space: nowrap !important; /* CRÍTICO: EVITA EL APILAMIENTO EN MÓVILES */
+    ">
+        <marquee 
+            behavior="scroll" 
+            direction="left" 
+            scrollamount="5" 
+            loop="infinite"
+            style="
+                width: 100%; 
+                height: 35px;
+                line-height: 35px !important; 
+                color: #C5A67C !important; /* COLOR DORADO FORZADO */
+                font-size: 0.9em !important;
+                white-space: nowrap !important;
+                display: inline-block !important;
+            "
+        >
+            <span style="padding: 0 40px;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span style="padding: 0 40px;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span style="padding: 0 40px;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+        </marquee>
+    </div>
+    
+    <section id="main-banner" class="visible" style="background-color: #000;">
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+            <source src="VIDEO1.mp4" type="video/mp4">
+            Tu navegador no soporta videos en HTML5.
+        </video>
 
-        <div class="video-overlay"></div>
+        <div class="video-overlay"></div>
 
-        <div class="banner-content">
-        </div>
+        <div class="banner-content">
+            </div>
 
-    </section>
-    
-    <footer>
-        <p style="text-align: center;">© 2024 RYNO DELTA. Todos los derechos reservados.</p>
-    </footer>
+    </section>
+    
+    <footer>
+        <p style="text-align: center; color: #E0E0E0;">© 2024 RYNO DELTA. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
 </html>
