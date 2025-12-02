@@ -25,10 +25,9 @@
             background-color: var(--color-dark);
             color: var(--color-text);
             line-height: 1.6;
-            overflow-x: hidden; 
+            overflow-x: hidden; /* Control total del scroll horizontal */
         }
 
-        /* Eliminamos margen del elemento raíz para asegurar el tope y prevenir overflow */
         html {
             margin: 0;
             padding: 0;
@@ -66,7 +65,6 @@
             font-weight: 600;
         }
 
-        /* Definición de la Animación Marquee */
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-100%, 0, 0); } 
@@ -114,7 +112,6 @@
             margin-top: 15vh; 
         }
         
-        /* ESTILO PARA LA NUEVA TARJETA DE MORRALES */
         .morrales-card {
             position: absolute; 
             bottom: 30px; 
@@ -161,79 +158,105 @@
             text-transform: uppercase;
         }
 
-        /* SECCIONES DE CONTENIDO */
+        /* SECCIONES DE CONTENIDO REDISEÑADAS */
         section {
             padding: 50px 20px; 
             min-height: 80vh; 
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Centra el bloque .seccion-contenido */
         }
 
         .seccion-contenido {
-            max-width: 1000px; 
+            max-width: 900px; /* Ancho máximo para el bloque de contenido */
             width: 100%;
-            /* Forzamos todo el contenido interno a centrarse, luego ajustamos los bloques de texto */
-            text-align: center; 
-            padding: 20px; 
+            text-align: center; /* Centraliza todo el texto y bloques internos por defecto */
+            padding: 30px 20px; 
             background-color: var(--color-accent); 
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
         
-        /* --- MODIFICACIONES CLAVE PARA LA MÁXIMA CENTRALIZACIÓN --- */
-        
-        /* Centrado de todos los encabezados H2 y H3 */
-        .seccion-contenido h2,
-        .seccion-contenido h3 {
-             text-align: center !important; 
-        }
-        
-        /* 1. Centrar el BLOQUE de párrafo con ancho reducido para look más profesional */
-        .seccion-contenido p {
-            max-width: 700px; /* Ancho más estricto */
-            margin: 0 auto 20px auto; /* Centra el bloque de párrafo */
-            text-align: left; /* Mantenemos izquierda para la legibilidad del texto largo */
-        }
-        
-        /* 2. Mantener párrafos de secciones cortas con texto centrado */
-        #quienes-somos .seccion-contenido p,
-        #morrales .seccion-contenido p,
-        #servicios .seccion-contenido > p:first-child { 
-            text-align: center; 
-        }
-        
-        /* 3. Asegurar que las listas tengan ancho estricto y estén centradas */
-        .centered-list {
-            max-width: 700px; /* Ancho estricto para centralización visual */
-            margin: 20px auto; /* Centrar el bloque de la lista */
-            list-style-type: circle; 
-            padding-left: 20px; /* Padding estándar para que se vean las viñetas */
-            text-align: left; 
-        }
-        
-        /* 4. Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
-        #contacto .contact-link {
-            display: block;
-            width: fit-content; 
-            margin: 0 auto; 
+        .seccion-contenido h2 {
+            display: block; 
+            color: var(--color-primary); 
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--color-primary); 
+            padding-bottom: 10px;
             text-align: center;
         }
+
+        .sub-titulo {
+            color: var(--color-primary);
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            text-align: center;
+            border-bottom: 1px dashed rgba(197, 166, 124, 0.5);
+            padding-bottom: 5px;
+        }
+
+        /* Bloque de texto/párrafo (Aseguramos que el bloque esté centrado) */
+        .text-block {
+            max-width: 650px; 
+            margin: 20px auto; 
+            text-align: left; /* IZQUIERDA para legibilidad del texto largo */
+        }
         
-        /* 5. Asegurar centrado interno en las tarjetas de servicio */
+        /* Lista centrada (El bloque completo de la lista está centrado) */
+        .centered-list {
+            max-width: 650px;
+            margin: 20px auto 40px auto; 
+            list-style-type: circle; 
+            padding-left: 20px; 
+            text-align: left; /* IZQUIERDA para viñetas organizadas */
+        }
+
+        /* Estilo para tarjetas en la sección Servicios */
+        .service-grid {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
         .service-card {
-            text-align: center; 
+            flex: 1 1 300px; 
+            background-color: var(--color-dark);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
+            border-left: 3px solid var(--color-primary); 
+            text-align: center;
+        }
+
+        /* Bloque de contacto */
+        .contact-info-block {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 350px;
+            margin: 0 auto 40px auto;
+        }
+
+        .contact-info-block a, .contact-info-block span {
+             display: block;
+             width: 100%;
+             padding: 10px 0;
+             border: 1px solid var(--color-primary);
+             border-radius: 5px;
+             font-weight: 500;
+             text-decoration: none;
+             color: var(--color-primary);
+             transition: background-color 0.3s, color 0.3s;
+        }
+
+        .contact-info-block a:hover {
+            background-color: var(--color-primary);
+            color: var(--color-dark);
         }
         
-        .service-card p {
-            max-width: none; 
-            text-align: center; 
-            margin: 0 auto 15px auto;
-        }
-
-        /* --------------------------------------------------------------------------------- */
-
-        /* BOTÓN VOLVER (Navegación táctica) */
+        /* BOTÓN VOLVER */
         .boton-volver {
             display: block; 
             width: fit-content;
@@ -254,42 +277,7 @@
             color: #000;
         }
 
-        /* ESTILOS DE TÍTULOS EN SECCIONES */
-        .seccion-contenido h2 {
-            display: block; 
-            color: var(--color-primary); 
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--color-primary); 
-            padding-bottom: 10px;
-        }
-        
-        /* TARJETAS DE SERVICIO (Flexbox responsive) */
-        .service-card-container {
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
-            text-align: center; 
-        }
-        
-        .service-card {
-            flex: 1 1 300px; 
-            background-color: var(--color-dark);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: inset 0 0 10px rgba(197, 166, 124, 0.1); 
-            border-left: 3px solid var(--color-primary); 
-        }
-
-        .service-card h3 {
-            color: var(--color-primary); 
-            text-transform: uppercase;
-            margin-top: 0;
-            margin-bottom: 15px; 
-        }
-        
-        /* CLASES DE VISIBILIDAD (SPA) */
+        /* CLASES DE VISIBILIDAD (SPA) - MANTENIDAS */
         .oculto {
             display: none !important; 
             pointer-events: none;
@@ -305,7 +293,7 @@
             min-height: 80vh;
         }
         
-        /* NAVEGACIÓN FIJA (Menú) */
+        /* NAVEGACIÓN FIJA (Menú) - MANTENIDA */
         .menu-icon {
             position: fixed; 
             z-index: 10001; 
@@ -326,7 +314,7 @@
             margin: 6px 0;
         }
         
-        /* MENÚ DESPLEGABLE */
+        /* MENÚ DESPLEGABLE - MANTENIDO */
         .nav-menu {
             height: 100%;
             width: 0; 
@@ -357,7 +345,7 @@
             letter-spacing: 1px;
         }
 
-        /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
+        /* MEDIA QUERY (MÓVIL) */
         @media (max-width: 768px) {
             
             :root {
@@ -373,27 +361,7 @@
                 min-height: calc(100vh - var(--promo-bar-height)); 
                 align-items: center; 
             }
-            
-            .banner-video {
-                position: relative; 
-                width: 100%; 
-                object-fit: contain; 
-            }
 
-            .menu-icon {
-                top: 45px; 
-                left: 10px;
-                background-color: transparent; 
-            }
-            
-            .banner-content {
-                 position: absolute;
-                 top: 50%;
-                 left: 50%;
-                 transform: translate(-50%, -50%);
-                 margin-top: 0; 
-            }
-            
             .morrales-card {
                 position: relative; 
                 width: 90%; 
@@ -402,47 +370,29 @@
                 bottom: auto; 
             }
             
-            /* En móvil, los párrafos ocupan todo el ancho, pero el texto largo regresa a la izquierda para legibilidad */
-            .seccion-contenido p {
+            /* Ajustes de contenido para móvil: el texto puede ocupar más ancho */
+            .text-block, .centered-list {
                  max-width: none; 
-                 text-align: left; 
+                 padding: 0 10px;
+                 text-align: left;
             }
-            
-            /* Pero las secciones cortas se mantienen centradas */
-             #quienes-somos .seccion-contenido p,
-             #morrales .seccion-contenido p,
-             #servicios .seccion-contenido > p:first-child { 
-                text-align: center; 
-            }
-            
-            /* Ajuste de listas para móvil: ocupan el 100% y usan posición interna */
-            .centered-list {
-                max-width: none;
-                padding-left: 0;
-                text-align: left;
-            }
-
-            .centered-list li {
-                padding-left: 20px;
-                list-style-position: inside; 
+            .seccion-contenido {
+                padding: 20px 10px;
             }
         }
     </style>
     
     <script>
-        // Altura de los elementos fijos (constante de control de scroll)
+        // Mantenemos la funcionalidad de menú y navegación
         const FIXED_HEADER_HEIGHT = 155; 
 
-        // Alterna la visibilidad del menú hamburguesa
         function toggleNav() {
             var menu = document.getElementById("myNav");
             menu.style.width = (menu.style.width === "100%") ? "0%" : "100%";
         }
         
-        // Muestra la sección seleccionada
         function mostrarSeccion(seccionId) {
-            document.getElementById("myNav").style.width = "0%"; // Cierra menú
-            
+            document.getElementById("myNav").style.width = "0%"; 
             document.getElementById('menu-icon').classList.add('hidden-nav-elements');
             
             document.getElementById('main-banner').classList.add('oculto');
@@ -468,7 +418,6 @@
             }
         }
         
-        // Vuelve al Banner principal
         function volverInicio() {
             document.querySelectorAll('.contenido-pagina').forEach(seccion => {
                 seccion.classList.add('oculto');
@@ -538,12 +487,9 @@
             <source src="VIDEO1.mp4" type="video/mp4">
             Tu navegador no soporta videos en HTML5.
         </video>
-
         <div class="video-overlay"></div>
-
         <div class="banner-content">
             </div>
-
         <div class="morrales-card" id="morrales-card" role="button" aria-label="Ver Morrales Tácticos">
             <img src="morrales.jpg" alt="Morrales Tácticos RYNO DELTA" onerror="this.onerror=null; this.src='https://placehold.co/350x200/111/C5A67C?text=';"> 
             <div class="morrales-text">
@@ -556,13 +502,16 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>QUIÉNES SOMOS</h2> 
-            <p>
-                **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia. Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
+            <p class="text-block" style="text-align: center;">
+                **RYNO DELTA** es tu fuente confiable de equipo táctico y de supervivencia.
             </p>
-            <p>
+            <p class="text-block">
+                Con más de **13 años de experiencia**, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
+            </p>
+            <p class="text-block">
                 Nuestro catálogo está curado para profesionales y entusiastas de la supervivencia. Desde morrales resistentes hasta prendas de ropa especializada, la selección se basa en la calidad del material y la innovación en el diseño.
             </p>
-            <p style="color: var(--color-primary); font-weight: bold; margin-top: 40px;">
+            <p class="text-block" style="color: var(--color-primary); font-weight: bold; text-align: center; margin-top: 40px;">
                 Equipamos tu confianza en cada despliegue.
             </p>
         </div>
@@ -572,10 +521,10 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>MORRALES TÁCTICOS</h2> 
-            <p style="color: #999;">
+            <p style="color: #999; text-align: center;">
                 **¡Próximamente, el contenido detallado de nuestra línea de morrales!**
             </p>
-            <p style="margin-top: 20px;">
+            <p style="margin-top: 20px; text-align: center;">
                 Esta sección está lista para recibir la galería de productos.
             </p>
         </div>
@@ -585,12 +534,12 @@
         <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
         <div class="seccion-contenido">
             <h2>NUESTROS SERVICIOS Y ENVÍOS</h2> 
-            <p>
+            <p style="text-align: center; max-width: 650px; margin: 0 auto 40px auto;">
                 Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
             </p>
-            <div class="service-card-container">
+            <div class="service-grid">
                 <div class="service-card">
-                    <h3>PAGO CONTRA ENTREGA</h3>
+                    <h3 class="sub-titulo" style="margin-top: 0;">PAGO CONTRA ENTREGA</h3>
                     <p>
                         Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
                     </p>
@@ -599,84 +548,7 @@
                     </p>
                 </div>
                 <div class="service-card">
-                    <h3>PAGO EN LÍNEA SEGURO</h3>
+                    <h3 class="sub-titulo" style="margin-top: 0;">PAGO EN LÍNEA SEGURO</h3>
                     <p>
                         Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento.
                     </p>
-                    <p style="font-weight: bold; color: #999; font-size: 0.9em;">
-                        *Obtenga tiempo de entrega preferencial y recompensas exclusivas.
-                    </p>
-                </div>
-            </div>
-            <h3 style="color: var(--color-primary); margin-top: 50px;">Logística y Envíos Nacionales</h3>
-            <ul class="centered-list">
-                <li>Envío Gratuito para órdenes que superen los **$80.000 COP**.</li>
-                <li>Tiempo de entrega estándar: 3-5 días hábiles.</li>
-                <li>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</li>
-                <li>**Recomendación:** Confirme su cobertura antes de realizar la compra.</li>
-            </ul>
-        </div>
-    </section>
-    
-    <section id="contacto" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-        <div class="seccion-contenido" style="text-align: center;">
-            <h2>CONTACTO RYNO DELTA</h2> 
-            <p style="font-size: 1.2em; max-width: 600px; margin: 0 auto 40px auto; color: var(--color-primary);">
-                Estamos listos para atender sus requerimientos.
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 350px; margin: 0 auto;">
-                <a class="contact-link whatsapp-btn" 
-                    href="https://wa.me/573148172002" 
-                    target="_blank">
-                     <span style="font-size: 1.2em; margin-right: 10px;">&#9990;</span> Chatear por WhatsApp
-                </a>
-                <span class="contact-link email-info">
-                     <span style="font-size: 1.2em; margin-right: 10px;">&#9993;</span> rynodelta@gmail.com
-                </span>
-            </div>
-            <p style="margin-top: 40px; font-size: 0.9em; color: #888;">
-                Nuestro equipo de soporte está disponible de Lunes a Viernes (8am - 6pm COL).
-            </p>
-        </div>
-    </section>
-
-    <section id="politicas" class="contenido-pagina oculto">
-        <button class="boton-volver" onclick="volverInicio()">&#9664; Volver al Inicio</button>
-        <div class="seccion-contenido">
-            <h2>POLÍTICAS Y GARANTÍA</h2> 
-            <h3 style="color: var(--color-primary); margin-top: 30px;">LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h3>
-            <p>
-                En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
-            </p>
-            <ul class="centered-list">
-                <li>Procesamiento y envío de pedidos.</li>
-                <li>Gestión de pagos y emisión de facturas.</li>
-                <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
-                <li>Mejora de nuestros servicios y la experiencia de compra.</li>
-            </ul>
-            <p>
-                Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.
-            </p>
-            
-            <h3 style="color: var(--color-primary); margin-top: 40px;">POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h3>
-            <p>
-                Todos nuestros productos cuentan con una garantía de **60 días** a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
-            </p>
-            <ul class="centered-list">
-                <li>Daños causados por mal uso, accidentes o desgaste normal.</li>
-                <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
-                <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
-            </ul>
-            <p>
-                Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a **5 días hábiles** desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
-            </p>
-        </div>
-    </section>
-    
-    <footer>
-        <p style="text-align: center;">© 2024 RYNO DELTA. Todos los derechos reservados.</p>
-    </footer>
-
-</body>
-</html>
