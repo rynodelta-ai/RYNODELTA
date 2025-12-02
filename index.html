@@ -25,7 +25,6 @@
             background-color: var(--color-dark);
             color: var(--color-text);
             line-height: 1.6;
-            /* CORRECCIÓN FINAL: Evita la barra de scroll horizontal */
             overflow-x: hidden; 
         }
 
@@ -174,7 +173,7 @@
         .seccion-contenido {
             max-width: 1000px; 
             width: 100%;
-            /* Forzar todo el contenido interno a centrarse, luego anular para legibilidad si es necesario */
+            /* Forzamos todo el contenido interno a centrarse, luego ajustamos los bloques de texto */
             text-align: center; 
             padding: 20px; 
             background-color: var(--color-accent); 
@@ -182,44 +181,38 @@
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
         }
         
-        /* --- MODIFICACIONES CLAVE PARA ALINEACIÓN/CENTRALIZACIÓN DEL CONTENIDO INTERNO --- */
+        /* --- MODIFICACIONES CLAVE PARA LA MÁXIMA CENTRALIZACIÓN --- */
         
-        /* Centrado de todos los encabezados */
+        /* Centrado de todos los encabezados H2 y H3 */
         .seccion-contenido h2,
         .seccion-contenido h3 {
-             text-align: center; /* ¡Forzado al centro! */
+             text-align: center !important; 
         }
         
-        /* Centrar el BLOQUE de párrafo */
+        /* 1. Centrar el BLOQUE de párrafo con ancho reducido para look más profesional */
         .seccion-contenido p {
-            max-width: 800px; 
+            max-width: 700px; /* Ancho más estricto */
             margin: 0 auto 20px auto; /* Centra el bloque de párrafo */
             text-align: left; /* Mantenemos izquierda para la legibilidad del texto largo */
         }
         
-        /* Centrar completamente el texto en secciones cortas (Quiénes Somos, Morrales, Servicios intro) */
+        /* 2. Mantener párrafos de secciones cortas con texto centrado */
         #quienes-somos .seccion-contenido p,
         #morrales .seccion-contenido p,
         #servicios .seccion-contenido > p:first-child { 
             text-align: center; 
         }
         
-        /* Asegurar que las listas también tengan un ancho máximo y estén centradas */
+        /* 3. Asegurar que las listas tengan ancho estricto y estén centradas */
         .centered-list {
-            max-width: 800px;
+            max-width: 700px; /* Ancho estricto para centralización visual */
             margin: 20px auto; /* Centrar el bloque de la lista */
             list-style-type: circle; 
-            padding-left: 0; /* Quitamos el padding para que la lista empiece justo después de margin: auto */
-            text-align: left; /* Alineación izquierda para que las viñetas se vean bien */
+            padding-left: 20px; /* Padding estándar para que se vean las viñetas */
+            text-align: left; 
         }
         
-        /* Ajuste para que las viñetas se vean correctamente */
-        .centered-list li {
-            padding-left: 25px; /* Agregamos el padding solo al item para mantener la sangría de la viñeta */
-            text-align: left;
-        }
-
-        /* Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
+        /* 4. Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
         #contacto .contact-link {
             display: block;
             width: fit-content; 
@@ -227,14 +220,14 @@
             text-align: center;
         }
         
-        /* Ajuste de alineación forzada para las tarjetas de servicio */
+        /* 5. Asegurar centrado interno en las tarjetas de servicio */
         .service-card {
-            text-align: center; /* Asegura que el contenido interno se centre */
+            text-align: center; 
         }
-
+        
         .service-card p {
-            max-width: none; /* No limitar ancho dentro de la tarjeta */
-            text-align: center; /* Forzar centrado del texto dentro de la tarjeta */
+            max-width: none; 
+            text-align: center; 
             margin: 0 auto 15px auto;
         }
 
@@ -367,7 +360,6 @@
         /* MEDIA QUERY (MÓVIL) - Refinamiento de estilos para pantallas pequeñas */
         @media (max-width: 768px) {
             
-            /* Ajuste de variable para offset móvil */
             :root {
                 --header-height: 40px; 
             }
@@ -375,7 +367,6 @@
                  margin: calc(var(--header-height) + var(--promo-bar-height)) auto 30px auto; 
             }
             
-            /* Ajuste del banner principal para móvil */
             #main-banner {
                 margin-top: var(--promo-bar-height); 
                 height: auto; 
@@ -411,7 +402,7 @@
                 bottom: auto; 
             }
             
-            /* En móvil, el texto vuelve a la alineación izquierda simple */
+            /* En móvil, los párrafos ocupan todo el ancho, pero el texto largo regresa a la izquierda para legibilidad */
             .seccion-contenido p {
                  max-width: none; 
                  text-align: left; 
@@ -424,14 +415,16 @@
                 text-align: center; 
             }
             
-            /* Ajuste de listas para móvil: mantienen sangría pero el bloque está centrado */
+            /* Ajuste de listas para móvil: ocupan el 100% y usan posición interna */
             .centered-list {
+                max-width: none;
                 padding-left: 0;
+                text-align: left;
             }
 
             .centered-list li {
                 padding-left: 20px;
-                list-style-position: inside; /* Asegura que la viñeta no se salga */
+                list-style-position: inside; 
             }
         }
     </style>
