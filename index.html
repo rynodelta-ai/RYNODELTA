@@ -8,13 +8,13 @@
     <style>
         /* VARIABLES DE COLOR */
         :root {
-            --color-primary: #C5A67C; /* Dorado/Cobre para acentos */
-            --color-accent: #111; /* Negro oscuro/Gris carbón para secciones */
-            --color-dark: #000; /* Negro absoluto */
-            --color-text: #E0E0E0; /* Blanco suave para texto principal */
-            --header-height: 120px; /* Altura fija para el cálculo de scroll en desktop */
-            --promo-bar-height: 35px; /* Altura de la nueva barra de promoción */
-            --menu-offset: 70px; /* Altura de la barra superior donde está el menú */
+            --color-primary: #C5A67C; 
+            --color-accent: #111; 
+            --color-dark: #000; 
+            --color-text: #E0E0E0; 
+            --header-height: 120px; 
+            --promo-bar-height: 35px; 
+            --menu-offset: 70px; 
         }
 
         /* ESTILOS BASE Y TIPOGRAFÍA */
@@ -25,50 +25,52 @@
             background-color: var(--color-dark);
             color: var(--color-text);
             line-height: 1.6;
-            overflow-x: hidden; /* Evita el scroll horizontal */
+            /* CORRECCIÓN 1: Evita la barra de scroll horizontal */
+            overflow-x: hidden; 
         }
 
         /* Eliminamos margen del elemento raíz para asegurar el tope. */
-        html, body {
+        html {
             margin: 0;
             padding: 0;
+            overflow-x: hidden; /* Seguridad adicional */
         }
-
+        
         /* --- ESTILOS PARA BARRA DE PROMOCIÓN --- */
         #promo-bar {
             position: fixed;
-            top: 0; /* Asegura que esté pegada al tope */
+            top: 0; 
             left: 0;
             width: 100%;
-            height: var(--promo-bar-height); /* Altura de la barra */
-            background-color: rgba(0, 0, 0, 0.85); /* Fondo negro semitransparente */
+            height: var(--promo-bar-height); 
+            background-color: rgba(0, 0, 0, 0.85); 
             color: var(--color-primary);
-            z-index: 10000; /* Alto Z-index para estar sobre todo */
-            overflow: hidden; /* Oculta el contenido que no está en la vista */
+            z-index: 10000; 
+            overflow: hidden; 
             display: flex;
             align-items: center;
             font-size: 0.9em;
-            white-space: nowrap; /* Impide que el texto se rompa */
+            white-space: nowrap; 
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             padding: 0;
         }
 
         .promo-content {
             display: inline-block;
-            animation: marquee 30s linear infinite; /* Aplica la animación */
-            padding-left: 100%; /* Inicia fuera de pantalla */
-            will-change: transform; /* Optimización de rendimiento */
+            animation: marquee 30s linear infinite; 
+            padding-left: 100%; 
+            will-change: transform; 
         }
 
         .promo-text {
-            padding: 0 40px; /* Espacio entre cada mensaje repetido */
+            padding: 0 40px; 
             font-weight: 600;
         }
 
-        /* Definición de la Animación Marquee (Movimiento de Izquierda a Derecha) */
+        /* Definición de la Animación Marquee */
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); } /* Desplaza el contenido un 100% de su ancho */
+            100% { transform: translate3d(-100%, 0, 0); } 
         }
         /* ------------------------------------------- */
 
@@ -76,9 +78,8 @@
         #main-banner {
             position: relative;
             width: 100%;
-            /* Ajuste para que el video comience debajo de la barra de promoción */
             margin-top: var(--promo-bar-height); 
-            height: calc(100vh - var(--promo-bar-height)); /* Ocupa el resto de la altura */
+            height: calc(100vh - var(--promo-bar-height)); 
             overflow: hidden;
             display: flex;
             flex-direction: column; 
@@ -103,7 +104,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Capa oscura */
+            background-color: rgba(0, 0, 0, 0.4); 
             z-index: 2;
         }
 
@@ -173,7 +174,6 @@
         .seccion-contenido {
             max-width: 1000px; 
             width: 100%;
-            /* El contenedor principal está centrado por la etiqueta <section> */
             text-align: left; 
             padding: 20px; 
             background-color: var(--color-accent); 
@@ -183,41 +183,50 @@
         
         /* --- MODIFICACIONES CLAVE PARA ALINEACIÓN/CENTRALIZACIÓN DEL CONTENIDO INTERNO --- */
         
-        /* 1. Centrar el BLOQUE de párrafo y mantener alineación izquierda para legibilidad de texto largo (default) */
-        .seccion-contenido p {
-            max-width: 800px; /* Limita el ancho para que el bloque no se estire demasiado */
-            margin: 0 auto 20px auto; /* Centra el bloque de párrafo */
-            text-align: left; /* Alineación izquierda para evitar "huecos" en el texto */
+        /* Centrado de todos los encabezados */
+        .seccion-contenido h2,
+        .seccion-contenido h3 {
+             text-align: center !important; 
         }
         
-        /* 2. Centrar completamente el texto en secciones cortas (Quiénes Somos, Morrales, Servicios intro) */
+        /* Centrar el BLOQUE de párrafo y mantener alineación izquierda para legibilidad de texto largo (default) */
+        .seccion-contenido p {
+            max-width: 800px; 
+            margin: 0 auto 20px auto; 
+            text-align: left; 
+        }
+        
+        /* Centrar completamente el texto en secciones cortas (Quiénes Somos, Morrales, Servicios intro) */
         #quienes-somos .seccion-contenido p,
         #morrales .seccion-contenido p,
-        #servicios .seccion-contenido > .seccion-contenido p:first-child { 
+        #servicios .seccion-contenido > p:first-child { 
             text-align: center; 
         }
         
-        /* 3. Asegurar que las listas también tengan un ancho máximo y estén centradas */
+        /* Asegurar que las listas también tengan un ancho máximo y estén centradas */
         .centered-list {
             max-width: 800px;
-            margin: 20px auto; /* Centrar el bloque de la lista */
-            list-style-type: circle; /* Viñetas circulares claras */
-            padding-left: 20px; /* Espacio para las viñetas */
-            text-align: left; /* Alineación izquierda para que las viñetas se vean bien */
+            margin: 20px auto; 
+            list-style-type: circle; 
+            padding-left: 20px; 
+            text-align: left; 
         }
         
-        /* 4. Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
+        /* Arreglo para la sección de Contacto (Centrar los elementos de enlace/correo) */
         #contacto .contact-link {
             display: block;
-            width: fit-content; /* El ancho se ajusta al contenido */
-            margin: 0 auto; /* Centra el bloque del enlace/información */
+            width: fit-content; 
+            margin: 0 auto; 
             text-align: center;
         }
         
-        /* 5. Centrar los títulos de Nivel 3 */
-        .seccion-contenido h3 {
-             text-align: center; 
+        /* Ajuste de alineación forzada para las tarjetas de servicio */
+        .service-card p {
+            max-width: none; /* No limitar ancho dentro de la tarjeta */
+            text-align: center; /* Forzar centrado del texto dentro de la tarjeta */
+            margin: 0 auto;
         }
+
         /* --------------------------------------------------------------------------------- */
 
         /* BOTÓN VOLVER (Navegación táctica) */
@@ -244,7 +253,6 @@
         /* ESTILOS DE TÍTULOS EN SECCIONES */
         .seccion-contenido h2 {
             display: block; 
-            text-align: center;
             color: var(--color-primary); 
             margin-bottom: 40px;
             border-bottom: 2px solid var(--color-primary); 
@@ -276,7 +284,6 @@
             text-transform: uppercase;
             margin-top: 0;
             margin-bottom: 15px; 
-            text-align: center;
         }
         
         /* CLASES DE VISIBILIDAD (SPA) */
@@ -394,16 +401,16 @@
                 bottom: auto; 
             }
             
-            /* En móvil, los párrafos regresan a la alineación izquierda simple */
+            /* En móvil, el texto vuelve a la alineación izquierda simple */
             .seccion-contenido p {
-                 max-width: none; /* Quitamos el max-width en móvil para usar el 100% disponible */
+                 max-width: none; 
                  text-align: left; 
             }
             
             /* Pero las secciones cortas se mantienen centradas */
              #quienes-somos .seccion-contenido p,
              #morrales .seccion-contenido p,
-             #servicios .seccion-contenido > .seccion-contenido p:first-child { 
+             #servicios .seccion-contenido > p:first-child { 
                 text-align: center; 
             }
         }
@@ -590,19 +597,19 @@
             <div class="service-card-container">
                 <div class="service-card">
                     <h3>PAGO CONTRA ENTREGA</h3>
-                    <p style="max-width: none; margin: 0; text-align: center;">
+                    <p>
                         Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
                     </p>
-                    <p style="max-width: none; margin: 15px 0 0 0; font-weight: bold; color: #999; font-size: 0.9em; text-align: center;">
+                    <p style="font-weight: bold; color: #999; font-size: 0.9em;">
                         *El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad.
                     </p>
                 </div>
                 <div class="service-card">
                     <h3>PAGO EN LÍNEA SEGURO</h3>
-                    <p style="max-width: none; margin: 0; text-align: center;">
+                    <p>
                         Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento.
                     </p>
-                    <p style="max-width: none; margin: 15px 0 0 0; font-weight: bold; color: #999; font-size: 0.9em; text-align: center;">
+                    <p style="font-weight: bold; color: #999; font-size: 0.9em;">
                         *Obtenga tiempo de entrega preferencial y recompensas exclusivas.
                     </p>
                 </div>
