@@ -120,7 +120,46 @@
             color: var(--color-gold); 
         }
 
-        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS (ACTUALIZADO) --- */
+        /* NUEVO: ESTILOS DEL ÍCONO DEL CARRITO (Parte Superior Derecha) */
+        #cart-icon-container {
+            position: fixed;
+            top: var(--promo-bar-height, 45px); 
+            right: 0; 
+            z-index: 999998; 
+            padding: 15px;
+            cursor: pointer;
+            width: 25px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-radius: 0 0 0 5px; /* Esquina redondeada en la parte inferior izquierda */
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
+            color: var(--color-gold);
+            font-size: 1.5em; /* Tamaño del ícono */
+            line-height: 1;
+        }
+        
+        #cart-icon-container:hover {
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); /* Efecto de brillo al pasar el ratón */
+        }
+
+        #cart-count {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #D9534F; /* Rojo para el contador */
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7em;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+
+        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
         #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page { 
             display: none; 
             padding: 60px 20px; 
@@ -229,7 +268,7 @@
             padding-left: 0;
         }
         
-        /* NUEVOS ESTILOS: Botones de Contacto */
+        /* Estilos para Botones de Contacto */
         .contact-button {
             display: block;
             text-align: center;
@@ -241,7 +280,7 @@
             text-transform: uppercase;
             border-radius: 5px;
             transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(197, 166, 124, 0.5); /* Iluminación dorada base */
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.5); 
         }
         
         .whatsapp-button {
@@ -251,7 +290,7 @@
         }
         .whatsapp-button:hover {
             background-color: #128C7E;
-            box-shadow: 0 0 15px 3px rgba(37, 211, 102, 0.8); /* Iluminación verde */
+            box-shadow: 0 0 15px 3px rgba(37, 211, 102, 0.8); 
         }
 
         .email-button {
@@ -261,7 +300,7 @@
         }
         .email-button:hover {
             background-color: rgba(197, 166, 124, 0.1);
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); /* Iluminación dorada fuerte */
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); 
         }
 
 
@@ -284,12 +323,12 @@
     </style>
     
     <script>
-        // Función para ocultar todas las páginas secundarias (ACTUALIZADO)
+        // Función para ocultar todas las páginas secundarias
         function hideAllSecondaryPages() {
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
             document.getElementById('politicas-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none'; // NUEVO
+            document.getElementById('contacto-page').style.display = 'none'; 
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -301,24 +340,27 @@
             const navMenu = document.getElementById('nav-menu-list');
             const mainBanner = document.getElementById('main-banner');
             
-            // Referencias de Enlaces (ACTUALIZADO)
+            // Referencias de Enlaces
             const inicioLink = document.getElementById('inicio-link'); 
             const quienesSomosLink = document.getElementById('quienes-somos-link'); 
             const serviciosLink = document.getElementById('servicios-link'); 
             const politicasLink = document.getElementById('politicas-link'); 
-            const contactoLink = document.getElementById('contacto-link'); // NUEVO
+            const contactoLink = document.getElementById('contacto-link'); 
             
-            // Referencias de Páginas (ACTUALIZADO)
+            // Referencias de Páginas
             const quienesSomosPage = document.getElementById('quienes-somos-page');
             const serviciosPage = document.getElementById('servicios-page'); 
             const politicasPage = document.getElementById('politicas-page'); 
-            const contactoPage = document.getElementById('contacto-page'); // NUEVO
+            const contactoPage = document.getElementById('contacto-page'); 
             
-            // Referencias de Botones (ACTUALIZADO)
+            // Referencias de Botones
             const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
             const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas'); 
-            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); // NUEVO
+            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
+            
+            // Referencia del Carrito (NUEVA)
+            const cartIcon = document.getElementById('cart-icon-container');
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
             hamburger.addEventListener('click', () => {
@@ -376,7 +418,7 @@
                 window.scrollTo(0, 0); 
             });
             
-            // 7. Lógica para la sección CONTACTO (NUEVO)
+            // 7. Lógica para la sección CONTACTO
             contactoLink.addEventListener('click', (e) => {
                 e.preventDefault(); 
                 navMenu.classList.remove('open'); 
@@ -386,8 +428,7 @@
                 window.scrollTo(0, 0); 
             });
 
-
-            // 8. Lógica para Volver al inicio (desde los botones de las páginas) (ACTUALIZADO)
+            // 8. Lógica para Volver al inicio (desde los botones de las páginas)
             backToHomeBtnQS.addEventListener('click', (e) => {
                 e.preventDefault();
                 navigateToHome();
@@ -403,9 +444,15 @@
                 navigateToHome();
             });
             
-            backToHomeBtnContacto.addEventListener('click', (e) => { // NUEVO
+            backToHomeBtnContacto.addEventListener('click', (e) => { 
                 e.preventDefault();
                 navigateToHome();
+            });
+            
+            // Lógica preliminar del Carrito (Demostración/Placeholder)
+            cartIcon.addEventListener('click', () => {
+                // Aquí iría la lógica para abrir el carrito lateral.
+                console.log("Ícono del Carrito clickeado. Implementación de carrito en proceso.");
             });
         });
     </script>
@@ -439,8 +486,15 @@
             <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
             <li><a href="#" id="servicios-link">SERVICIOS</a></li>
             <li><a href="#" id="politicas-link">POLITICAS</a></li> 
-            <li><a href="#" id="contacto-link">CONTACTO</a></li> </ul>
+            <li><a href="#" id="contacto-link">CONTACTO</a></li> 
+        </ul>
     </nav>
+    
+    <div id="cart-icon-container">
+        🛒
+        <span id="cart-count">0</span>
+    </div>
+
 
     <section id="main-banner" class="visible" style="background-color: #000;">
         <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
@@ -534,7 +588,7 @@
             </div>
         </div>
     </section>
-    
+
     <section id="contacto-page">
         <div class="back-button-container">
             <a href="#" class="back-to-home-btn" id="back-to-home-btn-contacto">VOLVER AL INICIO</a>
