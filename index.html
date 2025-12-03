@@ -122,7 +122,7 @@
             color: var(--color-gold);	
         }
 
-        /* --- SECCIÓN DE CATEGORÍAS (NUEVO) --- */
+        /* --- SECCIÓN DE CATEGORÍAS --- */
         #categories-section {
             padding: 40px 10px;
             max-width: 1200px;
@@ -165,15 +165,15 @@
             box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5);
         }
 
-        /* Contenedor para mantener la relación de aspecto 16:9 */
+        /* Contenedor para mantener la relación de aspecto 21:9 (MODIFICADO) */
         .aspect-ratio-box {
             position: relative;
             width: 100%;
-            /* Cálculo 9/16 * 100 = 56.25% para mantener 16:9 */
-            padding-top: 56.25%; 
+            /* Cálculo 9/21 * 100 = 42.86% para mantener 21:9 */
+            padding-top: 42.86%; 
         }
 
-        /* Imagen de Fondo (16:9) */
+        /* Imagen de Fondo */
         .category-image {
             position: absolute;
             top: 0;
@@ -182,7 +182,6 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            /* La opacidad del texto se maneja con el overlay */
         }
 
         .category-overlay {
