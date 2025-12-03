@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Inter', sans-serif !important;
-            margin: 0 !important; 
+            margin: 0 !important;	
             padding: 0 !important;
             background-color: var(--color-dark) !important;
             color: #E0E0E0;
@@ -31,7 +31,7 @@
         #main-banner {
             position: relative;
             width: 100%;
-            margin-top: var(--promo-bar-height) !important; 
+            margin-top: var(--promo-bar-height) !important;	
             height: calc(100vh - var(--promo-bar-height));
             overflow: hidden;
             display: flex;
@@ -50,9 +50,9 @@
         }
 
         .banner-content {
-            position: relative; 
-            z-index: 3; 
-            color: white; 
+            position: relative;	
+            z-index: 3;	
+            color: white;	
             margin-top: 15vh;
             text-align: center;
         }
@@ -60,9 +60,9 @@
         /* ESTILOS DEL MENÚ DE HAMBURGUESA */
         #main-nav {
             position: fixed;
-            top: var(--promo-bar-height, 45px); 
-            left: 0; 
-            z-index: 999998; 
+            top: var(--promo-bar-height, 45px);	
+            left: 0;	
+            z-index: 999998;	
         }
 
         /* Estilos del ícono de hamburguesa */
@@ -74,16 +74,16 @@
             justify-content: space-around;
             width: 25px;
             height: 20px;
-            background-color: rgba(0, 0, 0, 0.6); 
-            border-radius: 0 0 5px 0; 
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
+            background-color: rgba(0, 0, 0, 0.6);	
+            border-radius: 0 0 5px 0;	
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
         }
 
         .line {
             display: block;
             width: 100%;
             height: 3px;
-            background-color: var(--color-gold); 
+            background-color: var(--color-gold);	
             transition: all 0.3s ease-in-out;
         }
 
@@ -93,18 +93,18 @@
             padding: 0;
             margin: 0;
             position: absolute;
-            top: 50px; 
-            left: 0; 
-            width: 250px; 
-            background-color: rgba(0, 0, 0, 0.95); 
-            border-top: 1px solid var(--color-gold); 
-            transform: translateX(-100%); 
+            top: 50px;	
+            left: 0;	
+            width: 250px;	
+            background-color: rgba(0, 0, 0, 0.95);	
+            border-top: 1px solid var(--color-gold);	
+            transform: translateX(-100%);	
             transition: transform 0.3s ease-in-out;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95); 
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95);	
         }
 
         .nav-menu.open {
-            transform: translateX(0); 
+            transform: translateX(0);	
         }
 
         .nav-menu li a {
@@ -117,18 +117,18 @@
         }
         .nav-menu li a:hover {
             background-color: #333;
-            color: var(--color-gold); 
+            color: var(--color-gold);	
         }
 
         /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS (ACTUALIZADO) --- */
-        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page { 
-            display: none; 
-            padding: 60px 20px; 
+        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {	
+            display: none;	
+            padding: 60px 20px;	
             min-height: calc(100vh - var(--promo-bar-height));
             background-color: var(--color-dark);
             color: #E0E0E0;
-            margin-top: var(--promo-bar-height); 
-            position: relative; 
+            margin-top: var(--promo-bar-height);	
+            position: relative;	
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
@@ -141,7 +141,7 @@
         }
 
         /* Botón "Volver al Inicio" con brillo */
-        .back-to-home-btn { 
+        .back-to-home-btn {	
             display: inline-block;
             padding: 10px 20px;
             text-decoration: none;
@@ -152,7 +152,7 @@
             font-weight: 700;
             text-transform: uppercase;
             transition: all 0.3s ease;
-            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4); 
+            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4);	
         }
 
         .back-to-home-btn:hover {
@@ -200,7 +200,7 @@
             display: block;
             margin-top: 15px;
             font-size: 1.2em;
-            color: #E0E0E0; 
+            color: #E0E0E0;	
         }
         
         .service-list em {
@@ -296,28 +296,28 @@
             document.getElementById('main-banner').classList.add('visible');
             
             // Referencias
-            const mainNav = document.getElementById('main-nav'); 
+            const mainNav = document.getElementById('main-nav');	
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
             const mainBanner = document.getElementById('main-banner');
             
             // Referencias de Enlaces (ACTUALIZADO)
-            const inicioLink = document.getElementById('inicio-link'); 
-            const quienesSomosLink = document.getElementById('quienes-somos-link'); 
-            const serviciosLink = document.getElementById('servicios-link'); 
-            const politicasLink = document.getElementById('politicas-link'); 
+            const inicioLink = document.getElementById('inicio-link');	
+            const quienesSomosLink = document.getElementById('quienes-somos-link');	
+            const serviciosLink = document.getElementById('servicios-link');	
+            const politicasLink = document.getElementById('politicas-link');	
             const contactoLink = document.getElementById('contacto-link'); // NUEVO
             
             // Referencias de Páginas (ACTUALIZADO)
             const quienesSomosPage = document.getElementById('quienes-somos-page');
-            const serviciosPage = document.getElementById('servicios-page'); 
-            const politicasPage = document.getElementById('politicas-page'); 
+            const serviciosPage = document.getElementById('servicios-page');	
+            const politicasPage = document.getElementById('politicas-page');	
             const contactoPage = document.getElementById('contacto-page'); // NUEVO
             
             // Referencias de Botones (ACTUALIZADO)
             const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
-            const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas'); 
+            const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas');	
             const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); // NUEVO
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
@@ -335,55 +335,55 @@
             // Lógica compartida para volver al banner principal
             function navigateToHome() {
                 hideAllSecondaryPages();
-                mainBanner.style.display = 'flex'; 
-                window.scrollTo(0, 0); 
+                mainBanner.style.display = 'flex';	
+                window.scrollTo(0, 0);	
             }
             
             // 3. Función para el enlace INICIO en el menú
             inicioLink.addEventListener('click', (e) => {
                 e.preventDefault();
-                navMenu.classList.remove('open'); 
+                navMenu.classList.remove('open');	
                 navigateToHome();
             });
 
             // 4. Lógica para la sección QUIÉNES SOMOS
             quienesSomosLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
+                e.preventDefault();	
+                navMenu.classList.remove('open');	
+                mainBanner.style.display = 'none';	
                 hideAllSecondaryPages();
-                quienesSomosPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
+                quienesSomosPage.style.display = 'block';	
+                window.scrollTo(0, 0);	
             });
 
             // 5. Lógica para la sección SERVICIOS
             serviciosLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
+                e.preventDefault();	
+                navMenu.classList.remove('open');	
+                mainBanner.style.display = 'none';	
                 hideAllSecondaryPages();
-                serviciosPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
+                serviciosPage.style.display = 'block';	
+                window.scrollTo(0, 0);	
             });
             
             // 6. Lógica para la sección POLÍTICAS
             politicasLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
+                e.preventDefault();	
+                navMenu.classList.remove('open');	
+                mainBanner.style.display = 'none';	
                 hideAllSecondaryPages();
-                politicasPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
+                politicasPage.style.display = 'block';	
+                window.scrollTo(0, 0);	
             });
             
             // 7. Lógica para la sección CONTACTO (NUEVO)
             contactoLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
+                e.preventDefault();	
+                navMenu.classList.remove('open');	
+                mainBanner.style.display = 'none';	
                 hideAllSecondaryPages();
-                contactoPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
+                contactoPage.style.display = 'block';	
+                window.scrollTo(0, 0);	
             });
 
 
@@ -393,12 +393,12 @@
                 navigateToHome();
             });
 
-            backToHomeBtnServicios.addEventListener('click', (e) => { 
+            backToHomeBtnServicios.addEventListener('click', (e) => {	
                 e.preventDefault();
                 navigateToHome();
             });
             
-            backToHomeBtnPoliticas.addEventListener('click', (e) => { 
+            backToHomeBtnPoliticas.addEventListener('click', (e) => {	
                 e.preventDefault();
                 navigateToHome();
             });
@@ -407,6 +407,17 @@
                 e.preventDefault();
                 navigateToHome();
             });
+
+            // 9. Lógica para cerrar el menú con la tecla ESC (NUEVO - ACCESIBILIDAD)
+            document.addEventListener('keydown', (event) => {
+                // Verifica si la tecla presionada es 'Escape' (código 27)
+                if (event.key === 'Escape' || event.keyCode === 27) {
+                    // Si el menú está abierto, lo cierra
+                    if (navMenu.classList.contains('open')) {
+                        navMenu.classList.remove('open');
+                    }
+                }
+            });
         });
     </script>
     
@@ -414,7 +425,7 @@
 <body>
     
     <div id="promo-bar" style="
-        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 45px !important; line-height: 45px !important; 
+        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 45px !important; line-height: 45px !important;	
         background-color: rgba(0, 0, 0, 0.95) !important; z-index: 999999 !important; overflow: hidden !important;
         white-space: nowrap !important; font-size: 16px !important;
     ">
@@ -436,9 +447,9 @@
         
         <ul class="nav-menu" id="nav-menu-list">
             <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li>
-            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
+            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li>	
             <li><a href="#" id="servicios-link">SERVICIOS</a></li>
-            <li><a href="#" id="politicas-link">POLITICAS</a></li> 
+            <li><a href="#" id="politicas-link">POLITICAS</a></li>	
             <li><a href="#" id="contacto-link">CONTACTO</a></li> </ul>
     </nav>
 
@@ -455,7 +466,7 @@
     
     <section id="quienes-somos-page">
         <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a> 
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a>	
         </div>
 
         <div class="page-content">
@@ -479,12 +490,12 @@
             <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios">
             <p>Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.</p>
             <div class="service-list">
-                <strong>PAGO CONTRA ENTREGA:</strong> 
+                <strong>PAGO CONTRA ENTREGA:</strong>	
                 <p>Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
                     <br><em>*El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad de las transportadoras.</em></p>
-                <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong> 
+                <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong>	
                 <p>Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento. Obtenga tiempo de entrega preferencial y recompensas exclusivas.</p>
-                <strong>Logística y Envíos Nacionales:</strong> 
+                <strong>Logística y Envíos Nacionales:</strong>	
                 <p>Envío Gratuito para órdenes que superen los <strong>$80.000</strong>. Tiempo de entrega estándar: 3-5 días hábiles.</p>
                 <p>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</p>
                 <p><strong style="color: #E0E0E0;">Recomendación:</strong> Confirme su cobertura antes de realizar la compra.</p>
