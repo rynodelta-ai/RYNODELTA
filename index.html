@@ -1,724 +1,729 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
-    <style>
-        /* CRÍTICO: Variables para el cuerpo */
-        :root {
-            --color-dark: #000;
-            --color-gold: #C5A67C; /* Variable añadida para el color dorado */
-            --promo-bar-height: 45px; /* TAMAÑO FORZADO PARA LEGIBILIDAD EN PC */
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RYNO DELTA - Equipo Táctico y Supervivencia</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CRÍTICO: Variables para el cuerpo */
+        :root {
+            --color-dark: #000;
+            --color-gold: #C5A67C; /* Variable añadida para el color dorado */
+            --promo-bar-height: 45px; /* TAMAÑO FORZADO PARA LEGIBILIDAD EN PC */
+        }
 
-        body {
-            font-family: 'Inter', sans-serif !important;
-            margin: 0 !important; 
-            padding: 0 !important;
-            background-color: var(--color-dark) !important;
-            color: #E0E0E0;
-            line-height: 1.6;
-            transition: overflow 0.3s; 
-        }
-        
-        /* SOLUCIÓN 3: Esta clase solo debe aplicarse cuando se abre un sidebar */
-        .no-scroll {
-            overflow: hidden !important;
-        }
+        body {
+            font-family: 'Inter', sans-serif !important;
+            margin: 0 !important; 
+            padding: 0 !important;
+            background-color: var(--color-dark) !important;
+            color: #E0E0E0;
+            line-height: 1.6;
+            transition: overflow 0.3s; 
+        }
+        
+        /* SOLUCIÓN 3: Esta clase solo debe aplicarse cuando se abre un sidebar */
+        .no-scroll {
+            overflow: hidden !important;
+        }
 
-        html { 
-            margin: 0 !important; 
-            padding: 0 !important; 
-            overflow-x: hidden !important; 
-        }
-        
-        /* BANNER PRINCIPAL (Video de fondo) */
-        #main-banner {
-            position: relative;
-            width: 100%;
-            margin-top: var(--promo-bar-height) !important; 
-            height: calc(100vh - var(--promo-bar-height));
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0;
-        }
+        html { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            overflow-x: hidden !important; 
+        }
+        
+        /* BANNER PRINCIPAL (Video de fondo) */
+        #main-banner {
+            position: relative;
+            width: 100%;
+            margin-top: var(--promo-bar-height) !important; 
+            height: calc(100vh - var(--promo-bar-height));
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+        }
 
-        .banner-video {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
-        }
+        .banner-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
+        }
 
-        .video-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2;
-        }
+        .video-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2;
+        }
 
-        .banner-content {
-            position: relative; 
-            z-index: 3; 
-            color: white; 
-            margin-top: 15vh;
-            text-align: center;
-        }
-        
-        /* ESTILOS DEL MENÚ DE HAMBURGUESA */
-        #main-nav {
-            position: fixed;
-            top: var(--promo-bar-height, 45px); 
-            left: 0; 
-            z-index: 999998; 
-        }
+        .banner-content {
+            position: relative; 
+            z-index: 3; 
+            color: white; 
+            margin-top: 15vh;
+            text-align: center;
+        }
+        
+        /* ESTILOS DEL MENÚ DE HAMBURGUESA */
+        #main-nav {
+            position: fixed;
+            top: var(--promo-bar-height, 45px); 
+            left: 0; 
+            z-index: 999998; 
+        }
 
-        /* Estilos del ícono de hamburguesa */
-        .hamburger {
-            padding: 15px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 25px;
-            height: 20px;
-            background-color: rgba(0, 0, 0, 0.6); 
-            border-radius: 0 0 5px 0; 
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
-        }
+        /* Estilos del ícono de hamburguesa */
+        .hamburger {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 25px;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-radius: 0 0 5px 0; 
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
+        }
 
-        .line {
-            display: block;
-            width: 100%;
-            height: 3px;
-            background-color: var(--color-gold); 
-            transition: all 0.3s ease-in-out;
-        }
+        .line {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-gold); 
+            transition: all 0.3s ease-in-out;
+        }
 
-        /* Estilos del menú desplegable */
-        .nav-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            position: absolute;
-            top: 50px; 
-            left: 0; 
-            width: 250px; 
-            background-color: rgba(0, 0, 0, 0.95); 
-            border-top: 1px solid var(--color-gold); 
-            transform: translateX(-100%); 
-            transition: transform 0.3s ease-in-out;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95); 
-            max-height: calc(100vh - 50px - var(--promo-bar-height)); 
-            overflow-y: auto;
-        }
+        /* Estilos del menú desplegable */
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 50px; 
+            left: 0; 
+            width: 250px; 
+            background-color: rgba(0, 0, 0, 0.95); 
+            border-top: 1px solid var(--color-gold); 
+            transform: translateX(-100%); 
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95); 
+            max-height: calc(100vh - 50px - var(--promo-bar-height)); 
+            overflow-y: auto;
+        }
 
-        .nav-menu.open {
-            transform: translateX(0); 
-        }
+        .nav-menu.open {
+            transform: translateX(0); 
+        }
 
-        .nav-menu li a {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #E0E0E0;
-            font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .nav-menu li a:hover {
-            background-color: #333;
-            color: var(--color-gold); 
-        }
+        .nav-menu li a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #E0E0E0;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-menu li a:hover {
+            background-color: #333;
+            color: var(--color-gold); 
+        }
 
-        /* ESTILOS DEL ÍCONO DEL CARRITO */
-        #cart-icon-container {
-            position: fixed;
-            top: var(--promo-bar-height, 45px); 
-            right: 0; 
-            z-index: 999998; 
-            padding: 15px;
-            cursor: pointer;
-            width: 25px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.6); 
-            border-radius: 0 0 0 5px; 
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
-            color: var(--color-gold);
-            font-size: 1.5em; 
-            line-height: 1;
-        }
-        
-        #cart-icon-container:hover {
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); 
-        }
+        /* ESTILOS DEL ÍCONO DEL CARRITO */
+        #cart-icon-container {
+            position: fixed;
+            top: var(--promo-bar-height, 45px); 
+            right: 0; 
+            z-index: 999998; 
+            padding: 15px;
+            cursor: pointer;
+            width: 25px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-radius: 0 0 0 5px; 
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
+            color: var(--color-gold);
+            font-size: 1.5em; 
+            line-height: 1;
+        }
+        
+        #cart-icon-container:hover {
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); 
+        }
 
-        #cart-count {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: #D9534F; 
-            color: white;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.7em;
-            font-weight: 700;
-            line-height: 1;
-        }
+        #cart-count {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #D9534F; 
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7em;
+            font-weight: 700;
+            line-height: 1;
+        }
 
-        /* Estilos para el Sidebar del Carrito */
-        #cart-sidebar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            /* SOLUCIÓN 2: Usar 100vh para que ocupe todo el espacio visible */
-            height: 100vh; 
-            width: 280px; 
-            max-width: 90%; 
-            background-color: rgba(0, 0, 0, 0.98); 
-            z-index: 1000000; 
-            transform: translateX(100%); 
-            transition: transform 0.3s ease-in-out;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.7);
-            padding-top: var(--promo-bar-height); 
-            color: #E0E0E0;
-            display: flex;
-            flex-direction: column; 
-        }
+        /* Estilos para el Sidebar del Carrito */
+        #cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            /* **SOLUCIÓN A CORTE 1:** Ocupa el 100% de la altura de la ventana */
+            height: 100vh; 
+            width: 280px; 
+            max-width: 90%; 
+            background-color: rgba(0, 0, 0, 0.98); 
+            z-index: 1000000; 
+            transform: translateX(100%); 
+            transition: transform 0.3s ease-in-out;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.7);
+            /* Se eliminó el padding-top (la promo bar está fija) */
+            color: #E0E0E0;
+            /* **SOLUCIÓN A CORTE 2:** Habilita Flexbox para distribuir elementos */
+            display: flex;
+            flex-direction: column; 
+        }
 
-        #cart-sidebar.open {
-            transform: translateX(0); 
-        }
-        
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--color-gold);
-            flex-shrink: 0; 
-        }
+        #cart-sidebar.open {
+            transform: translateX(0); 
+        }
+        
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--color-gold);
+            flex-shrink: 0; /* Asegura que no se encoja */
+            /* Añadido top para no chocar con promo-bar, pero es mejor que esté en el sidebar-content */
+            margin-top: var(--promo-bar-height); /* Desplaza la cabecera por debajo de la promo bar */
+        }
 
-        .sidebar-header h3 {
-            margin: 0;
-            color: var(--color-gold);
-            font-size: 1.5em;
-        }
+        .sidebar-header h3 {
+            margin: 0;
+            color: var(--color-gold);
+            font-size: 1.5em;
+        }
 
-        .close-btn {
-            background: none;
-            border: none;
-            color: #E0E0E0;
-            font-size: 1.5em;
-            cursor: pointer;
-            padding: 5px;
-            transition: color 0.3s;
-        }
-        .close-btn:hover {
-            color: #D9534F; 
-        }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #E0E0E0;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+        .close-btn:hover {
+            color: #D9534F; 
+        }
 
-        .sidebar-content {
-            flex-grow: 1; 
-            padding: 20px;
-            overflow-y: auto; /* Permite el scroll solo en el contenido de la lista */
-            font-style: italic;
-        }
+        .sidebar-content {
+            flex-grow: 1; 
+            padding: 20px;
+            /* **SOLUCIÓN A CORTE 3:** El contenido variable es el que debe tener scroll */
+            overflow-y: auto; 
+            font-style: italic;
+        }
 
-        .sidebar-footer {
-            padding: 15px 20px;
-            border-top: 1px solid var(--color-gold);
-            text-align: center;
-            flex-shrink: 0; /* Asegura que el footer no se reduzca y quede visible */
-        }
-        
-        .sidebar-footer h4 {
-            margin: 5px 0 15px 0;
-            color: var(--color-gold);
-        }
+        .sidebar-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--color-gold);
+            text-align: center;
+            flex-shrink: 0; /* Asegura que el footer no se reduzca y quede visible */
+        }
+        
+        .sidebar-footer h4 {
+            margin: 5px 0 15px 0;
+            color: var(--color-gold);
+        }
 
-        .checkout-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--color-gold);
-            color: var(--color-dark);
-            border: none;
-            border-radius: 5px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .checkout-btn:hover {
-            background-color: #E0E0E0;
-        }
-
-
-        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
-        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page { 
-            display: none; 
-            padding: 60px 20px; 
-            /* Se corrigió el min-height para que el footer no se corte */
-            min-height: calc(100vh - var(--promo-bar-height) - 100px); 
-            background-color: var(--color-dark);
-            color: #E0E0E0;
-            margin-top: var(--promo-bar-height); 
-            position: relative; 
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Contenedor del Botón */
-        .back-button-container {
-            padding-bottom: 40px;
-            text-align: center;
-        }
-
-        /* Botón "Volver al Inicio" con brillo */
-        .back-to-home-btn { 
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: var(--color-gold);
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--color-gold);
-            border-radius: 5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4); 
-        }
-
-        .back-to-home-btn:hover {
-            background-color: rgba(197, 166, 124, 0.1);
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
-        }
-
-        /* Estilos de Contenido (Genéricos) */
-        .page-content img {
-            display: block;
-            margin: 0 auto 30px auto;
-            max-width: 200px;
-            height: auto;
-            border: 1px solid var(--color-gold);
-            padding: 5px;
-        }
-
-        .page-content h3 {
-            color: var(--color-gold);
-            font-weight: 900;
-            text-transform: uppercase;
-            text-align: center;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .page-content p {
-            text-align: justify;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            line-height: 1.8;
-        }
-
-        .page-content strong {
-            color: var(--color-gold);
-        }
-
-        /* Estilos específicos para contenido de servicios */
-        .service-list {
-            margin-top: 25px;
-            padding-left: 20px;
-        }
-
-        .service-list strong {
-            display: block;
-            margin-top: 15px;
-            font-size: 1.2em;
-            color: #E0E0E0; 
-        }
-        
-        .service-list em {
-            color: var(--color-gold);
-            font-style: normal;
-        }
-
-        /* Estilos específicos para contenido de políticas */
-        .policy-section {
-            margin-top: 30px;
-            padding-bottom: 20px;
-            border-top: 1px solid rgba(197, 166, 124, 0.2);
-            padding-top: 15px;
-        }
-        
-        .policy-section h4 {
-            color: var(--color-gold);
-            font-weight: 700;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        
-        .policy-list {
-            list-style: disc;
-            margin-left: 20px;
-            padding-left: 0;
-        }
-        
-        /* Estilos para Botones de Contacto */
-        .contact-button {
-            display: block;
-            text-align: center;
-            padding: 15px 10px;
-            margin: 20px auto;
-            max-width: 400px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(197, 166, 124, 0.5); 
-        }
-        
-        .whatsapp-button {
-            color: #fff;
-            background-color: #25D366;
-            border: 1px solid #128C7E;
-        }
-        .whatsapp-button:hover {
-            background-color: #128C7E;
-            box-shadow: 0 0 15px 3px rgba(37, 211, 102, 0.8); 
-        }
-
-        .email-button {
-            color: var(--color-gold);
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--color-gold);
-        }
-        .email-button:hover {
-            background-color: rgba(197, 166, 124, 0.1);
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); 
-        }
-
-        /* Estilos del Footer */
-        footer {
-            padding: 15px 20px;
-            text-align: center;
-            background-color: var(--color-dark);
-        }
+        .checkout-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--color-gold);
+            color: var(--color-dark);
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .checkout-btn:hover {
+            background-color: #E0E0E0;
+        }
 
 
-        /* Ajuste Móvil */
-        @media (max-width: 768px) {
-            #main-banner { margin-top: var(--promo-bar-height) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
-            .banner-video { position: relative; width: 100%; object-fit: contain; }
-            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
-            
-            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {
-                padding: 40px 15px;
-            }
-            .page-content h3 {
-                font-size: 1.5em;
-            }
-            .policy-section h4 {
-                font-size: 1.3em;
-            }
-        }
-    </style>
-    
-    <script>
-        // Función para ocultar todas las páginas secundarias
-        function hideAllSecondaryPages() {
-            document.getElementById('quienes-somos-page').style.display = 'none';
-            document.getElementById('servicios-page').style.display = 'none';
-            document.getElementById('politicas-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none'; 
-        }
-        
-        // SOLUCIÓN 3: Función revisada para bloquear/desbloquear el scroll del body
-        function toggleBodyScroll(lock) {
-            const body = document.body;
-            const navMenuIsOpen = document.getElementById('nav-menu-list').classList.contains('open');
-            const cartSidebarIsOpen = document.getElementById('cart-sidebar').classList.contains('open');
+        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
+        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page { 
+            display: none; 
+            padding: 60px 20px; 
+            /* Se corrigió el min-height para que el footer no se corte */
+            min-height: calc(100vh - var(--promo-bar-height) - 100px); 
+            background-color: var(--color-dark);
+            color: #E0E0E0;
+            margin-top: var(--promo-bar-height); 
+            position: relative; 
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-            if (lock) {
-                // Bloquea el scroll si se abre el carrito O el menú
-                body.classList.add('no-scroll');
-            } else {
-                // Desbloquea el scroll SOLO si ambos (carrito Y menú) están cerrados
-                if (!navMenuIsOpen && !cartSidebarIsOpen) {
-                     body.classList.remove('no-scroll');
-                }
-            }
-        }
+        /* Contenedor del Botón */
+        .back-button-container {
+            padding-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Botón "Volver al Inicio" con brillo */
+        .back-to-home-btn { 
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--color-gold);
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-gold);
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4); 
+        }
+
+        .back-to-home-btn:hover {
+            background-color: rgba(197, 166, 124, 0.1);
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
+        }
+
+        /* Estilos de Contenido (Genéricos) */
+        .page-content img {
+            display: block;
+            margin: 0 auto 30px auto;
+            max-width: 200px;
+            height: auto;
+            border: 1px solid var(--color-gold);
+            padding: 5px;
+        }
+
+        .page-content h3 {
+            color: var(--color-gold);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .page-content p {
+            text-align: justify;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .page-content strong {
+            color: var(--color-gold);
+        }
+
+        /* Estilos específicos para contenido de servicios */
+        .service-list {
+            margin-top: 25px;
+            padding-left: 20px;
+        }
+
+        .service-list strong {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #E0E0E0; 
+        }
+        
+        .service-list em {
+            color: var(--color-gold);
+            font-style: normal;
+        }
+
+        /* Estilos específicos para contenido de políticas */
+        .policy-section {
+            margin-top: 30px;
+            padding-bottom: 20px;
+            border-top: 1px solid rgba(197, 166, 124, 0.2);
+            padding-top: 15px;
+        }
+        
+        .policy-section h4 {
+            color: var(--color-gold);
+            font-weight: 700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .policy-list {
+            list-style: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        
+        /* Estilos para Botones de Contacto */
+        .contact-button {
+            display: block;
+            text-align: center;
+            padding: 15px 10px;
+            margin: 20px auto;
+            max-width: 400px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.5); 
+        }
+        
+        .whatsapp-button {
+            color: #fff;
+            background-color: #25D366;
+            border: 1px solid #128C7E;
+        }
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            box-shadow: 0 0 15px 3px rgba(37, 211, 102, 0.8); 
+        }
+
+        .email-button {
+            color: var(--color-gold);
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-gold);
+        }
+        .email-button:hover {
+            background-color: rgba(197, 166, 124, 0.1);
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); 
+        }
+
+        /* Estilos del Footer */
+        footer {
+            padding: 15px 20px;
+            text-align: center;
+            background-color: var(--color-dark);
+        }
 
 
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('main-banner').classList.add('visible');
-            
-            // Referencias de Navegación
-            const mainNav = document.getElementById('main-nav'); 
-            const hamburger = document.getElementById('hamburger-icon');
-            const navMenu = document.getElementById('nav-menu-list');
-            const mainBanner = document.getElementById('main-banner');
-            
-            // Referencias de Enlaces y Páginas 
-            const allLinks = document.querySelectorAll('.nav-menu a');
-            
-            // Referencia del Carrito y Sidebar
-            const cartIcon = document.getElementById('cart-icon-container');
-            const cartSidebar = document.getElementById('cart-sidebar'); 
-            const closeCartBtn = document.getElementById('close-cart-btn'); 
+        /* Ajuste Móvil */
+        @media (max-width: 768px) {
+            #main-banner { margin-top: var(--promo-bar-height) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
+            .banner-video { position: relative; width: 100%; object-fit: contain; }
+            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
+            
+            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {
+                padding: 40px 15px;
+            }
+            .page-content h3 {
+                font-size: 1.5em;
+            }
+            .policy-section h4 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+    
+    <script>
+        // Función para ocultar todas las páginas secundarias
+        function hideAllSecondaryPages() {
+            document.getElementById('quienes-somos-page').style.display = 'none';
+            document.getElementById('servicios-page').style.display = 'none';
+            document.getElementById('politicas-page').style.display = 'none';
+            document.getElementById('contacto-page').style.display = 'none'; 
+        }
+        
+        // SOLUCIÓN 3: Función revisada para bloquear/desbloquear el scroll del body
+        function toggleBodyScroll(lock) {
+            const body = document.body;
+            const navMenuIsOpen = document.getElementById('nav-menu-list').classList.contains('open');
+            const cartSidebarIsOpen = document.getElementById('cart-sidebar').classList.contains('open');
 
-            // Lógica compartida para volver al banner principal
-            function navigateToHome() {
-                hideAllSecondaryPages();
-                mainBanner.style.display = 'flex'; 
-                window.scrollTo(0, 0); 
-                toggleBodyScroll(false); 
-            }
-            
-            // FUNCIÓN: Abre/Cierra el Sidebar del Carrito
-            function toggleCartSidebar() {
-                cartSidebar.classList.toggle('open');
-                
-                if (cartSidebar.classList.contains('open')) {
-                    navMenu.classList.remove('open');
-                    toggleBodyScroll(true); // Bloquea el scroll
-                } else {
-                    toggleBodyScroll(false); // Desbloquea el scroll
-                }
-            }
-            
-            // FUNCIÓN: Abre/Cierra el Menú Hamburguesa
-            function toggleMenu() {
-                navMenu.classList.toggle('open');
-                
-                if (navMenu.classList.contains('open')) {
-                    cartSidebar.classList.remove('open');
-                    toggleBodyScroll(true); // Bloquea el scroll
-                } else {
-                    toggleBodyScroll(false); // Desbloquea el scroll
-                }
-            }
+            if (lock) {
+                // Bloquea el scroll si se abre el carrito O el menú
+                body.classList.add('no-scroll');
+            } else {
+                // Desbloquea el scroll SOLO si ambos (carrito Y menú) están cerrados
+                if (!navMenuIsOpen && !cartSidebarIsOpen) {
+                     body.classList.remove('no-scroll');
+                }
+            }
+        }
 
 
-            // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
-            hamburger.addEventListener('click', toggleMenu);
-            
-            // 3. Lógica para Abrir/Cerrar el Sidebar del Carrito
-            cartIcon.addEventListener('click', toggleCartSidebar); 
-            closeCartBtn.addEventListener('click', toggleCartSidebar); 
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('main-banner').classList.add('visible');
+            
+            // Referencias de Navegación
+            const mainNav = document.getElementById('main-nav'); 
+            const hamburger = document.getElementById('hamburger-icon');
+            const navMenu = document.getElementById('nav-menu-list');
+            const mainBanner = document.getElementById('main-banner');
+            
+            // Referencias de Enlaces y Páginas 
+            const allLinks = document.querySelectorAll('.nav-menu a');
+            
+            // Referencia del Carrito y Sidebar
+            const cartIcon = document.getElementById('cart-icon-container');
+            const cartSidebar = document.getElementById('cart-sidebar'); 
+            const closeCartBtn = document.getElementById('close-cart-btn'); 
 
-            // 4. Lógica de Navegación (Enlaces)
-            allLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // Cierra menú y desbloquea scroll
-                    navMenu.classList.remove('open');
-                    toggleBodyScroll(false); 
-                    
-                    const targetId = link.id.split('-')[0]; // inicio, quienes, servicios, etc.
+            // Lógica compartida para volver al banner principal
+            function navigateToHome() {
+                hideAllSecondaryPages();
+                mainBanner.style.display = 'flex'; 
+                window.scrollTo(0, 0); 
+                toggleBodyScroll(false); 
+            }
+            
+            // FUNCIÓN: Abre/Cierra el Sidebar del Carrito
+            function toggleCartSidebar() {
+                cartSidebar.classList.toggle('open');
+                
+                if (cartSidebar.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                    toggleBodyScroll(true); // Bloquea el scroll
+                } else {
+                    toggleBodyScroll(false); // Desbloquea el scroll
+                }
+            }
+            
+            // FUNCIÓN: Abre/Cierra el Menú Hamburguesa
+            function toggleMenu() {
+                navMenu.classList.toggle('open');
+                
+                if (navMenu.classList.contains('open')) {
+                    cartSidebar.classList.remove('open');
+                    toggleBodyScroll(true); // Bloquea el scroll
+                } else {
+                    toggleBodyScroll(false); // Desbloquea el scroll
+                }
+            }
 
-                    mainBanner.style.display = 'none'; 
-                    hideAllSecondaryPages();
-                    window.scrollTo(0, 0); 
-                    
-                    if (targetId === 'inicio') {
-                        navigateToHome();
-                    } else {
-                        // Aquí se muestran las páginas secundarias
-                        document.getElementById(`${targetId}-page`).style.display = 'block'; 
-                    }
-                });
-            });
+
+            // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
+            hamburger.addEventListener('click', toggleMenu);
+            
+            // 3. Lógica para Abrir/Cerrar el Sidebar del Carrito
+            cartIcon.addEventListener('click', toggleCartSidebar); 
+            closeCartBtn.addEventListener('click', toggleCartSidebar); 
+
+            // 4. Lógica de Navegación (Enlaces)
+            allLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Cierra menú y desbloquea scroll
+                    navMenu.classList.remove('open');
+                    toggleBodyScroll(false); 
+                    
+                    const targetId = link.id.split('-')[0]; // inicio, quienes, servicios, etc.
+
+                    mainBanner.style.display = 'none'; 
+                    hideAllSecondaryPages();
+                    window.scrollTo(0, 0); 
+                    
+                    if (targetId === 'inicio') {
+                        navigateToHome();
+                    } else {
+                        // Aquí se muestran las páginas secundarias
+                        // **CORRECCIÓN 1: Se asegura que el ID sea correcto (quienes-somos-page)**
+                        document.getElementById(`${targetId}-page`).style.display = 'block'; 
+                    }
+                });
+            });
 
 
-            // 5. Lógica para Volver al inicio (Botones)
-            document.querySelectorAll('.back-to-home-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    navigateToHome();
-                });
-            });
-            
-            // Lógica Inicial: Cuando la página carga, el scroll debe estar desbloqueado
-            toggleBodyScroll(false);
+            // 5. Lógica para Volver al inicio (Botones)
+            document.querySelectorAll('.back-to-home-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateToHome();
+                });
+            });
+            
+            // Lógica Inicial: Cuando la página carga, el scroll debe estar desbloqueado
+            toggleBodyScroll(false);
 
-        });
-    </script>
-    
+        });
+    </script>
+    
 </head>
 <body>
-    
-    <div id="promo-bar" style="
-        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 45px !important; line-height: 45px !important; 
-        background-color: rgba(0, 0, 0, 0.95) !important; z-index: 999999 !important; overflow: hidden !important;
-        white-space: nowrap !important; font-size: 16px !important;
-    ">
-        <marquee behavior="scroll" direction="left" scrollamount="4" loop="infinite"
-            style="width: 100%; height: 45px; line-height: 45px !important; color: #C5A67C !important; white-space: nowrap !important; display: inline-block !important;"
-        >
-            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
-        </marquee>
-    </div>
-    
-    <nav id="main-nav">
-        <div class="hamburger" id="hamburger-icon">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
-        </div>
-        
-        <ul class="nav-menu" id="nav-menu-list">
-            <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li>
-            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
-            <li><a href="#" id="servicios-link">SERVICIOS</a></li>
-            <li><a href="#" id="politicas-link">POLITICAS</a></li> 
-            <li><a href="#" id="contacto-link">CONTACTO</a></li> 
-        </ul>
-    </nav>
-    
-    <div id="cart-icon-container">
-        🛒
-        <span id="cart-count">0</span>
-    </div>
+    
+    <div id="promo-bar" style="
+        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 45px !important; line-height: 45px !important; 
+        background-color: rgba(0, 0, 0, 0.95) !important; z-index: 999999 !important; overflow: hidden !important;
+        white-space: nowrap !important; font-size: 16px !important;
+    ">
+        <marquee behavior="scroll" direction="left" scrollamount="4" loop="infinite"
+            style="width: 100%; height: 45px; line-height: 45px !important; color: #C5A67C !important; white-space: nowrap !important; display: inline-block !important;"
+        >
+            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
+        </marquee>
+    </div>
+    
+    <nav id="main-nav">
+        <div class="hamburger" id="hamburger-icon">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </div>
+        
+        <ul class="nav-menu" id="nav-menu-list">
+            <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li>
+            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
+            <li><a href="#" id="servicios-link">SERVICIOS</a></li>
+            <li><a href="#" id="politicas-link">POLITICAS</a></li> 
+            <li><a href="#" id="contacto-link">CONTACTO</a></li> 
+        </ul>
+    </nav>
+    
+    <div id="cart-icon-container">
+        🛒
+        <span id="cart-count">0</span>
+    </div>
 
-    <div id="cart-sidebar">
-        <div class="sidebar-header">
-            <h3>🛒 Mi Carrito</h3>
-            <button id="close-cart-btn" class="close-btn">X</button>
-        </div>
-        <div class="sidebar-content">
-            <p>El carrito está vacío. ¡Empieza a comprar!</p>
-        </div>
-        <div class="sidebar-footer">
-            <h4>Total: $0.00</h4>
-            <button class="checkout-btn">Finalizar Compra</button>
-        </div>
-    </div>
-
-
-    <section id="main-banner" class="visible" style="background-color: #000;">
-        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
-            <source src="VIDEO1.mp4" type="video/mp4">
-            Tu navegador no soporta videos en HTML5.
-        </video>
-
-        <div class="video-overlay"></div>
-        <div class="banner-content">
-            </div>
-    </section>
-    
-    <section id="quienes-somos-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a> 
-        </div>
-
-        <div class="page-content">
-            <h3>QUIÉNES SOMOS</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA">
-            <p>"RYNO DELTA" es la empresa confiable de equipo táctico y de supervivencia. Con más de 14 años de experiencia, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo y equipo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.</p>
-            <p>Nuestro catálogo está curado para profesionales, operadores y entusiastas de la supervivencia.</p>
-            <p style="text-align: center; margin-top: 40px;">
-                <strong>Equipamos tu confianza en cada despliegue.</strong>
-            </p>
-        </div>
-    </section>
-
-    <section id="servicios-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-servicios">VOLVER AL INICIO</a>
-        </div>
-
-        <div class="page-content">
-            <h3>NUESTROS SERVICIOS</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios">
-            <p>Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.</p>
-            <div class="service-list">
-                <strong>PAGO CONTRA ENTREGA:</strong> 
-                <p>Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
-                    <br><em>*El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad de las transportadoras.</em></p>
-                <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong> 
-                <p>Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento. Obtenga tiempo de entrega preferencial y recompensas exclusivas.</p>
-                <strong>Logística y Envíos Nacionales:</strong> 
-                <p>Envío Gratuito para órdenes que superen los <strong>$80.000</strong>. Tiempo de entrega estándar: 3-5 días hábiles.</p>
-                <p>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</p>
-                <p><strong style="color: #E0E0E0;">Recomendación:</strong> Confirme su cobertura antes de realizar la compra.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="politicas-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-politicas">VOLVER AL INICIO</a>
-        </div>
-
-        <div class="page-content">
-            <h3>POLÍTICAS</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Políticas">
-
-            <div class="policy-section">
-                <h4>LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h4>
-                <p>
-                    En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
-                </p>
-                <ul class="policy-list">
-                    <li>Procesamiento y envío de pedidos.</li>
-                    <li>Gestión de pagos y emisión de facturas.</li>
-                    <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
-                    <li>Mejora de nuestros servicios y la experiencia de compra.</li>
-                </ul>
-                <p>Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.</p>
-            </div>
-
-            <div class="policy-section">
-                <h4>POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h4>
-                <p>
-                    Todos nuestros productos cuentan con una garantía SEGÚN EL PRODUCTO a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
-                </p>
-                <ul class="policy-list">
-                    <li>Daños causados por mal uso o abuso, accidentes o desgaste normal.</li>
-                    <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
-                    <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
-                </ul>
-                <p>
-                    Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a 5 días hábiles desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
-                </p>
-                <p>
-                    Recuerda que según la norma colombiana es el cliente quien debe cubrir los gastos de fletes cuando de garantías o devoluciones se trata.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contacto-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-contacto">VOLVER AL INICIO</a> 
-        </div>
-
-        <div class="page-content">
-            <h3>CONTACTO</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Contacto">
-            
-            <a href="http://wa.me/573148172002" target="_blank" class="contact-button whatsapp-button">
-                WHATSAPP (314 817 2002)
-            </a>
-            
-            <a href="mailto:RYNODELTA@GMAIL.COM" class="contact-button email-button">
-                CORREO ELECTRÓNICO (RYNODELTA@GMAIL.COM)
-            </a>
-        </div>
-    </section>
+    <div id="cart-sidebar">
+        <div class="sidebar-header">
+            <h3>🛒 Mi Carrito</h3>
+            <button id="close-cart-btn" class="close-btn">X</button>
+        </div>
+        <div class="sidebar-content">
+            <p>El carrito está vacío. ¡Empieza a comprar!</p>
+        </div>
+        <div class="sidebar-footer">
+            <h4>Total: $0.00</h4>
+            <button class="checkout-btn">Finalizar Compra</button>
+        </div>
+    </div>
 
 
-    <footer>
-        <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
-    </footer>
+    <section id="main-banner" class="visible" style="background-color: #000;">
+        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+            <source src="VIDEO1.mp4" type="video/mp4">
+            Tu navegador no soporta videos en HTML5.
+        </video>
+
+        <div class="video-overlay"></div>
+        <div class="banner-content">
+            </div>
+    </section>
+    
+    <section id="quienes-somos-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a> 
+        </div>
+
+        <div class="page-content">
+            <h3>QUIÉNES SOMOS</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA">
+            <p>"RYNO DELTA" es la empresa confiable de equipo táctico y de supervivencia. Con más de 14 años de experiencia, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo y equipo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.</p>
+            <p>Nuestro catálogo está curado para profesionales, operadores y entusiastas de la supervivencia.</p>
+            <p style="text-align: center; margin-top: 40px;">
+                <strong>Equipamos tu confianza en cada despliegue.</strong>
+            </p>
+        </div>
+    </section>
+
+    <section id="servicios-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-servicios">VOLVER AL INICIO</a>
+        </div>
+
+        <div class="page-content">
+            <h3>NUESTROS SERVICIOS</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios">
+            <p>Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.</p>
+            <div class="service-list">
+                <strong>PAGO CONTRA ENTREGA:</strong> 
+                <p>Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
+                    <br><em>*El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad de las transportadoras.</em></p>
+                <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong> 
+                <p>Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento. Obtenga tiempo de entrega preferencial y recompensas exclusivas.</p>
+                <strong>Logística y Envíos Nacionales:</strong> 
+                <p>Envío Gratuito para órdenes que superen los <strong>$80.000</strong>. Tiempo de entrega estándar: 3-5 días hábiles.</p>
+                <p>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</p>
+                <p><strong style="color: #E0E0E0;">Recomendación:</strong> Confirme su cobertura antes de realizar la compra.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="politicas-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-politicas">VOLVER AL INICIO</a>
+        </div>
+
+        <div class="page-content">
+            <h3>POLÍTICAS</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Políticas">
+
+            <div class="policy-section">
+                <h4>LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h4>
+                <p>
+                    En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
+                </p>
+                <ul class="policy-list">
+                    <li>Procesamiento y envío de pedidos.</li>
+                    <li>Gestión de pagos y emisión de facturas.</li>
+                    <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
+                    <li>Mejora de nuestros servicios y la experiencia de compra.</li>
+                </ul>
+                <p>Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.</p>
+            </div>
+
+            <div class="policy-section">
+                <h4>POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h4>
+                <p>
+                    Todos nuestros productos cuentan con una garantía SEGÚN EL PRODUCTO a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
+                </p>
+                <ul class="policy-list">
+                    <li>Daños causados por mal uso o abuso, accidentes o desgaste normal.</li>
+                    <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
+                    <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
+                </ul>
+                <p>
+                    Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a 5 días hábiles desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
+                </p>
+                <p>
+                    Recuerda que según la norma colombiana es el cliente quien debe cubrir los gastos de fletes cuando de garantías o devoluciones se trata.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-contacto">VOLVER AL INICIO</a> 
+        </div>
+
+        <div class="page-content">
+            <h3>CONTACTO</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Contacto">
+            
+            <a href="http://wa.me/573148172002" target="_blank" class="contact-button whatsapp-button">
+                WHATSAPP (314 817 2002)
+            </a>
+            
+            <a href="mailto:RYNODELTA@GMAIL.COM" class="contact-button email-button">
+                CORREO ELECTRÓNICO (RYNODELTA@GMAIL.COM)
+            </a>
+        </div>
+    </section>
+
+
+    <footer>
+        <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
 </html>
