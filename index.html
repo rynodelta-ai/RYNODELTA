@@ -120,7 +120,7 @@
             color: var(--color-gold);	
         }
 
-        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS (ACTUALIZADO) --- */
+        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
         #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {	
             display: none;	
             padding: 60px 20px;	
@@ -166,10 +166,9 @@
             margin: 0 auto 30px auto;
             max-width: 200px;
             height: auto;
-            /* CORRECCIÓN APLICADA: Se elimina el borde y el padding del logo en páginas secundarias */
+            /* Corrección: Se elimina el borde y el padding del logo */
             border: none; 
             padding: 0;
-            /* FIN CORRECCIÓN */
         }
 
         .page-content h3 {
@@ -208,6 +207,16 @@
         .service-list em {
             color: var(--color-gold);
             font-style: normal;
+        }
+        
+        /* Estilo para destacar el obsequio en servicios */
+        .obsequio-text {
+            display: block;
+            text-align: center;
+            font-weight: 900;
+            color: #25D366; /* Color verde para el obsequio */
+            margin: 15px 0;
+            font-size: 1.1em;
         }
 
         /* Estilos específicos para contenido de políticas */
@@ -393,7 +402,7 @@
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
             document.getElementById('politicas-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none'; // NUEVO
+            document.getElementById('contacto-page').style.display = 'none'; 
         }
         
         // FUNCIÓN: Actualiza los contadores y subtotal (valores de ejemplo)
@@ -636,19 +645,27 @@
         <div class="page-content">
             <h3>NUESTROS SERVICIOS</h3>
             <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios"> 
+            
             <p>Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.</p>
             <div class="service-list">
+                
                 <strong>PAGO CONTRA ENTREGA:</strong>	
                 <p>Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
                     <br><em>*El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad de las transportadoras.</em></p>
+                
                 <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong>	
                 <p>Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento. Obtenga tiempo de entrega preferencial y recompensas exclusivas.</p>
+                
                 <strong>Logística y Envíos Nacionales:</strong>	
-                <p>Envío Gratuito para órdenes que superen los <strong>$80.000</strong>. Tiempo de entrega estándar: 3-5 días hábiles.</p>
+                <p>Envío Gratuito para órdenes que superen los <strong>$80.000</strong>.
+                    <br>Tiempo de entrega estándar: 3-5 días hábiles.</p>
+                
+                <p class="obsequio-text">Todos los envíos a partir de $80.000 van con un OBSEQUIO PARA TI.</p>
+                
                 <p>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</p>
                 <p><strong style="color: #E0E0E0;">Recomendación:</strong> Confirme su cobertura antes de realizar la compra.</p>
             </div>
-        </div>
+            </div>
     </section>
 
     <section id="politicas-page">
