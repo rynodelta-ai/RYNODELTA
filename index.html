@@ -306,7 +306,7 @@
             position: absolute;
             top: 50px;	
             right: 0;	
-            width: 300px;	
+            width: 250px;	/* MODIFICADO: De 300px a 250px para igualar el menú */
             height: calc(100vh - 50px - var(--promo-bar-height)); /* Altura ajustable */
             background-color: rgba(0, 0, 0, 0.95);	
             border-top: 1px solid var(--color-gold);	
@@ -352,8 +352,8 @@
                 font-size: 1.3em;
             }
             .cart-popup {
-                width: 95%; /* Ancho ampliado */
-                padding: 5px; /* Padding reducido para ganar espacio horizontal */
+                /* Se mantiene el ancho de 250px heredado del estilo general */
+                padding: 5px; /* Mantenemos el padding reducido de la modificación anterior */
             }
             /* NUEVA REGLA: Reducir fuente del encabezado del carrito en móvil para evitar que el texto se corte */
             #cart-popup h4 { 
