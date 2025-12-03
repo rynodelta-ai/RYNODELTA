@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Inter', sans-serif !important;
-            margin: 0 !important; /* CRÍTICO: Eliminar márgenes del cuerpo */
+            margin: 0 !important; 
             padding: 0 !important;
             background-color: var(--color-dark) !important;
             color: #E0E0E0;
@@ -31,7 +31,7 @@
         #main-banner {
             position: relative;
             width: 100%;
-            margin-top: var(--promo-bar-height) !important; /* Separación CRÍTICA para la barra fija */
+            margin-top: var(--promo-bar-height) !important; 
             height: calc(100vh - var(--promo-bar-height));
             overflow: hidden;
             display: flex;
@@ -63,7 +63,6 @@
             top: var(--promo-bar-height, 45px); 
             left: 0; 
             z-index: 999998; 
-            /* Importante: para que mouseleave funcione en toda el área desplegada */
         }
 
         /* Estilos del ícono de hamburguesa */
@@ -75,7 +74,6 @@
             justify-content: space-around;
             width: 25px;
             height: 20px;
-            /* ILUMINACIÓN SUTIL */
             background-color: rgba(0, 0, 0, 0.6); 
             border-radius: 0 0 5px 0; 
             box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
@@ -122,8 +120,8 @@
             color: var(--color-gold); 
         }
 
-        /* --- ESTILOS: SECCIÓN QUIÉNES SOMOS --- */
-        #quienes-somos-page {
+        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
+        #quienes-somos-page, #servicios-page { /* APLICADO A AMBAS SECCIONES */
             display: none; 
             padding: 60px 20px; 
             min-height: calc(100vh - var(--promo-bar-height));
@@ -142,8 +140,8 @@
             text-align: center;
         }
 
-        /* Botón "Volver al Inicio" con brillo */
-        #back-to-home-btn {
+        /* Botón "Volver al Inicio" con brillo (Clase genérica para los 2 botones) */
+        .back-to-home-btn { 
             display: inline-block;
             padding: 10px 20px;
             text-decoration: none;
@@ -157,13 +155,13 @@
             box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4); 
         }
 
-        #back-to-home-btn:hover {
+        .back-to-home-btn:hover {
             background-color: rgba(197, 166, 124, 0.1);
             box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
         }
 
-        /* Estilos de Contenido */
-        .quienes-somos-content img {
+        /* Estilos de Contenido (Genéricos para ambas páginas) */
+        .page-content img {
             display: block;
             margin: 0 auto 30px auto;
             max-width: 200px;
@@ -172,7 +170,7 @@
             padding: 5px;
         }
 
-        .quienes-somos-content h3 {
+        .page-content h3 {
             color: var(--color-gold);
             font-weight: 900;
             text-transform: uppercase;
@@ -181,15 +179,33 @@
             margin-bottom: 20px;
         }
 
-        .quienes-somos-content p {
+        .page-content p {
             text-align: justify;
             margin-bottom: 20px;
             font-size: 1.1em;
             line-height: 1.8;
         }
 
-        .quienes-somos-content strong {
+        .page-content strong {
             color: var(--color-gold);
+        }
+
+        /* Estilos específicos de SERVICIOS */
+        .service-list {
+            margin-top: 25px;
+            padding-left: 20px;
+        }
+
+        .service-list strong {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #E0E0E0; /* Mantener subtítulos claros */
+        }
+        
+        .service-list em {
+            color: var(--color-gold);
+            font-style: normal;
         }
 
         /* Ajuste Móvil */
@@ -198,67 +214,99 @@
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
             
-            #quienes-somos-page {
+            #quienes-somos-page, #servicios-page {
                 padding: 40px 15px;
             }
-            .quienes-somos-content h3 {
+            .page-content h3 {
                 font-size: 1.5em;
             }
         }
     </style>
     
     <script>
+        // Función para ocultar todas las páginas secundarias
+        function hideAllSecondaryPages() {
+            document.getElementById('quienes-somos-page').style.display = 'none';
+            document.getElementById('servicios-page').style.display = 'none';
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            const promoBarHeight = getComputedStyle(document.documentElement).getPropertyValue('--promo-bar-height') || '45px';
             document.getElementById('main-banner').classList.add('visible');
             
             // Referencias
-            const mainNav = document.getElementById('main-nav'); // NUEVA REFERENCIA: Contenedor principal
+            const mainNav = document.getElementById('main-nav'); 
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
-            const quienesSomosPage = document.getElementById('quienes-somos-page');
             const mainBanner = document.getElementById('main-banner');
-            const quienesSomosLink = document.getElementById('quienes-somos-link'); 
-            const backToHomeBtn = document.getElementById('back-to-home-btn');
+            
+            // Referencias de Enlaces
             const inicioLink = document.getElementById('inicio-link'); 
+            const quienesSomosLink = document.getElementById('quienes-somos-link'); 
+            const serviciosLink = document.getElementById('servicios-link'); // NUEVA REFERENCIA
+            
+            // Referencias de Páginas
+            const quienesSomosPage = document.getElementById('quienes-somos-page');
+            const serviciosPage = document.getElementById('servicios-page'); // NUEVA REFERENCIA
+            
+            // Referencias de Botones
+            const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
+            const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios'); // NUEVA REFERENCIA
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
             hamburger.addEventListener('click', () => {
                 navMenu.classList.toggle('open');
             });
 
-            // 2. NUEVA LÓGICA: Auto-contracción cuando el mouse abandona el área del menú
+            // 2. Auto-contracción cuando el mouse abandona el área del menú
             mainNav.addEventListener('mouseleave', () => {
-                // Solo cerramos si el menú está actualmente abierto
                 if (navMenu.classList.contains('open')) {
                     navMenu.classList.remove('open');
                 }
             });
+
+            // Lógica compartida para volver al banner principal
+            function navigateToHome() {
+                hideAllSecondaryPages();
+                mainBanner.style.display = 'flex'; 
+                window.scrollTo(0, 0); 
+            }
             
-            // 3. Lógica para la sección QUIÉNES SOMOS (Mostrar)
+            // 3. Función para el enlace INICIO en el menú
+            inicioLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                navMenu.classList.remove('open'); 
+                navigateToHome();
+            });
+
+            // 4. Lógica para la sección QUIÉNES SOMOS
             quienesSomosLink.addEventListener('click', (e) => {
                 e.preventDefault(); 
                 navMenu.classList.remove('open'); 
                 mainBanner.style.display = 'none'; 
+                hideAllSecondaryPages(); // Oculta todas las demás
                 quienesSomosPage.style.display = 'block'; 
                 window.scrollTo(0, 0); 
             });
 
-            // 4. Lógica para Volver al inicio (desde el botón dentro de la página)
-            backToHomeBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                quienesSomosPage.style.display = 'none'; 
-                mainBanner.style.display = 'flex'; 
+            // 5. NUEVA LÓGICA: Lógica para la sección SERVICIOS
+            serviciosLink.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                navMenu.classList.remove('open'); 
+                mainBanner.style.display = 'none'; 
+                hideAllSecondaryPages(); // Oculta todas las demás
+                serviciosPage.style.display = 'block'; 
                 window.scrollTo(0, 0); 
             });
 
-            // 5. Función para el enlace INICIO en el menú
-            inicioLink.addEventListener('click', (e) => {
+            // 6. Lógica para Volver al inicio (desde los botones de las páginas)
+            backToHomeBtnQS.addEventListener('click', (e) => {
                 e.preventDefault();
-                navMenu.classList.remove('open'); 
-                quienesSomosPage.style.display = 'none'; 
-                mainBanner.style.display = 'flex'; 
-                window.scrollTo(0, 0); 
+                navigateToHome();
+            });
+
+            backToHomeBtnServicios.addEventListener('click', (e) => { // NUEVA LÓGICA
+                e.preventDefault();
+                navigateToHome();
             });
         });
     </script>
@@ -267,31 +315,12 @@
 <body>
     
     <div id="promo-bar" style="
-        position: fixed !important; 
-        top: 0 !important; 
-        left: 0 !important; 
-        width: 100% !important; 
-        height: 45px !important; /* ALTURA GRANDE PARA LEGIBILIDAD EN PC */
-        line-height: 45px !important; 
-        background-color: rgba(0, 0, 0, 0.95) !important; /* FONDO NEGRO FORZADO */
-        z-index: 999999 !important; 
-        overflow: hidden !important;
-        white-space: nowrap !important; /* EVITA EL APILAMIENTO */
-        font-size: 16px !important; /* TAMAÑO DE FUENTE GRANDE PARA LEGIBILIDAD EN PC */
+        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 45px !important; line-height: 45px !important; 
+        background-color: rgba(0, 0, 0, 0.95) !important; z-index: 999999 !important; overflow: hidden !important;
+        white-space: nowrap !important; font-size: 16px !important;
     ">
-        <marquee 
-            behavior="scroll" 
-            direction="left" 
-            scrollamount="4" 
-            loop="infinite"
-            style="
-                width: 100%; 
-                height: 45px; 
-                line-height: 45px !important; 
-                color: #C5A67C !important; /* COLOR DORADO FORZADO */
-                white-space: nowrap !important;
-                display: inline-block !important;
-            "
+        <marquee behavior="scroll" direction="left" scrollamount="4" loop="infinite"
+            style="width: 100%; height: 45px; line-height: 45px !important; color: #C5A67C !important; white-space: nowrap !important; display: inline-block !important;"
         >
             <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
             <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha el Envío GRATIS en compras desde $80.000 y paga al recibir ⚠️</span>
@@ -309,8 +338,7 @@
         <ul class="nav-menu" id="nav-menu-list">
             <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li>
             <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
-            <li><a href="#">SERVICIOS</a></li>
-            <li><a href="#">POLITICAS</a></li>
+            <li><a href="#" id="servicios-link">SERVICIOS</a></li> <li><a href="#">POLITICAS</a></li>
             <li><a href="#">CONTACTO</a></li>
         </ul>
     </nav>
@@ -328,10 +356,9 @@
     
     <section id="quienes-somos-page">
         <div class="back-button-container">
-            <a href="#" id="back-to-home-btn">VOLVER AL INICIO</a>
-        </div>
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a> </div>
 
-        <div class="quienes-somos-content">
+        <div class="page-content">
             <h3>QUIÉNES SOMOS</h3>
             <img src="logoryno33.png" alt="Logo RYNO DELTA">
 
@@ -347,6 +374,45 @@
             <p style="text-align: center; margin-top: 40px;">
                 <strong>Equipamos tu confianza en cada despliegue.</strong>
             </p>
+        </div>
+    </section>
+
+    <section id="servicios-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-servicios">VOLVER AL INICIO</a>
+        </div>
+
+        <div class="page-content">
+            <h3>NUESTROS SERVICIOS</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios">
+
+            <p>
+                Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.
+            </p>
+            
+            <div class="service-list">
+                <strong>PAGO CONTRA ENTREGA:</strong> 
+                <p>
+                    Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
+                    <br><em>*El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad de las transportadoras.</em>
+                </p>
+                
+                <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong> 
+                <p>
+                    Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento. Obtenga tiempo de entrega preferencial y recompensas exclusivas.
+                </p>
+                
+                <strong>Logística y Envíos Nacionales:</strong> 
+                <p>
+                    Envío Gratuito para órdenes que superen los <strong>$80.000</strong>. Tiempo de entrega estándar: 3-5 días hábiles.
+                </p>
+                <p>
+                    En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.
+                </p>
+                <p>
+                    <strong style="color: #E0E0E0;">Recomendación:</strong> Confirme su cobertura antes de realizar la compra.
+                </p>
+            </div>
         </div>
     </section>
 
