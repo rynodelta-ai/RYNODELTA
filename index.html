@@ -22,16 +22,21 @@
             background-color: var(--color-dark) !important;
             color: #E0E0E0;
             line-height: 1.6;
-            overflow-x: hidden !important;
-            transition: overflow 0.3s; /* Transición suave para evitar saltos visuales */
+            /* La eliminación de overflow-x: hidden !important; del body permite el scroll normal */
+            transition: overflow 0.3s; 
         }
         
-        /* FIX CRÍTICO 1: Evita el scroll del fondo cuando el sidebar o menú están abiertos */
+        /* FIX CRÍTICO 1: Esta clase solo debe aplicarse cuando se abre un sidebar */
         .no-scroll {
             overflow: hidden !important;
         }
 
-        html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
+        html { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            /* Esto se movió a body.no-scroll para el fix */
+            overflow-x: hidden !important; 
+        }
         
         /* BANNER PRINCIPAL (Video de fondo) */
         #main-banner {
@@ -107,7 +112,7 @@
             transform: translateX(-100%); 
             transition: transform 0.3s ease-in-out;
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95); 
-            max-height: calc(100vh - 50px - var(--promo-bar-height)); /* Ajuste para que no se salga */
+            max-height: calc(100vh - 50px - var(--promo-bar-height)); 
             overflow-y: auto;
         }
 
@@ -171,8 +176,9 @@
             position: fixed;
             top: 0;
             right: 0;
+            /* Se mantiene height: 100% y max-height para controlar el espacio */
             height: 100%; 
-            max-height: 98vh; /* Asegura un pequeño margen inferior */
+            max-height: 98vh; 
             width: 280px; 
             max-width: 90%; 
             background-color: rgba(0, 0, 0, 0.98); 
@@ -257,7 +263,8 @@
         #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page { 
             display: none; 
             padding: 60px 20px; 
-            min-height: calc(100vh - var(--promo-bar-height));
+            /* Se corrigió el min-height para que el footer no se corte */
+            min-height: calc(100vh - var(--promo-bar-height) - 100px); 
             background-color: var(--color-dark);
             color: #E0E0E0;
             margin-top: var(--promo-bar-height); 
@@ -397,6 +404,13 @@
             box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); 
         }
 
+        /* Estilos del Footer */
+        footer {
+            padding: 15px 20px;
+            text-align: center;
+            background-color: var(--color-dark);
+        }
+
 
         /* Ajuste Móvil */
         @media (max-width: 768px) {
@@ -425,19 +439,20 @@
             document.getElementById('contacto-page').style.display = 'none'; 
         }
         
-        // FIX CRÍTICO 1: Función para bloquear/desbloquear el scroll del body
+        // FIX CRÍTICO 1: Función revisada para bloquear/desbloquear el scroll del body
         function toggleBodyScroll(lock) {
             const body = document.body;
-            const navMenu = document.getElementById('nav-menu-list');
+            const navMenuIsOpen = document.getElementById('nav-menu-list').classList.contains('open');
+            const cartSidebarIsOpen = document.getElementById('cart-sidebar').classList.contains('open');
 
             if (lock) {
-                // Bloquea el scroll solo si el menú o el carrito están abiertos
-                if (navMenu.classList.contains('open') || document.getElementById('cart-sidebar').classList.contains('open')) {
-                     body.classList.add('no-scroll');
-                }
+                // Bloquea el scroll si se abre el carrito O el menú
+                body.classList.add('no-scroll');
             } else {
-                // Desbloquea el scroll
-                body.classList.remove('no-scroll');
+                // Desbloquea el scroll SOLO si ambos (carrito Y menú) están cerrados
+                if (!navMenuIsOpen && !cartSidebarIsOpen) {
+                     body.classList.remove('no-scroll');
+                }
             }
         }
 
@@ -453,11 +468,6 @@
             
             // Referencias de Enlaces y Páginas 
             const allLinks = document.querySelectorAll('.nav-menu a');
-
-            const quienesSomosPage = document.getElementById('quienes-somos-page');
-            const serviciosPage = document.getElementById('servicios-page'); 
-            const politicasPage = document.getElementById('politicas-page'); 
-            const contactoPage = document.getElementById('contacto-page'); 
             
             // Referencia del Carrito y Sidebar
             const cartIcon = document.getElementById('cart-icon-container');
@@ -469,30 +479,31 @@
                 hideAllSecondaryPages();
                 mainBanner.style.display = 'flex'; 
                 window.scrollTo(0, 0); 
-                toggleBodyScroll(false); // Desbloquear scroll
+                toggleBodyScroll(false); // Desbloquear scroll cuando vamos al inicio
             }
             
             // FUNCIÓN: Abre/Cierra el Sidebar del Carrito
             function toggleCartSidebar() {
                 cartSidebar.classList.toggle('open');
-                // Bloquea el scroll cuando el carrito está abierto, y desbloquea cuando se cierra
-                toggleBodyScroll(cartSidebar.classList.contains('open')); 
                 
                 // Asegurar que el menú no esté abierto si el carrito lo está
                 if (cartSidebar.classList.contains('open')) {
                     navMenu.classList.remove('open');
+                    toggleBodyScroll(true); // Bloquea el scroll
+                } else {
+                    toggleBodyScroll(false); // Desbloquea el scroll
                 }
             }
             
             // FUNCIÓN: Abre/Cierra el Menú Hamburguesa
             function toggleMenu() {
                 navMenu.classList.toggle('open');
-                // Bloquea el scroll cuando el menú está abierto
-                toggleBodyScroll(navMenu.classList.contains('open')); 
                 
-                 // Asegurar que el carrito no esté abierto si el menú lo está
                 if (navMenu.classList.contains('open')) {
                     cartSidebar.classList.remove('open');
+                    toggleBodyScroll(true); // Bloquea el scroll
+                } else {
+                    toggleBodyScroll(false); // Desbloquea el scroll
                 }
             }
 
@@ -501,15 +512,7 @@
             hamburger.addEventListener('click', toggleMenu);
 
             // 2. Auto-contracción del menú
-            mainNav.addEventListener('mouseleave', () => {
-                if (navMenu.classList.contains('open')) {
-                    // Mantener el scroll bloqueado si el carrito sigue abierto
-                    if (!cartSidebar.classList.contains('open')) {
-                        toggleBodyScroll(false); 
-                    }
-                    navMenu.classList.remove('open');
-                }
-            });
+            // Se eliminó el mouseleave, ya que puede ser molesto en la práctica.
             
             // 3. Lógica para Abrir/Cerrar el Sidebar del Carrito
             cartIcon.addEventListener('click', toggleCartSidebar); 
@@ -532,14 +535,9 @@
                     
                     if (targetId === 'inicio') {
                         navigateToHome();
-                    } else if (targetId === 'quienes') {
-                        quienesSomosPage.style.display = 'block'; 
-                    } else if (targetId === 'servicios') {
-                        serviciosPage.style.display = 'block';
-                    } else if (targetId === 'politicas') {
-                        politicasPage.style.display = 'block';
-                    } else if (targetId === 'contacto') {
-                        contactoPage.style.display = 'block';
+                    } else {
+                        // Aquí se muestran las páginas secundarias
+                        document.getElementById(`${targetId}-page`).style.display = 'block'; 
                     }
                 });
             });
@@ -552,6 +550,9 @@
                     navigateToHome();
                 });
             });
+            
+            // Lógica Inicial: Cuando la página carga, el scroll debe estar desbloqueado
+            toggleBodyScroll(false);
 
         });
     </script>
@@ -709,3 +710,22 @@
 
         <div class="page-content">
             <h3>CONTACTO</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Contacto">
+            
+            <a href="http://wa.me/573148172002" target="_blank" class="contact-button whatsapp-button">
+                WHATSAPP (314 817 2002)
+            </a>
+            
+            <a href="mailto:RYNODELTA@GMAIL.COM" class="contact-button email-button">
+                CORREO ELECTRÓNICO (RYNODELTA@GMAIL.COM)
+            </a>
+        </div>
+    </section>
+
+
+    <footer>
+        <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
