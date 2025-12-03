@@ -55,7 +55,7 @@
             color: white; 
             margin-top: 15vh;
             text-align: center;
-            /* Se deja vacío esperando que el texto venga del video/poster */
+            /* El contenido (texto) viene del video/poster. */
         }
         
         /* ESTILOS DEL MENÚ DE HAMBURGUESA */
@@ -165,7 +165,8 @@
             top: 0;
             right: 0;
             height: 100%;
-            width: 350px; 
+            /* --- MODIFICACIÓN: Nuevo ancho reducido a 250px --- */
+            width: 250px; 
             max-width: 90%; 
             background-color: rgba(0, 0, 0, 0.98); 
             z-index: 1000000; 
@@ -175,7 +176,7 @@
             padding-top: var(--promo-bar-height); 
             color: #E0E0E0;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Esencial para el layout fijo/scrollable */
         }
 
         #cart-sidebar.open {
@@ -188,6 +189,7 @@
             align-items: center;
             padding: 15px 20px;
             border-bottom: 1px solid var(--color-gold);
+            flex-shrink: 0; /* Asegura que el header no se encoja */
         }
 
         .sidebar-header h3 {
@@ -210,9 +212,9 @@
         }
 
         .sidebar-content {
-            flex-grow: 1;
+            flex-grow: 1; /* Permite que este div ocupe todo el espacio restante */
             padding: 20px;
-            overflow-y: auto;
+            overflow-y: auto; /* Permite scroll vertical SOLO en el contenido */
             font-style: italic;
         }
 
@@ -220,6 +222,7 @@
             padding: 15px 20px;
             border-top: 1px solid var(--color-gold);
             text-align: center;
+            flex-shrink: 0; /* Asegura que el footer no se encoja */
         }
         
         .sidebar-footer h4 {
@@ -440,7 +443,7 @@
             const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
             const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas'); 
-            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
+            const backToHomeBtnContacto = document.getElementById('contacto-link'); 
             
             // Referencia del Carrito y Sidebar
             const cartIcon = document.getElementById('cart-icon-container');
@@ -454,7 +457,7 @@
                 window.scrollTo(0, 0); 
             }
             
-            // NUEVA FUNCIÓN: Abre/Cierra el Sidebar del Carrito
+            // FUNCIÓN: Abre/Cierra el Sidebar del Carrito
             function toggleCartSidebar() {
                 cartSidebar.classList.toggle('open');
             }
