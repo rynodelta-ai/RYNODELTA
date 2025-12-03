@@ -306,7 +306,7 @@
             position: absolute;
             top: 50px;	
             right: 0;	
-            width: 250px;	/* MODIFICADO: De 300px a 250px para igualar el menú */
+            width: 250px;	/* Ancho unificado con el menú */
             height: calc(100vh - 50px - var(--promo-bar-height)); /* Altura ajustable */
             background-color: rgba(0, 0, 0, 0.95);	
             border-top: 1px solid var(--color-gold);	
@@ -352,7 +352,6 @@
                 font-size: 1.3em;
             }
             .cart-popup {
-                /* Se mantiene el ancho de 250px heredado del estilo general */
                 padding: 5px; /* Mantenemos el padding reducido de la modificación anterior */
             }
             /* NUEVA REGLA: Reducir fuente del encabezado del carrito en móvil para evitar que el texto se corte */
@@ -370,9 +369,35 @@
             document.getElementById('politicas-page').style.display = 'none';
             document.getElementById('contacto-page').style.display = 'none'; // NUEVO
         }
+        
+        // NUEVA FUNCIÓN: Actualiza los contadores y subtotal (valores de ejemplo)
+        function updateCart() {
+            // Valores de ejemplo para simular un carrito
+            const productCount = 1;
+            const subtotalAmount = 45000; 
+
+            // Formatear el valor del subtotal a Peso Colombiano ($45.000)
+            const formatter = new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            });
+            const formattedSubtotal = formatter.format(subtotalAmount).replace('COP', '$').trim();
+
+            // 1. Actualizar Contadores
+            document.getElementById('product-count').textContent = productCount;
+            document.getElementById('popup-product-count').textContent = productCount;
+
+            // 2. Actualizar Subtotal
+            document.getElementById('subtotal-display').textContent = formattedSubtotal;
+        }
+
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('main-banner').classList.add('visible');
+            
+            // Llamar a la nueva función al cargar la página para mostrar los valores iniciales
+            updateCart();
             
             // Referencias del Menú de Navegación (Originales)
             const mainNav = document.getElementById('main-nav');	
@@ -384,12 +409,9 @@
             const cartIcon = document.getElementById('cart-icon');
             const cartPopup = document.getElementById('cart-popup');
             const closeCartBtn = document.getElementById('close-cart-btn');
-            const productCountSpan = document.getElementById('product-count');
-            const popupProductCount = document.getElementById('popup-product-count');
             
             // Lógica de ejemplo para el contador del carrito (inicia con 1 producto)
-            productCountSpan.textContent = '1';
-            popupProductCount.textContent = '1';
+            // ESTA LÍNEA ES ELIMINADA/SUSTITUIDA POR updateCart()
 
             
             // Referencias de Enlaces y Páginas (Existentes)
@@ -417,7 +439,7 @@
 
             // 2. Auto-contracción cuando el mouse abandona el área del menú
             mainNav.addEventListener('mouseleave', () => {
-                if (navMenu.classList.contains('open')) {
+                if (navMenu.classList.contains('open') && window.innerWidth > 768) { // Solo en escritorio
                     navMenu.classList.remove('open');
                 }
             });
@@ -541,6 +563,11 @@
             <button class="close-cart-btn" id="close-cart-btn">X</button>
             <h4 style="margin-top: 50px;">🛒 Tu Carrito de Compras</h4>
             <p style="text-align: center; font-size: 1.1em;">Productos en el carrito: <strong id="popup-product-count">0</strong></p>
+            
+            <p style="text-align: center; font-size: 1.2em; margin-top: 20px;">
+                Subtotal: <strong id="subtotal-display">$0</strong>
+            </p>
+            
             </div>
     </div>
 
