@@ -120,8 +120,8 @@
             color: var(--color-gold); 
         }
 
-        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
-        #quienes-somos-page, #servicios-page, #politicas-page { 
+        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS (ACTUALIZADO) --- */
+        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page { 
             display: none; 
             padding: 60px 20px; 
             min-height: calc(100vh - var(--promo-bar-height));
@@ -228,6 +228,42 @@
             margin-left: 20px;
             padding-left: 0;
         }
+        
+        /* NUEVOS ESTILOS: Botones de Contacto */
+        .contact-button {
+            display: block;
+            text-align: center;
+            padding: 15px 10px;
+            margin: 20px auto;
+            max-width: 400px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.5); /* Iluminación dorada base */
+        }
+        
+        .whatsapp-button {
+            color: #fff;
+            background-color: #25D366;
+            border: 1px solid #128C7E;
+        }
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            box-shadow: 0 0 15px 3px rgba(37, 211, 102, 0.8); /* Iluminación verde */
+        }
+
+        .email-button {
+            color: var(--color-gold);
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-gold);
+        }
+        .email-button:hover {
+            background-color: rgba(197, 166, 124, 0.1);
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); /* Iluminación dorada fuerte */
+        }
+
 
         /* Ajuste Móvil */
         @media (max-width: 768px) {
@@ -235,7 +271,7 @@
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
             
-            #quienes-somos-page, #servicios-page, #politicas-page {
+            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {
                 padding: 40px 15px;
             }
             .page-content h3 {
@@ -248,11 +284,12 @@
     </style>
     
     <script>
-        // Función para ocultar todas las páginas secundarias
+        // Función para ocultar todas las páginas secundarias (ACTUALIZADO)
         function hideAllSecondaryPages() {
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
-            document.getElementById('politicas-page').style.display = 'none'; 
+            document.getElementById('politicas-page').style.display = 'none';
+            document.getElementById('contacto-page').style.display = 'none'; // NUEVO
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -264,21 +301,24 @@
             const navMenu = document.getElementById('nav-menu-list');
             const mainBanner = document.getElementById('main-banner');
             
-            // Referencias de Enlaces
+            // Referencias de Enlaces (ACTUALIZADO)
             const inicioLink = document.getElementById('inicio-link'); 
             const quienesSomosLink = document.getElementById('quienes-somos-link'); 
             const serviciosLink = document.getElementById('servicios-link'); 
             const politicasLink = document.getElementById('politicas-link'); 
+            const contactoLink = document.getElementById('contacto-link'); // NUEVO
             
-            // Referencias de Páginas
+            // Referencias de Páginas (ACTUALIZADO)
             const quienesSomosPage = document.getElementById('quienes-somos-page');
             const serviciosPage = document.getElementById('servicios-page'); 
             const politicasPage = document.getElementById('politicas-page'); 
+            const contactoPage = document.getElementById('contacto-page'); // NUEVO
             
-            // Referencias de Botones
+            // Referencias de Botones (ACTUALIZADO)
             const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
             const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas'); 
+            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); // NUEVO
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
             hamburger.addEventListener('click', () => {
@@ -335,8 +375,19 @@
                 politicasPage.style.display = 'block'; 
                 window.scrollTo(0, 0); 
             });
+            
+            // 7. Lógica para la sección CONTACTO (NUEVO)
+            contactoLink.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                navMenu.classList.remove('open'); 
+                mainBanner.style.display = 'none'; 
+                hideAllSecondaryPages();
+                contactoPage.style.display = 'block'; 
+                window.scrollTo(0, 0); 
+            });
 
-            // 7. Lógica para Volver al inicio (desde los botones de las páginas)
+
+            // 8. Lógica para Volver al inicio (desde los botones de las páginas) (ACTUALIZADO)
             backToHomeBtnQS.addEventListener('click', (e) => {
                 e.preventDefault();
                 navigateToHome();
@@ -348,6 +399,11 @@
             });
             
             backToHomeBtnPoliticas.addEventListener('click', (e) => { 
+                e.preventDefault();
+                navigateToHome();
+            });
+            
+            backToHomeBtnContacto.addEventListener('click', (e) => { // NUEVO
                 e.preventDefault();
                 navigateToHome();
             });
@@ -383,8 +439,7 @@
             <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
             <li><a href="#" id="servicios-link">SERVICIOS</a></li>
             <li><a href="#" id="politicas-link">POLITICAS</a></li> 
-            <li><a href="#">CONTACTO</a></li>
-        </ul>
+            <li><a href="#" id="contacto-link">CONTACTO</a></li> </ul>
     </nav>
 
     <section id="main-banner" class="visible" style="background-color: #000;">
@@ -477,6 +532,25 @@
                     Recuerda que según la norma colombiana es el cliente quien debe cubrir los gastos de fletes cuando de garantías o devoluciones se trata.
                 </p>
             </div>
+        </div>
+    </section>
+    
+    <section id="contacto-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-contacto">VOLVER AL INICIO</a>
+        </div>
+
+        <div class="page-content">
+            <h3>CONTACTO</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Contacto">
+            
+            <a href="http://wa.me/573148172002" target="_blank" class="contact-button whatsapp-button">
+                WHATSAPP (314 817 2002)
+            </a>
+            
+            <a href="mailto:RYNODELTA@GMAIL.COM" class="contact-button email-button">
+                CORREO ELECTRÓNICO (RYNODELTA@GMAIL.COM)
+            </a>
         </div>
     </section>
 
