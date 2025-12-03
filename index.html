@@ -264,6 +264,77 @@
             box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); /* Iluminación dorada fuerte */
         }
 
+        /* --- NUEVOS ESTILOS PARA EL CARRITO --- */
+        #cart-nav {
+            position: fixed;
+            top: var(--promo-bar-height, 45px); /* Se alinea con el menú de hamburguesa */
+            right: 0;	/* Posicionado a la derecha */
+            z-index: 999998;
+        }
+
+        /* Estilos del ícono del carrito */
+        .cart-icon {
+            padding: 15px;
+            cursor: pointer;
+            width: 25px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            background-color: rgba(0, 0, 0, 0.6);	
+            border-radius: 0 0 0 5px; /* Esquina redondeada en la parte inferior izquierda */
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
+        }
+        
+        /* Contador de productos */
+        .product-count {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--color-gold);
+            color: var(--color-dark);
+            font-size: 0.6em;
+            font-weight: 900;
+            padding: 2px 5px;
+            border-radius: 50%;
+            line-height: 1;
+        }
+
+        /* Estilos del popup del carrito */
+        .cart-popup {
+            position: absolute;
+            top: 50px;	
+            right: 0;	
+            width: 300px;	
+            height: calc(100vh - 50px - var(--promo-bar-height)); /* Altura ajustable */
+            background-color: rgba(0, 0, 0, 0.95);	
+            border-top: 1px solid var(--color-gold);	
+            transform: translateX(100%); /* Oculto a la derecha */
+            transition: transform 0.3s ease-in-out;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.95);	
+            padding: 10px;
+            text-align: left;
+        }
+
+        .cart-popup.open {
+            transform: translateX(0); /* Abierto */
+        }
+
+        /* Botón de cierre (X) */
+        .close-cart-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--color-gold);
+            font-size: 1.5em;
+            cursor: pointer;
+            font-weight: 700;
+            line-height: 1;
+        }
+
 
         /* Ajuste Móvil */
         @media (max-width: 768px) {
@@ -280,6 +351,9 @@
             .policy-section h4 {
                 font-size: 1.3em;
             }
+            .cart-popup {
+                width: 80%; /* Más ancho en móviles */
+            }
         }
     </style>
     
@@ -295,33 +369,44 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('main-banner').classList.add('visible');
             
-            // Referencias
+            // Referencias del Menú de Navegación (Originales)
             const mainNav = document.getElementById('main-nav');	
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
             const mainBanner = document.getElementById('main-banner');
             
-            // Referencias de Enlaces (ACTUALIZADO)
+            // NUEVAS Referencias del Carrito
+            const cartIcon = document.getElementById('cart-icon');
+            const cartPopup = document.getElementById('cart-popup');
+            const closeCartBtn = document.getElementById('close-cart-btn');
+            const productCountSpan = document.getElementById('product-count');
+            const popupProductCount = document.getElementById('popup-product-count');
+            
+            // Lógica de ejemplo para el contador del carrito (inicia con 1 producto)
+            productCountSpan.textContent = '1';
+            popupProductCount.textContent = '1';
+
+            
+            // Referencias de Enlaces y Páginas (Existentes)
             const inicioLink = document.getElementById('inicio-link');	
             const quienesSomosLink = document.getElementById('quienes-somos-link');	
             const serviciosLink = document.getElementById('servicios-link');	
             const politicasLink = document.getElementById('politicas-link');	
-            const contactoLink = document.getElementById('contacto-link'); // NUEVO
-            
-            // Referencias de Páginas (ACTUALIZADO)
+            const contactoLink = document.getElementById('contacto-link'); 
             const quienesSomosPage = document.getElementById('quienes-somos-page');
             const serviciosPage = document.getElementById('servicios-page');	
             const politicasPage = document.getElementById('politicas-page');	
-            const contactoPage = document.getElementById('contacto-page'); // NUEVO
-            
-            // Referencias de Botones (ACTUALIZADO)
+            const contactoPage = document.getElementById('contacto-page'); 
             const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
             const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas');	
-            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); // NUEVO
+            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
 
-            // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
+            // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic) - AJUSTADA
             hamburger.addEventListener('click', () => {
+                // CIERRA el carrito al abrir el menú (AJUSTE DE COMPATIBILIDAD)
+                cartPopup.classList.remove('open');
+                // Abre/Cierra el menú
                 navMenu.classList.toggle('open');
             });
 
@@ -331,92 +416,80 @@
                     navMenu.classList.remove('open');
                 }
             });
+            
+            // Auto-contracción del carrito cuando el mouse abandona el área (solo en escritorio)
+            document.getElementById('cart-nav').addEventListener('mouseleave', () => {
+                // Solo si no está en un dispositivo táctil o la pantalla es pequeña
+                if (window.innerWidth > 768) { 
+                    if (cartPopup.classList.contains('open')) {
+                        cartPopup.classList.remove('open');
+                    }
+                }
+            });
 
-            // Lógica compartida para volver al banner principal
+
+            // Lógica compartida para volver al banner principal (Existente)
             function navigateToHome() {
                 hideAllSecondaryPages();
                 mainBanner.style.display = 'flex';	
                 window.scrollTo(0, 0);	
             }
             
-            // 3. Función para el enlace INICIO en el menú
+            // Lógica de enlaces de navegación (Existentes)
             inicioLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                navMenu.classList.remove('open');	
-                navigateToHome();
+                e.preventDefault();	navMenu.classList.remove('open');	navigateToHome();
             });
-
-            // 4. Lógica para la sección QUIÉNES SOMOS
             quienesSomosLink.addEventListener('click', (e) => {
-                e.preventDefault();	
-                navMenu.classList.remove('open');	
-                mainBanner.style.display = 'none';	
-                hideAllSecondaryPages();
-                quienesSomosPage.style.display = 'block';	
-                window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); quienesSomosPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
-
-            // 5. Lógica para la sección SERVICIOS
             serviciosLink.addEventListener('click', (e) => {
-                e.preventDefault();	
-                navMenu.classList.remove('open');	
-                mainBanner.style.display = 'none';	
-                hideAllSecondaryPages();
-                serviciosPage.style.display = 'block';	
-                window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); serviciosPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
-            
-            // 6. Lógica para la sección POLÍTICAS
             politicasLink.addEventListener('click', (e) => {
-                e.preventDefault();	
-                navMenu.classList.remove('open');	
-                mainBanner.style.display = 'none';	
-                hideAllSecondaryPages();
-                politicasPage.style.display = 'block';	
-                window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); politicasPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
-            
-            // 7. Lógica para la sección CONTACTO (NUEVO)
             contactoLink.addEventListener('click', (e) => {
-                e.preventDefault();	
-                navMenu.classList.remove('open');	
-                mainBanner.style.display = 'none';	
-                hideAllSecondaryPages();
-                contactoPage.style.display = 'block';	
-                window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); contactoPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
-
-
-            // 8. Lógica para Volver al inicio (desde los botones de las páginas) (ACTUALIZADO)
             backToHomeBtnQS.addEventListener('click', (e) => {
-                e.preventDefault();
-                navigateToHome();
+                e.preventDefault(); navigateToHome();
             });
-
             backToHomeBtnServicios.addEventListener('click', (e) => {	
-                e.preventDefault();
-                navigateToHome();
+                e.preventDefault(); navigateToHome();
             });
-            
             backToHomeBtnPoliticas.addEventListener('click', (e) => {	
-                e.preventDefault();
-                navigateToHome();
+                e.preventDefault(); navigateToHome();
             });
-            
-            backToHomeBtnContacto.addEventListener('click', (e) => { // NUEVO
-                e.preventDefault();
-                navigateToHome();
+            backToHomeBtnContacto.addEventListener('click', (e) => { 
+                e.preventDefault(); navigateToHome();
             });
 
-            // 9. Lógica para cerrar el menú con la tecla ESC (NUEVO - ACCESIBILIDAD)
+
+            // Lógica para cerrar ambos menús con la tecla ESC (MEJORADO)
             document.addEventListener('keydown', (event) => {
-                // Verifica si la tecla presionada es 'Escape' (código 27)
                 if (event.key === 'Escape' || event.keyCode === 27) {
-                    // Si el menú está abierto, lo cierra
+                    // Cierra el menú de hamburguesa
                     if (navMenu.classList.contains('open')) {
                         navMenu.classList.remove('open');
                     }
+                    // Cierra el carrito
+                    if (cartPopup.classList.contains('open')) {
+                        cartPopup.classList.remove('open');
+                    }
                 }
+            });
+
+            // Lógica del Carrito (Abrir/Cerrar por clic) - NUEVO
+            cartIcon.addEventListener('click', () => {
+                // CIERRA el menú de hamburguesa al abrir el carrito
+                navMenu.classList.remove('open'); 
+                // Abre/Cierra el carrito
+                cartPopup.classList.toggle('open');
+            });
+
+            // Lógica del Carrito (Cerrar con X) - NUEVO
+            closeCartBtn.addEventListener('click', () => {
+                cartPopup.classList.remove('open');
             });
         });
     </script>
@@ -452,6 +525,20 @@
             <li><a href="#" id="politicas-link">POLITICAS</a></li>	
             <li><a href="#" id="contacto-link">CONTACTO</a></li> </ul>
     </nav>
+    
+    <div id="cart-nav">
+        <div class="cart-icon" id="cart-icon">
+            🛒 
+            <span id="product-count" class="product-count">0</span>
+        </div>
+        
+        <div class="cart-popup" id="cart-popup">
+            <button class="close-cart-btn" id="close-cart-btn">X</button>
+            <h4 style="margin-top: 50px;">🛒 Tu Carrito de Compras</h4>
+            <p style="text-align: center; font-size: 1.1em;">Productos en el carrito: <strong id="popup-product-count">0</strong></p>
+            <p style="text-align: center; color: #777;">(Funcionalidad básica de ejemplo)</p>
+            </div>
+    </div>
 
     <section id="main-banner" class="visible" style="background-color: #000;">
         <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
@@ -487,7 +574,6 @@
 
         <div class="page-content">
             <h3>NUESTROS SERVICIOS</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios">
             <p>Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.</p>
             <div class="service-list">
                 <strong>PAGO CONTRA ENTREGA:</strong>	
