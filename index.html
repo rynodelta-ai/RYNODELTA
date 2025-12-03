@@ -165,7 +165,7 @@
             box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5);
         }
 
-        /* Contenedor para mantener la relación de aspecto 21:9 (MODIFICADO) */
+        /* Contenedor para mantener la relación de aspecto 21:9 */
         .aspect-ratio-box {
             position: relative;
             width: 100%;
@@ -472,7 +472,12 @@
 
         /* Ajuste Móvil */
         @media (max-width: 768px) {
-            #main-banner { margin-top: var(--promo-bar-height) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
+            #main-banner { 
+                margin-top: var(--promo-bar-height) !important; 
+                height: auto; 
+                /* min-height: calc(100vh - var(--promo-bar-height)); <-- ELIMINADO PARA REDUCIR EL ESPACIO EN MÓVIL (Versión 1.7) */
+                align-items: center; 
+            }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
             
