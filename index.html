@@ -219,8 +219,8 @@
         }
         
         /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
-        /* Incluye la nueva página de Morrales */
-        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page {	
+        /* Incluye la nueva página de Morrales y Accesorios */
+        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {	
             display: none;	
             padding: 60px 20px;	
             min-height: calc(100vh - var(--promo-bar-height));
@@ -475,13 +475,12 @@
             #main-banner { 
                 margin-top: var(--promo-bar-height) !important; 
                 height: auto; 
-                /* min-height: calc(100vh - var(--promo-bar-height)); <-- ELIMINADO PARA REDUCIR EL ESPACIO EN MÓVIL (Versión 1.7) */
                 align-items: center; 
             }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
             
-            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page {
+            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {
                 padding: 40px 15px;
             }
             .page-content h3 {
@@ -501,13 +500,14 @@
     </style>
     
     <script>
-        // Función para ocultar todas las páginas secundarias (ACTUALIZADO: incluye Morrales)
+        // Función para ocultar todas las páginas secundarias (ACTUALIZADO: incluye Morrales y Accesorios)
         function hideAllSecondaryPages() {
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
             document.getElementById('politicas-page').style.display = 'none';
             document.getElementById('contacto-page').style.display = 'none';
-            document.getElementById('morrales-page').style.display = 'none'; // NUEVO
+            document.getElementById('morrales-page').style.display = 'none'; 
+            document.getElementById('accesorios-page').style.display = 'none'; // NUEVO
         }
         
         // FUNCIÓN: Actualiza los contadores y subtotal (valores de ejemplo)
@@ -565,10 +565,15 @@
             const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas');	
             const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
             
-            // NUEVAS Referencias para MORRALES
+            // Referencias para MORRALES (Existentes)
             const morralesLink = document.getElementById('morrales-category-link'); // Enlace de la categoría
             const morralesPage = document.getElementById('morrales-page');         // Página de la categoría
             const backToHomeBtnMorrales = document.getElementById('back-to-home-btn-morrales'); // Botón de Volver
+            
+            // NUEVAS Referencias para ACCESORIOS
+            const accesoriosLink = document.getElementById('accesorios-category-link'); // Enlace de la categoría
+            const accesoriosPage = document.getElementById('accesorios-page');         // Página de la categoría
+            const backToHomeBtnAccesorios = document.getElementById('back-to-home-btn-accesorios'); // Botón de Volver
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic) - AJUSTADA
             hamburger.addEventListener('click', () => {
@@ -622,13 +627,23 @@
                 e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); contactoPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
             
-            // NUEVA LÓGICA DE NAVEGACIÓN (MORRALES)
+            // LÓGICA DE NAVEGACIÓN (MORRALES)
             morralesLink.addEventListener('click', (e) => {
                 e.preventDefault();	
                 mainBanner.style.display = 'none';
                 document.getElementById('categories-section').style.display = 'none'; 
                 hideAllSecondaryPages(); 
                 morralesPage.style.display = 'block';	
+                window.scrollTo(0, 0);	
+            });
+            
+            // NUEVA LÓGICA DE NAVEGACIÓN (ACCESORIOS)
+            accesoriosLink.addEventListener('click', (e) => {
+                e.preventDefault();	
+                mainBanner.style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none'; 
+                hideAllSecondaryPages(); 
+                accesoriosPage.style.display = 'block';	
                 window.scrollTo(0, 0);	
             });
             
@@ -645,7 +660,10 @@
             backToHomeBtnContacto.addEventListener('click', (e) => { 
                 e.preventDefault(); navigateToHome();
             });
-            backToHomeBtnMorrales.addEventListener('click', (e) => { // NUEVO
+            backToHomeBtnMorrales.addEventListener('click', (e) => { 
+                e.preventDefault(); navigateToHome();
+            });
+            backToHomeBtnAccesorios.addEventListener('click', (e) => { // NUEVO
                 e.preventDefault(); navigateToHome();
             });
 
@@ -758,6 +776,16 @@
                     <div class="category-image" style="background-image: url('morrales.jpg');">
                         <div class="category-overlay">
                             <h4 class="category-title">MORRALES</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="#" class="category-item" id="accesorios-category-link">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
+                        <div class="category-overlay">
+                            <h4 class="category-title">ACCESORIOS PARA ARMAS</h4>
                         </div>
                     </div>
                 </div>
@@ -885,6 +913,19 @@
             <img src="logoryno33.png" alt="Logo RYNO DELTA Morrales"> 
             
             <p>¡Gracias por tu interés en nuestra línea de equipos de transporte y combate!</p>
+        </div>
+    </section>
+    <section id="accesorios-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-accesorios">VOLVER AL INICIO</a>
+        </div>
+
+        <div class="page-content">
+            <h3>CATÁLOGO DE ACCESORIOS PARA ARMAS</h3>
+            <p style="text-align: center;">Aquí se mostrarán los productos de la categoría Accesorios para Armas.</p>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Accesorios"> 
+            
+            <p>¡Explora nuestra selección de accesorios tácticos y de tiro!</p>
         </div>
     </section>
     <footer>
