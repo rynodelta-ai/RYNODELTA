@@ -63,6 +63,7 @@
             top: var(--promo-bar-height, 45px); 
             left: 0; 
             z-index: 999998; 
+            /* Importante: para que mouseleave funcione en toda el área desplegada */
         }
 
         /* Estilos del ícono de hamburguesa */
@@ -212,31 +213,38 @@
             document.getElementById('main-banner').classList.add('visible');
             
             // Referencias
+            const mainNav = document.getElementById('main-nav'); // NUEVA REFERENCIA: Contenedor principal
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
             const quienesSomosPage = document.getElementById('quienes-somos-page');
             const mainBanner = document.getElementById('main-banner');
             const quienesSomosLink = document.getElementById('quienes-somos-link'); 
             const backToHomeBtn = document.getElementById('back-to-home-btn');
-
-            // NUEVA REFERENCIA: Enlace INICIO
             const inicioLink = document.getElementById('inicio-link'); 
 
-            // 1. Lógica del menú de hamburguesa (Abrir/Cerrar)
+            // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
             hamburger.addEventListener('click', () => {
                 navMenu.classList.toggle('open');
             });
+
+            // 2. NUEVA LÓGICA: Auto-contracción cuando el mouse abandona el área del menú
+            mainNav.addEventListener('mouseleave', () => {
+                // Solo cerramos si el menú está actualmente abierto
+                if (navMenu.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                }
+            });
             
-            // 2. Lógica para la sección QUIÉNES SOMOS (Mostrar)
+            // 3. Lógica para la sección QUIÉNES SOMOS (Mostrar)
             quienesSomosLink.addEventListener('click', (e) => {
                 e.preventDefault(); 
-                navMenu.classList.remove('open'); // Cierra el menú
+                navMenu.classList.remove('open'); 
                 mainBanner.style.display = 'none'; 
                 quienesSomosPage.style.display = 'block'; 
                 window.scrollTo(0, 0); 
             });
 
-            // 3. Lógica para Volver al inicio (desde el botón dentro de la página)
+            // 4. Lógica para Volver al inicio (desde el botón dentro de la página)
             backToHomeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 quienesSomosPage.style.display = 'none'; 
@@ -244,13 +252,13 @@
                 window.scrollTo(0, 0); 
             });
 
-            // 4. NUEVA LÓGICA: Función para el enlace INICIO en el menú
+            // 5. Función para el enlace INICIO en el menú
             inicioLink.addEventListener('click', (e) => {
                 e.preventDefault();
-                navMenu.classList.remove('open'); // Cierra el menú
-                quienesSomosPage.style.display = 'none'; // Oculta la página de quiénes somos si está abierta
-                mainBanner.style.display = 'flex'; // Asegura que el banner principal se vea
-                window.scrollTo(0, 0); // Vuelve al inicio
+                navMenu.classList.remove('open'); 
+                quienesSomosPage.style.display = 'none'; 
+                mainBanner.style.display = 'flex'; 
+                window.scrollTo(0, 0); 
             });
         });
     </script>
@@ -299,7 +307,8 @@
         </div>
         
         <ul class="nav-menu" id="nav-menu-list">
-            <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li> <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
+            <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li>
+            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
             <li><a href="#">SERVICIOS</a></li>
             <li><a href="#">POLITICAS</a></li>
             <li><a href="#">CONTACTO</a></li>
