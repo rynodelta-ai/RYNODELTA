@@ -22,11 +22,10 @@
             background-color: var(--color-dark) !important;
             color: #E0E0E0;
             line-height: 1.6;
-            /* La eliminación de overflow-x: hidden !important; del body permite el scroll normal */
             transition: overflow 0.3s; 
         }
         
-        /* FIX CRÍTICO 1: Esta clase solo debe aplicarse cuando se abre un sidebar */
+        /* SOLUCIÓN 3: Esta clase solo debe aplicarse cuando se abre un sidebar */
         .no-scroll {
             overflow: hidden !important;
         }
@@ -34,7 +33,6 @@
         html { 
             margin: 0 !important; 
             padding: 0 !important; 
-            /* Esto se movió a body.no-scroll para el fix */
             overflow-x: hidden !important; 
         }
         
@@ -176,9 +174,8 @@
             position: fixed;
             top: 0;
             right: 0;
-            /* Se mantiene height: 100% y max-height para controlar el espacio */
-            height: 100%; 
-            max-height: 98vh; 
+            /* SOLUCIÓN 2: Usar 100vh para que ocupe todo el espacio visible */
+            height: 100vh; 
             width: 280px; 
             max-width: 90%; 
             background-color: rgba(0, 0, 0, 0.98); 
@@ -227,7 +224,7 @@
         .sidebar-content {
             flex-grow: 1; 
             padding: 20px;
-            overflow-y: auto; 
+            overflow-y: auto; /* Permite el scroll solo en el contenido de la lista */
             font-style: italic;
         }
 
@@ -235,7 +232,7 @@
             padding: 15px 20px;
             border-top: 1px solid var(--color-gold);
             text-align: center;
-            flex-shrink: 0; 
+            flex-shrink: 0; /* Asegura que el footer no se reduzca y quede visible */
         }
         
         .sidebar-footer h4 {
@@ -439,7 +436,7 @@
             document.getElementById('contacto-page').style.display = 'none'; 
         }
         
-        // FIX CRÍTICO 1: Función revisada para bloquear/desbloquear el scroll del body
+        // SOLUCIÓN 3: Función revisada para bloquear/desbloquear el scroll del body
         function toggleBodyScroll(lock) {
             const body = document.body;
             const navMenuIsOpen = document.getElementById('nav-menu-list').classList.contains('open');
@@ -479,14 +476,13 @@
                 hideAllSecondaryPages();
                 mainBanner.style.display = 'flex'; 
                 window.scrollTo(0, 0); 
-                toggleBodyScroll(false); // Desbloquear scroll cuando vamos al inicio
+                toggleBodyScroll(false); 
             }
             
             // FUNCIÓN: Abre/Cierra el Sidebar del Carrito
             function toggleCartSidebar() {
                 cartSidebar.classList.toggle('open');
                 
-                // Asegurar que el menú no esté abierto si el carrito lo está
                 if (cartSidebar.classList.contains('open')) {
                     navMenu.classList.remove('open');
                     toggleBodyScroll(true); // Bloquea el scroll
@@ -510,9 +506,6 @@
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
             hamburger.addEventListener('click', toggleMenu);
-
-            // 2. Auto-contracción del menú
-            // Se eliminó el mouseleave, ya que puede ser molesto en la práctica.
             
             // 3. Lógica para Abrir/Cerrar el Sidebar del Carrito
             cartIcon.addEventListener('click', toggleCartSidebar); 
