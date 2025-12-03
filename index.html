@@ -74,10 +74,9 @@
             justify-content: space-around;
             width: 25px;
             height: 20px;
-            /* ILUMINACIÓN SUTIL: Fondo oscuro y sombra tenue */
+            /* ILUMINACIÓN SUTIL */
             background-color: rgba(0, 0, 0, 0.6); 
             border-radius: 0 0 5px 0; 
-            /* CAMBIO CLAVE: MAYOR ILUMINACIÓN */
             box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); /* Dorado sutil en el borde */
         }
 
@@ -102,7 +101,6 @@
             border-top: 1px solid var(--color-gold); 
             transform: translateX(-100%); 
             transition: transform 0.3s ease-in-out;
-            /* CAMBIO CLAVE: Sombra más suave y extendida */
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95); 
         }
 
@@ -118,30 +116,130 @@
             font-weight: 500;
             transition: background-color 0.3s, color 0.3s;
         }
-        /* Color dorado en el hover del menú */
         .nav-menu li a:hover {
             background-color: #333;
             color: var(--color-gold); 
         }
-        
-        /* MEDIA QUERY (MÓVIL) - Ajuste del banner */
+
+        /* --- NUEVOS ESTILOS: SECCIÓN QUIÉNES SOMOS --- */
+        #quienes-somos-page {
+            display: none; /* Inicia oculto */
+            padding: 60px 20px; 
+            min-height: calc(100vh - var(--promo-bar-height));
+            background-color: var(--color-dark);
+            color: #E0E0E0;
+            margin-top: var(--promo-bar-height); 
+            position: relative; 
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Contenedor del Botón */
+        .back-button-container {
+            padding-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Botón "Volver al Inicio" con brillo */
+        #back-to-home-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--color-gold);
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-gold);
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4); /* Brillo Dorado */
+        }
+
+        #back-to-home-btn:hover {
+            background-color: rgba(197, 166, 124, 0.1);
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
+        }
+
+        /* Estilos de Contenido */
+        .quienes-somos-content img {
+            display: block;
+            margin: 0 auto 30px auto;
+            max-width: 200px;
+            height: auto;
+            border: 1px solid var(--color-gold);
+            padding: 5px;
+        }
+
+        .quienes-somos-content h3 {
+            color: var(--color-gold);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .quienes-somos-content p {
+            text-align: justify;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .quienes-somos-content strong {
+            color: var(--color-gold);
+        }
+
+        /* Ajuste Móvil */
         @media (max-width: 768px) {
             #main-banner { margin-top: var(--promo-bar-height) !important; height: auto; min-height: calc(100vh - var(--promo-bar-height)); align-items: center; }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
+            
+            #quienes-somos-page {
+                padding: 40px 15px;
+            }
+            .quienes-somos-content h3 {
+                font-size: 1.5em;
+            }
         }
     </style>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const promoBarHeight = getComputedStyle(document.documentElement).getPropertyValue('--promo-bar-height') || '45px';
             document.getElementById('main-banner').classList.add('visible');
             
-            // Lógica del menú de hamburguesa
+            // 1. Lógica del menú de hamburguesa
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
-
             hamburger.addEventListener('click', () => {
                 navMenu.classList.toggle('open');
+            });
+            
+            // 2. Lógica para la sección QUIÉNES SOMOS
+            const quienesSomosPage = document.getElementById('quienes-somos-page');
+            const mainBanner = document.getElementById('main-banner');
+            // Referencia al enlace en el menú
+            const quienesSomosLink = document.getElementById('quienes-somos-link'); 
+            const backToHomeBtn = document.getElementById('back-to-home-btn');
+
+            // Mostrar QUIÉNES SOMOS
+            quienesSomosLink.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                navMenu.classList.remove('open'); // Cierra el menú
+                mainBanner.style.display = 'none'; // Oculta el banner
+                quienesSomosPage.style.display = 'block'; // Muestra QUIÉNES SOMOS
+                window.scrollTo(0, 0); // Desplaza al inicio
+            });
+
+            // Ocultar QUIÉNES SOMOS y Volver al inicio
+            backToHomeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                quienesSomosPage.style.display = 'none'; // Oculta QUIÉNES SOMOS
+                mainBanner.style.display = 'flex'; // Muestra el banner principal
+                window.scrollTo(0, 0); // Desplaza al inicio
             });
         });
     </script>
@@ -191,8 +289,7 @@
         
         <ul class="nav-menu" id="nav-menu-list">
             <li><a href="#" style="font-weight: 700;">INICIO</a></li>
-            <li><a href="#">QUIÉNES SOMOS</a></li>
-            <li><a href="#">SERVICIOS</a></li>
+            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> <li><a href="#">SERVICIOS</a></li>
             <li><a href="#">POLITICAS</a></li>
             <li><a href="#">CONTACTO</a></li>
         </ul>
@@ -205,12 +302,34 @@
         </video>
 
         <div class="video-overlay"></div>
-
         <div class="banner-content">
             </div>
-
     </section>
     
+    <section id="quienes-somos-page">
+        <div class="back-button-container">
+            <a href="#" id="back-to-home-btn">VOLVER AL INICIO</a>
+        </div>
+
+        <div class="quienes-somos-content">
+            <h3>QUIÉNES SOMOS</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA">
+
+            <p>
+                "RYNO DELTA" es la empresa confiable de equipo táctico y de supervivencia. 
+                Con más de 14 años de experiencia, nos dedicamos a importar y distribuir 
+                herramientas de alto rendimiento, asegurando que cada artículo y equipo 
+                cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.
+            </p>
+            <p>
+                Nuestro catálogo está curado para profesionales, operadores y entusiastas de la supervivencia.
+            </p>
+            <p style="text-align: center; margin-top: 40px;">
+                <strong>Equipamos tu confianza en cada despliegue.</strong>
+            </p>
+        </div>
+    </section>
+
     <footer>
         <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
     </footer>
