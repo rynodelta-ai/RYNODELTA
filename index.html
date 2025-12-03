@@ -121,7 +121,7 @@
         }
 
         /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
-        #quienes-somos-page, #servicios-page, #politicas-page { /* APLICADO A LAS TRES SECCIONES */
+        #quienes-somos-page, #servicios-page, #politicas-page { 
             display: none; 
             padding: 60px 20px; 
             min-height: calc(100vh - var(--promo-bar-height));
@@ -190,6 +190,24 @@
             color: var(--color-gold);
         }
 
+        /* Estilos específicos para contenido de servicios */
+        .service-list {
+            margin-top: 25px;
+            padding-left: 20px;
+        }
+
+        .service-list strong {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #E0E0E0; 
+        }
+        
+        .service-list em {
+            color: var(--color-gold);
+            font-style: normal;
+        }
+
         /* Estilos específicos para contenido de políticas */
         .policy-section {
             margin-top: 30px;
@@ -230,11 +248,11 @@
     </style>
     
     <script>
-        // Función para ocultar todas las páginas secundarias (Actualizada)
+        // Función para ocultar todas las páginas secundarias
         function hideAllSecondaryPages() {
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
-            document.getElementById('politicas-page').style.display = 'none'; // NUEVO
+            document.getElementById('politicas-page').style.display = 'none'; 
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -250,17 +268,17 @@
             const inicioLink = document.getElementById('inicio-link'); 
             const quienesSomosLink = document.getElementById('quienes-somos-link'); 
             const serviciosLink = document.getElementById('servicios-link'); 
-            const politicasLink = document.getElementById('politicas-link'); // NUEVA REFERENCIA
+            const politicasLink = document.getElementById('politicas-link'); 
             
             // Referencias de Páginas
             const quienesSomosPage = document.getElementById('quienes-somos-page');
             const serviciosPage = document.getElementById('servicios-page'); 
-            const politicasPage = document.getElementById('politicas-page'); // NUEVA REFERENCIA
+            const politicasPage = document.getElementById('politicas-page'); 
             
             // Referencias de Botones
             const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
-            const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas'); // NUEVA REFERENCIA
+            const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas'); 
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
             hamburger.addEventListener('click', () => {
@@ -308,7 +326,7 @@
                 window.scrollTo(0, 0); 
             });
             
-            // 6. NUEVA LÓGICA: Lógica para la sección POLÍTICAS
+            // 6. Lógica para la sección POLÍTICAS
             politicasLink.addEventListener('click', (e) => {
                 e.preventDefault(); 
                 navMenu.classList.remove('open'); 
@@ -329,7 +347,7 @@
                 navigateToHome();
             });
             
-            backToHomeBtnPoliticas.addEventListener('click', (e) => { // NUEVA LÓGICA
+            backToHomeBtnPoliticas.addEventListener('click', (e) => { 
                 e.preventDefault();
                 navigateToHome();
             });
@@ -364,7 +382,8 @@
             <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li>
             <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li> 
             <li><a href="#" id="servicios-link">SERVICIOS</a></li>
-            <li><a href="#" id="politicas-link">POLITICAS</a></li> <li><a href="#">CONTACTO</a></li>
+            <li><a href="#" id="politicas-link">POLITICAS</a></li> 
+            <li><a href="#">CONTACTO</a></li>
         </ul>
     </nav>
 
@@ -424,7 +443,7 @@
         </div>
 
         <div class="page-content">
-            <h3>POLÍTICAS DE RYNO DELTA</h3>
+            <h3>POLÍTICAS</h3>
             <img src="logoryno33.png" alt="Logo RYNO DELTA Políticas">
 
             <div class="policy-section">
@@ -444,15 +463,15 @@
             <div class="policy-section">
                 <h4>POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h4>
                 <p>
-                    Todos nuestros productos cuentan con una garantía de <strong>60 días</strong> a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
+                    Todos nuestros productos cuentan con una garantía **SEGÚN EL PRODUCTO** a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
                 </p>
                 <ul class="policy-list">
-                    <li>Daños causados por mal uso, accidentes o desgaste normal.</li>
+                    <li>Daños causados por mal uso **o abuso**, accidentes o desgaste normal.</li>
                     <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
                     <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
                 </ul>
                 <p>
-                    Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a <strong>5 días hábiles</strong> desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
+                    Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a 5 días hábiles desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
                 </p>
             </div>
         </div>
