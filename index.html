@@ -39,6 +39,8 @@
             align-items: center;
             justify-content: flex-start;
             padding: 0;
+            /* Asegurar que el banner esté visible solo al inicio */
+            display: flex;
         }
 
         .banner-video {
@@ -120,8 +122,106 @@
             color: var(--color-gold);	
         }
 
+        /* --- SECCIÓN DE CATEGORÍAS (NUEVO) --- */
+        #categories-section {
+            padding: 40px 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        /* Línea divisora sutil */
+        .divider-line {
+            width: 80%;
+            height: 1px;
+            background-color: rgba(197, 166, 124, 0.3);
+            margin: 0 auto 40px auto;
+        }
+
+        .categories-container {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+            gap: 20px; /* Espacio entre categorías */
+            justify-content: center; /* Centrado en móvil */
+        }
+
+        .category-item {
+            width: 100%; /* Ancho completo en móvil */
+            background-color: #111;
+            border: 2px solid var(--color-gold);
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin: 10px 0; /* Espacio entre items en móvil */
+            max-width: 450px; /* Limite de ancho en móvil/vertical */
+            display: block; /* Asegura que sea un bloque para el padding-top */
+        }
+        
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5);
+        }
+
+        /* Contenedor para mantener la relación de aspecto 16:9 */
+        .aspect-ratio-box {
+            position: relative;
+            width: 100%;
+            /* Cálculo 9/16 * 100 = 56.25% para mantener 16:9 */
+            padding-top: 56.25%; 
+        }
+
+        /* Imagen de Fondo (16:9) */
+        .category-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            /* La opacidad del texto se maneja con el overlay */
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .category-title {
+            color: var(--color-gold);
+            font-size: 1.8em;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 1);
+        }
+        
+        /* Media Query para Escritorio: Dos columnas (Dos hileras) */
+        @media (min-width: 769px) {
+            .categories-container {
+                justify-content: space-between; /* Espaciado entre columnas */
+            }
+            .category-item {
+                width: calc(50% - 10px); /* 50% menos la mitad del gap (20px/2 = 10px) */
+                margin: 0; /* Eliminar margen vertical en PC */
+                max-width: none;
+            }
+        }
+        
         /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
-        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {	
+        /* Incluye la nueva página de Morrales */
+        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page {	
             display: none;	
             padding: 60px 20px;	
             min-height: calc(100vh - var(--promo-bar-height));
@@ -377,7 +477,7 @@
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
             
-            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {
+            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page {
                 padding: 40px 15px;
             }
             .page-content h3 {
@@ -397,12 +497,13 @@
     </style>
     
     <script>
-        // Función para ocultar todas las páginas secundarias (ACTUALIZADO)
+        // Función para ocultar todas las páginas secundarias (ACTUALIZADO: incluye Morrales)
         function hideAllSecondaryPages() {
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
             document.getElementById('politicas-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none'; 
+            document.getElementById('contacto-page').style.display = 'none';
+            document.getElementById('morrales-page').style.display = 'none'; // NUEVO
         }
         
         // FUNCIÓN: Actualiza los contadores y subtotal (valores de ejemplo)
@@ -459,6 +560,11 @@
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
             const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas');	
             const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
+            
+            // NUEVAS Referencias para MORRALES
+            const morralesLink = document.getElementById('morrales-category-link'); // Enlace de la categoría
+            const morralesPage = document.getElementById('morrales-page');         // Página de la categoría
+            const backToHomeBtnMorrales = document.getElementById('back-to-home-btn-morrales'); // Botón de Volver
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic) - AJUSTADA
             hamburger.addEventListener('click', () => {
@@ -489,7 +595,9 @@
             // Lógica compartida para volver al banner principal (Existente)
             function navigateToHome() {
                 hideAllSecondaryPages();
+                // Asegurar que el banner y las categorías estén visibles
                 mainBanner.style.display = 'flex';	
+                document.getElementById('categories-section').style.display = 'block'; // Aseguramos que las categorías se muestren
                 window.scrollTo(0, 0);	
             }
             
@@ -498,17 +606,29 @@
                 e.preventDefault();	navMenu.classList.remove('open');	navigateToHome();
             });
             quienesSomosLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); quienesSomosPage.style.display = 'block';	window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); quienesSomosPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
             serviciosLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); serviciosPage.style.display = 'block';	window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); serviciosPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
             politicasLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); politicasPage.style.display = 'block';	window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); politicasPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
             contactoLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	hideAllSecondaryPages(); contactoPage.style.display = 'block';	window.scrollTo(0, 0);	
+                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); contactoPage.style.display = 'block';	window.scrollTo(0, 0);	
             });
+            
+            // NUEVA LÓGICA DE NAVEGACIÓN (MORRALES)
+            morralesLink.addEventListener('click', (e) => {
+                e.preventDefault();	
+                mainBanner.style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none'; 
+                hideAllSecondaryPages(); 
+                morralesPage.style.display = 'block';	
+                window.scrollTo(0, 0);	
+            });
+            
+            // Lógica de botones "Volver al Inicio" (Existentes + Nuevo)
             backToHomeBtnQS.addEventListener('click', (e) => {
                 e.preventDefault(); navigateToHome();
             });
@@ -519,6 +639,9 @@
                 e.preventDefault(); navigateToHome();
             });
             backToHomeBtnContacto.addEventListener('click', (e) => { 
+                e.preventDefault(); navigateToHome();
+            });
+            backToHomeBtnMorrales.addEventListener('click', (e) => { // NUEVO
                 e.preventDefault(); navigateToHome();
             });
 
@@ -568,7 +691,7 @@
             <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
             <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
             <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
-            </marquee>
+        </marquee>
     </div>
     
     <nav id="main-nav">
@@ -621,6 +744,23 @@
             </div>
     </section>
     
+    <div class="divider-line"></div>
+
+    <section id="categories-section">
+        <div class="categories-container">
+            
+            <a href="#" class="category-item" id="morrales-category-link">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('morrales.jpg');">
+                        <div class="category-overlay">
+                            <h4 class="category-title">MORRALES</h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            </div>
+    </section>
     <section id="quienes-somos-page">
         <div class="back-button-container">
             <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a>	
@@ -729,8 +869,20 @@
             </a>
         </div>
     </section>
+    
+    <section id="morrales-page">
+        <div class="back-button-container">
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-morrales">VOLVER AL INICIO</a>
+        </div>
 
-
+        <div class="page-content">
+            <h3>CATÁLOGO DE MORRALES</h3>
+            <p style="text-align: center;">Aquí se mostrarán los productos de la categoría Morrales.</p>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Morrales"> 
+            
+            <p>¡Gracias por tu interés en nuestra línea de equipos de transporte y combate!</p>
+        </div>
+    </section>
     <footer>
         <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
     </footer>
