@@ -23,6 +23,12 @@
             color: #E0E0E0;
             line-height: 1.6;
             overflow-x: hidden !important;
+            transition: overflow 0.3s; /* Transición suave para evitar saltos visuales */
+        }
+        
+        /* FIX CRÍTICO 1: Evita el scroll del fondo cuando el sidebar o menú están abiertos */
+        .no-scroll {
+            overflow: hidden !important;
         }
 
         html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
@@ -55,7 +61,6 @@
             color: white; 
             margin-top: 15vh;
             text-align: center;
-            /* El contenido (texto) viene del video/poster. */
         }
         
         /* ESTILOS DEL MENÚ DE HAMBURGUESA */
@@ -102,6 +107,8 @@
             transform: translateX(-100%); 
             transition: transform 0.3s ease-in-out;
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95); 
+            max-height: calc(100vh - 50px - var(--promo-bar-height)); /* Ajuste para que no se salga */
+            overflow-y: auto;
         }
 
         .nav-menu.open {
@@ -164,8 +171,9 @@
             position: fixed;
             top: 0;
             right: 0;
-            height: 100%;
-            width: 250px; 
+            height: 100%; 
+            max-height: 98vh; /* Asegura un pequeño margen inferior */
+            width: 280px; 
             max-width: 90%; 
             background-color: rgba(0, 0, 0, 0.98); 
             z-index: 1000000; 
@@ -416,6 +424,23 @@
             document.getElementById('politicas-page').style.display = 'none';
             document.getElementById('contacto-page').style.display = 'none'; 
         }
+        
+        // FIX CRÍTICO 1: Función para bloquear/desbloquear el scroll del body
+        function toggleBodyScroll(lock) {
+            const body = document.body;
+            const navMenu = document.getElementById('nav-menu-list');
+
+            if (lock) {
+                // Bloquea el scroll solo si el menú o el carrito están abiertos
+                if (navMenu.classList.contains('open') || document.getElementById('cart-sidebar').classList.contains('open')) {
+                     body.classList.add('no-scroll');
+                }
+            } else {
+                // Desbloquea el scroll
+                body.classList.remove('no-scroll');
+            }
+        }
+
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('main-banner').classList.add('visible');
@@ -427,23 +452,12 @@
             const mainBanner = document.getElementById('main-banner');
             
             // Referencias de Enlaces y Páginas 
-            const inicioLink = document.getElementById('inicio-link'); 
-            const quienesSomosLink = document.getElementById('quienes-somos-link'); 
-            const serviciosLink = document.getElementById('servicios-link'); 
-            const politicasLink = document.getElementById('politicas-link'); 
-            const contactoLink = document.getElementById('contacto-link'); 
-            
+            const allLinks = document.querySelectorAll('.nav-menu a');
+
             const quienesSomosPage = document.getElementById('quienes-somos-page');
             const serviciosPage = document.getElementById('servicios-page'); 
             const politicasPage = document.getElementById('politicas-page'); 
             const contactoPage = document.getElementById('contacto-page'); 
-            
-            // Referencias de Botones
-            const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
-            const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
-            const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas'); 
-            // ✅ CORRECCIÓN APLICADA: Referencia al ID correcto del botón de Contacto
-            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
             
             // Referencia del Carrito y Sidebar
             const cartIcon = document.getElementById('cart-icon-container');
@@ -455,21 +469,44 @@
                 hideAllSecondaryPages();
                 mainBanner.style.display = 'flex'; 
                 window.scrollTo(0, 0); 
+                toggleBodyScroll(false); // Desbloquear scroll
             }
             
             // FUNCIÓN: Abre/Cierra el Sidebar del Carrito
             function toggleCartSidebar() {
                 cartSidebar.classList.toggle('open');
+                // Bloquea el scroll cuando el carrito está abierto, y desbloquea cuando se cierra
+                toggleBodyScroll(cartSidebar.classList.contains('open')); 
+                
+                // Asegurar que el menú no esté abierto si el carrito lo está
+                if (cartSidebar.classList.contains('open')) {
+                    navMenu.classList.remove('open');
+                }
+            }
+            
+            // FUNCIÓN: Abre/Cierra el Menú Hamburguesa
+            function toggleMenu() {
+                navMenu.classList.toggle('open');
+                // Bloquea el scroll cuando el menú está abierto
+                toggleBodyScroll(navMenu.classList.contains('open')); 
+                
+                 // Asegurar que el carrito no esté abierto si el menú lo está
+                if (navMenu.classList.contains('open')) {
+                    cartSidebar.classList.remove('open');
+                }
             }
 
+
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic)
-            hamburger.addEventListener('click', () => {
-                navMenu.classList.toggle('open');
-            });
+            hamburger.addEventListener('click', toggleMenu);
 
             // 2. Auto-contracción del menú
             mainNav.addEventListener('mouseleave', () => {
                 if (navMenu.classList.contains('open')) {
+                    // Mantener el scroll bloqueado si el carrito sigue abierto
+                    if (!cartSidebar.classList.contains('open')) {
+                        toggleBodyScroll(false); 
+                    }
                     navMenu.classList.remove('open');
                 }
             });
@@ -478,71 +515,42 @@
             cartIcon.addEventListener('click', toggleCartSidebar); 
             closeCartBtn.addEventListener('click', toggleCartSidebar); 
 
-            // 4. Lógica de Navegación 
-            inicioLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                navMenu.classList.remove('open'); 
-                navigateToHome();
-            });
+            // 4. Lógica de Navegación (Enlaces)
+            allLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Cierra menú y desbloquea scroll
+                    navMenu.classList.remove('open');
+                    toggleBodyScroll(false); 
+                    
+                    const targetId = link.id.split('-')[0]; // inicio, quienes, servicios, etc.
 
-            quienesSomosLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
-                hideAllSecondaryPages();
-                quienesSomosPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
-            });
-
-            serviciosLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
-                hideAllSecondaryPages();
-                serviciosPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
-            });
-            
-            politicasLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
-                hideAllSecondaryPages();
-                politicasPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
-            });
-            
-            contactoLink.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                navMenu.classList.remove('open'); 
-                mainBanner.style.display = 'none'; 
-                hideAllSecondaryPages();
-                contactoPage.style.display = 'block'; 
-                window.scrollTo(0, 0); 
+                    mainBanner.style.display = 'none'; 
+                    hideAllSecondaryPages();
+                    window.scrollTo(0, 0); 
+                    
+                    if (targetId === 'inicio') {
+                        navigateToHome();
+                    } else if (targetId === 'quienes') {
+                        quienesSomosPage.style.display = 'block'; 
+                    } else if (targetId === 'servicios') {
+                        serviciosPage.style.display = 'block';
+                    } else if (targetId === 'politicas') {
+                        politicasPage.style.display = 'block';
+                    } else if (targetId === 'contacto') {
+                        contactoPage.style.display = 'block';
+                    }
+                });
             });
 
 
-            // 5. Lógica para Volver al inicio 
-            
-            backToHomeBtnQS.addEventListener('click', (e) => {
-                e.preventDefault();
-                navigateToHome();
-            });
-
-            backToHomeBtnServicios.addEventListener('click', (e) => { 
-                e.preventDefault();
-                navigateToHome();
-            });
-            
-            backToHomeBtnPoliticas.addEventListener('click', (e) => { 
-                e.preventDefault();
-                navigateToHome();
-            });
-            
-            // ✅ CORRECCIÓN: Listener para el botón de Contacto con el ID correcto.
-            backToHomeBtnContacto.addEventListener('click', (e) => { 
-                e.preventDefault();
-                navigateToHome();
+            // 5. Lógica para Volver al inicio (Botones)
+            document.querySelectorAll('.back-to-home-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateToHome();
+                });
             });
 
         });
@@ -701,22 +709,3 @@
 
         <div class="page-content">
             <h3>CONTACTO</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Contacto">
-            
-            <a href="http://wa.me/573148172002" target="_blank" class="contact-button whatsapp-button">
-                WHATSAPP (314 817 2002)
-            </a>
-            
-            <a href="mailto:RYNODELTA@GMAIL.COM" class="contact-button email-button">
-                CORREO ELECTRÓNICO (RYNODELTA@GMAIL.COM)
-            </a>
-        </div>
-    </section>
-
-
-    <footer>
-        <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
-    </footer>
-
-</body>
-</html>
