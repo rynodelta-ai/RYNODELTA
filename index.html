@@ -122,7 +122,7 @@
             color: var(--color-gold);	
         }
 
-        /* --- SECCIÓN DE CATEGORÍAS (VERSION 2.0 - SOLUCIÓN DE DOBLE FILA) --- */
+        /* --- SECCIÓN DE CATEGORÍAS --- */
         #categories-section {
             padding: 40px 10px;
             max-width: 1200px;
@@ -156,7 +156,7 @@
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             margin: 10px 0; /* Espacio entre items en móvil */
-            /* max-width: 450px; ELIMINADO de aquí y movido al media query de móvil (Solución V2.0) */
+            max-width: 450px; /* Limite de ancho en móvil/vertical */
             display: block; /* Asegura que sea un bloque para el padding-top */
         }
         
@@ -170,7 +170,7 @@
             position: relative;
             width: 100%;
             /* Cálculo 9/21 * 100 = 42.86% para mantener 21:9 */
-            padding-top: 42.86%; 
+            padding-top: 42.86%; 
         }
 
         /* Imagen de Fondo */
@@ -206,7 +206,7 @@
             text-shadow: 0 0 5px rgba(0, 0, 0, 1);
         }
         
-        /* Media Query para Escritorio: Dos columnas (Doble fila) - SOLUCIÓN V2.0 */
+        /* Media Query para Escritorio: Dos columnas (Dos hileras) */
         @media (min-width: 769px) {
             .categories-container {
                 justify-content: space-between; /* Espaciado entre columnas */
@@ -214,15 +214,7 @@
             .category-item {
                 width: calc(50% - 10px); /* 50% menos la mitad del gap (20px/2 = 10px) */
                 margin: 0; /* Eliminar margen vertical en PC */
-                max-width: none; /* Asegura que la regla del 50% tenga prioridad */
-            }
-        }
-        
-        /* Media Query para Móviles/Tabletas Verticales: Reintroduce el max-width para centrar y limitar - SOLUCIÓN V2.0 */
-        @media (max-width: 768px) {
-            .category-item {
-                max-width: 450px; /* Límite para que no crezca demasiado en móvil */
-                margin: 10px auto; /* Centrado en móvil */
+                max-width: none;
             }
         }
         
@@ -274,7 +266,7 @@
             max-width: 200px;
             height: auto;
             /* Corrección: Se elimina el borde y el padding del logo */
-            border: none; 
+            border: none; 
             padding: 0;
         }
 
@@ -480,10 +472,10 @@
 
         /* Ajuste Móvil */
         @media (max-width: 768px) {
-            #main-banner { 
-                margin-top: var(--promo-bar-height) !important; 
-                height: auto; 
-                align-items: center; 
+            #main-banner { 
+                margin-top: var(--promo-bar-height) !important; 
+                height: auto; 
+                align-items: center; 
             }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
@@ -501,14 +493,8 @@
                 padding: 5px; /* Mantenemos el padding reducido de la modificación anterior */
             }
             /* NUEVA REGLA: Reducir fuente del encabezado del carrito en móvil para evitar que el texto se corte */
-            #cart-popup h4 { 
-                font-size: 1.0em; 
-            }
-            
-            /* REGLA AGREGADA (Versión 2.0): Asegura el límite de ancho y centrado en móvil */
-            .category-item {
-                max-width: 450px; /* Límite para que no crezca demasiado en móvil */
-                margin: 10px auto; /* Centrado en móvil */
+            #cart-popup h4 { 
+                font-size: 1.0em; 
             }
         }
     </style>
@@ -520,15 +506,15 @@
             document.getElementById('servicios-page').style.display = 'none';
             document.getElementById('politicas-page').style.display = 'none';
             document.getElementById('contacto-page').style.display = 'none';
-            document.getElementById('morrales-page').style.display = 'none'; 
-            document.getElementById('accesorios-page').style.display = 'none'; 
+            document.getElementById('morrales-page').style.display = 'none'; 
+            document.getElementById('accesorios-page').style.display = 'none'; // NUEVO
         }
         
         // FUNCIÓN: Actualiza los contadores y subtotal (valores de ejemplo)
         function updateCart() {
             // Valores de ejemplo para simular un carrito
             const productCount = 1;
-            const subtotalAmount = 45000; 
+            const subtotalAmount = 45000; 
 
             // Formatear el valor del subtotal a Peso Colombiano ($45.000)
             const formatter = new Intl.NumberFormat('es-CO', {
@@ -569,24 +555,24 @@
             const quienesSomosLink = document.getElementById('quienes-somos-link');	
             const serviciosLink = document.getElementById('servicios-link');	
             const politicasLink = document.getElementById('politicas-link');	
-            const contactoLink = document.getElementById('contacto-link'); 
+            const contactoLink = document.getElementById('contacto-link'); 
             const quienesSomosPage = document.getElementById('quienes-somos-page');
             const serviciosPage = document.getElementById('servicios-page');	
             const politicasPage = document.getElementById('politicas-page');	
-            const contactoPage = document.getElementById('contacto-page'); 
+            const contactoPage = document.getElementById('contacto-page'); 
             const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
             const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
             const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas');	
-            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
+            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
             
             // Referencias para MORRALES (Existentes)
             const morralesLink = document.getElementById('morrales-category-link'); // Enlace de la categoría
-            const morralesPage = document.getElementById('morrales-page');         // Página de la categoría
+            const morralesPage = document.getElementById('morrales-page');         // Página de la categoría
             const backToHomeBtnMorrales = document.getElementById('back-to-home-btn-morrales'); // Botón de Volver
             
-            // Referencias para ACCESORIOS
+            // NUEVAS Referencias para ACCESORIOS
             const accesoriosLink = document.getElementById('accesorios-category-link'); // Enlace de la categoría
-            const accesoriosPage = document.getElementById('accesorios-page');         // Página de la categoría
+            const accesoriosPage = document.getElementById('accesorios-page');         // Página de la categoría
             const backToHomeBtnAccesorios = document.getElementById('back-to-home-btn-accesorios'); // Botón de Volver
 
             // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic) - AJUSTADA
@@ -607,7 +593,7 @@
             // Auto-contracción del carrito cuando el mouse abandona el área (solo en escritorio)
             document.getElementById('cart-nav').addEventListener('mouseleave', () => {
                 // Solo si no está en un dispositivo táctil o la pantalla es pequeña
-                if (window.innerWidth > 768) { 
+                if (window.innerWidth > 768) { 
                     if (cartPopup.classList.contains('open')) {
                         cartPopup.classList.remove('open');
                     }
@@ -645,18 +631,18 @@
             morralesLink.addEventListener('click', (e) => {
                 e.preventDefault();	
                 mainBanner.style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none'; 
-                hideAllSecondaryPages(); 
+                document.getElementById('categories-section').style.display = 'none'; 
+                hideAllSecondaryPages(); 
                 morralesPage.style.display = 'block';	
                 window.scrollTo(0, 0);	
             });
             
-            // LÓGICA DE NAVEGACIÓN (ACCESORIOS)
+            // NUEVA LÓGICA DE NAVEGACIÓN (ACCESORIOS)
             accesoriosLink.addEventListener('click', (e) => {
                 e.preventDefault();	
                 mainBanner.style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none'; 
-                hideAllSecondaryPages(); 
+                document.getElementById('categories-section').style.display = 'none'; 
+                hideAllSecondaryPages(); 
                 accesoriosPage.style.display = 'block';	
                 window.scrollTo(0, 0);	
             });
@@ -671,13 +657,13 @@
             backToHomeBtnPoliticas.addEventListener('click', (e) => {	
                 e.preventDefault(); navigateToHome();
             });
-            backToHomeBtnContacto.addEventListener('click', (e) => { 
+            backToHomeBtnContacto.addEventListener('click', (e) => { 
                 e.preventDefault(); navigateToHome();
             });
-            backToHomeBtnMorrales.addEventListener('click', (e) => { 
+            backToHomeBtnMorrales.addEventListener('click', (e) => { 
                 e.preventDefault(); navigateToHome();
             });
-            backToHomeBtnAccesorios.addEventListener('click', (e) => { 
+            backToHomeBtnAccesorios.addEventListener('click', (e) => { // NUEVO
                 e.preventDefault(); navigateToHome();
             });
 
@@ -699,7 +685,7 @@
             // Lógica del Carrito (Abrir/Cerrar por clic) - NUEVO
             cartIcon.addEventListener('click', () => {
                 // CIERRA el menú de hamburguesa al abrir el carrito
-                navMenu.classList.remove('open'); 
+                navMenu.classList.remove('open'); 
                 // Abre/Cierra el carrito
                 cartPopup.classList.toggle('open');
             });
@@ -747,7 +733,7 @@
     
     <div id="cart-nav">
         <div class="cart-icon" id="cart-icon">
-            🛒 
+            🛒 
             <span id="product-count" class="product-count">0</span>
         </div>
         
@@ -756,9 +742,9 @@
             <h4 style="margin-top: 50px;">🛒 Tu Carrito de Compras</h4>
             <p style="text-align: center; font-size: 1.1em;">Productos en el carrito: <strong id="popup-product-count">0</strong></p>
             
-            <p style="text-align: center; font-size: 1.2em; margin-top: 20px; 
-                     padding: 5px; border-radius: 3px; 
-                     background-color: rgba(197, 166, 124, 0.1);">
+            <p style="text-align: center; font-size: 1.2em; margin-top: 20px; 
+                      padding: 5px; border-radius: 3px; 
+                      background-color: rgba(197, 166, 124, 0.1);">
                 Subtotal: <strong id="subtotal-display">$0</strong>
             </p>
             
@@ -783,14 +769,13 @@
     <div class="divider-line"></div>
 
     <section id="categories-section">
-        <h2 style="text-align: center; color: var(--color-gold); margin-bottom: 30px;">🔥 CATEGORÍAS TÁCTICAS 🔥</h2>
         <div class="categories-container">
             
             <a href="#" class="category-item" id="morrales-category-link">
                 <div class="aspect-ratio-box">
                     <div class="category-image" style="background-image: url('morrales.jpg');">
                         <div class="category-overlay">
-                            <h4 class="category-title">MORRALES TÁCTICOS</h4>
+                            <h4 class="category-title">MORRALES</h4>
                         </div>
                     </div>
                 </div>
@@ -806,119 +791,146 @@
                 </div>
             </a>
             
-            <a href="#" class="category-item" id="cuchillos-category-link">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('cuchillos.jpg');">
-                        <div class="category-overlay">
-                            <h4 class="category-title">CUCHILLERÍA Y EDC</h4>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="category-item" id="linternas-category-link">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('linternas.jpg');">
-                        <div class="category-overlay">
-                            <h4 class="category-title">LINTERNAS LED</h4>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="category-item" id="ropa-category-link">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('ropa.jpg');">
-                        <div class="category-overlay">
-                            <h4 class="category-title">ROPA TÁCTICA</h4>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
             </div>
     </section>
-    
     <section id="quienes-somos-page">
         <div class="back-button-container">
-            <a href="#" id="back-to-home-btn-qs" class="back-to-home-btn">Volver al Inicio</a>
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a>	
         </div>
+
         <div class="page-content">
+            <h3>QUIÉNES SOMOS</h3>
             <img src="logoryno33.png" alt="Logo RYNO DELTA">
-            <h3>Nuestra Misión</h3>
-            <p>RYNO DELTA es una marca dedicada a proveer equipo táctico y de supervivencia de la más alta calidad en Colombia. Nuestro objetivo es equipar a profesionales y entusiastas con las herramientas necesarias para enfrentar cualquier desafío, garantizando durabilidad y rendimiento.</p>
+            <p>"RYNO DELTA" es la empresa confiable de equipo táctico y de supervivencia. Con más de 14 años de experiencia, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo y equipo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.</p>
+            <p>Nuestro catálogo está curado para profesionales, operadores y entusiastas de la supervivencia.</p>
+            <p style="text-align: center; margin-top: 40px;">
+                <strong>Equipamos tu confianza en cada despliegue.</strong>
+            </p>
         </div>
     </section>
-    
+
     <section id="servicios-page">
         <div class="back-button-container">
-            <a href="#" id="back-to-home-btn-servicios" class="back-to-home-btn">Volver al Inicio</a>
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-servicios">VOLVER AL INICIO</a>
         </div>
+
         <div class="page-content">
-            <h3>Servicios Destacados</h3>
-            <p>Ofrecemos:</p>
-            <ul class="service-list">
-                <li><strong>Asesoría Personalizada:</strong> <em>Recomendaciones de equipo</em> según tus necesidades.</li>
-                <li><strong>Envíos Nacionales:</strong> Cobertura en toda Colombia.</li>
-                <li><strong>Garantía de Calidad:</strong> Todos nuestros productos cuentan con respaldo.</li>
-            </ul>
-            <span class="obsequio-text">¡Recuerda que tienes ENVÍO GRATIS + OBSEQUIO en compras superiores a $80.000!</span>
-        </div>
+            <h3>NUESTROS SERVICIOS</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios"> 
+            
+            <p>Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.</p>
+            <div class="service-list">
+                
+                <strong>PAGO CONTRA ENTREGA:</strong>	
+                <p>Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
+                    <br><em>*El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad de las transportadoras.</em></p>
+                
+                <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong>	
+                <p>Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento. Obtenga tiempo de entrega preferencial y recompensas exclusivas.</p>
+                
+                <strong>Logística y Envíos Nacionales:</strong>	
+                <p>Envío Gratuito para órdenes que superen los <strong>$80.000</strong>.
+                    <br>Tiempo de entrega estándar: 3-5 días hábiles.</p>
+                
+                <p class="obsequio-text">Todos los envíos a partir de $80.000 van con un OBSEQUIO PARA TI.</p>
+                
+                <p>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</p>
+                <p><strong style="color: #E0E0E0;">Recomendación:</strong> Confirme su cobertura antes de realizar la compra.</p>
+            </div>
+            </div>
     </section>
-    
+
     <section id="politicas-page">
         <div class="back-button-container">
-            <a href="#" id="back-to-home-btn-politicas" class="back-to-home-btn">Volver al Inicio</a>
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-politicas">VOLVER AL INICIO</a>
         </div>
+
         <div class="page-content">
-            <h3>Políticas de la Tienda</h3>
+            <h3>POLÍTICAS</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Políticas">
+
             <div class="policy-section">
-                <h4>Política de Envíos</h4>
-                <p>Realizamos envíos a nivel nacional. Los tiempos de entrega varían según la ubicación. El envío es gratuito para compras superiores a $80.000.</p>
+                <h4>LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h4>
+                <p>
+                    En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
+                </p>
+                <ul class="policy-list">
+                    <li>Procesamiento y envío de pedidos.</li>
+                    <li>Gestión de pagos y emisión de facturas.</li>
+                    <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
+                    <li>Mejora de nuestros servicios y la experiencia de compra.</li>
+                    </ul>
+                <p>Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.</p>
             </div>
+
             <div class="policy-section">
-                <h4>Política de Devoluciones</h4>
-                <p>Aceptamos devoluciones dentro de los 5 días siguientes a la recepción del producto, siempre y cuando esté en su empaque original y sin usar.</p>
+                <h4>POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h4>
+                <p>
+                    Todos nuestros productos cuentan con una garantía SEGÚN EL PRODUCTO a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
+                </p>
+                <ul class="policy-list">
+                    <li>Daños causados por mal uso o abuso, accidentes o desgaste normal.</li>
+                    <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
+                    <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
+                </ul>
+                <p>
+                    Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a 5 días hábiles desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
+                </p>
+                <p>
+                    Recuerda que según la norma colombiana es el cliente quien debe cubrir los gastos de fletes cuando de garantías o devoluciones se trata.
+                </p>
             </div>
         </div>
     </section>
     
     <section id="contacto-page">
         <div class="back-button-container">
-            <a href="#" id="back-to-home-btn-contacto" class="back-to-home-btn">Volver al Inicio</a>
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-contacto">VOLVER AL INICIO</a>
         </div>
+
         <div class="page-content">
-            <h3>Contáctanos</h3>
-            <p>Estamos disponibles para atender todas tus consultas:</p>
-            <a href="https://wa.me/numerodetelefono" target="_blank" class="contact-button whatsapp-button">
-                📱 CHATEAR POR WHATSAPP
+            <h3>CONTACTO</h3>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Contacto">
+            
+            <a href="http://wa.me/573148172002" target="_blank" class="contact-button whatsapp-button">
+                WHATSAPP (314 817 2002)
             </a>
-            <a href="mailto:tuemail@ejemplo.com" class="contact-button email-button">
-                📧 ENVIAR CORREO ELECTRÓNICO
+            
+            <a href="mailto:RYNODELTA@GMAIL.COM" class="contact-button email-button">
+                CORREO ELECTRÓNICO (RYNODELTA@GMAIL.COM)
             </a>
-            <p style="text-align: center; margin-top: 30px;">Horario de Atención: Lunes a Viernes 8am - 5pm.</p>
         </div>
     </section>
-
+    
     <section id="morrales-page">
         <div class="back-button-container">
-            <a href="#" id="back-to-home-btn-morrales" class="back-to-home-btn">Volver al Inicio</a>
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-morrales">VOLVER AL INICIO</a>
         </div>
+
         <div class="page-content">
-            <h3>MORRALES TÁCTICOS</h3>
-            <p style="text-align: center;">Aquí irá el listado de morrales.</p>
+            <h3>CATÁLOGO DE MORRALES</h3>
+            <p style="text-align: center;">Aquí se mostrarán los productos de la categoría Morrales.</p>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Morrales"> 
+            
+            <p>¡Gracias por tu interés en nuestra línea de equipos de transporte y combate!</p>
         </div>
     </section>
-
     <section id="accesorios-page">
         <div class="back-button-container">
-            <a href="#" id="back-to-home-btn-accesorios" class="back-to-home-btn">Volver al Inicio</a>
+            <a href="#" class="back-to-home-btn" id="back-to-home-btn-accesorios">VOLVER AL INICIO</a>
         </div>
+
         <div class="page-content">
-            <h3>ACCESORIOS PARA ARMAS</h3>
-            <p style="text-align: center;">Aquí irá el listado de accesorios.</p>
+            <h3>CATÁLOGO DE ACCESORIOS PARA ARMAS</h3>
+            <p style="text-align: center;">Aquí se mostrarán los productos de la categoría Accesorios para Armas.</p>
+            <img src="logoryno33.png" alt="Logo RYNO DELTA Accesorios"> 
+            
+            <p>¡Explora nuestra selección de accesorios tácticos y de tiro!</p>
         </div>
     </section>
+    <footer>
+        <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
 </html>
