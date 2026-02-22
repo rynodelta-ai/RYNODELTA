@@ -8,11 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
-        /* CRÍTICO: Variables para el cuerpo */
+        /* VARIABLES GLOBALES */
         :root {
             --color-dark: #000;
-            --color-gold: #C5A67C; /* Variable añadida para el color dorado */
-            --promo-bar-height: 45px; /* TAMAÑO FORZADO PARA LEGIBILIDAD EN PC */
+            --color-gold: #C5A67C; 
+            --promo-bar-height: 45px; 
         }
 
         body {
@@ -27,7 +27,7 @@
 
         html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
         
-        /* BANNER PRINCIPAL (Video de fondo) */
+        /* BANNER PRINCIPAL */
         #main-banner {
             position: relative;
             width: 100%;
@@ -38,9 +38,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 0;
-            /* Asegurar que el banner esté visible solo al inicio */
-            display: flex;
         }
 
         .banner-video {
@@ -51,15 +48,7 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2;
         }
 
-        .banner-content {
-            position: relative;	
-            z-index: 3;	
-            color: white;	
-            margin-top: 15vh;
-            text-align: center;
-        }
-        
-        /* ESTILOS DEL MENÚ DE HAMBURGUESA */
+        /* NAVEGACIÓN Y HAMBURGUESA */
         #main-nav {
             position: fixed;
             top: var(--promo-bar-height, 45px);	
@@ -67,7 +56,6 @@
             z-index: 999998;	
         }
 
-        /* Estilos del ícono de hamburguesa */
         .hamburger {
             padding: 15px;
             cursor: pointer;
@@ -89,7 +77,6 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* Estilos del menú desplegable */
         .nav-menu {
             list-style: none;
             padding: 0;
@@ -105,9 +92,7 @@
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95);	
         }
 
-        .nav-menu.open {
-            transform: translateX(0);	
-        }
+        .nav-menu.open { transform: translateX(0); }
 
         .nav-menu li a {
             display: block;
@@ -115,11 +100,6 @@
             text-decoration: none;
             color: #E0E0E0;
             font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .nav-menu li a:hover {
-            background-color: #333;
-            color: var(--color-gold);	
         }
 
         /* --- SECCIÓN DE CATEGORÍAS --- */
@@ -130,7 +110,6 @@
             position: relative;
         }
         
-        /* Línea divisora sutil */
         .divider-line {
             width: 80%;
             height: 1px;
@@ -140,13 +119,13 @@
 
         .categories-container {
             display: flex;
-            flex-wrap: wrap; /* Permite que los elementos se envuelvan */
-            gap: 20px; /* Espacio entre categorías */
-            justify-content: center; /* Centrado en móvil */
+            flex-wrap: wrap; 
+            gap: 20px; 
+            justify-content: center; /* Centrado en Móvil */
         }
 
         .category-item {
-            width: 100%; /* Ancho completo en móvil */
+            width: 100%; 
             background-color: #111;
             border: 2px solid var(--color-gold);
             border-radius: 8px;
@@ -155,9 +134,9 @@
             color: white;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin: 10px 0; /* Espacio entre items en móvil */
-            max-width: 450px; /* Limite de ancho en móvil/vertical */
-            display: block; /* Asegura que sea un bloque para el padding-top */
+            margin: 10px 0; 
+            max-width: 450px; 
+            display: block; 
         }
         
         .category-item:hover {
@@ -165,37 +144,26 @@
             box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5);
         }
 
-        /* Contenedor para mantener la relación de aspecto 21:9 */
         .aspect-ratio-box {
             position: relative;
             width: 100%;
-            /* Cálculo 9/21 * 100 = 42.86% para mantener 21:9 */
             padding-top: 42.86%; 
         }
 
-        /* Imagen de Fondo */
         .category-image {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
         }
 
         .category-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 10px;
         }
 
         .category-title {
@@ -203,186 +171,51 @@
             font-size: 1.8em;
             font-weight: 900;
             text-transform: uppercase;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 1);
         }
         
-        /* Media Query para Escritorio: Dos columnas (Dos hileras) */
+        /* --- SOLUCIÓN CENTRALIZACIÓN WEB --- */
         @media (min-width: 769px) {
             .categories-container {
-                justify-content: space-between; /* Espaciado entre columnas */
+                justify-content: center; 
+                gap: 40px;               
             }
             .category-item {
-                width: calc(50% - 10px); /* 50% menos la mitad del gap (20px/2 = 10px) */
-                margin: 0; /* Eliminar margen vertical en PC */
+                width: 420px;            
+                margin: 0; 
                 max-width: none;
             }
         }
         
-        /* --- ESTILOS COMPARTIDOS PARA PÁGINAS SECUNDARIAS --- */
-        /* Incluye la nueva página de Morrales y Accesorios */
+        /* PÁGINAS SECUNDARIAS */
         #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {	
             display: none;	
             padding: 60px 20px;	
             min-height: calc(100vh - var(--promo-bar-height));
             background-color: var(--color-dark);
-            color: #E0E0E0;
             margin-top: var(--promo-bar-height);	
-            position: relative;	
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Contenedor del Botón */
-        .back-button-container {
-            padding-bottom: 40px;
-            text-align: center;
-        }
-
-        /* Botón "Volver al Inicio" con brillo */
         .back-to-home-btn {	
             display: inline-block;
             padding: 10px 20px;
             text-decoration: none;
             color: var(--color-gold);
-            background-color: rgba(0, 0, 0, 0.7);
             border: 1px solid var(--color-gold);
             border-radius: 5px;
             font-weight: 700;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4);	
         }
 
-        .back-to-home-btn:hover {
-            background-color: rgba(197, 166, 124, 0.1);
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
-        }
-
-        /* Estilos de Contenido (Genéricos) */
-        .page-content img {
-            display: block;
-            margin: 0 auto 30px auto;
-            max-width: 200px;
-            height: auto;
-            /* Corrección: Se elimina el borde y el padding del logo */
-            border: none; 
-            padding: 0;
-        }
-
-        .page-content h3 {
-            color: var(--color-gold);
-            font-weight: 900;
-            text-transform: uppercase;
-            text-align: center;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .page-content p {
-            text-align: justify;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            line-height: 1.8;
-        }
-
-        .page-content strong {
-            color: var(--color-gold);
-        }
-
-        /* Estilos específicos para contenido de servicios */
-        .service-list {
-            margin-top: 25px;
-            padding-left: 20px;
-        }
-
-        .service-list strong {
-            display: block;
-            margin-top: 15px;
-            font-size: 1.2em;
-            color: #E0E0E0;	
-        }
-        
-        .service-list em {
-            color: var(--color-gold);
-            font-style: normal;
-        }
-        
-        /* Estilo para destacar el obsequio en servicios */
-        .obsequio-text {
-            display: block;
-            text-align: center;
-            font-weight: 900;
-            color: #25D366; /* Color verde para el obsequio */
-            margin: 15px 0;
-            font-size: 1.1em;
-        }
-
-        /* Estilos específicos para contenido de políticas */
-        .policy-section {
-            margin-top: 30px;
-            padding-bottom: 20px;
-            border-top: 1px solid rgba(197, 166, 124, 0.2);
-            padding-top: 15px;
-        }
-        
-        .policy-section h4 {
-            color: var(--color-gold);
-            font-weight: 700;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        
-        .policy-list {
-            list-style: disc;
-            margin-left: 20px;
-            padding-left: 0;
-        }
-        
-        /* NUEVOS ESTILOS: Botones de Contacto */
-        .contact-button {
-            display: block;
-            text-align: center;
-            padding: 15px 10px;
-            margin: 20px auto;
-            max-width: 400px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(197, 166, 124, 0.5); /* Iluminación dorada base */
-        }
-        
-        .whatsapp-button {
-            color: #fff;
-            background-color: #25D366;
-            border: 1px solid #128C7E;
-        }
-        .whatsapp-button:hover {
-            background-color: #128C7E;
-            box-shadow: 0 0 15px 3px rgba(37, 211, 102, 0.8); /* Iluminación verde */
-        }
-
-        .email-button {
-            color: var(--color-gold);
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--color-gold);
-        }
-        .email-button:hover {
-            background-color: rgba(197, 166, 124, 0.1);
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8); /* Iluminación dorada fuerte */
-        }
-
-        /* --- NUEVOS ESTILOS PARA EL CARRITO --- */
+        /* CARRITO */
         #cart-nav {
             position: fixed;
-            top: var(--promo-bar-height, 45px); /* Se alinea con el menú de hamburguesa */
-            right: 0;	/* Posicionado a la derecha */
+            top: var(--promo-bar-height, 45px); 
+            right: 0;	
             z-index: 999998;
         }
 
-        /* Estilos del ícono del carrito */
         .cart-icon {
             padding: 15px;
             cursor: pointer;
@@ -393,544 +226,174 @@
             justify-content: center;
             font-size: 1.5em;
             background-color: rgba(0, 0, 0, 0.6);	
-            border-radius: 0 0 0 5px; /* Esquina redondeada en la parte inferior izquierda */
+            border-radius: 0 0 0 5px; 
             box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
         }
         
-        /* Contador de productos */
         .product-count {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 5px; right: 5px;
             background-color: var(--color-gold);
             color: var(--color-dark);
             font-size: 0.6em;
             font-weight: 900;
             padding: 2px 5px;
             border-radius: 50%;
-            line-height: 1;
         }
 
-        /* Estilos del popup del carrito */
         .cart-popup {
             position: absolute;
-            top: 50px;	
-            right: 0;	
-            width: 250px;	/* Ancho unificado con el menú */
-            height: calc(100vh - 50px - var(--promo-bar-height)); /* Altura ajustable */
+            top: 50px; right: 0; width: 250px;	
+            height: calc(100vh - 100px); 
             background-color: rgba(0, 0, 0, 0.95);	
             border-top: 1px solid var(--color-gold);	
-            transform: translateX(100%); /* Oculto a la derecha */
+            transform: translateX(100%); 
             transition: transform 0.3s ease-in-out;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.95);	
             padding: 10px;
-            text-align: left;
         }
 
-        .cart-popup.open {
-            transform: translateX(0); /* Abierto */
-        }
+        .cart-popup.open { transform: translateX(0); }
 
-        /* Botón de cierre (X) */
-        .close-cart-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: var(--color-gold);
-            font-size: 1.5em;
-            cursor: pointer;
-            font-weight: 700;
-            line-height: 1;
-        }
-        
-        /* NUEVO: Estilo para el Botón de Comprar Ahora */
         .checkout-btn {
             display: block;
             width: 100%;
             padding: 10px;
             margin-top: 15px;
-            text-align: center;
-            font-size: 1.1em;
             font-weight: 900;
-            text-transform: uppercase;
             color: var(--color-dark);
             background-color: var(--color-gold);
             border: none;
-            border-radius: 3px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.5);
-        }
-        
-        .checkout-btn:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 15px 3px var(--color-gold);
         }
 
-
-        /* Ajuste Móvil */
         @media (max-width: 768px) {
-            #main-banner { 
-                margin-top: var(--promo-bar-height) !important; 
-                height: auto; 
-                align-items: center; 
-            }
+            #main-banner { height: auto; }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
-            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; }
-            
-            #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {
-                padding: 40px 15px;
-            }
-            .page-content h3 {
-                font-size: 1.5em;
-            }
-            .policy-section h4 {
-                font-size: 1.3em;
-            }
-            .cart-popup {
-                padding: 5px; /* Mantenemos el padding reducido de la modificación anterior */
-            }
-            /* NUEVA REGLA: Reducir fuente del encabezado del carrito en móvil para evitar que el texto se corte */
-            #cart-popup h4 { 
-                font-size: 1.0em; 
-            }
         }
     </style>
     
     <script>
-        // Función para ocultar todas las páginas secundarias (ACTUALIZADO: incluye Morrales y Accesorios)
         function hideAllSecondaryPages() {
-            document.getElementById('quienes-somos-page').style.display = 'none';
-            document.getElementById('servicios-page').style.display = 'none';
-            document.getElementById('politicas-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none';
-            document.getElementById('morrales-page').style.display = 'none'; 
-            document.getElementById('accesorios-page').style.display = 'none'; // NUEVO
+            const pages = ['quienes-somos-page', 'servicios-page', 'politicas-page', 'contacto-page', 'morrales-page', 'accesorios-page'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if(el) el.style.display = 'none';
+            });
         }
         
-        // FUNCIÓN: Actualiza los contadores y subtotal (valores de ejemplo)
-        function updateCart() {
-            // Valores de ejemplo para simular un carrito
-            const productCount = 1;
-            const subtotalAmount = 45000; 
-
-            // Formatear el valor del subtotal a Peso Colombiano ($45.000)
-            const formatter = new Intl.NumberFormat('es-CO', {
-                style: 'currency',
-                currency: 'COP',
-                minimumFractionDigits: 0
-            });
-            const formattedSubtotal = formatter.format(subtotalAmount).replace('COP', '$').trim();
-
-            // 1. Actualizar Contadores
-            document.getElementById('product-count').textContent = productCount;
-            document.getElementById('popup-product-count').textContent = productCount;
-
-            // 2. Actualizar Subtotal
-            document.getElementById('subtotal-display').textContent = formattedSubtotal;
+        function navigateToHome() {
+            hideAllSecondaryPages();
+            document.getElementById('main-banner').style.display = 'flex';
+            document.getElementById('categories-section').style.display = 'block';
+            window.scrollTo(0,0);
         }
 
-
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('main-banner').classList.add('visible');
-            
-            // Llamar a la nueva función al cargar la página para mostrar los valores iniciales
-            updateCart();
-            
-            // Referencias del Menú de Navegación (Originales)
-            const mainNav = document.getElementById('main-nav');	
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
-            const mainBanner = document.getElementById('main-banner');
-            
-            // NUEVAS Referencias del Carrito
             const cartIcon = document.getElementById('cart-icon');
             const cartPopup = document.getElementById('cart-popup');
-            const closeCartBtn = document.getElementById('close-cart-btn');
-            
-            // Referencias de Enlaces y Páginas (Existentes)
-            const inicioLink = document.getElementById('inicio-link');	
-            const quienesSomosLink = document.getElementById('quienes-somos-link');	
-            const serviciosLink = document.getElementById('servicios-link');	
-            const politicasLink = document.getElementById('politicas-link');	
-            const contactoLink = document.getElementById('contacto-link'); 
-            const quienesSomosPage = document.getElementById('quienes-somos-page');
-            const serviciosPage = document.getElementById('servicios-page');	
-            const politicasPage = document.getElementById('politicas-page');	
-            const contactoPage = document.getElementById('contacto-page'); 
-            const backToHomeBtnQS = document.getElementById('back-to-home-btn-qs');
-            const backToHomeBtnServicios = document.getElementById('back-to-home-btn-servicios');
-            const backToHomeBtnPoliticas = document.getElementById('back-to-home-btn-politicas');	
-            const backToHomeBtnContacto = document.getElementById('back-to-home-btn-contacto'); 
-            
-            // Referencias para MORRALES (Existentes)
-            const morralesLink = document.getElementById('morrales-category-link'); // Enlace de la categoría
-            const morralesPage = document.getElementById('morrales-page');         // Página de la categoría
-            const backToHomeBtnMorrales = document.getElementById('back-to-home-btn-morrales'); // Botón de Volver
-            
-            // NUEVAS Referencias para ACCESORIOS
-            const accesoriosLink = document.getElementById('accesorios-category-link'); // Enlace de la categoría
-            const accesoriosPage = document.getElementById('accesorios-page');         // Página de la categoría
-            const backToHomeBtnAccesorios = document.getElementById('back-to-home-btn-accesorios'); // Botón de Volver
 
-            // 1. Lógica del menú de hamburguesa (Abrir/Cerrar por clic) - AJUSTADA
             hamburger.addEventListener('click', () => {
-                // CIERRA el carrito al abrir el menú (AJUSTE DE COMPATIBILIDAD)
                 cartPopup.classList.remove('open');
-                // Abre/Cierra el menú
                 navMenu.classList.toggle('open');
             });
 
-            // 2. Auto-contracción cuando el mouse abandona el área del menú
-            mainNav.addEventListener('mouseleave', () => {
-                if (navMenu.classList.contains('open') && window.innerWidth > 768) { // Solo en escritorio
-                    navMenu.classList.remove('open');
-                }
-            });
-            
-            // Auto-contracción del carrito cuando el mouse abandona el área (solo en escritorio)
-            document.getElementById('cart-nav').addEventListener('mouseleave', () => {
-                // Solo si no está en un dispositivo táctil o la pantalla es pequeña
-                if (window.innerWidth > 768) { 
-                    if (cartPopup.classList.contains('open')) {
-                        cartPopup.classList.remove('open');
-                    }
-                }
-            });
-
-
-            // Lógica compartida para volver al banner principal (Existente)
-            function navigateToHome() {
-                hideAllSecondaryPages();
-                // Asegurar que el banner y las categorías estén visibles
-                mainBanner.style.display = 'flex';	
-                document.getElementById('categories-section').style.display = 'block'; // Aseguramos que las categorías se muestren
-                window.scrollTo(0, 0);	
-            }
-            
-            // Lógica de enlaces de navegación (Existentes)
-            inicioLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	navigateToHome();
-            });
-            quienesSomosLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); quienesSomosPage.style.display = 'block';	window.scrollTo(0, 0);	
-            });
-            serviciosLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); serviciosPage.style.display = 'block';	window.scrollTo(0, 0);	
-            });
-            politicasLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); politicasPage.style.display = 'block';	window.scrollTo(0, 0);	
-            });
-            contactoLink.addEventListener('click', (e) => {
-                e.preventDefault();	navMenu.classList.remove('open');	mainBanner.style.display = 'none';	document.getElementById('categories-section').style.display = 'none'; hideAllSecondaryPages(); contactoPage.style.display = 'block';	window.scrollTo(0, 0);	
-            });
-            
-            // LÓGICA DE NAVEGACIÓN (MORRALES)
-            morralesLink.addEventListener('click', (e) => {
-                e.preventDefault();	
-                mainBanner.style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none'; 
-                hideAllSecondaryPages(); 
-                morralesPage.style.display = 'block';	
-                window.scrollTo(0, 0);	
-            });
-            
-            // NUEVA LÓGICA DE NAVEGACIÓN (ACCESORIOS)
-            accesoriosLink.addEventListener('click', (e) => {
-                e.preventDefault();	
-                mainBanner.style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none'; 
-                hideAllSecondaryPages(); 
-                accesoriosPage.style.display = 'block';	
-                window.scrollTo(0, 0);	
-            });
-            
-            // Lógica de botones "Volver al Inicio" (Existentes + Nuevo)
-            backToHomeBtnQS.addEventListener('click', (e) => {
-                e.preventDefault(); navigateToHome();
-            });
-            backToHomeBtnServicios.addEventListener('click', (e) => {	
-                e.preventDefault(); navigateToHome();
-            });
-            backToHomeBtnPoliticas.addEventListener('click', (e) => {	
-                e.preventDefault(); navigateToHome();
-            });
-            backToHomeBtnContacto.addEventListener('click', (e) => { 
-                e.preventDefault(); navigateToHome();
-            });
-            backToHomeBtnMorrales.addEventListener('click', (e) => { 
-                e.preventDefault(); navigateToHome();
-            });
-            backToHomeBtnAccesorios.addEventListener('click', (e) => { // NUEVO
-                e.preventDefault(); navigateToHome();
-            });
-
-
-            // Lógica para cerrar ambos menús con la tecla ESC (MEJORADO)
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' || event.keyCode === 27) {
-                    // Cierra el menú de hamburguesa
-                    if (navMenu.classList.contains('open')) {
-                        navMenu.classList.remove('open');
-                    }
-                    // Cierra el carrito
-                    if (cartPopup.classList.contains('open')) {
-                        cartPopup.classList.remove('open');
-                    }
-                }
-            });
-
-            // Lógica del Carrito (Abrir/Cerrar por clic) - NUEVO
             cartIcon.addEventListener('click', () => {
-                // CIERRA el menú de hamburguesa al abrir el carrito
-                navMenu.classList.remove('open'); 
-                // Abre/Cierra el carrito
+                navMenu.classList.remove('open');
                 cartPopup.classList.toggle('open');
             });
 
-            // Lógica del Carrito (Cerrar con X) - NUEVO
-            closeCartBtn.addEventListener('click', () => {
-                cartPopup.classList.remove('open');
+            // Enlaces de navegación
+            document.getElementById('inicio-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                navMenu.classList.remove('open');
+                navigateToHome();
             });
-            
-            // Botón de Compra: No requiere JS ya que no es funcional (solo HTML/CSS)
+
+            // Ejemplo para activar Quiénes Somos
+            document.getElementById('quienes-somos-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                navMenu.classList.remove('open');
+                document.getElementById('main-banner').style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none';
+                hideAllSecondaryPages();
+                document.getElementById('quienes-somos-page').style.display = 'block';
+            });
         });
     </script>
-    
 </head>
 <body>
     
-    <div id="promo-bar" style="
-        position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 45px !important; line-height: 45px !important;	
-        background-color: rgba(0, 0, 0, 0.95) !important; z-index: 999999 !important; overflow: hidden !important;
-        white-space: nowrap !important; font-size: 16px !important;
-    ">
-        <marquee behavior="scroll" direction="left" scrollamount="4" loop="infinite"
-            style="width: 100%; height: 45px; line-height: 45px !important; color: #C5A67C !important; white-space: nowrap !important; display: inline-block !important;"
-        >
-            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
-            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
-            <span style="padding: 0 40px; font-weight: 700 !important;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
+    <div id="promo-bar" style="position: fixed; top: 0; left: 0; width: 100%; height: 45px; background-color: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px; overflow: hidden;">
+        <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #C5A67C; font-weight: 700;">
+            <span style="padding: 0 40px;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
         </marquee>
     </div>
     
     <nav id="main-nav">
         <div class="hamburger" id="hamburger-icon">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
+            <span class="line"></span><span class="line"></span><span class="line"></span>
         </div>
-        
         <ul class="nav-menu" id="nav-menu-list">
-            <li><a href="#" id="inicio-link" style="font-weight: 700;">INICIO</a></li>
-            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li>	
+            <li><a href="#" id="inicio-link">INICIO</a></li>
+            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li>
             <li><a href="#" id="servicios-link">SERVICIOS</a></li>
-            <li><a href="#" id="politicas-link">POLITICAS</a></li>	
-            <li><a href="#" id="contacto-link">CONTACTO</a></li> </ul>
+            <li><a href="#" id="politicas-link">POLITICAS</a></li>
+            <li><a href="#" id="contacto-link">CONTACTO</a></li>
+        </ul>
     </nav>
     
     <div id="cart-nav">
-        <div class="cart-icon" id="cart-icon">
-            🛒 
-            <span id="product-count" class="product-count">0</span>
-        </div>
-        
+        <div class="cart-icon" id="cart-icon">🛒 <span id="product-count" class="product-count">0</span></div>
         <div class="cart-popup" id="cart-popup">
-            <button class="close-cart-btn" id="close-cart-btn">X</button>
-            <h4 style="margin-top: 50px;">🛒 Tu Carrito de Compras</h4>
-            <p style="text-align: center; font-size: 1.1em;">Productos en el carrito: <strong id="popup-product-count">0</strong></p>
-            
-            <p style="text-align: center; font-size: 1.2em; margin-top: 20px; 
-                      padding: 5px; border-radius: 3px; 
-                      background-color: rgba(197, 166, 124, 0.1);">
-                Subtotal: <strong id="subtotal-display">$0</strong>
-            </p>
-            
-            <button class="checkout-btn">
-                COMPRAR AHORA
-            </button>
-            
-            </div>
+            <h4 style="margin-top: 50px; color: #C5A67C;">🛒 Tu Carrito</h4>
+            <p>Productos: <strong id="popup-product-count">0</strong></p>
+            <p>Subtotal: <strong id="subtotal-display">$0</strong></p>
+            <button class="checkout-btn">COMPRAR AHORA</button>
+        </div>
     </div>
 
-    <section id="main-banner" class="visible" style="background-color: #000;">
-        <video class="banner-video" autoplay muted loop playsinline poster="logoryno33.png" onerror="this.style.display='none'">
+    <section id="main-banner">
+        <video class="banner-video" autoplay muted loop playsinline>
             <source src="VIDEO1.mp4" type="video/mp4">
-            Tu navegador no soporta videos en HTML5.
         </video>
-
         <div class="video-overlay"></div>
-        <div class="banner-content">
-            </div>
     </section>
     
     <div class="divider-line"></div>
 
     <section id="categories-section">
         <div class="categories-container">
-            
             <a href="#" class="category-item" id="morrales-category-link">
                 <div class="aspect-ratio-box">
                     <div class="category-image" style="background-image: url('morrales.jpg');">
-                        <div class="category-overlay">
-                            <h4 class="category-title">MORRALES</h4>
-                        </div>
+                        <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
                     </div>
                 </div>
             </a>
-            
             <a href="#" class="category-item" id="accesorios-category-link">
                 <div class="aspect-ratio-box">
                     <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
-                        <div class="category-overlay">
-                            <h4 class="category-title">ACCESORIOS PARA ARMAS</h4>
-                        </div>
+                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div>
                     </div>
                 </div>
             </a>
-            
-            </div>
+        </div>
     </section>
+
     <section id="quienes-somos-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-qs">VOLVER AL INICIO</a>	
+        <div class="back-button-container" style="text-align:center; padding: 20px;">
+            <a href="#" class="back-to-home-btn" onclick="navigateToHome()">VOLVER AL INICIO</a>
         </div>
-
-        <div class="page-content">
-            <h3>QUIÉNES SOMOS</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA">
-            <p>"RYNO DELTA" es la empresa confiable de equipo táctico y de supervivencia. Con más de 14 años de experiencia, nos dedicamos a importar y distribuir herramientas de alto rendimiento, asegurando que cada artículo y equipo cumpla con los estándares más estrictos de durabilidad y funcionalidad en entornos extremos.</p>
-            <p>Nuestro catálogo está curado para profesionales, operadores y entusiastas de la supervivencia.</p>
-            <p style="text-align: center; margin-top: 40px;">
-                <strong>Equipamos tu confianza en cada despliegue.</strong>
-            </p>
+        <div class="page-content" style="color: white; text-align: center;">
+            <h3 style="color: #C5A67C;">QUIÉNES SOMOS</h3>
+            <p>RYNO DELTA es tu aliado táctico con más de 14 años de experiencia.</p>
         </div>
     </section>
 
-    <section id="servicios-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-servicios">VOLVER AL INICIO</a>
-        </div>
-
-        <div class="page-content">
-            <h3>NUESTROS SERVICIOS</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Servicios"> 
-            
-            <p>Ofrecemos logística eficiente con dos modalidades de pago para su conveniencia.</p>
-            <div class="service-list">
-                
-                <strong>PAGO CONTRA ENTREGA:</strong>	
-                <p>Seguridad total: Pague su equipo directamente al mensajero una vez que lo reciba.
-                    <br><em>*El paquete debe ser liquidado antes de su apertura, por protocolo de seguridad de las transportadoras.</em></p>
-                
-                <strong>PAGO EN LÍNEA SEGURO Y PREMIUM:</strong>	
-                <p>Proceso rápido y acceso a nuestro programa de fidelidad para acumular bonos de descuento. Obtenga tiempo de entrega preferencial y recompensas exclusivas.</p>
-                
-                <strong>Logística y Envíos Nacionales:</strong>	
-                <p>Envío Gratuito para órdenes que superen los <strong>$80.000</strong>.
-                    <br>Tiempo de entrega estándar: 3-5 días hábiles.</p>
-                
-                <p class="obsequio-text">Todos los envíos a partir de $80.000 van con un OBSEQUIO PARA TI.</p>
-                
-                <p>En zonas de difícil acceso, el envío puede extenderse hasta 15 días con posible recargo adicional.</p>
-                <p><strong style="color: #E0E0E0;">Recomendación:</strong> Confirme su cobertura antes de realizar la compra.</p>
-            </div>
-            </div>
-    </section>
-
-    <section id="politicas-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-politicas">VOLVER AL INICIO</a>
-        </div>
-
-        <div class="page-content">
-            <h3>POLÍTICAS</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Políticas">
-
-            <div class="policy-section">
-                <h4>LEY DE PROTECCIÓN DE DATOS (COLOMBIA)</h4>
-                <p>
-                    En cumplimiento con la Ley 1581 de 2012 y el Decreto 1377 de 2013, RYNO DELTA se compromete a proteger la privacidad de sus clientes. Los datos personales recolectados (nombre, dirección, teléfono, email) son utilizados exclusivamente para:
-                </p>
-                <ul class="policy-list">
-                    <li>Procesamiento y envío de pedidos.</li>
-                    <li>Gestión de pagos y emisión de facturas.</li>
-                    <li>Comunicación de ofertas, promociones y novedades (con consentimiento explícito).</li>
-                    <li>Mejora de nuestros servicios y la experiencia de compra.</li>
-                    </ul>
-                <p>Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales en cualquier momento. Para ejercer estos derechos, contáctenos al correo electrónico de contacto.</p>
-            </div>
-
-            <div class="policy-section">
-                <h4>POLÍTICA DE GARANTÍA Y DEVOLUCIONES</h4>
-                <p>
-                    Todos nuestros productos cuentan con una garantía SEGÚN EL PRODUCTO a partir de la fecha de entrega, cubriendo defectos de fabricación. La garantía no aplica en casos de:
-                </p>
-                <ul class="policy-list">
-                    <li>Daños causados por mal uso o abuso, accidentes o desgaste normal.</li>
-                    <li>Modificaciones o reparaciones realizadas por personal no autorizado.</li>
-                    <li>Uso del producto en condiciones para las cuales no fue diseñado.</li>
-                </ul>
-                <p>
-                    Para iniciar un proceso de garantía o devolución, el cliente debe notificarlo por WhatsApp en un plazo no mayor a 5 días hábiles desde la recepción del producto, adjuntando prueba de compra y fotografías claras del defecto.
-                </p>
-                <p>
-                    Recuerda que según la norma colombiana es el cliente quien debe cubrir los gastos de fletes cuando de garantías o devoluciones se trata.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <section id="contacto-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-contacto">VOLVER AL INICIO</a>
-        </div>
-
-        <div class="page-content">
-            <h3>CONTACTO</h3>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Contacto">
-            
-            <a href="http://wa.me/573148172002" target="_blank" class="contact-button whatsapp-button">
-                WHATSAPP (314 817 2002)
-            </a>
-            
-            <a href="mailto:RYNODELTA@GMAIL.COM" class="contact-button email-button">
-                CORREO ELECTRÓNICO (RYNODELTA@GMAIL.COM)
-            </a>
-        </div>
-    </section>
-    
-    <section id="morrales-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-morrales">VOLVER AL INICIO</a>
-        </div>
-
-        <div class="page-content">
-            <h3>CATÁLOGO DE MORRALES</h3>
-            <p style="text-align: center;">Aquí se mostrarán los productos de la categoría Morrales.</p>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Morrales"> 
-            
-            <p>¡Gracias por tu interés en nuestra línea de equipos de transporte y combate!</p>
-        </div>
-    </section>
-    <section id="accesorios-page">
-        <div class="back-button-container">
-            <a href="#" class="back-to-home-btn" id="back-to-home-btn-accesorios">VOLVER AL INICIO</a>
-        </div>
-
-        <div class="page-content">
-            <h3>CATÁLOGO DE ACCESORIOS PARA ARMAS</h3>
-            <p style="text-align: center;">Aquí se mostrarán los productos de la categoría Accesorios para Armas.</p>
-            <img src="logoryno33.png" alt="Logo RYNO DELTA Accesorios"> 
-            
-            <p>¡Explora nuestra selección de accesorios tácticos y de tiro!</p>
-        </div>
-    </section>
-    <footer>
-        <p style="text-align: center; color: #E0E0E0;">© 2025 RYNO DELTA. Todos los derechos reservados.</p>
+    <footer style="text-align: center; padding: 40px; font-size: 0.9em; color: #555; background: black;">
+        © 2025 RYNO DELTA. Todos los derechos reservados.
     </footer>
-
 </body>
 </html>
