@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
+        /* CRÍTICO: Variables para el cuerpo */
         :root {
             --color-dark: #000;
             --color-gold: #C5A67C; 
@@ -26,6 +27,7 @@
 
         html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
         
+        /* BANNER PRINCIPAL (Video de fondo) */
         #main-banner {
             position: relative;
             width: 100%;
@@ -36,6 +38,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
+            padding: 0;
+            display: flex;
         }
 
         .banner-video {
@@ -46,6 +50,15 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2;
         }
 
+        .banner-content {
+            position: relative;	
+            z-index: 3;	
+            color: white;	
+            margin-top: 15vh;
+            text-align: center;
+        }
+        
+        /* ESTILOS DEL MENÚ DE HAMBURGUESA */
         #main-nav {
             position: fixed;
             top: var(--promo-bar-height, 45px);	
@@ -59,7 +72,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            width: 25px; height: 20px;
+            width: 25px;
+            height: 20px;
             background-color: rgba(0, 0, 0, 0.6);	
             border-radius: 0 0 5px 0;	
             box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
@@ -67,16 +81,20 @@
 
         .line {
             display: block;
-            width: 100%; height: 3px;
+            width: 100%;
+            height: 3px;
             background-color: var(--color-gold);	
             transition: all 0.3s ease-in-out;
         }
 
         .nav-menu {
             list-style: none;
-            padding: 0; margin: 0;
+            padding: 0;
+            margin: 0;
             position: absolute;
-            top: 50px; left: 0; width: 250px;	
+            top: 50px;	
+            left: 0;	
+            width: 250px;	
             background-color: rgba(0, 0, 0, 0.95);	
             border-top: 1px solid var(--color-gold);	
             transform: translateX(-100%);	
@@ -84,7 +102,9 @@
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95);	
         }
 
-        .nav-menu.open { transform: translateX(0); }
+        .nav-menu.open {
+            transform: translateX(0);	
+        }
 
         .nav-menu li a {
             display: block;
@@ -92,17 +112,24 @@
             text-decoration: none;
             color: #E0E0E0;
             font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-menu li a:hover {
+            background-color: #333;
+            color: var(--color-gold);	
         }
 
-        /* --- SECCIÓN CATEGORÍAS CENTRALIZADA --- */
+        /* --- SECCIÓN DE CATEGORÍAS (CENTRALIZADAS) --- */
         #categories-section {
             padding: 40px 10px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
         }
         
         .divider-line {
-            width: 80%; height: 1px;
+            width: 80%;
+            height: 1px;
             background-color: rgba(197, 166, 124, 0.3);
             margin: 0 auto 40px auto;
         }
@@ -111,7 +138,7 @@
             display: flex;
             flex-wrap: wrap; 
             gap: 20px; 
-            justify-content: center; /* CENTRALIZACIÓN PARA WEB Y MÓVIL */
+            justify-content: center; /* Centralización */
         }
 
         .category-item {
@@ -121,31 +148,54 @@
             border-radius: 8px;
             overflow: hidden;
             text-decoration: none;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin: 10px 0; 
             max-width: 450px; 
-            display: block;
-            transition: transform 0.3s;
+            display: block; 
         }
-
+        
+        /* Ajuste específico para PC */
         @media (min-width: 769px) {
             .categories-container {
-                gap: 40px;               
+                justify-content: center; 
+                gap: 40px;
             }
             .category-item {
-                width: 420px; /* Tamaño optimizado para escritorio */
+                width: 420px;
+                max-width: none;
             }
         }
 
-        .aspect-ratio-box { position: relative; width: 100%; padding-top: 42.86%; }
+        .aspect-ratio-box {
+            position: relative;
+            width: 100%;
+            padding-top: 42.86%; 
+        }
 
         .category-image {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
         }
 
         .category-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-color: rgba(0, 0, 0, 0.4);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
         }
 
         .category-title {
@@ -153,47 +203,192 @@
             font-size: 1.8em;
             font-weight: 900;
             text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 1);
         }
 
-        /* PÁGINAS DE CONTENIDO */
-        .page-content-section {
-            display: none;
-            padding: 60px 20px;
-            min-height: 80vh;
-            margin-top: var(--promo-bar-height);
-            max-width: 900px;
+        /* --- PÁGINAS DE CONTENIDO (ORIGINALES) --- */
+        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {	
+            display: none;	
+            padding: 60px 20px;	
+            min-height: calc(100vh - var(--promo-bar-height));
+            background-color: var(--color-dark);
+            color: #E0E0E0;
+            margin-top: var(--promo-bar-height);	
+            position: relative;	
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
         }
 
+        .back-button-container {
+            padding-bottom: 40px;
+            text-align: center;
+        }
+
+        .back-to-home-btn {	
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--color-gold);
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--color-gold);
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4);	
+        }
+
         .page-content h3 {
             color: var(--color-gold);
-            font-size: 2.2em;
-            text-align: center;
             font-weight: 900;
-            margin-bottom: 30px;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
 
-        .back-to-home-btn {
-            display: inline-block;
-            margin-bottom: 30px;
-            padding: 10px 20px;
-            color: var(--color-gold);
-            border: 1px solid var(--color-gold);
-            text-decoration: none;
-            font-weight: bold;
+        #cart-nav {
+            position: fixed;
+            top: var(--promo-bar-height, 45px); 
+            right: 0;	
+            z-index: 999998;
         }
 
-        /* CARRITO */
-        #cart-nav { position: fixed; top: 45px; right: 0; z-index: 999998; }
-        .cart-icon { padding: 15px; cursor: pointer; background: rgba(0,0,0,0.6); border-radius: 0 0 0 5px; }
-        .product-count { position: absolute; top: 5px; right: 5px; background: var(--color-gold); color: #000; padding: 2px 6px; border-radius: 50%; font-size: 11px; }
+        .cart-icon {
+            padding: 15px;
+            cursor: pointer;
+            width: 25px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            background-color: rgba(0, 0, 0, 0.6);	
+            border-radius: 0 0 0 5px; 
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
+        }
+        
+        .product-count {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: var(--color-gold);
+            color: var(--color-dark);
+            font-size: 0.6em;
+            font-weight: 900;
+            padding: 2px 5px;
+            border-radius: 50%;
+            line-height: 1;
+        }
+
+        .cart-popup {
+            position: absolute;
+            top: 50px;	
+            right: 0;	
+            width: 250px;	
+            height: calc(100vh - 50px - var(--promo-bar-height)); 
+            background-color: rgba(0, 0, 0, 0.95);	
+            border-top: 1px solid var(--color-gold);	
+            transform: translateX(100%); 
+            transition: transform 0.3s ease-in-out;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.95);	
+            padding: 10px;
+        }
+
+        .cart-popup.open {
+            transform: translateX(0); 
+        }
+
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--color-dark);
+            background-color: var(--color-gold);
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.5);
+        }
 
     </style>
+    
+    <script>
+        function hideAllSecondaryPages() {
+            document.getElementById('quienes-somos-page').style.display = 'none';
+            document.getElementById('servicios-page').style.display = 'none';
+            document.getElementById('politicas-page').style.display = 'none';
+            document.getElementById('contacto-page').style.display = 'none';
+            document.getElementById('morrales-page').style.display = 'none'; 
+            document.getElementById('accesorios-page').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.getElementById('hamburger-icon');
+            const navMenu = document.getElementById('nav-menu-list');
+            const cartIcon = document.getElementById('cart-icon');
+            const cartPopup = document.getElementById('cart-popup');
+
+            hamburger.addEventListener('click', () => {
+                cartPopup.classList.remove('open');
+                navMenu.classList.toggle('open');
+            });
+
+            cartIcon.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                cartPopup.classList.toggle('open');
+            });
+
+            // NAVEGACIÓN ORIGINAL
+            document.getElementById('inicio-link').addEventListener('click', () => location.reload());
+
+            document.getElementById('quienes-somos-link').addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                document.getElementById('main-banner').style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none';
+                hideAllSecondaryPages();
+                document.getElementById('quienes-somos-page').style.display = 'block';
+            });
+
+            document.getElementById('servicios-link').addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                document.getElementById('main-banner').style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none';
+                hideAllSecondaryPages();
+                document.getElementById('servicios-page').style.display = 'block';
+            });
+
+            document.getElementById('politicas-link').addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                document.getElementById('main-banner').style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none';
+                hideAllSecondaryPages();
+                document.getElementById('politicas-page').style.display = 'block';
+            });
+
+            document.getElementById('contacto-link').addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                document.getElementById('main-banner').style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none';
+                hideAllSecondaryPages();
+                document.getElementById('contacto-page').style.display = 'block';
+            });
+        });
+
+        function volverInicio() {
+            location.reload();
+        }
+    </script>
 </head>
 <body>
     
-    <div id="promo-bar" style="position: fixed; top: 0; left: 0; width: 100%; height: 45px; background-color: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px; overflow: hidden;">
+    <div id="promo-bar" style="position: fixed !important; top: 0; left: 0; width: 100%; height: 45px; background-color: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px; overflow: hidden;">
         <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #C5A67C; font-weight: 700;">
             <span style="padding: 0 40px;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
         </marquee>
@@ -204,105 +399,85 @@
             <span class="line"></span><span class="line"></span><span class="line"></span>
         </div>
         <ul class="nav-menu" id="nav-menu-list">
-            <li><a href="#" onclick="showPage('home')">INICIO</a></li>
-            <li><a href="#" onclick="showPage('quienes-somos')">QUIÉNES SOMOS</a></li>
-            <li><a href="#" onclick="showPage('servicios')">SERVICIOS</a></li>
-            <li><a href="#" onclick="showPage('politicas')">POLÍTICAS</a></li>
-            <li><a href="#" onclick="showPage('contacto')">CONTACTO</a></li>
+            <li><a href="#" id="inicio-link">INICIO</a></li>
+            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li>
+            <li><a href="#" id="servicios-link">SERVICIOS</a></li>
+            <li><a href="#" id="politicas-link">POLITICAS</a></li>
+            <li><a href="#" id="contacto-link">CONTACTO</a></li>
         </ul>
     </nav>
     
     <div id="cart-nav">
-        <div class="cart-icon">🛒 <span class="product-count">0</span></div>
-    </div>
-
-    <div id="home-content">
-        <section id="main-banner">
-            <video class="banner-video" autoplay muted loop playsinline>
-                <source src="VIDEO1.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay"></div>
-        </section>
-        
-        <div class="divider-line"></div>
-
-        <section id="categories-section">
-            <div class="categories-container">
-                <a href="#" class="category-item">
-                    <div class="aspect-ratio-box">
-                        <div class="category-image" style="background-image: url('morrales.jpg');">
-                            <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="category-item">
-                    <div class="aspect-ratio-box">
-                        <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
-                            <div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </section>
-        
-        <div style="text-align: center; padding: 40px 20px;">
-            <p style="max-width: 800px; margin: 0 auto; color: #aaa;">
-                Nuestro catálogo está diseñado para quienes no aceptan menos que la excelencia en el equipo de supervivencia.
-            </p>
+        <div class="cart-icon" id="cart-icon">🛒 <span id="product-count" class="product-count">0</span></div>
+        <div class="cart-popup" id="cart-popup">
+            <h4 style="margin-top: 50px;">🛒 Tu Carrito</h4>
+            <p>Productos: <strong id="popup-product-count">0</strong></p>
+            <button class="checkout-btn">COMPRAR AHORA</button>
         </div>
     </div>
 
-    <section id="quienes-somos-page" class="page-content-section page-content">
-        <a href="#" class="back-to-home-btn" onclick="showPage('home')">← VOLVER</a>
-        <h3>QUIÉNES SOMOS</h3>
-        <p>RYNO DELTA es tu aliado táctico con más de 14 años de experiencia en el sector. Nos especializamos en proveer equipo de alta resistencia para entusiastas de la supervivencia, profesionales de seguridad y aventureros de todo el país.</p>
-        <p>Nuestra misión es equiparte con lo mejor para que enfrentes cualquier desafío con total confianza y seguridad.</p>
+    <section id="main-banner">
+        <video class="banner-video" autoplay muted loop playsinline>
+            <source src="VIDEO1.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </section>
+    
+    <div class="divider-line"></div>
+
+    <section id="categories-section">
+        <div class="categories-container">
+            <a href="#" class="category-item" id="morrales-category-link">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('morrales.jpg');">
+                        <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="category-item" id="accesorios-category-link">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
+                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </section>
 
-    <section id="servicios-page" class="page-content-section page-content">
-        <a href="#" class="back-to-home-btn" onclick="showPage('home')">← VOLVER</a>
-        <h3>NUESTROS SERVICIOS</h3>
-        <ul style="list-style: none; padding: 0;">
-            <li>✔️ <strong>Asesoría Especializada:</strong> Te ayudamos a elegir el equipo según tu necesidad.</li>
-            <li>✔️ <strong>Venta al Detal y Por Mayor:</strong> Equipamos a individuos y empresas.</li>
-            <li>✔️ <strong>Envíos Nacionales:</strong> Cobertura total en Colombia.</li>
-        </ul>
+    <section id="quienes-somos-page">
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="page-content">
+            <h3>QUIÉNES SOMOS</h3>
+            <p>RYNO DELTA es mucho más que una tienda; es el resultado de una pasión por la aventura y la seguridad. Con más de 14 años de experiencia, ofrecemos soluciones tácticas de alta resistencia.</p>
+        </div>
     </section>
 
-    <section id="politicas-page" class="page-content-section page-content">
-        <a href="#" class="back-to-home-btn" onclick="showPage('home')">← VOLVER</a>
-        <h3>POLÍTICAS</h3>
-        <p><strong>Garantía:</strong> Cobertura por defectos de fábrica.</p>
-        <p><strong>Devoluciones:</strong> 5 días hábiles para cambios.</p>
+    <section id="servicios-page">
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="page-content">
+            <h3>SERVICIOS</h3>
+            <p>Ofrecemos equipamiento especializado, envíos nacionales rápidos y asesoría personalizada para profesionales y entusiastas.</p>
+        </div>
     </section>
 
-    <section id="contacto-page" class="page-content-section page-content">
-        <a href="#" class="back-to-home-btn" onclick="showPage('home')">← VOLVER</a>
-        <h3>CONTACTO</h3>
-        <p>📱 WhatsApp: +57 3XX XXX XXXX</p>
-        <p>📧 Email: ventas@rynodelta.com</p>
-        <p>📍 Ubicación: Bogotá, Colombia</p>
+    <section id="politicas-page">
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="page-content">
+            <h3>POLÍTICAS</h3>
+            <p>Garantía de calidad en cada producto, protección de datos y logística eficiente de envíos.</p>
+        </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; font-size: 0.8em; color: #444;">
+    <section id="contacto-page">
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="page-content">
+            <h3>CONTACTO</h3>
+            <p>📍 Bogotá, Colombia | WhatsApp: +57 3XX XXX XXXX | contacto@rynodelta.com</p>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 20px; font-size: 0.9em; color: #666;">
         © 2025 RYNO DELTA. Todos los derechos reservados.
     </footer>
-
-    <script>
-        function showPage(pageId) {
-            document.getElementById('home-content').style.display = 'none';
-            document.querySelectorAll('.page-content-section').forEach(p => p.style.display = 'none');
-            document.getElementById('nav-menu-list').classList.remove('open');
-            if(pageId === 'home') {
-                document.getElementById('home-content').style.display = 'block';
-            } else {
-                document.getElementById(pageId + '-page').style.display = 'block';
-            }
-            window.scrollTo(0,0);
-        }
-        document.getElementById('hamburger-icon').addEventListener('click', () => {
-            document.getElementById('nav-menu-list').classList.toggle('open');
-        });
-    </script>
 </body>
 </html>
