@@ -36,8 +36,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 0;
-            display: flex;
         }
 
         .banner-video {
@@ -48,14 +46,6 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2;
         }
 
-        .banner-content {
-            position: relative;	
-            z-index: 3;	
-            color: white;	
-            margin-top: 15vh;
-            text-align: center;
-        }
-        
         #main-nav {
             position: fixed;
             top: var(--promo-bar-height, 45px);	
@@ -69,8 +59,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            width: 25px;
-            height: 20px;
+            width: 25px; height: 20px;
             background-color: rgba(0, 0, 0, 0.6);	
             border-radius: 0 0 5px 0;	
             box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
@@ -78,20 +67,16 @@
 
         .line {
             display: block;
-            width: 100%;
-            height: 3px;
+            width: 100%; height: 3px;
             background-color: var(--color-gold);	
             transition: all 0.3s ease-in-out;
         }
 
         .nav-menu {
             list-style: none;
-            padding: 0;
-            margin: 0;
+            padding: 0; margin: 0;
             position: absolute;
-            top: 50px;	
-            left: 0;	
-            width: 250px;	
+            top: 50px; left: 0; width: 250px;	
             background-color: rgba(0, 0, 0, 0.95);	
             border-top: 1px solid var(--color-gold);	
             transform: translateX(-100%);	
@@ -99,320 +84,56 @@
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95);	
         }
 
-        .nav-menu.open {
-            transform: translateX(0);	
-        }
+        .nav-menu.open { transform: translateX(0); }
 
         .nav-menu li a {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #E0E0E0;
-            font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .nav-menu li a:hover {
-            background-color: #333;
-            color: var(--color-gold);	
+            display: block; padding: 15px 20px; text-decoration: none; color: #E0E0E0; font-weight: 500;
         }
 
-        #categories-section {
-            padding: 40px 10px;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .divider-line {
-            width: 80%;
-            height: 1px;
-            background-color: rgba(197, 166, 124, 0.3);
-            margin: 0 auto 40px auto;
-        }
+        #categories-section { padding: 40px 10px; max-width: 1200px; margin: 0 auto; }
+        .divider-line { width: 80%; height: 1px; background-color: rgba(197, 166, 124, 0.3); margin: 0 auto 40px auto; }
 
-        .categories-container {
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: space-between; 
-        }
+        .categories-container { display: flex; flex-wrap: wrap; justify-content: space-between; }
 
         .category-item {
-            width: 100%; 
-            background-color: #111;
-            border: 2px solid var(--color-gold);
-            border-radius: 8px;
-            overflow: hidden;
-            text-decoration: none;
-            color: white;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin: 10px 0; 
-            max-width: 450px; 
-            display: block; 
+            width: 100%; background-color: #111; border: 2px solid var(--color-gold); border-radius: 8px;
+            overflow: hidden; text-decoration: none; color: white; transition: transform 0.3s;
+            max-width: 450px; margin: 10px 0; display: block;
         }
+
+        .aspect-ratio-box { position: relative; width: 100%; padding-top: 42.86%; }
+        .category-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
+        .category-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+        .category-title { color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; }
+
+        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page {
+            display: none; padding: 60px 20px; min-height: 80vh; margin-top: var(--promo-bar-height); max-width: 900px; margin-left: auto; margin-right: auto;
+        }
+
+        .back-button-container { text-align: center; margin-bottom: 30px; }
+        .back-to-home-btn { display: inline-block; padding: 10px 20px; color: var(--color-gold); border: 1px solid var(--color-gold); text-decoration: none; font-weight: bold; border-radius: 5px; }
         
-        .category-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5);
-        }
+        .page-content img { display: block; margin: 0 auto 20px; max-width: 200px; }
+        .page-content h3 { color: var(--color-gold); font-size: 2em; text-align: center; font-weight: 900; margin-bottom: 20px; }
+        .page-content p { text-align: justify; line-height: 1.8; margin-bottom: 15px; }
 
-        .aspect-ratio-box {
-            position: relative;
-            width: 100%;
-            padding-top: 42.86%; 
-        }
-
-        .category-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .category-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .category-title {
-            color: var(--color-gold);
-            font-size: 1.8em;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 1);
-        }
-
-        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {	
-            display: none;	
-            padding: 60px 20px;	
-            min-height: calc(100vh - var(--promo-bar-height));
-            background-color: var(--color-dark);
-            color: #E0E0E0;
-            margin-top: var(--promo-bar-height);	
-            position: relative;	
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .back-button-container {
-            padding-bottom: 40px;
-            text-align: center;
-        }
-
-        .back-to-home-btn {	
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: var(--color-gold);
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--color-gold);
-            border-radius: 5px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4);	
-        }
-
-        .page-content img {
-            display: block;
-            margin: 0 auto 30px auto;
-            max-width: 200px;
-            height: auto;
-        }
-
-        .page-content h3 {
-            color: var(--color-gold);
-            font-weight: 900;
-            text-transform: uppercase;
-            text-align: center;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .page-content p {
-            text-align: justify;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            line-height: 1.8;
-        }
-
-        #cart-nav {
-            position: fixed;
-            top: var(--promo-bar-height, 45px); 
-            right: 0;	
-            z-index: 999998;
-        }
-
-        .cart-icon {
-            padding: 15px;
-            cursor: pointer;
-            width: 25px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            background-color: rgba(0, 0, 0, 0.6);	
-            border-radius: 0 0 0 5px; 
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
-        }
-        
-        .product-count {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background-color: var(--color-gold);
-            color: var(--color-dark);
-            font-size: 0.6em;
-            font-weight: 900;
-            padding: 2px 5px;
-            border-radius: 50%;
-            line-height: 1;
-        }
-
-        .cart-popup {
-            position: absolute;
-            top: 50px;	
-            right: 0;	
-            width: 250px;	
-            height: calc(100vh - 50px - var(--promo-bar-height)); 
-            background-color: rgba(0, 0, 0, 0.95);	
-            border-top: 1px solid var(--color-gold);	
-            transform: translateX(100%); 
-            transition: transform 0.3s ease-in-out;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.95);	
-            padding: 10px;
-        }
-
-        .cart-popup.open { transform: translateX(0); }
-
-        .checkout-btn {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            text-align: center;
-            font-size: 1.1em;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: var(--color-dark);
-            background-color: var(--color-gold);
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.5);
-        }
+        #cart-nav { position: fixed; top: 45px; right: 0; z-index: 999998; }
+        .cart-icon { padding: 15px; cursor: pointer; background: rgba(0,0,0,0.6); border-radius: 0 0 0 5px; }
+        .product-count { position: absolute; top: 5px; right: 5px; background: var(--color-gold); color: #000; padding: 2px 6px; border-radius: 50%; font-size: 11px; }
 
         @media (max-width: 768px) {
             #main-banner { height: auto; }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
-            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
         }
 
         @media (min-width: 769px) {
-            .categories-container {
-                justify-content: center !important;
-                gap: 40px !important;
-            }
+            .categories-container { justify-content: center !important; gap: 40px !important; }
         }
     </style>
-    
-    <script>
-        function hideAllSecondaryPages() {
-            document.getElementById('quienes-somos-page').style.display = 'none';
-            document.getElementById('servicios-page').style.display = 'none';
-            document.getElementById('politicas-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none';
-            document.getElementById('morrales-page').style.display = 'none'; 
-            document.getElementById('accesorios-page').style.display = 'none';
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburger = document.getElementById('hamburger-icon');
-            const navMenu = document.getElementById('nav-menu-list');
-            const cartIcon = document.getElementById('cart-icon');
-            const cartPopup = document.getElementById('cart-popup');
-
-            hamburger.addEventListener('click', () => {
-                cartPopup.classList.remove('open');
-                navMenu.classList.toggle('open');
-            });
-
-            cartIcon.addEventListener('click', () => {
-                navMenu.classList.remove('open');
-                cartPopup.classList.toggle('open');
-            });
-
-            document.getElementById('inicio-link').addEventListener('click', () => location.reload());
-
-            document.getElementById('quienes-somos-link').addEventListener('click', () => {
-                navMenu.classList.remove('open');
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('quienes-somos-page').style.display = 'block';
-            });
-
-            document.getElementById('servicios-link').addEventListener('click', () => {
-                navMenu.classList.remove('open');
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('servicios-page').style.display = 'block';
-            });
-
-            document.getElementById('politicas-link').addEventListener('click', () => {
-                navMenu.classList.remove('open');
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('politicas-page').style.display = 'block';
-            });
-
-            document.getElementById('contacto-link').addEventListener('click', () => {
-                navMenu.classList.remove('open');
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('contacto-page').style.display = 'block';
-            });
-
-            document.getElementById('morrales-category-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('morrales-page').style.display = 'block';
-            });
-
-            document.getElementById('accesorios-category-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('accesorios-page').style.display = 'block';
-            });
-        });
-
-        function volverInicio() { location.reload(); }
-    </script>
 </head>
 <body>
     
-    <div id="promo-bar" style="position: fixed !important; top: 0; left: 0; width: 100%; height: 45px; background-color: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px; overflow: hidden;">
+    <div id="promo-bar" style="position: fixed; top: 0; left: 0; width: 100%; height: 45px; background: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px; overflow: hidden;">
         <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #C5A67C; font-weight: 700;">
             <span style="padding: 0 40px;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
         </marquee>
@@ -426,86 +147,101 @@
             <li><a href="#" id="inicio-link">INICIO</a></li>
             <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li>
             <li><a href="#" id="servicios-link">SERVICIOS</a></li>
-            <li><a href="#" id="politicas-link">POLITICAS</a></li>
+            <li><a href="#" id="politicas-link">POLÍTICAS</a></li>
             <li><a href="#" id="contacto-link">CONTACTO</a></li>
         </ul>
     </nav>
-    
+
     <div id="cart-nav">
-        <div class="cart-icon" id="cart-icon">🛒 <span id="product-count" class="product-count">0</span></div>
-        <div class="cart-popup" id="cart-popup">
-            <h4 style="margin-top: 50px; color: var(--color-gold);">🛒 Tu Carrito</h4>
-            <p>Productos: <strong id="popup-product-count">0</strong></p>
-            <button class="checkout-btn">COMPRAR AHORA</button>
-        </div>
+        <div class="cart-icon">🛒 <span class="product-count">0</span></div>
     </div>
 
-    <section id="main-banner">
-        <video class="banner-video" autoplay muted loop playsinline>
-            <source src="VIDEO1.mp4" type="video/mp4">
-        </video>
-        <div class="video-overlay"></div>
-    </section>
-    
-    <div class="divider-line"></div>
+    <div id="home-content">
+        <section id="main-banner">
+            <video class="banner-video" autoplay muted loop playsinline>
+                <source src="VIDEO1.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </section>
+        
+        <div class="divider-line"></div>
 
-    <section id="categories-section">
-        <div class="categories-container">
-            <a href="#" class="category-item" id="morrales-category-link">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('morrales.jpg');">
-                        <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
+        <section id="categories-section">
+            <div class="categories-container">
+                <a href="#" class="category-item" id="morrales-link">
+                    <div class="aspect-ratio-box">
+                        <div class="category-image" style="background-image: url('morrales.jpg');">
+                            <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
+                        </div>
                     </div>
-                </div>
-            </a>
-            <a href="#" class="category-item" id="accesorios-category-link">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
-                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS PARA ARMAS</h4></div>
+                </a>
+                <a href="#" class="category-item" id="accesorios-link">
+                    <div class="aspect-ratio-box">
+                        <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
+                            <div class="category-overlay"><h4 class="category-title">ACCESORIOS PARA ARMAS</h4></div>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-    </section>
+                </a>
+            </div>
+        </section>
+    </div>
 
     <section id="quienes-somos-page">
         <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
             <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
             <h3>QUIÉNES SOMOS</h3>
-            <p>En RYNO DELTA, nos apasiona el mundo táctico y de supervivencia. Con más de 14 años de experiencia, nos hemos dedicado a ofrecer el mejor equipo para profesionales y entusiastas.</p>
+            <p>RYNO DELTA es mucho más que una tienda de equipo táctico; es el resultado de una pasión compartida por la aventura, la seguridad y la preparación para lo inesperado. Desde nuestros inicios, nos hemos dedicado a ofrecer soluciones de alta calidad para aquellos que se enfrentan a los desafíos más exigentes.</p>
         </div>
     </section>
 
     <section id="servicios-page">
         <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
+            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
             <h3>NUESTROS SERVICIOS</h3>
-            <p>Ofrecemos asesoría personalizada en equipo táctico, ventas al por mayor y detal, y envíos rápidos a todo el país.</p>
+            <p>En RYNO DELTA, nos enorgullecemos de ofrecer una gama completa de servicios diseñados para satisfacer las necesidades de nuestros clientes tácticos y de supervivencia: Equipamiento especializado, Envíos nacionales y Asesoría personalizada.</p>
         </div>
     </section>
 
     <section id="politicas-page">
         <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
-            <h3>POLÍTICAS</h3>
-            <p>Nuestras políticas garantizan la satisfacción del cliente, con procesos claros de cambios y manejo de garantías.</p>
+            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
+            <h3>POLÍTICAS DE LA TIENDA</h3>
+            <p>Garantía de Calidad: Todos nuestros productos pasan por un control de calidad. Privacidad de Datos: Cumplimos con las normativas de protección de datos. Políticas de Envío: Procesamiento en 24-48 horas.</p>
         </div>
     </section>
 
     <section id="contacto-page">
         <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
+            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
             <h3>CONTACTO</h3>
-            <p>📍 Dirección: Bogotá, Colombia<br>✉️ Email: contacto@rynodelta.com</p>
+            <p style="text-align: center;">📍 Ubicación: Bogotá, Colombia<br>📱 WhatsApp: +57 321 445 6135<br>📧 Email: contacto@rynodelta.com</p>
         </div>
     </section>
 
-    <section id="morrales-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div><div class="page-content"><h3>MORRALES</h3></div></section>
-    <section id="accesorios-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div><div class="page-content"><h3>ACCESORIOS</h3></div></section>
+    <script>
+        function hideAll() {
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('quienes-somos-page').style.display = 'none';
+            document.getElementById('servicios-page').style.display = 'none';
+            document.getElementById('politicas-page').style.display = 'none';
+            document.getElementById('contacto-page').style.display = 'none';
+        }
 
-    <footer style="text-align: center; padding: 20px; font-size: 0.9em; color: #666;">
-        © 2025 RYNO DELTA. Todos los derechos reservados.
-    </footer>
+        function volverInicio() { location.reload(); }
+
+        document.getElementById('hamburger-icon').addEventListener('click', () => {
+            document.getElementById('nav-menu-list').classList.toggle('open');
+        });
+
+        document.getElementById('quienes-somos-link').addEventListener('click', () => { hideAll(); document.getElementById('quienes-somos-page').style.display = 'block'; document.getElementById('nav-menu-list').classList.remove('open'); window.scrollTo(0,0); });
+        document.getElementById('servicios-link').addEventListener('click', () => { hideAll(); document.getElementById('servicios-page').style.display = 'block'; document.getElementById('nav-menu-list').classList.remove('open'); window.scrollTo(0,0); });
+        document.getElementById('politicas-link').addEventListener('click', () => { hideAll(); document.getElementById('politicas-page').style.display = 'block'; document.getElementById('nav-menu-list').classList.remove('open'); window.scrollTo(0,0); });
+        document.getElementById('contacto-link').addEventListener('click', () => { hideAll(); document.getElementById('contacto-page').style.display = 'block'; document.getElementById('nav-menu-list').classList.remove('open'); window.scrollTo(0,0); });
+        document.getElementById('inicio-link').addEventListener('click', () => { volverInicio(); });
+    </script>
 </body>
 </html>
