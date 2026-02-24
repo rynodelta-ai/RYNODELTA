@@ -38,6 +38,61 @@
             box-shadow: 0 0 25px rgba(197, 166, 124, 0.5);
         }
 
+        /* --- BOTÓN REGRESAR EVOLUCIONADO (REFERENCIA 1.1) --- */
+        .container-regresar {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .btn-regresar {
+            position: relative;
+            background: rgba(197, 166, 124, 0.05);
+            border: 2px solid var(--color-gold);
+            color: var(--color-gold);
+            padding: 14px 30px;
+            cursor: pointer;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85em;
+            border-radius: 4px;
+            overflow: hidden; /* Necesario para el destello */
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(197, 166, 124, 0.2);
+        }
+
+        /* Animación de Destello (Radar Sweep) */
+        .btn-regresar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent
+            );
+            transform: skewX(-20deg);
+            animation: radar-sweep 4s infinite;
+        }
+
+        @keyframes radar-sweep {
+            0% { left: -150%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        .btn-regresar:hover {
+            background: var(--color-gold);
+            color: #000;
+            box-shadow: 0 0 20px var(--color-gold);
+        }
+
         /* BARRA PROMOCIONAL */
         #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: #000; z-index: 10000; border-bottom: 1px solid #111; line-height: var(--promo-bar-height); text-align: center; }
 
@@ -63,7 +118,7 @@
         .cart-popup { position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); }
         .cart-popup.open { transform: translateX(0); }
 
-        /* --- BANNER HORIZONTAL SIN CORTES (MOBILE FIX) --- */
+        /* BANNER */
         #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: #000; overflow: hidden; }
         .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
         .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 2; pointer-events: none; }
@@ -89,14 +144,10 @@
         .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); border-radius: 8px; overflow: hidden; margin-top: 20px; }
         .landing-img { width: 100%; max-height: 450px; object-fit: cover; border-bottom: 1px solid #222; }
         .landing-content { padding: 25px; }
-        .landing-specs { list-style: none; padding: 0; color: #aaa; margin: 20px 0; }
-        .landing-specs li { margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 0.95em; }
-        .landing-specs li::before { content: "▶"; position: absolute; left: 0; color: var(--color-gold); }
         .landing-price { font-size: 2.2em; font-weight: 900; color: #fff; display: block; margin-bottom: 20px; }
         .buy-btn { width: 100%; padding: 18px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; color: #000; }
 
         #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { display: none; padding: 60px 20px; margin-top: var(--promo-bar-height); max-width: 1000px; margin: 0 auto; }
-        .btn-regresar { background: none; border: 1px solid var(--color-gold); color: var(--color-gold); padding: 10px 20px; cursor: pointer; margin-bottom: 25px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
 
         footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; letter-spacing: 2px; }
     </style>
@@ -121,7 +172,6 @@
         <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">0</span></div>
         <div class="cart-popup" id="cart-popup">
             <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px;">TU EQUIPO</h3>
-            <p>Subtotal: <span id="cart-total" style="color:var(--color-gold); font-weight:900;">$0</span></p>
             <button class="checkout-btn" style="width: 100%; padding: 12px; background: var(--color-gold); border: none; font-weight: 900; color: #000; cursor: pointer;">FINALIZAR</button>
         </div>
     </div>
@@ -153,7 +203,9 @@
     </section>
 
     <section id="morrales-page">
-        <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        <div class="container-regresar">
+            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        </div>
         <h2 style="color:var(--color-gold); text-align:center; letter-spacing: 2px;">CATÁLOGO TÁCTICO</h2>
         <div id="morrales-mosaico" class="mosaico-grid">
             <div class="mosaico-item" onclick="verProducto('0001')">
@@ -171,25 +223,33 @@
     </section>
 
     <section id="quienes-somos-page" style="text-align:center;">
-        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <div class="container-regresar">
+            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        </div>
         <h3 style="color:var(--color-gold);">QUIÉNES SOMOS</h3>
-        <p>Equipo profesional con 14 años de trayectoria equipando misiones tácticas.</p>
+        <p>14 años equipando misiones tácticas.</p>
     </section>
 
     <section id="servicios-page" style="text-align:center;">
-        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <div class="container-regresar">
+            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        </div>
         <h3 style="color:var(--color-gold);">SERVICIOS</h3>
-        <p>Asesoría en equipamiento y envíos seguros a todo el país.</p>
+        <p>Asesoría táctica y envíos seguros.</p>
     </section>
 
     <section id="contacto-page" style="text-align:center;">
-        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <div class="container-regresar">
+            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        </div>
         <h3 style="color:var(--color-gold);">CONTACTO</h3>
         <p>WhatsApp: +57 321 445 6135</p>
     </section>
 
     <section id="accesorios-page" style="text-align:center;">
-        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <div class="container-regresar">
+            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        </div>
         <h3 style="color:var(--color-gold);">ACCESORIOS</h3>
         <p>Próximamente nueva línea disponible.</p>
     </section>
@@ -220,7 +280,9 @@
             landing.style.display = 'block';
             const p = id === '0001' ? {n:'Morral de Asalto 45L', i:'morral1.jpg', pr:'$145.000'} : {n:'Morral Compacto 25L', i:'morral2.jpg', pr:'$95.000'};
             landing.innerHTML = `
-                <button class="btn-regresar" onclick="showPage('morrales-page')">← VOLVER</button>
+                <div class="container-regresar">
+                    <button class="btn-regresar" onclick="showPage('morrales-page')">← VOLVER AL CATÁLOGO</button>
+                </div>
                 <div class="landing-card">
                     <img src="${p.i}" class="landing-img">
                     <div class="landing-content">
