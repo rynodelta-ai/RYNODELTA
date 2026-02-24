@@ -16,184 +16,199 @@
 
         body {
             font-family: 'Inter', sans-serif !important;
-            margin: 0 !important;	
-            padding: 0 !important;
+            margin: 0 !important; padding: 0 !important;
             background-color: var(--color-dark) !important;
-            color: #E0E0E0;
-            line-height: 1.6;
-            overflow-x: hidden !important;
+            color: #E0E0E0; overflow-x: hidden !important;
         }
 
-        html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
-        
+        /* --- EFECTO TÁCTICO DE UNDIMIENTO Y LUZ (PC Y MÓVIL) --- */
+        .category-item:active, 
+        .mosaico-item:active, 
+        .buy-btn:active, 
+        .back-to-home-btn:active, 
+        .hamburger:active, 
+        .cart-icon:active, 
+        .btn-regresar:active,
+        .checkout-btn:active {
+            transform: scale(0.95) !important;
+            background-color: rgba(197, 166, 124, 0.2) !important;
+            box-shadow: 0 0 20px rgba(197, 166, 124, 0.5) !important;
+            transition: all 0.1s ease-in-out;
+        }
+
         #main-banner {
-            position: relative;
-            width: 100%;
-            margin-top: var(--promo-bar-height) !important;	
-            height: calc(100vh - var(--promo-bar-height));
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0;
+            position: relative; width: 100%; margin-top: var(--promo-bar-height);
+            height: calc(100vh - var(--promo-bar-height)); overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .banner-video {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;
-        }
+        .banner-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 2; }
 
-        .video-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); z-index: 2;
-        }
-
-        #main-nav {
-            position: fixed;
-            top: var(--promo-bar-height, 45px);	
-            left: 0;	
-            z-index: 999998;	
-        }
-
+        #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
         .hamburger {
-            padding: 15px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 25px;
-            height: 20px;
-            background-color: rgba(0, 0, 0, 0.6);	
-            border-radius: 0 0 5px 0;	
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);
-            transition: transform 0.1s ease;
+            padding: 15px; cursor: pointer; background: rgba(0,0,0,0.6);
+            border-radius: 0 0 5px 0; box-shadow: 0 0 10px rgba(197, 166, 124, 0.3);
         }
-
-        .hamburger:active { transform: scale(0.9); background-color: rgba(197, 166, 124, 0.2); }
-
-        .line {
-            display: block; width: 100%; height: 3px;
-            background-color: var(--color-gold);	
-            transition: all 0.3s ease-in-out;
-        }
+        .line { display: block; width: 25px; height: 3px; background: var(--color-gold); margin: 4px 0; }
 
         .nav-menu {
-            list-style: none; padding: 0; margin: 0;
-            position: absolute; top: 50px; left: 0; width: 250px;	
-            background-color: rgba(0, 0, 0, 0.95);	
-            border-top: 1px solid var(--color-gold);	
-            transform: translateX(-100%);	
-            transition: transform 0.3s ease-in-out;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.95);	
+            position: absolute; top: 50px; left: 0; width: 250px; background: rgba(0,0,0,0.95);
+            transform: translateX(-100%); transition: 0.3s; border-top: 1px solid var(--color-gold);
         }
-
         .nav-menu.open { transform: translateX(0); }
+        .nav-menu a { display: block; padding: 15px 20px; color: #fff; text-decoration: none; text-transform: uppercase; font-weight: 700; }
 
-        .nav-menu li a {
-            display: block; padding: 15px 20px; text-decoration: none; color: #E0E0E0; font-weight: 500; transition: all 0.2s ease;
+        /* --- CARRITO --- */
+        #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
+        .cart-icon { padding: 15px; cursor: pointer; background: rgba(0,0,0,0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px rgba(197, 166, 124, 0.3); font-size: 1.5em; }
+        .product-count { position: absolute; top: 5px; right: 5px; background: var(--color-gold); color: #000; font-size: 0.7em; font-weight: 900; padding: 2px 6px; border-radius: 50%; }
+        
+        .cart-popup {
+            position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98);
+            transform: translateX(110%); transition: 0.3s; padding: 20px; border-left: 1px solid var(--color-gold);
+            height: calc(100vh - 100px); box-shadow: -5px 0 20px rgba(0,0,0,0.8);
         }
-        .nav-menu li a:hover { background-color: rgba(197, 166, 124, 0.1); color: var(--color-gold); padding-left: 30px; }
-        .nav-menu li a:active { transform: scale(0.95); background-color: rgba(197, 166, 124, 0.2); }
+        .cart-popup.open { transform: translateX(0); }
+        .checkout-btn { width: 100%; padding: 15px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; margin-top: 20px; text-transform: uppercase; }
 
+        /* --- CATEGORÍAS --- */
         #categories-section { padding: 40px 10px; max-width: 1200px; margin: 0 auto; }
-        
-        .divider-line { width: 80%; height: 1px; background-color: rgba(197, 166, 124, 0.3); margin: 0 auto 40px auto; }
-
-        .categories-container { display: flex; flex-wrap: wrap; justify-content: space-between; }
-
+        .categories-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
         .category-item {
-            width: 100%; background-color: #111; border: 2px solid var(--color-gold); border-radius: 8px;
-            overflow: hidden; text-decoration: none; color: white; transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin: 10px 0; max-width: 450px; display: block; 
+            width: 100%; max-width: 450px; background: #111; border: 2px solid var(--color-gold);
+            border-radius: 8px; overflow: hidden; text-decoration: none; transition: 0.2s;
         }
-        
-        .category-item:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5); filter: brightness(1.1); }
-        .category-item:active { transform: scale(0.96); filter: brightness(1.3); background-color: rgba(197, 166, 124, 0.1); }
-
-        .aspect-ratio-box { position: relative; width: 100%; padding-top: 42.86%; }
+        .aspect-ratio-box { position: relative; padding-top: 45%; }
         .category-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
-        .category-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; }
-        .category-title { color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; text-shadow: 0 0 5px rgba(0, 0, 0, 1); }
+        .category-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        .category-title { color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; }
 
-        #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {	
-            display: none; padding: 60px 20px; min-height: calc(100vh - var(--promo-bar-height));
-            background-color: var(--color-dark); color: #E0E0E0; margin-top: var(--promo-bar-height);
-            position: relative; max-width: 1000px; margin: 0 auto;
-        }
-
-        .back-button-container { padding-bottom: 20px; text-align: center; }
-        .back-to-home-btn {	
-            display: inline-block; padding: 10px 20px; text-decoration: none; color: var(--color-gold);
-            background-color: rgba(0, 0, 0, 0.7); border: 1px solid var(--color-gold); border-radius: 5px;
-            font-weight: 700; text-transform: uppercase; transition: all 0.2s ease;
-        }
-        .back-to-home-btn:active { transform: scale(0.9); background-color: rgba(197, 166, 124, 0.2); }
-
-        /* NUEVO SISTEMA DE MOSAICO Y LANDING */
-        .mosaico-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 20px 0;
-        }
-        .mosaico-item {
-            background: #0a0a0a; border: 1px solid #222; border-radius: 4px; padding: 10px;
-            text-align: center; cursor: pointer; transition: all 0.2s ease;
-        }
-        .mosaico-item:active { transform: scale(0.94); border-color: var(--color-gold); background: rgba(197, 166, 124, 0.05); }
-        .mosaico-img { width: 100%; height: 120px; object-fit: cover; margin-bottom: 10px; border-radius: 2px; }
-        .mosaico-id { display: block; font-size: 0.7em; color: var(--color-gold); margin-bottom: 5px; }
-        .mosaico-name { font-size: 0.85em; font-weight: 700; text-transform: uppercase; color: #fff; }
-
-        /* LANDING DE PRODUCTO DETALLADO */
-        .product-landing-view { display: none; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); padding: 20px; border-radius: 4px; }
-        .landing-img { width: 100%; max-height: 400px; object-fit: cover; border-bottom: 1px solid #222; margin-bottom: 20px; }
-        .landing-info h4 { color: #fff; font-size: 1.8em; margin: 0 0 10px 0; text-transform: uppercase; }
-        .landing-specs { list-style: none; padding: 0; margin-bottom: 25px; color: #aaa; font-size: 0.95em; }
-        .landing-specs li { margin-bottom: 8px; padding-left: 20px; position: relative; }
-        .landing-specs li::before { content: "▶"; position: absolute; left: 0; color: var(--color-gold); font-size: 0.8em; }
-        .landing-price { font-size: 2em; font-weight: 900; color: #fff; display: block; margin-bottom: 20px; }
+        /* --- MOSAICO Y LANDING --- */
+        #morrales-page { display: none; padding: 60px 20px; margin-top: var(--promo-bar-height); max-width: 1000px; margin: 0 auto; }
+        .mosaico-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 15px; margin-top: 20px; }
+        .mosaico-item { background: #0a0a0a; border: 1px solid #222; padding: 12px; border-radius: 5px; text-align: center; cursor: pointer; }
+        .mosaico-img { width: 100%; height: 140px; object-fit: cover; border-radius: 3px; margin-bottom: 10px; }
         
-        .buy-btn {
-            width: 100%; padding: 15px; background: var(--color-gold); color: #000; border: none;
-            font-weight: 900; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;
-        }
-        .buy-btn:active { transform: scale(0.95); background: #e2c08d; }
+        .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); border-radius: 8px; overflow: hidden; margin-top: 20px; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .landing-img { width: 100%; max-height: 450px; object-fit: cover; border-bottom: 1px solid #222; }
+        .landing-content { padding: 25px; }
+        .landing-specs { list-style: none; padding: 0; color: #aaa; margin: 20px 0; }
+        .landing-specs li { margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 0.95em; }
+        .landing-specs li::before { content: "▶"; position: absolute; left: 0; color: var(--color-gold); }
+        .landing-price { font-size: 2.2em; font-weight: 900; color: #fff; display: block; margin-bottom: 20px; }
+        .buy-btn { width: 100%; padding: 18px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 1.1em; }
 
-        .btn-regresar {
-            background: transparent; border: 1px solid #444; color: #888; padding: 8px 15px;
-            margin-bottom: 20px; cursor: pointer; text-transform: uppercase; font-size: 0.8em;
-        }
-        .btn-regresar:active { transform: scale(0.9); color: var(--color-gold); }
+        .btn-regresar { background: none; border: 1px solid #444; color: #888; padding: 10px 20px; cursor: pointer; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8em; }
 
-        #cart-nav { position: fixed; top: var(--promo-bar-height, 45px); right: 0; z-index: 999998; }
-        .cart-icon {
-            padding: 15px; cursor: pointer; width: 25px; height: 20px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.5em; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; 
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);
-        }
-        .cart-icon:active { transform: scale(0.9); }
-        .product-count { position: absolute; top: 5px; right: 5px; background-color: var(--color-gold); color: var(--color-dark); font-size: 0.6em; font-weight: 900; padding: 2px 5px; border-radius: 50%; }
-
-        @media (max-width: 768px) { #main-banner { height: auto; } .banner-video { position: relative; width: 100%; object-fit: contain; } }
+        .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.2); margin: 20px auto; }
+        footer { text-align: center; padding: 30px; font-size: 0.8em; color: #444; border-top: 1px solid #111; margin-top: 50px; }
     </style>
-    
-    <script>
-        function hideAllSecondaryPages() {
-            document.querySelectorAll('section[id$="-page"]').forEach(p => p.style.display = 'none');
-        }
+</head>
+<body>
+
+    <div id="promo-bar" style="position: fixed; top: 0; width: 100%; height: 45px; background: #000; z-index: 10000; border-bottom: 1px solid #222;">
+        <marquee scrollamount="5" style="line-height: 45px; color: var(--color-gold); font-weight: 900;">⚠️ ENVÍO GRATIS Y OBSEQUIO POR COMPRAS SUPERIORES A $80.000 ⚠️</marquee>
+    </div>
+
+    <nav id="main-nav">
+        <div class="hamburger" id="hamburger-icon"><span class="line"></span><span class="line"></span><span class="line"></span></div>
+        <ul class="nav-menu" id="nav-menu-list">
+            <li><a href="#" onclick="location.reload()">INICIO</a></li>
+            <li><a href="#" onclick="showPage('quienes-somos-page')">QUIÉNES SOMOS</a></li>
+            <li><a href="#" onclick="showPage('contacto-page')">CONTACTO</a></li>
+        </ul>
+    </nav>
+
+    <div id="cart-nav">
+        <div class="cart-icon" id="cart-icon">🛒 <span class="product-count" id="cart-count">0</span></div>
+        <div class="cart-popup" id="cart-popup">
+            <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 40px;">TU EQUIPO</h3>
+            <p>Productos: <span id="cart-items-qty">0</span></p>
+            <p>Subtotal: <span id="cart-total" style="color:var(--color-gold); font-weight:900;">$0</span></p>
+            <button class="checkout-btn">FINALIZAR COMPRA</button>
+            <p style="font-size: 0.7em; color: #555; margin-top: 15px; text-align: center;">PEDIDO VÍA WHATSAPP</p>
+        </div>
+    </div>
+
+    <section id="main-banner">
+        <video class="banner-video" autoplay muted loop playsinline><source src="VIDEO1.mp4" type="video/mp4"></video>
+        <div class="video-overlay"></div>
+    </section>
+
+    <div class="divider-line"></div>
+
+    <section id="categories-section">
+        <div class="categories-container">
+            <a href="#" class="category-item" onclick="showPage('morrales-page')">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('morrales.jpg');">
+                        <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="category-item" onclick="showPage('accesorios-page')">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
+                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="morrales-page">
+        <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        <h2 style="color:var(--color-gold); text-align:center; text-transform:uppercase;">Categoría: Morrales</h2>
         
+        <div id="morrales-mosaico" class="mosaico-grid">
+            <div class="mosaico-item" onclick="verProducto('0001')">
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">#0001</span>
+                <img src="morral1.jpg" class="mosaico-img">
+                <p style="font-size:0.85em; font-weight:700;">ASALTO 45L</p>
+            </div>
+            <div class="mosaico-item" onclick="verProducto('0002')">
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">#0002</span>
+                <img src="morral2.jpg" class="mosaico-img">
+                <p style="font-size:0.85em; font-weight:700;">COMPACTO 25L</p>
+            </div>
+        </div>
+
+        <div id="morrales-landing" style="display:none;"></div>
+    </section>
+
+    <section id="quienes-somos-page" style="display:none; padding:80px 20px; text-align:center;">
+        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <h3 style="color:var(--color-gold);">QUIÉNES SOMOS</h3>
+        <p>14 años equipando misiones con excelencia táctica.</p>
+    </section>
+
+    <section id="accesorios-page" style="display:none; padding:80px 20px; text-align:center;">
+        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <h3 style="color:var(--color-gold);">ACCESORIOS</h3>
+        <p>Próximamente nueva línea táctica disponible.</p>
+    </section>
+
+    <footer>
+        © 2025 RYNO DELTA. EQUIPO TÁCTICO PROFESIONAL.
+    </footer>
+
+    <script>
+        const navMenu = document.getElementById('nav-menu-list');
+        const cartPopup = document.getElementById('cart-popup');
+
         function showPage(id) {
-            document.getElementById('nav-menu-list').classList.remove('open');
             document.getElementById('main-banner').style.display = 'none';
             document.getElementById('categories-section').style.display = 'none';
-            hideAllSecondaryPages();
+            document.querySelectorAll('section[id$="-page"]').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
-            if(id === 'morrales-page') mostrarMosaico();
-        }
-
-        function mostrarMosaico() {
-            document.getElementById('morrales-mosaico').style.display = 'grid';
-            document.getElementById('morrales-landing').style.display = 'none';
+            if(id === 'morrales-page') { 
+                document.getElementById('morrales-mosaico').style.display = 'grid';
+                document.getElementById('morrales-landing').style.display = 'none';
+            }
+            navMenu.classList.remove('open');
         }
 
         function verProducto(id) {
@@ -202,138 +217,29 @@
             landing.style.display = 'block';
             
             const productos = {
-                '0001': {
-                    nombre: 'Morral de Asalto 45L',
-                    img: 'morral1.jpg',
-                    specs: ['Nylon Oxford 900D Impermeable', 'Sistema MOLLE Laser-Cut', 'Compartimento hidratación', 'Espaldar ergonómico'],
-                    precio: '$145.000'
-                },
-                '0002': {
-                    nombre: 'Morral Compacto 25L',
-                    img: 'morral2.jpg',
-                    specs: ['Diseño Slim Urbano', 'Cremalleras reforzadas', 'Panel velcro parches', 'Organizadores internos'],
-                    precio: '$95.000'
-                }
+                '0001': { nombre: 'Morral de Asalto 45L', img: 'morral1.jpg', precio: '$145.000', specs: ['Nylon Oxford 900D Impermeable', 'Sistema MOLLE Laser-Cut', 'Compartimento para hidratación', 'Cremalleras de alta resistencia'] },
+                '0002': { nombre: 'Morral Compacto 25L', img: 'morral2.jpg', precio: '$95.000', specs: ['Diseño Slim para uso Urbano', 'Cierres reforzados', 'Panel frontal para parches', 'Organizadores internos tácticos'] }
             };
 
             const p = productos[id];
             landing.innerHTML = `
-                <button class="btn-regresar" onclick="mostrarMosaico()">← Volver al catálogo</button>
+                <button class="btn-regresar" onclick="showPage('morrales-page')">← VOLVER AL CATÁLOGO</button>
                 <div class="landing-card">
                     <img src="${p.img}" class="landing-img">
-                    <div class="landing-info">
-                        <span style="color:var(--color-gold); font-size:0.8em;">ID: #${id}</span>
-                        <h4>${p.nombre}</h4>
+                    <div class="landing-content">
+                        <span style="color:var(--color-gold); font-weight:900; letter-spacing:2px;">CÓDIGO: #${id}</span>
+                        <h2 style="margin:10px 0; font-size:1.8em; color:#fff;">${p.nombre}</h2>
                         <ul class="landing-specs">${p.specs.map(s => `<li>${s}</li>`).join('')}</ul>
                         <span class="landing-price">${p.precio}</span>
-                        <button class="buy-btn">Añadir al equipo</button>
+                        <button class="buy-btn" onclick="alert('Equipo añadido al carrito')">AÑADIR AL EQUIPO</button>
                     </div>
                 </div>
             `;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburger = document.getElementById('hamburger-icon');
-            const navMenu = document.getElementById('nav-menu-list');
-            const cartIcon = document.getElementById('cart-icon');
-            const cartPopup = document.getElementById('cart-popup');
-
-            hamburger.onclick = (e) => { e.stopPropagation(); cartPopup.classList.remove('open'); navMenu.classList.toggle('open'); };
-            cartIcon.onclick = (e) => { e.stopPropagation(); navMenu.classList.remove('open'); cartPopup.classList.toggle('open'); };
-            
-            document.onclick = (e) => {
-                if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) navMenu.classList.remove('open');
-                if (!cartPopup.contains(e.target) && !cartIcon.contains(e.target)) cartPopup.classList.remove('open');
-            };
-
-            document.getElementById('inicio-link').onclick = () => location.reload();
-            document.getElementById('quienes-somos-link').onclick = () => showPage('quienes-somos-page');
-            document.getElementById('servicios-link').onclick = () => showPage('servicios-page');
-            document.getElementById('politicas-link').onclick = () => showPage('politicas-page');
-            document.getElementById('contacto-link').onclick = () => showPage('contacto-page');
-            document.getElementById('morrales-category-link').onclick = (e) => { e.preventDefault(); showPage('morrales-page'); };
-            document.getElementById('accesorios-category-link').onclick = (e) => { e.preventDefault(); showPage('accesorios-page'); };
-        });
+        document.getElementById('hamburger-icon').onclick = (e) => { e.stopPropagation(); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
+        document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); };
+        document.onclick = () => { navMenu.classList.remove('open'); cartPopup.classList.remove('open'); };
     </script>
-</head>
-<body>
-    
-    <div id="promo-bar" style="position: fixed; top: 0; left: 0; width: 100%; height: 45px; background: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px;">
-        <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #C5A67C; font-weight: 700;">
-            <span style="padding: 0 40px;">⚠️ Envío GRATIS ➕ OBSEQUIO desde $80.000 ⚠️</span>
-        </marquee>
-    </div>
-    
-    <nav id="main-nav">
-        <div class="hamburger" id="hamburger-icon"><span class="line"></span><span class="line"></span><span class="line"></span></div>
-        <ul class="nav-menu" id="nav-menu-list">
-            <li><a href="#" id="inicio-link">INICIO</a></li>
-            <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li>
-            <li><a href="#" id="servicios-link">SERVICIOS</a></li>
-            <li><a href="#" id="politicas-link">POLITICAS</a></li>
-            <li><a href="#" id="contacto-link">CONTACTO</a></li>
-        </ul>
-    </nav>
-    
-    <div id="cart-nav">
-        <div class="cart-icon" id="cart-icon">🛒 <span class="product-count">0</span></div>
-        <div class="cart-popup" id="cart-popup" style="position:absolute; top:50px; right:0; width:250px; background:rgba(0,0,0,0.95); transform:translateX(100%); transition:0.3s; padding:15px; border-top:1px solid var(--color-gold);">
-            <h4 style="color:var(--color-gold); margin-top:40px;">🛒 TU CARRITO</h4>
-            <button class="checkout-btn" style="width:100%; padding:10px; background:var(--color-gold); border:none; font-weight:900;">COMPRAR AHORA</button>
-        </div>
-    </div>
-
-    <section id="main-banner">
-        <video class="banner-video" autoplay muted loop playsinline><source src="VIDEO1.mp4" type="video/mp4"></video>
-        <div class="video-overlay"></div>
-    </section>
-    
-    <div class="divider-line"></div>
-
-    <section id="categories-section">
-        <div class="categories-container">
-            <a href="#" class="category-item" id="morrales-category-link">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('morrales.jpg');"><div class="category-overlay"><h4 class="category-title">MORRALES</h4></div></div>
-                </div>
-            </a>
-            <a href="#" class="category-item" id="accesorios-category-link">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');"><div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div></div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="quienes-somos-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>QUIÉNES SOMOS</h3><p>Más de 14 años de experiencia táctica.</p></div></section>
-    <section id="servicios-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>SERVICIOS</h3><p>Ventas al por mayor y detal.</p></div></section>
-    <section id="politicas-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>POLÍTICAS</h3><p>Garantía de satisfacción total.</p></div></section>
-    <section id="contacto-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>CONTACTO</h3><p>Tel: +57 321 445 6135</p></div></section>
-
-    <section id="morrales-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div>
-        <h3>CATEGORÍA: MORRALES</h3>
-        
-        <div id="morrales-mosaico" class="mosaico-grid">
-            <div class="mosaico-item" onclick="verProducto('0001')">
-                <span class="mosaico-id">#0001</span>
-                <img src="morral1.jpg" class="mosaico-img">
-                <span class="mosaico-name">Asalto 45L</span>
-            </div>
-            <div class="mosaico-item" onclick="verProducto('0002')">
-                <span class="mosaico-id">#0002</span>
-                <img src="morral2.jpg" class="mosaico-img">
-                <span class="mosaico-name">Compacto 25L</span>
-            </div>
-        </div>
-
-        <div id="morrales-landing" class="product-landing-view"></div>
-    </section>
-
-    <section id="accesorios-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER</a></div><h3>ACCESORIOS</h3></section>
-
-    <footer style="text-align: center; padding: 20px; font-size: 0.8em; color: #444; background: #000; border-top: 1px solid #111;">
-        © 2025 RYNO DELTA. EQUIPO TÁCTICO PROFESIONAL.
-    </footer>
 </body>
 </html>
