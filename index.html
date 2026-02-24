@@ -21,8 +21,8 @@
             color: #E0E0E0; overflow-x: hidden !important; line-height: 1.6;
         }
 
-        /* --- EFECTOS INTERACTIVOS (HOVER Y ACTIVE) --- */
-        .category-item:active, .mosaico-item:active, .buy-btn:active, .checkout-btn:active, .hamburger:active, .cart-icon:active, .btn-regresar:active {
+        /* --- EFECTOS INTERACTIVOS GENERALES --- */
+        .category-item:active, .mosaico-item:active, .buy-btn:active, .checkout-btn:active, .hamburger:active, .cart-icon:active {
             transform: scale(0.95) !important;
             transition: 0.1s ease;
         }
@@ -38,12 +38,13 @@
             box-shadow: 0 0 25px rgba(197, 166, 124, 0.5);
         }
 
-        /* --- BOTÓN REGRESAR EVOLUCIONADO (REFERENCIA 1.1) --- */
+        /* --- BOTÓN REGRESAR EVOLUCIONADO (REFERENCIA 1.2) --- */
         .container-regresar {
             display: flex;
             justify-content: center;
             width: 100%;
             margin-bottom: 40px;
+            padding-top: 20px; /* Espacio extra interno */
         }
 
         .btn-regresar {
@@ -58,12 +59,21 @@
             letter-spacing: 3px;
             font-size: 0.85em;
             border-radius: 4px;
-            overflow: hidden; /* Necesario para el destello */
-            transition: all 0.3s ease;
+            overflow: hidden; 
+            transition: all 0.2s ease;
             box-shadow: 0 0 10px rgba(197, 166, 124, 0.2);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Animación de Destello (Radar Sweep) */
+        /* Efecto de Hundimiento al hacer TAP */
+        .btn-regresar:active {
+            transform: scale(0.92); /* Hundimiento más pronunciado */
+            background: rgba(197, 166, 124, 0.2);
+            box-shadow: 0 0 5px var(--color-gold);
+        }
+
+        /* Animación de Destello Radar */
         .btn-regresar::before {
             content: '';
             position: absolute;
@@ -79,6 +89,12 @@
             );
             transform: skewX(-20deg);
             animation: radar-sweep 4s infinite;
+        }
+
+        /* Destello extra al hacer TAP */
+        .btn-regresar:active::before {
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            transition: 0s;
         }
 
         @keyframes radar-sweep {
@@ -110,7 +126,6 @@
         .nav-menu.open { transform: translateX(0); }
         .nav-menu li { opacity: 0; transform: translateX(-20px); transition: 0.4s; padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; }
         .nav-menu.open li { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
-        .nav-menu li:hover { color: var(--color-gold); padding-left: 35px; background: rgba(197,166,124,0.1); }
 
         /* CARRITO */
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
@@ -118,7 +133,7 @@
         .cart-popup { position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); }
         .cart-popup.open { transform: translateX(0); }
 
-        /* BANNER */
+        /* BANNER (Fijo 16:9 Horizontal) */
         #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: #000; overflow: hidden; }
         .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
         .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 2; pointer-events: none; }
@@ -126,7 +141,15 @@
         /* LÍNEA DIVISORIA */
         .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.3); margin: 25px auto; box-shadow: 0 0 10px rgba(197, 166, 124, 0.4); }
 
-        /* SECCIONES Y MOSAICO */
+        /* SECCIONES: Ajuste de 100px para evitar choque con menú en celular */
+        #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { 
+            display: none; 
+            padding: 100px 20px 60px 20px; /* Aumentado a 100px arriba */
+            margin-top: var(--promo-bar-height); 
+            max-width: 1000px; 
+            margin: 0 auto; 
+        }
+
         #categories-section { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
         .categories-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
         .category-item { width: 100%; max-width: 480px; }
@@ -140,14 +163,11 @@
         .mosaico-item { padding: 15px; text-align: center; }
         .mosaico-img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
 
-        /* LANDING CARD */
         .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); border-radius: 8px; overflow: hidden; margin-top: 20px; }
         .landing-img { width: 100%; max-height: 450px; object-fit: cover; border-bottom: 1px solid #222; }
         .landing-content { padding: 25px; }
         .landing-price { font-size: 2.2em; font-weight: 900; color: #fff; display: block; margin-bottom: 20px; }
         .buy-btn { width: 100%; padding: 18px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; color: #000; }
-
-        #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { display: none; padding: 60px 20px; margin-top: var(--promo-bar-height); max-width: 1000px; margin: 0 auto; }
 
         footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; letter-spacing: 2px; }
     </style>
