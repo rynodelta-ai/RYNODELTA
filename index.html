@@ -64,8 +64,11 @@
             height: 20px;
             background-color: rgba(0, 0, 0, 0.6);	
             border-radius: 0 0 5px 0;	
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);
+            transition: transform 0.1s ease;
         }
+
+        .hamburger:active { transform: scale(0.9); background-color: rgba(197, 166, 124, 0.2); }
 
         .line {
             display: block; width: 100%; height: 3px;
@@ -86,84 +89,30 @@
         .nav-menu.open { transform: translateX(0); }
 
         .nav-menu li a {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #E0E0E0;
-            font-weight: 500;
-            transition: all 0.2s ease;
+            display: block; padding: 15px 20px; text-decoration: none; color: #E0E0E0; font-weight: 500; transition: all 0.2s ease;
         }
-        .nav-menu li a:hover {
-            background-color: rgba(197, 166, 124, 0.1);
-            color: var(--color-gold);
-            padding-left: 30px;
-        }
-        .nav-menu li a:active {
-            transform: scale(0.95);
-            background-color: rgba(197, 166, 124, 0.2);
-        }
+        .nav-menu li a:hover { background-color: rgba(197, 166, 124, 0.1); color: var(--color-gold); padding-left: 30px; }
+        .nav-menu li a:active { transform: scale(0.95); background-color: rgba(197, 166, 124, 0.2); }
 
-        #categories-section {
-            padding: 40px 10px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        #categories-section { padding: 40px 10px; max-width: 1200px; margin: 0 auto; }
         
-        .divider-line {
-            width: 80%;
-            height: 1px;
-            background-color: rgba(197, 166, 124, 0.3);
-            margin: 0 auto 40px auto;
-        }
+        .divider-line { width: 80%; height: 1px; background-color: rgba(197, 166, 124, 0.3); margin: 0 auto 40px auto; }
 
-        .categories-container {
-            display: flex;
-            flex-wrap: wrap; 
-            justify-content: space-between; 
-        }
+        .categories-container { display: flex; flex-wrap: wrap; justify-content: space-between; }
 
         .category-item {
-            width: 100%; 
-            background-color: #111;
-            border: 2px solid var(--color-gold);
-            border-radius: 8px;
-            overflow: hidden;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin: 10px 0; 
-            max-width: 450px; 
-            display: block; 
+            width: 100%; background-color: #111; border: 2px solid var(--color-gold); border-radius: 8px;
+            overflow: hidden; text-decoration: none; color: white; transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin: 10px 0; max-width: 450px; display: block; 
         }
         
-        .category-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5);
-            filter: brightness(1.1);
-        }
+        .category-item:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5); filter: brightness(1.1); }
+        .category-item:active { transform: scale(0.96); filter: brightness(1.3); background-color: rgba(197, 166, 124, 0.1); }
 
-        .category-item:active {
-            transform: scale(0.97);
-            filter: brightness(0.9);
-        }
-
-        .aspect-ratio-box {
-            position: relative; width: 100%; padding-top: 42.86%; 
-        }
-
-        .category-image {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center;
-        }
-
-        .category-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4);
-            display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px;
-        }
-
-        .category-title {
-            color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; text-shadow: 0 0 5px rgba(0, 0, 0, 1);
-        }
+        .aspect-ratio-box { position: relative; width: 100%; padding-top: 42.86%; }
+        .category-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
+        .category-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+        .category-title { color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; text-shadow: 0 0 5px rgba(0, 0, 0, 1); }
 
         #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {	
             display: none; padding: 60px 20px; min-height: calc(100vh - var(--promo-bar-height));
@@ -171,265 +120,152 @@
             position: relative; max-width: 1000px; margin: 0 auto;
         }
 
-        .back-button-container { padding-bottom: 40px; text-align: center; }
-
+        .back-button-container { padding-bottom: 20px; text-align: center; }
         .back-to-home-btn {	
             display: inline-block; padding: 10px 20px; text-decoration: none; color: var(--color-gold);
             background-color: rgba(0, 0, 0, 0.7); border: 1px solid var(--color-gold); border-radius: 5px;
             font-weight: 700; text-transform: uppercase; transition: all 0.2s ease;
-            box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4);	
         }
+        .back-to-home-btn:active { transform: scale(0.9); background-color: rgba(197, 166, 124, 0.2); }
 
-        .back-to-home-btn:hover {
-            background-color: rgba(197, 166, 124, 0.1);
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
+        /* NUEVO SISTEMA DE MOSAICO Y LANDING */
+        .mosaico-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; padding: 20px 0;
         }
-
-        .back-to-home-btn:active {
-            transform: scale(0.92);
+        .mosaico-item {
+            background: #0a0a0a; border: 1px solid #222; border-radius: 4px; padding: 10px;
+            text-align: center; cursor: pointer; transition: all 0.2s ease;
         }
+        .mosaico-item:active { transform: scale(0.94); border-color: var(--color-gold); background: rgba(197, 166, 124, 0.05); }
+        .mosaico-img { width: 100%; height: 120px; object-fit: cover; margin-bottom: 10px; border-radius: 2px; }
+        .mosaico-id { display: block; font-size: 0.7em; color: var(--color-gold); margin-bottom: 5px; }
+        .mosaico-name { font-size: 0.85em; font-weight: 700; text-transform: uppercase; color: #fff; }
 
-        /* ESTILOS DE PRODUCTO (LANDING TÁCTICA) */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px 0;
+        /* LANDING DE PRODUCTO DETALLADO */
+        .product-landing-view { display: none; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); padding: 20px; border-radius: 4px; }
+        .landing-img { width: 100%; max-height: 400px; object-fit: cover; border-bottom: 1px solid #222; margin-bottom: 20px; }
+        .landing-info h4 { color: #fff; font-size: 1.8em; margin: 0 0 10px 0; text-transform: uppercase; }
+        .landing-specs { list-style: none; padding: 0; margin-bottom: 25px; color: #aaa; font-size: 0.95em; }
+        .landing-specs li { margin-bottom: 8px; padding-left: 20px; position: relative; }
+        .landing-specs li::before { content: "▶"; position: absolute; left: 0; color: var(--color-gold); font-size: 0.8em; }
+        .landing-price { font-size: 2em; font-weight: 900; color: #fff; display: block; margin-bottom: 20px; }
+        
+        .buy-btn {
+            width: 100%; padding: 15px; background: var(--color-gold); color: #000; border: none;
+            font-weight: 900; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;
         }
+        .buy-btn:active { transform: scale(0.95); background: #e2c08d; }
 
-        .product-card {
-            background: #0a0a0a;
-            border: 1px solid #222;
-            border-radius: 4px;
-            padding: 20px;
-            position: relative;
-            transition: all 0.3s ease;
+        .btn-regresar {
+            background: transparent; border: 1px solid #444; color: #888; padding: 8px 15px;
+            margin-bottom: 20px; cursor: pointer; text-transform: uppercase; font-size: 0.8em;
         }
-
-        .product-card:hover {
-            border-color: var(--color-gold);
-            box-shadow: 0 0 15px rgba(197, 166, 124, 0.1);
-        }
-
-        .product-serial {
-            font-size: 0.8em;
-            color: var(--color-gold);
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .product-status {
-            background: rgba(197, 166, 124, 0.1);
-            color: var(--color-gold);
-            padding: 4px 8px;
-            font-size: 0.7em;
-            border-radius: 3px;
-            margin-bottom: 15px;
-            display: inline-block;
-            border: 0.5px solid var(--color-gold);
-        }
-
-        .product-img-box {
-            width: 100%;
-            height: 250px;
-            background: #111;
-            margin-bottom: 15px;
-            overflow: hidden;
-            border: 1px solid #1a1a1a;
-        }
-
-        .product-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .product-info h4 {
-            color: #fff;
-            margin: 0 0 10px 0;
-            font-size: 1.4em;
-            text-transform: uppercase;
-        }
-
-        .product-specs {
-            font-size: 0.9em;
-            color: #888;
-            margin-bottom: 20px;
-            list-style: none;
-            padding: 0;
-        }
-
-        .product-specs li {
-            margin-bottom: 5px;
-            padding-left: 15px;
-            position: relative;
-        }
-
-        .product-specs li::before {
-            content: "▶";
-            position: absolute;
-            left: 0;
-            color: var(--color-gold);
-            font-size: 0.7em;
-            top: 4px;
-        }
-
-        .product-price {
-            font-size: 1.5em;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .add-to-gear-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--color-gold);
-            color: #000;
-            border: none;
-            font-weight: 900;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .add-to-gear-btn:hover { background: #e2c08d; }
-        .add-to-gear-btn:active { transform: scale(0.96); }
+        .btn-regresar:active { transform: scale(0.9); color: var(--color-gold); }
 
         #cart-nav { position: fixed; top: var(--promo-bar-height, 45px); right: 0; z-index: 999998; }
-
         .cart-icon {
             padding: 15px; cursor: pointer; width: 25px; height: 20px; display: flex; align-items: center; justify-content: center;
             font-size: 1.5em; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; 
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);	
+            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3);
         }
-        
-        .product-count {
-            position: absolute; top: 5px; right: 5px; background-color: var(--color-gold); color: var(--color-dark);
-            font-size: 0.6em; font-weight: 900; padding: 2px 5px; border-radius: 50%; line-height: 1;
-        }
+        .cart-icon:active { transform: scale(0.9); }
+        .product-count { position: absolute; top: 5px; right: 5px; background-color: var(--color-gold); color: var(--color-dark); font-size: 0.6em; font-weight: 900; padding: 2px 5px; border-radius: 50%; }
 
-        .cart-popup {
-            position: absolute; top: 50px; right: 0; width: 250px;	
-            height: calc(100vh - 50px - var(--promo-bar-height)); 
-            background-color: rgba(0, 0, 0, 0.95); border-top: 1px solid var(--color-gold);	
-            transform: translateX(100%); transition: transform 0.3s ease-in-out;
-            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.95); padding: 10px; text-align: left;
-        }
-
-        .cart-popup.open { transform: translateX(0); }
-
-        .checkout-btn {
-            display: block; width: 100%; padding: 10px; margin-top: 15px; text-align: center; font-size: 1.1em;
-            font-weight: 900; text-transform: uppercase; color: var(--color-dark);
-            background-color: var(--color-gold); border: none; border-radius: 3px; cursor: pointer;
-            box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.5);
-            transition: all 0.2s ease;
-        }
-        .checkout-btn:hover {
-            background-color: #e2c08d;
-            box-shadow: 0 5px 15px rgba(197, 166, 124, 0.8);
-        }
-        .checkout-btn:active { transform: scale(0.95); }
-
-        @media (max-width: 768px) {
-            #main-banner { height: auto; }
-            .banner-video { position: relative; width: 100%; object-fit: contain; }
-        }
-
-        @media (min-width: 769px) {
-            .categories-container { justify-content: center !important; gap: 40px !important; }
-        }
+        @media (max-width: 768px) { #main-banner { height: auto; } .banner-video { position: relative; width: 100%; object-fit: contain; } }
     </style>
     
     <script>
         function hideAllSecondaryPages() {
-            document.getElementById('quienes-somos-page').style.display = 'none';
-            document.getElementById('servicios-page').style.display = 'none';
-            document.getElementById('politicas-page').style.display = 'none';
-            document.getElementById('contacto-page').style.display = 'none';
-            document.getElementById('morrales-page').style.display = 'none'; 
-            document.getElementById('accesorios-page').style.display = 'none';
+            document.querySelectorAll('section[id$="-page"]').forEach(p => p.style.display = 'none');
         }
         
+        function showPage(id) {
+            document.getElementById('nav-menu-list').classList.remove('open');
+            document.getElementById('main-banner').style.display = 'none';
+            document.getElementById('categories-section').style.display = 'none';
+            hideAllSecondaryPages();
+            document.getElementById(id).style.display = 'block';
+            if(id === 'morrales-page') mostrarMosaico();
+        }
+
+        function mostrarMosaico() {
+            document.getElementById('morrales-mosaico').style.display = 'grid';
+            document.getElementById('morrales-landing').style.display = 'none';
+        }
+
+        function verProducto(id) {
+            document.getElementById('morrales-mosaico').style.display = 'none';
+            const landing = document.getElementById('morrales-landing');
+            landing.style.display = 'block';
+            
+            const productos = {
+                '0001': {
+                    nombre: 'Morral de Asalto 45L',
+                    img: 'morral1.jpg',
+                    specs: ['Nylon Oxford 900D Impermeable', 'Sistema MOLLE Laser-Cut', 'Compartimento hidratación', 'Espaldar ergonómico'],
+                    precio: '$145.000'
+                },
+                '0002': {
+                    nombre: 'Morral Compacto 25L',
+                    img: 'morral2.jpg',
+                    specs: ['Diseño Slim Urbano', 'Cremalleras reforzadas', 'Panel velcro parches', 'Organizadores internos'],
+                    precio: '$95.000'
+                }
+            };
+
+            const p = productos[id];
+            landing.innerHTML = `
+                <button class="btn-regresar" onclick="mostrarMosaico()">← Volver al catálogo</button>
+                <div class="landing-card">
+                    <img src="${p.img}" class="landing-img">
+                    <div class="landing-info">
+                        <span style="color:var(--color-gold); font-size:0.8em;">ID: #${id}</span>
+                        <h4>${p.nombre}</h4>
+                        <ul class="landing-specs">${p.specs.map(s => `<li>${s}</li>`).join('')}</ul>
+                        <span class="landing-price">${p.precio}</span>
+                        <button class="buy-btn">Añadir al equipo</button>
+                    </div>
+                </div>
+            `;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
             const cartIcon = document.getElementById('cart-icon');
             const cartPopup = document.getElementById('cart-popup');
 
-            hamburger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                cartPopup.classList.remove('open');
-                navMenu.classList.toggle('open');
-            });
+            hamburger.onclick = (e) => { e.stopPropagation(); cartPopup.classList.remove('open'); navMenu.classList.toggle('open'); };
+            cartIcon.onclick = (e) => { e.stopPropagation(); navMenu.classList.remove('open'); cartPopup.classList.toggle('open'); };
+            
+            document.onclick = (e) => {
+                if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) navMenu.classList.remove('open');
+                if (!cartPopup.contains(e.target) && !cartIcon.contains(e.target)) cartPopup.classList.remove('open');
+            };
 
-            cartIcon.addEventListener('click', (e) => {
-                e.stopPropagation();
-                navMenu.classList.remove('open');
-                cartPopup.classList.toggle('open');
-            });
-
-            navMenu.addEventListener('mouseleave', () => navMenu.classList.remove('open'));
-            cartPopup.addEventListener('mouseleave', () => cartPopup.classList.remove('open'));
-
-            document.addEventListener('click', (event) => {
-                if (!navMenu.contains(event.target) && !hamburger.contains(event.target)) {
-                    navMenu.classList.remove('open');
-                }
-                if (!cartPopup.contains(event.target) && !cartIcon.contains(event.target)) {
-                    cartPopup.classList.remove('open');
-                }
-            });
-
-            document.getElementById('inicio-link').addEventListener('click', () => location.reload());
-            document.getElementById('quienes-somos-link').addEventListener('click', () => { showPage('quienes-somos-page'); });
-            document.getElementById('servicios-link').addEventListener('click', () => { showPage('servicios-page'); });
-            document.getElementById('politicas-link').addEventListener('click', () => { showPage('politicas-page'); });
-            document.getElementById('contacto-link').addEventListener('click', () => { showPage('contacto-page'); });
-
-            function showPage(id) {
-                navMenu.classList.remove('open');
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById(id).style.display = 'block';
-            }
-
-            document.getElementById('morrales-category-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('morrales-page').style.display = 'block';
-            });
-
-            document.getElementById('accesorios-category-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('main-banner').style.display = 'none';
-                document.getElementById('categories-section').style.display = 'none';
-                hideAllSecondaryPages();
-                document.getElementById('accesorios-page').style.display = 'block';
-            });
+            document.getElementById('inicio-link').onclick = () => location.reload();
+            document.getElementById('quienes-somos-link').onclick = () => showPage('quienes-somos-page');
+            document.getElementById('servicios-link').onclick = () => showPage('servicios-page');
+            document.getElementById('politicas-link').onclick = () => showPage('politicas-page');
+            document.getElementById('contacto-link').onclick = () => showPage('contacto-page');
+            document.getElementById('morrales-category-link').onclick = (e) => { e.preventDefault(); showPage('morrales-page'); };
+            document.getElementById('accesorios-category-link').onclick = (e) => { e.preventDefault(); showPage('accesorios-page'); };
         });
-
-        function volverInicio() { location.reload(); }
     </script>
 </head>
 <body>
     
-    <div id="promo-bar" style="position: fixed !important; top: 0; left: 0; width: 100%; height: 45px; background-color: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px; overflow: hidden;">
+    <div id="promo-bar" style="position: fixed; top: 0; left: 0; width: 100%; height: 45px; background: rgba(0,0,0,0.95); z-index: 999999; line-height: 45px;">
         <marquee behavior="scroll" direction="left" scrollamount="4" style="color: #C5A67C; font-weight: 700;">
-            <span style="padding: 0 40px;">⚠️ Aprovecha Envío GRATIS ➕ OBSEQUIO a partir de $80.000 en compras ⚠️</span>
+            <span style="padding: 0 40px;">⚠️ Envío GRATIS ➕ OBSEQUIO desde $80.000 ⚠️</span>
         </marquee>
     </div>
     
     <nav id="main-nav">
-        <div class="hamburger" id="hamburger-icon">
-            <span class="line"></span><span class="line"></span><span class="line"></span>
-        </div>
+        <div class="hamburger" id="hamburger-icon"><span class="line"></span><span class="line"></span><span class="line"></span></div>
         <ul class="nav-menu" id="nav-menu-list">
             <li><a href="#" id="inicio-link">INICIO</a></li>
             <li><a href="#" id="quienes-somos-link">QUIÉNES SOMOS</a></li>
@@ -440,21 +276,15 @@
     </nav>
     
     <div id="cart-nav">
-        <div class="cart-icon" id="cart-icon">🛒 <span id="product-count" class="product-count">0</span></div>
-        <div class="cart-popup" id="cart-popup">
-            <h4 style="margin-top: 50px; color: var(--color-gold); font-weight: 900; text-transform: uppercase;">🛒 Tu Carrito</h4>
-            <p style="color: #E0E0E0;">Productos: <strong id="popup-product-count" style="color: var(--color-gold);">0</strong></p>
-            <p style="color: #E0E0E0; margin-bottom: 20px;">Subtotal: <strong id="subtotal-display" style="color: var(--color-gold);">$0</strong></p>
-            <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
-            <button class="checkout-btn">COMPRAR AHORA</button>
-            <p style="font-size: 0.8em; color: #888; margin-top: 15px; text-align: center;">Finaliza tu compra por WhatsApp</p>
+        <div class="cart-icon" id="cart-icon">🛒 <span class="product-count">0</span></div>
+        <div class="cart-popup" id="cart-popup" style="position:absolute; top:50px; right:0; width:250px; background:rgba(0,0,0,0.95); transform:translateX(100%); transition:0.3s; padding:15px; border-top:1px solid var(--color-gold);">
+            <h4 style="color:var(--color-gold); margin-top:40px;">🛒 TU CARRITO</h4>
+            <button class="checkout-btn" style="width:100%; padding:10px; background:var(--color-gold); border:none; font-weight:900;">COMPRAR AHORA</button>
         </div>
     </div>
 
     <section id="main-banner">
-        <video class="banner-video" autoplay muted loop playsinline>
-            <source src="VIDEO1.mp4" type="video/mp4">
-        </video>
+        <video class="banner-video" autoplay muted loop playsinline><source src="VIDEO1.mp4" type="video/mp4"></video>
         <div class="video-overlay"></div>
     </section>
     
@@ -464,107 +294,46 @@
         <div class="categories-container">
             <a href="#" class="category-item" id="morrales-category-link">
                 <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('morrales.jpg');">
-                        <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
-                    </div>
+                    <div class="category-image" style="background-image: url('morrales.jpg');"><div class="category-overlay"><h4 class="category-title">MORRALES</h4></div></div>
                 </div>
             </a>
             <a href="#" class="category-item" id="accesorios-category-link">
                 <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
-                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS PARA ARMAS</h4></div>
-                    </div>
+                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');"><div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div></div>
                 </div>
             </a>
         </div>
     </section>
 
-    <section id="quienes-somos-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
-        <div class="page-content">
-            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
-            <h3>QUIÉNES SOMOS</h3>
-            <p>En RYNO DELTA, nos apasiona el mundo táctico y de supervivencia. Con más de 14 años de experiencia, nos hemos dedicado a ofrecer el mejor equipo para profesionales y entusiastas.</p>
-        </div>
-    </section>
-
-    <section id="servicios-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
-        <div class="page-content">
-            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
-            <h3>NUESTROS SERVICIOS</h3>
-            <p>Ofrecemos asesoría personalizada en equipo táctico, ventas al por mayor y detal, y envíos rápidos a todo el país.</p>
-        </div>
-    </section>
-
-    <section id="politicas-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
-        <div class="page-content">
-            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
-            <h3>POLÍTICAS</h3>
-            <p>Nuestras políticas garantizan la satisfacción del cliente, con procesos claros de cambios, devoluciones y manejo de garantías.</p>
-        </div>
-    </section>
-
-    <section id="contacto-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
-        <div class="page-content">
-            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
-            <h3>CONTACTO</h3>
-            <p>📍 Dirección: Bogotá, Colombia<br>📞 Teléfono: +57 321 445 6135<br>✉️ Email: contacto@rynodelta.com</p>
-        </div>
-    </section>
+    <section id="quienes-somos-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>QUIÉNES SOMOS</h3><p>Más de 14 años de experiencia táctica.</p></div></section>
+    <section id="servicios-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>SERVICIOS</h3><p>Ventas al por mayor y detal.</p></div></section>
+    <section id="politicas-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>POLÍTICAS</h3><p>Garantía de satisfacción total.</p></div></section>
+    <section id="contacto-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div><div class="page-content"><h3>CONTACTO</h3><p>Tel: +57 321 445 6135</p></div></section>
 
     <section id="morrales-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
-        <div class="page-content">
-            <h3>MORRALES</h3>
-            <div class="products-grid">
-                <div class="product-card">
-                    <span class="product-serial">ID: #0001</span>
-                    <span class="product-status">EQUIPO DISPONIBLE</span>
-                    <div class="product-img-box">
-                        <img src="morral1.jpg" alt="Morral Táctico Asalto">
-                    </div>
-                    <div class="product-info">
-                        <h4>Morral de Asalto 45L</h4>
-                        <ul class="product-specs">
-                            <li>Nylon Oxford 900D Impermeable</li>
-                            <li>Sistema MOLLE Laser-Cut</li>
-                            <li>Compartimento para hidratación</li>
-                            <li>Espaldar ergonómico ventilado</li>
-                        </ul>
-                        <span class="product-price">$145.000</span>
-                        <button class="add-to-gear-btn">AÑADIR AL EQUIPO</button>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <span class="product-serial">ID: #0002</span>
-                    <span class="product-status">EQUIPO DISPONIBLE</span>
-                    <div class="product-img-box">
-                        <img src="morral2.jpg" alt="Morral Táctico Compacto">
-                    </div>
-                    <div class="product-info">
-                        <h4>Morral Compacto 25L</h4>
-                        <ul class="product-specs">
-                            <li>Diseño Slim para Misión Urbana</li>
-                            <li>Cremalleras reforzadas YKK</li>
-                            <li>Panel de velcro para parches</li>
-                            <li>Bolsillos organizadores internos</li>
-                        </ul>
-                        <span class="product-price">$95.000</span>
-                        <button class="add-to-gear-btn">AÑADIR AL EQUIPO</button>
-                    </div>
-                </div>
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER AL INICIO</a></div>
+        <h3>CATEGORÍA: MORRALES</h3>
+        
+        <div id="morrales-mosaico" class="mosaico-grid">
+            <div class="mosaico-item" onclick="verProducto('0001')">
+                <span class="mosaico-id">#0001</span>
+                <img src="morral1.jpg" class="mosaico-img">
+                <span class="mosaico-name">Asalto 45L</span>
+            </div>
+            <div class="mosaico-item" onclick="verProducto('0002')">
+                <span class="mosaico-id">#0002</span>
+                <img src="morral2.jpg" class="mosaico-img">
+                <span class="mosaico-name">Compacto 25L</span>
             </div>
         </div>
+
+        <div id="morrales-landing" class="product-landing-view"></div>
     </section>
 
-    <section id="accesorios-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div><div class="page-content"><h3>ACCESORIOS PARA ARMAS</h3></div></section>
+    <section id="accesorios-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="location.reload()">VOLVER</a></div><h3>ACCESORIOS</h3></section>
 
-    <footer style="text-align: center; padding: 20px; font-size: 0.9em; color: #666; background-color: #000; border-top: 1px solid #111;">
-        © 2025 RYNO DELTA. Todos los derechos reservados.
+    <footer style="text-align: center; padding: 20px; font-size: 0.8em; color: #444; background: #000; border-top: 1px solid #111;">
+        © 2025 RYNO DELTA. EQUIPO TÁCTICO PROFESIONAL.
     </footer>
 </body>
 </html>
