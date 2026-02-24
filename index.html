@@ -30,8 +30,6 @@
             box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); 
         }
         .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; transform-origin: left; }
-        
-        /* Animación a X */
         .hamburger.open .line:nth-child(1) { transform: rotate(45deg); }
         .hamburger.open .line:nth-child(2) { opacity: 0; }
         .hamburger.open .line:nth-child(3) { transform: rotate(-45deg); }
@@ -46,7 +44,7 @@
         .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; transition: 0.3s; }
         .nav-menu li:hover { background: rgba(197, 166, 124, 0.1); color: var(--color-gold); }
 
-        /* --- CARRITO CON DESCRIPCIÓN Y LÓGICA --- */
+        /* --- CARRITO COMPLETO --- */
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
         .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.8); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); font-size: 1.2em; }
         .cart-popup { 
@@ -56,13 +54,12 @@
             border-left: 2px solid var(--color-gold); max-height: 80vh; overflow-y: auto;
         }
         .cart-popup.open { transform: translateX(0); }
-        .cart-item { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #222; }
+        .cart-item { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
         .cart-item img { width: 50px; height: 50px; object-fit: cover; border: 1px solid var(--color-gold); }
-        .cart-item-info { flex-grow: 1; font-size: 0.8em; }
-        .cart-qty-controls { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
-        .qty-btn { background: #222; border: 1px solid var(--color-gold); color: #fff; padding: 2px 8px; cursor: pointer; }
+        .cart-qty-controls { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+        .qty-btn { background: #222; border: 1px solid var(--color-gold); color: #fff; padding: 0 8px; cursor: pointer; font-weight: 900; }
 
-        /* --- BOTONES TÁCTICOS UNIFICADOS (CONSTANTE) --- */
+        /* --- BOTONES TÁCTICOS UNIFICADOS --- */
         .btn-regresar, .buy-btn, .checkout-btn {
             position: relative; background: rgba(197, 166, 124, 0.1) !important;
             border: 2px solid var(--color-gold) !important; color: var(--color-gold) !important;
@@ -70,6 +67,7 @@
             letter-spacing: 3px; font-size: 0.85em; border-radius: 4px; overflow: hidden; 
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             box-shadow: 0 0 15px rgba(197, 166, 124, 0.2); outline: none; -webkit-tap-highlight-color: transparent;
+            display: block; margin: 0 auto;
         }
         .btn-regresar:hover, .btn-regresar:active, .buy-btn:hover, .buy-btn:active, .checkout-btn:hover, .checkout-btn:active {
             background-color: var(--color-gold) !important; color: #000 !important;
@@ -82,22 +80,33 @@
         }
         @keyframes radar-sweep { 0% { left: -150%; } 20% { left: 150%; } 100% { left: 150%; } }
 
-        /* --- ESTRUCTURA Y BANNER 16:9 --- */
-        #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: #000; z-index: 10000; border-bottom: 1px solid #111; text-align: center; line-height: var(--promo-bar-height); }
-        #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: #000; }
-        .banner-video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+        /* --- CATEGORÍAS RESTAURADAS --- */
+        #categories-section { padding: 40px 10px; max-width: 1200px; margin: 0 auto; }
+        .categories-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        .category-item { 
+            width: 100%; max-width: 480px; transition: all 0.4s; cursor: pointer; 
+            background: #111; border: 2px solid #222; border-radius: 8px; overflow: hidden;
+        }
+        .category-item:hover { transform: translateY(-8px); border-color: var(--color-gold); box-shadow: 0 0 25px rgba(197,166,124,0.4); }
+        .aspect-ratio-box { position: relative; width: 100%; padding-top: 45%; overflow: hidden; }
+        .category-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: 0.6s; }
+        .category-item:hover .category-image { transform: scale(1.1); }
+        .category-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+        .category-title { color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* BANNER 16:9 CONSTANTE */
+        #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: #000; overflow: hidden; }
+        .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
         
+        /* SECCIONES: DISTANCIA 140PX */
         #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { 
             display: none; padding: 140px 20px 60px 20px; max-width: 1000px; margin: 0 auto; 
         }
         .container-regresar { display: flex; justify-content: center; margin-bottom: 40px; }
 
-        .mosaico-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .mosaico-item { padding: 15px; text-align: center; background: #111; border: 1px solid #222; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .mosaico-item:hover { border-color: var(--color-gold); }
-        .mosaico-img { width: 100%; height: 150px; object-fit: cover; }
+        .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.3); margin: 25px auto; box-shadow: 0 0 10px rgba(197, 166, 124, 0.4); }
 
-        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; }
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -119,9 +128,9 @@
     </nav>
 
     <div id="cart-nav">
-        <div class="cart-icon" id="cart-btn">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; padding:2px 6px; border-radius:50%; font-size:0.7em;">0</span></div>
+        <div class="cart-icon" id="cart-btn">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; padding:2px 6px; border-radius:50%; font-size:0.7em; font-weight:900;">0</span></div>
         <div class="cart-popup" id="cart-popup">
-            <h3 style="color:var(--color-gold); text-align:center; border-bottom:1px solid #333; padding-bottom:10px;">EQUIPO ALISTADO</h3>
+            <h3 style="color:var(--color-gold); text-align:center; border-bottom: 1px solid #333; padding-bottom: 10px;">EQUIPO ALISTADO</h3>
             <div id="cart-items-container">
                 <p style="text-align:center; font-size:0.8em; color:#666;">El equipo está vacío</p>
             </div>
@@ -130,7 +139,7 @@
                     <span>SUBTOTAL:</span>
                     <span id="cart-total">$0</span>
                 </div>
-                <button class="checkout-btn" style="width:100%; margin-top:15px;">FINALIZAR MISION</button>
+                <button class="checkout-btn" style="width:100%; margin-top:15px;">FINALIZAR MISIÓN</button>
             </div>
         </div>
     </div>
@@ -139,28 +148,65 @@
         <video class="banner-video" autoplay muted loop playsinline><source src="VIDEO1.mp4" type="video/mp4"></video>
     </section>
 
-    <section id="categories-section" style="padding:40px 20px; text-align:center;">
-        <button class="btn-regresar" onclick="showPage('morrales-page')" style="width:280px;">VER MORRALES</button>
+    <div class="divider-line"></div>
+
+    <section id="categories-section">
+        <div class="categories-container">
+            <div class="category-item" onclick="showPage('morrales-page')">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('morrales.jpg');">
+                        <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
+                    </div>
+                </div>
+            </div>
+            <div class="category-item" onclick="showPage('accesorios-page')">
+                <div class="aspect-ratio-box">
+                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
+                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="morrales-page">
         <div class="container-regresar">
             <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
         </div>
-        <div id="morrales-mosaico" class="mosaico-grid">
-            <div class="mosaico-item" onclick="verProducto('0001')">
-                <img src="morral1.jpg" class="mosaico-img">
-                <p>ASALTO 45L - $145.000</p>
+        <div id="morrales-mosaico" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:20px;">
+            <div class="category-item" style="padding:15px; text-align:center;" onclick="verProducto('0001')">
+                <img src="morral1.jpg" style="width:100%; height:150px; object-fit:cover; border-radius:4px;">
+                <p style="font-weight:800; margin-top:10px;">ASALTO 45L - $145.000</p>
             </div>
         </div>
         <div id="morrales-landing" style="display:none;"></div>
     </section>
 
-    <section id="quienes-somos-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← INICIO</button></div><h3 style="text-align:center;color:var(--color-gold);">QUIÉNES SOMOS</h3></section>
-    <section id="servicios-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← INICIO</button></div><h3 style="text-align:center;color:var(--color-gold);">SERVICIOS</h3></section>
-    <section id="contacto-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← INICIO</button></div><h3 style="text-align:center;color:var(--color-gold);">CONTACTO</h3></section>
+    <section id="quienes-somos-page" style="text-align:center;">
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← INICIO</button></div>
+        <h3 style="color:var(--color-gold);">QUIÉNES SOMOS</h3>
+        <p>14 años equipando misiones tácticas con los más altos estándares de resistencia.</p>
+    </section>
 
-    <footer>© 2025 RYNO DELTA.</footer>
+    <section id="servicios-page" style="text-align:center;">
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← INICIO</button></div>
+        <h3 style="color:var(--color-gold);">SERVICIOS</h3>
+        <p>Asesoría en equipamiento, envíos nacionales seguros y garantía táctica integral.</p>
+    </section>
+
+    <section id="contacto-page" style="text-align:center;">
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← INICIO</button></div>
+        <h3 style="color:var(--color-gold);">CONTACTO</h3>
+        <p>WhatsApp: +57 321 445 6135<br>Bogotá, Colombia</p>
+    </section>
+
+    <section id="accesorios-page" style="text-align:center;">
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← INICIO</button></div>
+        <h3 style="color:var(--color-gold);">ACCESORIOS</h3>
+        <p>Nueva línea de accesorios tácticos disponible próximamente.</p>
+    </section>
+
+    <footer>© 2025 RYNO DELTA. EQUIPO TÁCTICO PROFESIONAL.</footer>
 
     <script>
         let carrito = [];
@@ -168,14 +214,12 @@
         const hamburger = document.getElementById('hamburger-btn');
         const cartPopup = document.getElementById('cart-popup');
 
-        // Toggle Menú con Animación
         hamburger.onclick = () => {
             hamburger.classList.toggle('open');
             menu.classList.toggle('open');
             cartPopup.classList.remove('open');
         };
 
-        // Toggle Carrito
         document.getElementById('cart-btn').onclick = () => {
             cartPopup.classList.toggle('open');
             menu.classList.remove('open');
@@ -185,8 +229,13 @@
         function showPage(id) {
             document.getElementById('main-banner').style.display = 'none';
             document.getElementById('categories-section').style.display = 'none';
+            document.querySelector('.divider-line').style.display = 'none';
             document.querySelectorAll('section[id$="-page"]').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
+            if(id === 'morrales-page') {
+                document.getElementById('morrales-mosaico').style.display = 'grid';
+                document.getElementById('morrales-landing').style.display = 'none';
+            }
             window.scrollTo(0,0);
         }
 
@@ -196,12 +245,14 @@
             landing.style.display = 'block';
             const p = {id:'0001', n:'Morral de Asalto 45L', i:'morral1.jpg', pr:145000};
             landing.innerHTML = `
-                <div class="container-regresar"><button class="btn-regresar" onclick="showPage('morrales-page')">← VOLVER</button></div>
-                <div style="text-align:center;">
-                    <img src="${p.i}" style="width:100%; max-width:400px; border:1px solid var(--color-gold);">
-                    <h2>${p.n}</h2>
-                    <p style="font-size:1.5em; color:var(--color-gold);">$${p.pr.toLocaleString()}</p>
-                    <button class="buy-btn" onclick="agregarAlCarrito('${p.id}', '${p.n}', ${p.pr}, '${p.i}')">AÑADIR AL EQUIPO</button>
+                <div class="container-regresar">
+                    <button class="btn-regresar" onclick="showPage('morrales-page')">← VOLVER AL CATÁLOGO</button>
+                </div>
+                <div style="text-align:center; padding:20px; background:#0a0a0a; border:1px solid var(--color-gold); border-radius:8px;">
+                    <img src="${p.i}" style="width:100%; max-width:400px; border:1px solid #222; border-radius:4px;">
+                    <h2 style="color:#fff;">${p.n}</h2>
+                    <p style="font-size:1.8em; color:var(--color-gold); font-weight:900;">$${p.pr.toLocaleString()}</p>
+                    <button class="buy-btn" onclick="agregarAlCarrito('${p.id}', '${p.n}', ${p.pr}, '${p.i}')" style="width:100%; max-width:300px;">AÑADIR AL EQUIPO</button>
                 </div>`;
         }
 
@@ -227,16 +278,13 @@
 
             summary.style.display = 'block';
             container.innerHTML = '';
-            let total = 0;
-            let itemsCount = 0;
-
+            let total = 0; let itemsCount = 0;
             carrito.forEach(item => {
-                total += item.precio * item.qty;
-                itemsCount += item.qty;
+                total += item.precio * item.qty; itemsCount += item.qty;
                 container.innerHTML += `
                     <div class="cart-item">
                         <img src="${item.imagen}">
-                        <div class="cart-item-info">
+                        <div style="flex-grow:1; font-size:0.8em;">
                             <strong>${item.nombre}</strong><br>
                             $${(item.precio * item.qty).toLocaleString()}
                             <div class="cart-qty-controls">
@@ -247,7 +295,6 @@
                         </div>
                     </div>`;
             });
-
             totalE.innerText = `$${total.toLocaleString()}`;
             count.innerText = itemsCount;
         }
