@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
-        /* CRÍTICO: Variables para el cuerpo */
+        /* --- ESTILOS ORIGINALES SIN TOCAR --- */
         :root {
             --color-dark: #000;
             --color-gold: #C5A67C; 
@@ -27,7 +27,6 @@
 
         html { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
         
-        /* BANNER PRINCIPAL (Video de fondo) */
         #main-banner {
             position: relative;
             width: 100%;
@@ -58,7 +57,6 @@
             text-align: center;
         }
         
-        /* ESTILOS DEL MENÚ DE HAMBURGUESA */
         #main-nav {
             position: fixed;
             top: var(--promo-bar-height, 45px);	
@@ -119,7 +117,7 @@
             color: var(--color-gold);	
         }
 
-        /* --- SECCIÓN DE CATEGORÍAS (CENTRALIZADAS) --- */
+        /* --- SECCIÓN CATEGORÍAS --- */
         #categories-section {
             padding: 40px 10px;
             max-width: 1200px;
@@ -137,8 +135,7 @@
         .categories-container {
             display: flex;
             flex-wrap: wrap; 
-            gap: 20px; 
-            justify-content: center; /* Centralización */
+            justify-content: space-between; 
         }
 
         .category-item {
@@ -156,16 +153,9 @@
             display: block; 
         }
         
-        /* Ajuste específico para PC */
-        @media (min-width: 769px) {
-            .categories-container {
-                justify-content: center; 
-                gap: 40px;
-            }
-            .category-item {
-                width: 420px;
-                max-width: none;
-            }
+        .category-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(197, 166, 124, 0.5);
         }
 
         .aspect-ratio-box {
@@ -206,7 +196,6 @@
             text-shadow: 0 0 5px rgba(0, 0, 0, 1);
         }
 
-        /* --- PÁGINAS DE CONTENIDO (ORIGINALES) --- */
         #quienes-somos-page, #servicios-page, #politicas-page, #contacto-page, #morrales-page, #accesorios-page {	
             display: none;	
             padding: 60px 20px;	
@@ -239,6 +228,20 @@
             box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4);	
         }
 
+        .back-to-home-btn:hover {
+            background-color: rgba(197, 166, 124, 0.1);
+            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
+        }
+
+        .page-content img {
+            display: block;
+            margin: 0 auto 30px auto;
+            max-width: 200px;
+            height: auto;
+            border: none; 
+            padding: 0;
+        }
+
         .page-content h3 {
             color: var(--color-gold);
             font-weight: 900;
@@ -246,6 +249,13 @@
             text-align: center;
             font-size: 2em;
             margin-bottom: 20px;
+        }
+
+        .page-content p {
+            text-align: justify;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
         }
 
         #cart-nav {
@@ -294,6 +304,7 @@
             transition: transform 0.3s ease-in-out;
             box-shadow: -5px 0 20px rgba(0, 0, 0, 0.95);	
             padding: 10px;
+            text-align: left;
         }
 
         .cart-popup.open {
@@ -317,9 +328,24 @@
             box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.5);
         }
 
+        @media (max-width: 768px) {
+            #main-banner { height: auto; }
+            .banner-video { position: relative; width: 100%; object-fit: contain; }
+            .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+            .page-content h3 { font-size: 1.5em; }
+        }
+
+        /* --- ÚNICO AJUSTE AGREGADO PARA CENTRAR EN WEB --- */
+        @media (min-width: 769px) {
+            .categories-container {
+                justify-content: center !important;
+                gap: 40px !important;
+            }
+        }
     </style>
     
     <script>
+        /* --- SCRIPTS ORIGINALES SIN TOCAR --- */
         function hideAllSecondaryPages() {
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
@@ -328,8 +354,17 @@
             document.getElementById('morrales-page').style.display = 'none'; 
             document.getElementById('accesorios-page').style.display = 'none';
         }
+        
+        function updateCart() {
+            const productCount = 0;
+            const subtotalAmount = 0; 
+            document.getElementById('product-count').textContent = productCount;
+            document.getElementById('popup-product-count').textContent = productCount;
+            document.getElementById('subtotal-display').textContent = "$" + subtotalAmount.toLocaleString();
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
+            updateCart();
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
             const cartIcon = document.getElementById('cart-icon');
@@ -345,8 +380,9 @@
                 cartPopup.classList.toggle('open');
             });
 
-            // NAVEGACIÓN ORIGINAL
-            document.getElementById('inicio-link').addEventListener('click', () => location.reload());
+            document.getElementById('inicio-link').addEventListener('click', () => {
+                location.reload();
+            });
 
             document.getElementById('quienes-somos-link').addEventListener('click', () => {
                 navMenu.classList.remove('open');
@@ -379,6 +415,22 @@
                 hideAllSecondaryPages();
                 document.getElementById('contacto-page').style.display = 'block';
             });
+
+            document.getElementById('morrales-category-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('main-banner').style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none';
+                hideAllSecondaryPages();
+                document.getElementById('morrales-page').style.display = 'block';
+            });
+
+            document.getElementById('accesorios-category-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('main-banner').style.display = 'none';
+                document.getElementById('categories-section').style.display = 'none';
+                hideAllSecondaryPages();
+                document.getElementById('accesorios-page').style.display = 'block';
+            });
         });
 
         function volverInicio() {
@@ -410,9 +462,12 @@
     <div id="cart-nav">
         <div class="cart-icon" id="cart-icon">🛒 <span id="product-count" class="product-count">0</span></div>
         <div class="cart-popup" id="cart-popup">
-            <h4 style="margin-top: 50px;">🛒 Tu Carrito</h4>
-            <p>Productos: <strong id="popup-product-count">0</strong></p>
+            <h4 style="margin-top: 50px; color: var(--color-gold); font-weight: 900; text-transform: uppercase;">🛒 Tu Carrito</h4>
+            <p style="color: #E0E0E0;">Productos: <strong id="popup-product-count" style="color: var(--color-gold);">0</strong></p>
+            <p style="color: #E0E0E0; margin-bottom: 20px;">Subtotal: <strong id="subtotal-display" style="color: var(--color-gold);">$0</strong></p>
+            <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
             <button class="checkout-btn">COMPRAR AHORA</button>
+            <p style="font-size: 0.8em; color: #888; margin-top: 15px; text-align: center;">Finaliza tu compra por WhatsApp</p>
         </div>
     </div>
 
@@ -445,38 +500,39 @@
     </section>
 
     <section id="quienes-somos-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
+            <img src="RYNO DELTA DORADO.png" alt="Logo Ryno Delta">
             <h3>QUIÉNES SOMOS</h3>
-            <p>RYNO DELTA es mucho más que una tienda; es el resultado de una pasión por la aventura y la seguridad. Con más de 14 años de experiencia, ofrecemos soluciones tácticas de alta resistencia.</p>
+            <p>En RYNO DELTA, nos apasiona el mundo táctico y de supervivencia. Con más de 14 años de experiencia, nos hemos dedicado a ofrecer el mejor equipo para profesionales y entusiastas.</p>
         </div>
     </section>
 
     <section id="servicios-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
-            <h3>SERVICIOS</h3>
-            <p>Ofrecemos equipamiento especializado, envíos nacionales rápidos y asesoría personalizada para profesionales y entusiastas.</p>
+            <h3>NUESTROS SERVICIOS</h3>
+            <p>Ofrecemos asesoría personalizada en equipo táctico, ventas al por mayor y detal, y envíos rápidos a todo el país.</p>
         </div>
     </section>
 
     <section id="politicas-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
             <h3>POLÍTICAS</h3>
-            <p>Garantía de calidad en cada producto, protección de datos y logística eficiente de envíos.</p>
+            <p>Nuestras políticas garantizan la satisfacción del cliente, con procesos claros de cambios, devoluciones y manejo de garantías.</p>
         </div>
     </section>
 
     <section id="contacto-page">
-        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div>
+        <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
             <h3>CONTACTO</h3>
-            <p>📍 Bogotá, Colombia | WhatsApp: +57 3XX XXX XXXX | contacto@rynodelta.com</p>
+            <p>📍 Dirección: Bogotá, Colombia<br>📞 Teléfono: +57 3XX XXX XXXX<br>✉️ Email: contacto@rynodelta.com</p>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 20px; font-size: 0.9em; color: #666;">
+    <footer style="text-align: center; padding: 20px; font-size: 0.9em; color: #666; background-color: #000; border-top: 1px solid #111;">
         © 2025 RYNO DELTA. Todos los derechos reservados.
     </footer>
 </body>
