@@ -21,7 +21,7 @@
             color: #E0E0E0; overflow-x: hidden !important; line-height: 1.6;
         }
 
-        /* --- ESTILO MAESTRO DE BOTONES TÁCTICOS (UNIFICADOS) --- */
+        /* --- BOTONES TÁCTICOS UNIFICADOS --- */
         .btn-regresar, .buy-btn, .checkout-btn {
             position: relative;
             background: rgba(197, 166, 124, 0.1) !important;
@@ -44,7 +44,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Reacción Unificada HOVER/ACTIVE */
         .btn-regresar:hover, .btn-regresar:active, 
         .buy-btn:hover, .buy-btn:active, 
         .checkout-btn:hover, .checkout-btn:active {
@@ -54,7 +53,6 @@
             box-shadow: 0 0 30px var(--color-gold) !important;
         }
 
-        /* Destello Radar Unificado para todos los botones */
         .btn-regresar::before, .buy-btn::before, .checkout-btn::before {
             content: '';
             position: absolute;
@@ -73,10 +71,9 @@
             100% { left: 150%; }
         }
 
-        /* Ajustes específicos de ancho */
         .buy-btn, .checkout-btn { width: 100% !important; max-width: 400px; margin-top: 20px; }
 
-        /* --- OTROS ELEMENTOS INTERACTIVOS --- */
+        /* --- CATEGORÍAS Y MOSAICO --- */
         .category-item, .mosaico-item {
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             cursor: pointer; background: #111; border: 2px solid #222; border-radius: 8px; overflow: hidden;
@@ -117,9 +114,21 @@
         /* LÍNEA DIVISORIA */
         .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.3); margin: 25px auto; box-shadow: 0 0 10px rgba(197, 166, 124, 0.4); }
 
-        /* SECCIONES: 100px para evitar choque */
+        /* SECCIONES: AJUSTE FINAL 140PX PARA SEGURIDAD DEL BOTÓN */
         #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { 
-            display: none; padding: 100px 20px 60px 20px; margin-top: var(--promo-bar-height); max-width: 1000px; margin: 0 auto; 
+            display: none; 
+            padding: 140px 20px 60px 20px; 
+            margin-top: var(--promo-bar-height); 
+            max-width: 1000px; 
+            margin: 0 auto; 
+        }
+
+        .container-regresar {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 40px;
+            margin-top: 10px; /* Margen extra de seguridad */
         }
 
         #categories-section { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
