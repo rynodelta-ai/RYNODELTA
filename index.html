@@ -18,99 +18,75 @@
             font-family: 'Inter', sans-serif !important;
             margin: 0 !important; padding: 0 !important;
             background-color: var(--color-dark) !important;
-            color: #E0E0E0; overflow-x: hidden !important;
+            color: #E0E0E0; overflow-x: hidden !important; line-height: 1.6;
         }
 
-        /* --- EFECTO TÁCTICO DE UNDIMIENTO Y LUZ (PC Y MÓVIL) --- */
-        .category-item:active, 
-        .mosaico-item:active, 
-        .buy-btn:active, 
-        .back-to-home-btn:active, 
-        .hamburger:active, 
-        .cart-icon:active, 
-        .btn-regresar:active,
-        .checkout-btn:active {
+        /* --- EFECTO DE HUNDIMIENTO TÁCTICO EXCLUSIVO --- */
+        .category-item:active, .mosaico-item:active, .buy-btn:active, .checkout-btn:active, .hamburger:active, .cart-icon:active, .btn-regresar:active {
             transform: scale(0.95) !important;
-            background-color: rgba(197, 166, 124, 0.2) !important;
-            box-shadow: 0 0 20px rgba(197, 166, 124, 0.5) !important;
-            transition: all 0.1s ease-in-out;
+            box-shadow: 0 0 15px rgba(197, 166, 124, 0.4) !important;
+            background-color: rgba(197, 166, 124, 0.1) !important;
+            transition: 0.1s ease;
         }
 
-        #main-banner {
-            position: relative; width: 100%; margin-top: var(--promo-bar-height);
-            height: calc(100vh - var(--promo-bar-height)); overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
+        /* BARRA PROMOCIONAL */
+        #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: #000; z-index: 10000; border-bottom: 1px solid #111; line-height: var(--promo-bar-height); text-align: center; }
 
+        /* NAVEGACIÓN HAMBURGUESA */
+        #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
+        .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
+        .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; }
+        .nav-menu { list-style: none; padding: 0; margin: 0; position: absolute; top: 50px; left: 0; width: 250px; background-color: rgba(0, 0, 0, 0.95); border-top: 1px solid var(--color-gold); transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+        .nav-menu.open { transform: translateX(0); }
+        .nav-menu li a { display: block; padding: 15px 20px; color: #E0E0E0; text-decoration: none; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #111; }
+
+        /* CARRITO LATERAL CORRECTO */
+        #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
+        .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); font-size: 1.2em; }
+        .product-count { position: absolute; top: 5px; right: 5px; background: var(--color-gold); color: #000; font-size: 0.65em; font-weight: 900; padding: 2px 5px; border-radius: 50%; }
+        .cart-popup { position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.3s; padding: 20px; border-left: 1px solid var(--color-gold); box-shadow: -5px 5px 15px rgba(0,0,0,0.8); }
+        .cart-popup.open { transform: translateX(0); }
+        .checkout-btn { width: 100%; padding: 12px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; margin-top: 15px; color: #000; text-transform: uppercase; }
+
+        /* BANNER DE VIDEO */
+        #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); height: calc(100vh - var(--promo-bar-height)); overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .banner-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
         .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 2; }
+        .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.2); margin: 20px auto; }
 
-        #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
-        .hamburger {
-            padding: 15px; cursor: pointer; background: rgba(0,0,0,0.6);
-            border-radius: 0 0 5px 0; box-shadow: 0 0 10px rgba(197, 166, 124, 0.3);
-        }
-        .line { display: block; width: 25px; height: 3px; background: var(--color-gold); margin: 4px 0; }
-
-        .nav-menu {
-            position: absolute; top: 50px; left: 0; width: 250px; background: rgba(0,0,0,0.95);
-            transform: translateX(-100%); transition: 0.3s; border-top: 1px solid var(--color-gold);
-        }
-        .nav-menu.open { transform: translateX(0); }
-        .nav-menu a { display: block; padding: 15px 20px; color: #fff; text-decoration: none; text-transform: uppercase; font-weight: 700; }
-
-        /* --- CARRITO --- */
-        #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
-        .cart-icon { padding: 15px; cursor: pointer; background: rgba(0,0,0,0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px rgba(197, 166, 124, 0.3); font-size: 1.5em; }
-        .product-count { position: absolute; top: 5px; right: 5px; background: var(--color-gold); color: #000; font-size: 0.7em; font-weight: 900; padding: 2px 6px; border-radius: 50%; }
-        
-        .cart-popup {
-            position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98);
-            transform: translateX(110%); transition: 0.3s; padding: 20px; border-left: 1px solid var(--color-gold);
-            height: calc(100vh - 100px); box-shadow: -5px 0 20px rgba(0,0,0,0.8);
-        }
-        .cart-popup.open { transform: translateX(0); }
-        .checkout-btn { width: 100%; padding: 15px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; margin-top: 20px; text-transform: uppercase; }
-
-        /* --- CATEGORÍAS --- */
+        /* CATEGORÍAS */
         #categories-section { padding: 40px 10px; max-width: 1200px; margin: 0 auto; }
         .categories-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .category-item {
-            width: 100%; max-width: 450px; background: #111; border: 2px solid var(--color-gold);
-            border-radius: 8px; overflow: hidden; text-decoration: none; transition: 0.2s;
-        }
-        .aspect-ratio-box { position: relative; padding-top: 45%; }
+        .category-item { width: 100%; max-width: 450px; background: #111; border: 2px solid var(--color-gold); border-radius: 8px; overflow: hidden; text-decoration: none; transition: 0.3s; }
+        .aspect-ratio-box { position: relative; width: 100%; padding-top: 45%; }
         .category-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
-        .category-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
-        .category-title { color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; }
+        .category-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+        .category-title { color: var(--color-gold); font-size: 1.8em; font-weight: 900; text-transform: uppercase; text-shadow: 0 0 5px #000; }
 
-        /* --- MOSAICO Y LANDING --- */
-        #morrales-page { display: none; padding: 60px 20px; margin-top: var(--promo-bar-height); max-width: 1000px; margin: 0 auto; }
+        /* PÁGINAS Y MOSAICO */
+        #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { display: none; padding: 60px 20px; margin-top: var(--promo-bar-height); max-width: 1000px; margin: 0 auto; }
+        .btn-regresar { background: none; border: 1px solid var(--color-gold); color: var(--color-gold); padding: 10px 20px; cursor: pointer; margin-bottom: 20px; font-weight: 700; text-transform: uppercase; font-size: 0.8em; }
+        
         .mosaico-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 15px; margin-top: 20px; }
-        .mosaico-item { background: #0a0a0a; border: 1px solid #222; padding: 12px; border-radius: 5px; text-align: center; cursor: pointer; }
-        .mosaico-img { width: 100%; height: 140px; object-fit: cover; border-radius: 3px; margin-bottom: 10px; }
+        .mosaico-item { background: #0a0a0a; border: 1px solid #222; border-radius: 4px; padding: 12px; text-align: center; cursor: pointer; }
+        .mosaico-img { width: 100%; height: 130px; object-fit: cover; border-radius: 3px; margin-bottom: 10px; }
         
-        .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); border-radius: 8px; overflow: hidden; margin-top: 20px; animation: slideUp 0.3s ease; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
+        .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); border-radius: 8px; overflow: hidden; margin-top: 20px; }
         .landing-img { width: 100%; max-height: 450px; object-fit: cover; border-bottom: 1px solid #222; }
         .landing-content { padding: 25px; }
         .landing-specs { list-style: none; padding: 0; color: #aaa; margin: 20px 0; }
         .landing-specs li { margin-bottom: 8px; padding-left: 20px; position: relative; font-size: 0.95em; }
         .landing-specs li::before { content: "▶"; position: absolute; left: 0; color: var(--color-gold); }
         .landing-price { font-size: 2.2em; font-weight: 900; color: #fff; display: block; margin-bottom: 20px; }
-        .buy-btn { width: 100%; padding: 18px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 1.1em; }
+        .buy-btn { width: 100%; padding: 18px; background: var(--color-gold); border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; color: #000; }
 
-        .btn-regresar { background: none; border: 1px solid #444; color: #888; padding: 10px 20px; cursor: pointer; margin-bottom: 20px; text-transform: uppercase; font-size: 0.8em; }
-
-        .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.2); margin: 20px auto; }
-        footer { text-align: center; padding: 30px; font-size: 0.8em; color: #444; border-top: 1px solid #111; margin-top: 50px; }
+        footer { text-align: center; padding: 30px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-    <div id="promo-bar" style="position: fixed; top: 0; width: 100%; height: 45px; background: #000; z-index: 10000; border-bottom: 1px solid #222;">
-        <marquee scrollamount="5" style="line-height: 45px; color: var(--color-gold); font-weight: 900;">⚠️ ENVÍO GRATIS Y OBSEQUIO POR COMPRAS SUPERIORES A $80.000 ⚠️</marquee>
+    <div id="promo-bar">
+        <marquee scrollamount="4" style="color: var(--color-gold); font-weight: 900;">⚠️ ENVÍO GRATIS Y OBSEQUIO POR COMPRAS SUPERIORES A $80.000 ⚠️</marquee>
     </div>
 
     <nav id="main-nav">
@@ -118,6 +94,7 @@
         <ul class="nav-menu" id="nav-menu-list">
             <li><a href="#" onclick="location.reload()">INICIO</a></li>
             <li><a href="#" onclick="showPage('quienes-somos-page')">QUIÉNES SOMOS</a></li>
+            <li><a href="#" onclick="showPage('servicios-page')">SERVICIOS</a></li>
             <li><a href="#" onclick="showPage('contacto-page')">CONTACTO</a></li>
         </ul>
     </nav>
@@ -125,11 +102,11 @@
     <div id="cart-nav">
         <div class="cart-icon" id="cart-icon">🛒 <span class="product-count" id="cart-count">0</span></div>
         <div class="cart-popup" id="cart-popup">
-            <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 40px;">TU EQUIPO</h3>
+            <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px;">TU EQUIPO</h3>
             <p>Productos: <span id="cart-items-qty">0</span></p>
             <p>Subtotal: <span id="cart-total" style="color:var(--color-gold); font-weight:900;">$0</span></p>
             <button class="checkout-btn">FINALIZAR COMPRA</button>
-            <p style="font-size: 0.7em; color: #555; margin-top: 15px; text-align: center;">PEDIDO VÍA WHATSAPP</p>
+            <p style="font-size: 0.7em; color: #555; margin-top: 10px; text-align: center;">PEDIDO VÍA WHATSAPP</p>
         </div>
     </div>
 
@@ -161,34 +138,46 @@
 
     <section id="morrales-page">
         <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
-        <h2 style="color:var(--color-gold); text-align:center; text-transform:uppercase;">Categoría: Morrales</h2>
+        <h2 style="color:var(--color-gold); text-align:center;">CATÁLOGO TÁCTICO</h2>
         
         <div id="morrales-mosaico" class="mosaico-grid">
             <div class="mosaico-item" onclick="verProducto('0001')">
-                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">#0001</span>
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #0001</span>
                 <img src="morral1.jpg" class="mosaico-img">
-                <p style="font-size:0.85em; font-weight:700;">ASALTO 45L</p>
+                <p style="font-size:0.85em; font-weight:700; margin:0;">ASALTO 45L</p>
             </div>
             <div class="mosaico-item" onclick="verProducto('0002')">
-                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">#0002</span>
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #0002</span>
                 <img src="morral2.jpg" class="mosaico-img">
-                <p style="font-size:0.85em; font-weight:700;">COMPACTO 25L</p>
+                <p style="font-size:0.85em; font-weight:700; margin:0;">COMPACTO 25L</p>
             </div>
         </div>
-
+        
         <div id="morrales-landing" style="display:none;"></div>
     </section>
 
-    <section id="quienes-somos-page" style="display:none; padding:80px 20px; text-align:center;">
+    <section id="quienes-somos-page" style="text-align: center;">
         <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
         <h3 style="color:var(--color-gold);">QUIÉNES SOMOS</h3>
-        <p>14 años equipando misiones con excelencia táctica.</p>
+        <p>Equipo profesional con 14 años de trayectoria equipando misiones.</p>
     </section>
 
-    <section id="accesorios-page" style="display:none; padding:80px 20px; text-align:center;">
+    <section id="servicios-page" style="text-align: center;">
+        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <h3 style="color:var(--color-gold);">SERVICIOS</h3>
+        <p>Asesoría en equipamiento táctico y envíos a todo el país.</p>
+    </section>
+
+    <section id="contacto-page" style="text-align: center;">
+        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
+        <h3 style="color:var(--color-gold);">CONTACTO</h3>
+        <p>Línea directa y WhatsApp: +57 321 445 6135</p>
+    </section>
+
+    <section id="accesorios-page" style="text-align: center;">
         <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
         <h3 style="color:var(--color-gold);">ACCESORIOS</h3>
-        <p>Próximamente nueva línea táctica disponible.</p>
+        <p>Próximamente nueva línea disponible.</p>
     </section>
 
     <footer>
@@ -202,6 +191,7 @@
         function showPage(id) {
             document.getElementById('main-banner').style.display = 'none';
             document.getElementById('categories-section').style.display = 'none';
+            document.querySelector('.divider-line').style.display = 'none';
             document.querySelectorAll('section[id$="-page"]').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
             if(id === 'morrales-page') { 
@@ -209,6 +199,7 @@
                 document.getElementById('morrales-landing').style.display = 'none';
             }
             navMenu.classList.remove('open');
+            window.scrollTo(0,0);
         }
 
         function verProducto(id) {
@@ -237,9 +228,13 @@
             `;
         }
 
+        // Eventos de Menú y Carrito
         document.getElementById('hamburger-icon').onclick = (e) => { e.stopPropagation(); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
         document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); };
-        document.onclick = () => { navMenu.classList.remove('open'); cartPopup.classList.remove('open'); };
+        document.onclick = (e) => { 
+            if(!navMenu.contains(e.target)) navMenu.classList.remove('open'); 
+            if(!cartPopup.contains(e.target)) cartPopup.classList.remove('open'); 
+        };
     </script>
 </body>
 </html>
