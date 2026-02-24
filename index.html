@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS ORIGINALES SIN TOCAR --- */
         :root {
             --color-dark: #000;
             --color-gold: #C5A67C; 
@@ -117,7 +116,6 @@
             color: var(--color-gold);	
         }
 
-        /* --- SECCIÓN CATEGORÍAS --- */
         #categories-section {
             padding: 40px 10px;
             max-width: 1200px;
@@ -228,18 +226,11 @@
             box-shadow: 0 0 10px 1px rgba(197, 166, 124, 0.4);	
         }
 
-        .back-to-home-btn:hover {
-            background-color: rgba(197, 166, 124, 0.1);
-            box-shadow: 0 0 15px 3px rgba(197, 166, 124, 0.8);
-        }
-
         .page-content img {
             display: block;
             margin: 0 auto 30px auto;
             max-width: 200px;
             height: auto;
-            border: none; 
-            padding: 0;
         }
 
         .page-content h3 {
@@ -304,12 +295,9 @@
             transition: transform 0.3s ease-in-out;
             box-shadow: -5px 0 20px rgba(0, 0, 0, 0.95);	
             padding: 10px;
-            text-align: left;
         }
 
-        .cart-popup.open {
-            transform: translateX(0); 
-        }
+        .cart-popup.open { transform: translateX(0); }
 
         .checkout-btn {
             display: block;
@@ -332,10 +320,8 @@
             #main-banner { height: auto; }
             .banner-video { position: relative; width: 100%; object-fit: contain; }
             .banner-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-            .page-content h3 { font-size: 1.5em; }
         }
 
-        /* --- ÚNICO AJUSTE AGREGADO PARA CENTRAR EN WEB --- */
         @media (min-width: 769px) {
             .categories-container {
                 justify-content: center !important;
@@ -345,7 +331,6 @@
     </style>
     
     <script>
-        /* --- SCRIPTS ORIGINALES SIN TOCAR --- */
         function hideAllSecondaryPages() {
             document.getElementById('quienes-somos-page').style.display = 'none';
             document.getElementById('servicios-page').style.display = 'none';
@@ -355,16 +340,7 @@
             document.getElementById('accesorios-page').style.display = 'none';
         }
         
-        function updateCart() {
-            const productCount = 0;
-            const subtotalAmount = 0; 
-            document.getElementById('product-count').textContent = productCount;
-            document.getElementById('popup-product-count').textContent = productCount;
-            document.getElementById('subtotal-display').textContent = "$" + subtotalAmount.toLocaleString();
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            updateCart();
             const hamburger = document.getElementById('hamburger-icon');
             const navMenu = document.getElementById('nav-menu-list');
             const cartIcon = document.getElementById('cart-icon');
@@ -380,9 +356,7 @@
                 cartPopup.classList.toggle('open');
             });
 
-            document.getElementById('inicio-link').addEventListener('click', () => {
-                location.reload();
-            });
+            document.getElementById('inicio-link').addEventListener('click', () => location.reload());
 
             document.getElementById('quienes-somos-link').addEventListener('click', () => {
                 navMenu.classList.remove('open');
@@ -433,9 +407,7 @@
             });
         });
 
-        function volverInicio() {
-            location.reload();
-        }
+        function volverInicio() { location.reload(); }
     </script>
 </head>
 <body>
@@ -462,12 +434,9 @@
     <div id="cart-nav">
         <div class="cart-icon" id="cart-icon">🛒 <span id="product-count" class="product-count">0</span></div>
         <div class="cart-popup" id="cart-popup">
-            <h4 style="margin-top: 50px; color: var(--color-gold); font-weight: 900; text-transform: uppercase;">🛒 Tu Carrito</h4>
-            <p style="color: #E0E0E0;">Productos: <strong id="popup-product-count" style="color: var(--color-gold);">0</strong></p>
-            <p style="color: #E0E0E0; margin-bottom: 20px;">Subtotal: <strong id="subtotal-display" style="color: var(--color-gold);">$0</strong></p>
-            <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
+            <h4 style="margin-top: 50px; color: var(--color-gold);">🛒 Tu Carrito</h4>
+            <p>Productos: <strong id="popup-product-count">0</strong></p>
             <button class="checkout-btn">COMPRAR AHORA</button>
-            <p style="font-size: 0.8em; color: #888; margin-top: 15px; text-align: center;">Finaliza tu compra por WhatsApp</p>
         </div>
     </div>
 
@@ -492,7 +461,7 @@
             <a href="#" class="category-item" id="accesorios-category-link">
                 <div class="aspect-ratio-box">
                     <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
-                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS</h4></div>
+                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS PARA ARMAS</h4></div>
                     </div>
                 </div>
             </a>
@@ -520,7 +489,7 @@
         <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
             <h3>POLÍTICAS</h3>
-            <p>Nuestras políticas garantizan la satisfacción del cliente, con procesos claros de cambios, devoluciones y manejo de garantías.</p>
+            <p>Nuestras políticas garantizan la satisfacción del cliente, con procesos claros de cambios y manejo de garantías.</p>
         </div>
     </section>
 
@@ -528,11 +497,14 @@
         <div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER AL INICIO</a></div>
         <div class="page-content">
             <h3>CONTACTO</h3>
-            <p>📍 Dirección: Bogotá, Colombia<br>📞 Teléfono: +57 3XX XXX XXXX<br>✉️ Email: contacto@rynodelta.com</p>
+            <p>📍 Dirección: Bogotá, Colombia<br>✉️ Email: contacto@rynodelta.com</p>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 20px; font-size: 0.9em; color: #666; background-color: #000; border-top: 1px solid #111;">
+    <section id="morrales-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div><div class="page-content"><h3>MORRALES</h3></div></section>
+    <section id="accesorios-page"><div class="back-button-container"><a href="#" class="back-to-home-btn" onclick="volverInicio()">VOLVER</a></div><div class="page-content"><h3>ACCESORIOS</h3></div></section>
+
+    <footer style="text-align: center; padding: 20px; font-size: 0.9em; color: #666;">
         © 2025 RYNO DELTA. Todos los derechos reservados.
     </footer>
 </body>
