@@ -102,9 +102,24 @@
         
         .cart-total-section { margin-top: 15px; padding-top: 10px; border-top: 2px solid var(--color-gold); text-align: right; }
 
-        /* BANNER UNIFICADO - FONDO GRIS NARDO SIN RECORTE DE VIDEO */
-        #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: var(--color-dark) !important; overflow: hidden; }
-        .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: var(--color-dark) !important; }
+        /* AJUSTE FINAL DE BANNER - ELIMINA EL NEGRO SIN AFECTAR PROPORCIÓN */
+        #main-banner { 
+            position: relative; 
+            width: 100%; 
+            margin-top: var(--promo-bar-height); 
+            background: transparent !important; 
+            overflow: hidden; 
+            display: flex; 
+            justify-content: center;
+        }
+        .banner-video { 
+            display: block; 
+            width: 100%; 
+            max-width: 100%;
+            height: auto; 
+            object-fit: contain; 
+            background: transparent !important;
+        }
         
         /* SECCIONES */
         #morrales-page, #accesorios-page, #quienes-somos-page, #servicios-page, #contacto-page, #politica-page { 
@@ -233,11 +248,6 @@
         </div>
         <div id="accesorios-landing" style="display:none;"></div>
     </section>
-
-    <section id="quienes-somos-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
-    <section id="servicios-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
-    <section id="contacto-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
-    <section id="politica-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
 
     <script>
         const navMenu = document.getElementById('nav-menu-list');
