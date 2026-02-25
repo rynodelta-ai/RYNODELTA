@@ -169,11 +169,6 @@
         .mosaico-item { padding: 15px; text-align: center; }
         .mosaico-img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
 
-        .landing-card { background: #0a0a0a; border: 1px solid var(--color-gold); border-radius: 8px; overflow: hidden; margin-top: 20px; }
-        .landing-img { width: 100%; max-height: 450px; object-fit: cover; border-bottom: 1px solid #222; }
-        .landing-content { padding: 25px; }
-        .landing-price { font-size: 2.2em; font-weight: 900; color: #fff; display: block; margin-bottom: 20px; }
-
         footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; letter-spacing: 2px; }
     </style>
 </head>
@@ -190,7 +185,6 @@
             <li onclick="showPage('quienes-somos-page')">QUIÉNES SOMOS</li>
             <li onclick="showPage('servicios-page')">SERVICIOS</li>
             <li onclick="showPage('contacto-page')">CONTACTO</li>
-            <li onclick="showPage('accesorios-page')">ACCESORIOS PARA ARMAS</li>
             <li onclick="showPage('politica-page')">POLÍTICA</li>
         </ul>
     </nav>
@@ -199,7 +193,6 @@
         <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">1</span></div>
         <div class="cart-popup" id="cart-popup">
             <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; text-align:center; font-size: 1em;">TU EQUIPO</h3>
-            
             <div class="cart-example-item">
                 <img src="morral1.jpg" class="cart-example-img">
                 <div class="cart-example-info">
@@ -212,12 +205,6 @@
                 </div>
                 <div style="font-weight: 900; color: var(--color-gold);">$145.000</div>
             </div>
-
-            <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #333; display: flex; justify-content: space-between; font-weight: 900; font-size: 0.9em;">
-                <span>SUBTOTAL:</span>
-                <span style="color: var(--color-gold);">$145.000</span>
-            </div>
-
             <button class="checkout-btn" onclick="alert('Iniciando compra...')">COMPRAR EQUIPO</button>
         </div>
     </div>
@@ -258,43 +245,28 @@
                 <img src="morral1.jpg" class="mosaico-img">
                 <p style="font-size:0.9em; font-weight:800; margin:0;">ASALTO 45L</p>
             </div>
-            <div class="mosaico-item" onclick="verProducto('0002')">
-                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #0002</span>
-                <img src="morral2.jpg" class="mosaico-img">
-                <p style="font-size:0.9em; font-weight:800; margin:0;">COMPACTO 25L</p>
-            </div>
         </div>
         <div id="morrales-landing" style="display:none;"></div>
     </section>
 
     <section id="quienes-somos-page" style="text-align:center;">
-        <div class="container-regresar">
-            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
-        </div>
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
     </section>
 
     <section id="servicios-page" style="text-align:center;">
-        <div class="container-regresar">
-            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
-        </div>
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
     </section>
 
     <section id="contacto-page" style="text-align:center;">
-        <div class="container-regresar">
-            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
-        </div>
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
     </section>
 
     <section id="accesorios-page" style="text-align:center;">
-        <div class="container-regresar">
-            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
-        </div>
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
     </section>
 
     <section id="politica-page" style="text-align:center;">
-        <div class="container-regresar">
-            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
-        </div>
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
     </section>
 
     <script>
@@ -317,25 +289,6 @@
             window.scrollTo(0,0);
         }
 
-        function verProducto(id) {
-            document.getElementById('morrales-mosaico').style.display = 'none';
-            const landing = document.getElementById('morrales-landing');
-            landing.style.display = 'block';
-            const p = id === '0001' ? {n:'Morral de Asalto 45L', i:'morral1.jpg', pr:'$145.000'} : {n:'Morral Compacto 25L', i:'morral2.jpg', pr:'$95.000'};
-            landing.innerHTML = `
-                <div class="container-regresar">
-                    <button class="btn-regresar" onclick="showPage('morrales-page')">← VOLVER AL CATÁLOGO</button>
-                </div>
-                <div class="landing-card">
-                    <img src="${p.i}" class="landing-img">
-                    <div class="landing-content">
-                        <h2 style="color:#fff; text-align:center;">${p.n}</h2>
-                        <span class="landing-price" style="text-align:center;">${p.pr}</span>
-                        <button class="buy-btn" onclick="alert('Equipo añadido')">AÑADIR AL EQUIPO</button>
-                    </div>
-                </div>`;
-        }
-
         hamburger.onclick = (e) => { 
             e.stopPropagation(); 
             hamburger.classList.toggle('open'); 
@@ -349,12 +302,6 @@
             navMenu.classList.remove('open'); 
             hamburger.classList.remove('open');
         };
-
-        navMenu.onmouseleave = () => {
-            navMenu.classList.remove('open');
-            hamburger.classList.remove('open');
-        };
-        cartPopup.onmouseleave = () => cartPopup.classList.remove('open');
 
         document.onclick = (e) => { 
             if(!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
