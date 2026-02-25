@@ -141,7 +141,7 @@
         .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.3); margin: 25px auto; box-shadow: 0 0 10px rgba(197, 166, 124, 0.4); }
 
         /* SECCIONES */
-        #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { 
+        #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page, #politica-page { 
             display: none; 
             padding: 140px 20px 60px 20px; 
             margin-top: var(--promo-bar-height); 
@@ -190,6 +190,7 @@
             <li onclick="showPage('quienes-somos-page')">QUIÉNES SOMOS</li>
             <li onclick="showPage('servicios-page')">SERVICIOS</li>
             <li onclick="showPage('contacto-page')">CONTACTO</li>
+            <li onclick="showPage('politica-page')">POLÍTICA</li>
         </ul>
     </nav>
 
@@ -284,6 +285,12 @@
     </section>
 
     <section id="accesorios-page" style="text-align:center;">
+        <div class="container-regresar">
+            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        </div>
+    </section>
+
+    <section id="politica-page" style="text-align:center;">
         <div class="container-regresar">
             <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
         </div>
