@@ -9,7 +9,8 @@
     
     <style>
         :root {
-            --color-dark: #000;
+            /* CAMBIO A GRIS NARDO TÁCTICO */
+            --color-dark: #4C4C4C; 
             --color-gold: #C5A67C; 
             --promo-bar-height: 45px; 
         }
@@ -54,7 +55,7 @@
         /* --- CATEGORÍAS Y MOSAICO --- */
         .category-item, .mosaico-item {
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            cursor: pointer; background: #111; border: 2px solid #222; border-radius: 8px; overflow: hidden;
+            cursor: pointer; background: rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden;
         }
         .category-item:hover, .mosaico-item:hover {
             transform: translateY(-8px);
@@ -97,7 +98,6 @@
         .qty-btn { background: none; border: 1px solid var(--color-gold); color: var(--color-gold); width: 22px; height: 22px; cursor: pointer; font-weight: 900; line-height: 1; border-radius: 2px; }
         .qty-val { font-size: 0.8em; font-weight: 900; }
         
-        /* CANEQUITAS DE BASURA ESTILIZADAS */
         .remove-btn { background: none; border: none; color: var(--color-gold); cursor: pointer; font-size: 1.2em; margin-left: auto; transition: 0.3s; padding: 5px; }
         .remove-btn:hover { color: #ff4444; transform: scale(1.1); }
         
@@ -117,7 +117,7 @@
         .mosaico-item { padding: 15px; text-align: center; }
         .mosaico-img { width: 100%; height: 160px; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
 
-        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; letter-spacing: 2px; }
+        footer { text-align: center; padding: 40px; color: #ccc; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -286,7 +286,7 @@
             landing.style.display = 'block';
             const p = {'0001':{n:'ASALTO 45L', i:'morral1.jpg', pr:'$145.000'},'0002':{n:'COMPACTO 25L', i:'morral2.jpg', pr:'$95.000'},'1001':{n:'GUANTES TÁCTICOS', i:'ACCESORIOS PARA ARMAS.jpg', pr:'$85.000'}}[id];
             landing.innerHTML = `<div class="container-regresar"><button class="btn-regresar" onclick="document.getElementById('${cat}-mosaico').style.display='grid'; document.getElementById('${cat}-landing').style.display='none'">← VOLVER AL CATÁLOGO</button></div>
-                <div style="background:#0a0a0a; border:1px solid var(--color-gold); border-radius:8px; overflow:hidden; text-align:center;">
+                <div style="background:rgba(0,0,0,0.4); border:1px solid var(--color-gold); border-radius:8px; overflow:hidden; text-align:center;">
                     <img src="${p.i}" style="width:100%; max-height:450px; object-fit:cover;">
                     <div style="padding:25px;"><h2 style="color:#fff;">${p.n}</h2><span style="font-size:2em; font-weight:900; color:var(--color-gold); display:block; margin-bottom:20px;">${p.pr}</span><button class="buy-btn" onclick="alert('Equipo añadido')">AÑADIR AL EQUIPO</button></div>
                 </div>`;
