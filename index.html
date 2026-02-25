@@ -21,7 +21,7 @@
             color: #E0E0E0; overflow-x: hidden !important; line-height: 1.6;
         }
 
-        /* --- BOTONES TÁCTICOS CON EFECTO RADAR Y HUNDIMIENTO --- */
+        /* --- BOTONES TÁCTICOS CON RADAR Y HUNDIMIENTO --- */
         .btn-regresar, .buy-btn, .checkout-btn {
             position: relative;
             background: rgba(197, 166, 124, 0.1) !important;
@@ -39,18 +39,11 @@
             display: block;
             width: fit-content;
             margin: 0 auto;
-            overflow: hidden; /* Necesario para el radar */
+            overflow: hidden;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Efecto de Hundimiento al Click/Tap */
-        .btn-regresar:active, .buy-btn:active, .checkout-btn:active {
-            transform: scale(0.92) !important;
-            box-shadow: 0 0 5px var(--color-gold) !important;
-            filter: brightness(0.8);
-        }
-
-        /* Animación Radar (Destello) */
+        /* Efecto Radar */
         .btn-regresar::after, .buy-btn::after, .checkout-btn::after {
             content: '';
             position: absolute;
@@ -72,6 +65,12 @@
             100% { transform: scale(40); opacity: 0; }
         }
 
+        /* Hundimiento */
+        .btn-regresar:active, .buy-btn:active, .checkout-btn:active {
+            transform: scale(0.92) !important;
+            filter: brightness(0.8);
+        }
+
         .btn-regresar:hover, .buy-btn:hover, .checkout-btn:hover {
             background-color: var(--color-gold) !important;
             color: #000 !important;
@@ -91,10 +90,10 @@
             box-shadow: 0 0 25px rgba(197, 166, 124, 0.5);
         }
 
-        /* BARRA PROMOCIONAL UNIFICADA */
+        /* BARRA PROMOCIONAL */
         #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: var(--color-dark); z-index: 10000; border-bottom: 1px solid rgba(255,255,255,0.1); line-height: var(--promo-bar-height); text-align: center; }
 
-        /* NAVEGACIÓN Y MENÚ HAMBURGUESA */
+        /* NAVEGACIÓN Y HAMBURGUESA */
         #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
         .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
         .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; }
@@ -112,37 +111,32 @@
         .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; transition: all 0.3s ease; }
         .nav-menu li:hover { color: var(--color-gold); padding-left: 35px; background: rgba(197, 166, 124, 0.05); }
 
-        /* CARRITO DINÁMICO */
+        /* CARRITO */
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
         .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); font-size: 1.2em; }
         .cart-popup { position: absolute; top: 50px; right: 0; width: 310px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); }
         .cart-popup.open { transform: translateX(0); }
 
+        .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #222; }
+        .cart-item-img { width: 45px; height: 45px; object-fit: cover; border: 1px solid #333; }
+        .cart-item-info { flex-grow: 1; }
+        .cart-item-name { font-size: 0.75em; font-weight: 900; color: #fff; margin: 0; text-transform: uppercase; }
+        .cart-controls { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+        .qty-btn { background: none; border: 1px solid var(--color-gold); color: var(--color-gold); width: 22px; height: 22px; cursor: pointer; font-weight: 900; line-height: 1; border-radius: 2px; }
+        .qty-val { font-size: 0.8em; font-weight: 900; }
+        .remove-btn { background: none; border: none; color: var(--color-gold); cursor: pointer; font-size: 1.2em; margin-left: auto; transition: 0.3s; padding: 5px; }
+        .remove-btn:hover { color: #ff4444; transform: scale(1.1); }
+        .cart-total-section { margin-top: 15px; padding-top: 10px; border-top: 2px solid var(--color-gold); text-align: right; }
+
         /* BANNER */
-        #main-banner { 
-            position: relative; 
-            width: 100%; 
-            margin-top: var(--promo-bar-height); 
-            background: transparent !important; 
-            overflow: hidden; 
-            display: flex; 
-            justify-content: center;
-        }
-        .banner-video { 
-            display: block; 
-            width: 100%; 
-            height: auto; 
-            aspect-ratio: 16 / 9; 
-            object-fit: contain; 
-            background: transparent !important;
-        }
+        #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: transparent !important; overflow: hidden; display: flex; justify-content: center; }
+        .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: transparent !important; }
         
         /* SECCIONES */
         #morrales-page, #accesorios-page, #quienes-somos-page, #servicios-page, #contacto-page, #politica-page { 
             display: none; padding: 140px 20px 60px 20px; max-width: 1000px; margin: 0 auto; 
         }
         .container-regresar { display: flex; justify-content: center; width: 100%; margin-bottom: 40px; margin-top: 10px; }
-
         .mosaico-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-top: 30px; }
         .mosaico-item { padding: 15px; text-align: center; }
         .mosaico-img { width: 100%; height: 160px; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
@@ -156,7 +150,7 @@
         <marquee scrollamount="4" style="color: var(--color-gold); font-weight: 900;">⚠️ ENVÍO GRATIS Y OBSEQUIO POR COMPRAS SUPERIORES A $80.000 ⚠️</marquee>
     </div>
 
-    <nav id="main-nav">
+    <nav id="main-nav" onmouseleave="closeMenus()">
         <div class="hamburger" id="hamburger-icon"><span class="line"></span><span class="line"></span><span class="line"></span></div>
         <ul class="nav-menu" id="nav-menu-list">
             <li onclick="location.reload()">INICIO</li>
@@ -167,14 +161,19 @@
         </ul>
     </nav>
 
-    <div id="cart-nav">
+    <div id="cart-nav" onmouseleave="closeMenus()">
         <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">2</span></div>
         <div class="cart-popup" id="cart-popup">
             <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; text-align:center; font-size: 0.9em;">TU EQUIPO</h3>
             <div id="cart-items-container">
+                <div class="cart-item" data-price="145000">
+                    <img src="morral1.jpg" class="cart-item-img">
+                    <div class="cart-item-info"><p class="cart-item-name">ASALTO 45L</p><div class="cart-controls"><button class="qty-btn" onclick="updateQty(this, -1)">-</button><span class="qty-val">1</span><button class="qty-btn" onclick="updateQty(this, 1)">+</button><span style="font-size: 0.7em; color:var(--color-gold); margin-left:5px;">$145.000</span></div></div>
+                    <button class="remove-btn" onclick="removeItem(this)">🗑</button>
                 </div>
+            </div>
             <div class="cart-total-section">
-                <p style="font-weight:900; color:#fff; font-size: 1em;">SUBTOTAL: <span id="cart-subtotal">$0</span></p>
+                <p style="font-weight:900; color:#fff; font-size: 1em;">SUBTOTAL: <span id="cart-subtotal">$145.000</span></p>
             </div>
             <button class="checkout-btn" onclick="alert('Iniciando compra...')">COMPRAR EQUIPO</button>
         </div>
@@ -191,18 +190,14 @@
                 <div class="category-item" onclick="showPage('morrales-page')" style="width:100%; max-width:480px;">
                     <div style="position:relative; padding-top:45%;">
                         <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:url('morrales.jpg') center/cover;">
-                            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
-                                <h4 style="color:var(--color-gold); font-size:1.6em; font-weight:900;">MORRALES</h4>
-                            </div>
+                            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;"><h4 style="color:var(--color-gold); font-size:1.6em; font-weight:900;">MORRALES</h4></div>
                         </div>
                     </div>
                 </div>
                 <div class="category-item" onclick="showPage('accesorios-page')" style="width:100%; max-width:480px;">
                     <div style="position:relative; padding-top:45%;">
                         <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:url('ACCESORIOS PARA ARMAS.jpg') center/cover;">
-                            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
-                                <h4 style="color:var(--color-gold); font-size:1.6em; font-weight:900; text-align:center;">ACCESORIOS</h4>
-                            </div>
+                            <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;"><h4 style="color:var(--color-gold); font-size:1.6em; font-weight:900; text-align:center;">ACCESORIOS</h4></div>
                         </div>
                     </div>
                 </div>
@@ -210,8 +205,39 @@
         </section>
     </div>
 
-    <section id="morrales-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
-    <section id="accesorios-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="morrales-page">
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
+        <div id="morrales-mosaico" class="mosaico-grid">
+            <div class="mosaico-item" onclick="verProducto('0001', 'morrales')">
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #0001</span>
+                <img src="morral1.jpg" class="mosaico-img">
+                <p style="font-weight:800; margin:0;">ASALTO 45L</p>
+            </div>
+            <div class="mosaico-item" onclick="verProducto('0002', 'morrales')">
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #0002</span>
+                <img src="morral2.jpg" class="mosaico-img">
+                <p style="font-weight:800; margin:0;">COMPACTO 25L</p>
+            </div>
+        </div>
+        <div id="morrales-landing" style="display:none;"></div>
+    </section>
+
+    <section id="accesorios-page">
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
+        <div id="accesorios-mosaico" class="mosaico-grid">
+            <div class="mosaico-item" onclick="verProducto('1001', 'accesorios')">
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #1001</span>
+                <img src="ACCESORIOS PARA ARMAS.jpg" class="mosaico-img">
+                <p style="font-weight:800; margin:0;">GUANTES TÁCTICOS</p>
+            </div>
+        </div>
+        <div id="accesorios-landing" style="display:none;"></div>
+    </section>
+
+    <section id="quienes-somos-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="servicios-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="contacto-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="politica-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
 
     <script>
         const navMenu = document.getElementById('nav-menu-list');
@@ -224,13 +250,25 @@
             cartPopup.classList.remove('open');
         }
 
-        hamburger.onclick = (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
-        document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); hamburger.classList.remove('open'); };
-        
-        document.onclick = (e) => { 
-            if(!document.getElementById('main-nav').contains(e.target)) { navMenu.classList.remove('open'); hamburger.classList.remove('open'); }
-            if(!document.getElementById('cart-nav').contains(e.target)) cartPopup.classList.remove('open'); 
-        };
+        function updateQty(btn, change) {
+            const qtyElement = btn.parentElement.querySelector('.qty-val');
+            qtyElement.innerText = Math.max(1, parseInt(qtyElement.innerText) + change);
+            calculateSubtotal();
+        }
+
+        function removeItem(btn) {
+            btn.parentElement.remove();
+            calculateSubtotal();
+            document.getElementById('cart-count').innerText = document.querySelectorAll('.cart-item').length;
+        }
+
+        function calculateSubtotal() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                total += parseInt(item.getAttribute('data-price')) * parseInt(item.querySelector('.qty-val').innerText);
+            });
+            document.getElementById('cart-subtotal').innerText = '$' + total.toLocaleString('es-CO');
+        }
 
         function showPage(id) {
             document.getElementById('main-banner').style.display = 'none';
@@ -240,6 +278,26 @@
             closeMenus();
             window.scrollTo(0,0);
         }
+
+        function verProducto(id, cat) {
+            document.getElementById(cat + '-mosaico').style.display = 'none';
+            const landing = document.getElementById(cat + '-landing');
+            landing.style.display = 'block';
+            const p = {'0001':{n:'ASALTO 45L', i:'morral1.jpg', pr:'$145.000'},'0002':{n:'COMPACTO 25L', i:'morral2.jpg', pr:'$95.000'},'1001':{n:'GUANTES TÁCTICOS', i:'ACCESORIOS PARA ARMAS.jpg', pr:'$85.000'}}[id];
+            landing.innerHTML = `<div class="container-regresar"><button class="btn-regresar" onclick="document.getElementById('${cat}-mosaico').style.display='grid'; document.getElementById('${cat}-landing').style.display='none'">← VOLVER AL CATÁLOGO</button></div>
+                <div style="background:rgba(0,0,0,0.4); border:1px solid var(--color-gold); border-radius:8px; overflow:hidden; text-align:center;">
+                    <img src="${p.i}" style="width:100%; max-height:450px; object-fit:cover;">
+                    <div style="padding:25px;"><h2 style="color:#fff;">${p.n}</h2><span style="font-size:2em; font-weight:900; color:var(--color-gold); display:block; margin-bottom:20px;">${p.pr}</span><button class="buy-btn" onclick="alert('Añadido')">AÑADIR AL EQUIPO</button></div>
+                </div>`;
+        }
+
+        hamburger.onclick = (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
+        document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); hamburger.classList.remove('open'); };
+        
+        document.onclick = (e) => { 
+            if(!document.getElementById('main-nav').contains(e.target)) { navMenu.classList.remove('open'); hamburger.classList.remove('open'); }
+            if(!document.getElementById('cart-nav').contains(e.target)) cartPopup.classList.remove('open'); 
+        };
     </script>
 
     <footer>© 2025 RYNO DELTA. EQUIPO TÁCTICO PROFESIONAL.</footer>
