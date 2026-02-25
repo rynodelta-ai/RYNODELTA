@@ -92,7 +92,6 @@
         .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
         .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; }
         
-        /* Estados de la animación X */
         .hamburger.open .line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open .line:nth-child(2) { opacity: 0; }
         .hamburger.open .line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -104,7 +103,23 @@
             box-shadow: 10px 0 20px rgba(0,0,0,0.8);
         }
         .nav-menu.open { transform: translateX(0); }
-        .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; }
+        
+        /* OPCIONES DEL MENÚ: ANIMACIÓN HOVER (AUTORIZADA) */
+        .nav-menu li { 
+            padding: 15px 25px; 
+            color: #fff; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            border-bottom: 1px solid #111; 
+            cursor: pointer; 
+            transition: all 0.3s ease; /* Transición para suavizar el efecto */
+        }
+        .nav-menu li:hover {
+            color: var(--color-gold);
+            padding-left: 35px; /* Movimiento a la derecha */
+            transform: scale(1.05); /* Aumento sutil */
+            background: rgba(197, 166, 124, 0.05);
+        }
 
         /* CARRITO */
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
@@ -126,7 +141,7 @@
         /* LÍNEA DIVISORIA */
         .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.3); margin: 25px auto; box-shadow: 0 0 10px rgba(197, 166, 124, 0.4); }
 
-        /* SECCIONES: AJUSTE FINAL 140PX PARA SEGURIDAD DEL BOTÓN */
+        /* SECCIONES */
         #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page { 
             display: none; 
             padding: 140px 20px 60px 20px; 
@@ -325,7 +340,6 @@
                 </div>`;
         }
 
-        // --- LÓGICA DE APERTURA Y CIERRE CON ANIMACIÓN (RESTAURADA) ---
         hamburger.onclick = (e) => { 
             e.stopPropagation(); 
             hamburger.classList.toggle('open'); 
@@ -340,7 +354,6 @@
             hamburger.classList.remove('open');
         };
 
-        // Auto-contracción al quitar el cursor
         navMenu.onmouseleave = () => {
             navMenu.classList.remove('open');
             hamburger.classList.remove('open');
