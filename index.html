@@ -108,10 +108,10 @@
             background: rgba(197, 166, 124, 0.05);
         }
 
-        /* CARRITO (AJUSTE DE ÁREA PARA HOVER) */
+        /* CARRITO */
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
         .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); font-size: 1.2em; }
-        .cart-popup { position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); pointer-events: auto; }
+        .cart-popup { position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); }
         .cart-popup.open { transform: translateX(0); }
 
         /* BANNER (PROTEGIDO 16:9) */
@@ -160,7 +160,7 @@
         </ul>
     </nav>
 
-    <div id="cart-nav" onmouseenter="document.getElementById('cart-popup').classList.add('open')" onmouseleave="document.getElementById('cart-popup').classList.remove('open')">
+    <div id="cart-nav">
         <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">1</span></div>
         <div class="cart-popup" id="cart-popup">
             <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; text-align:center;">TU EQUIPO</h3>
@@ -244,15 +244,33 @@
                 </div>`;
         }
 
-        hamburger.onclick = (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
+        // Lógica de navegación principal
+        hamburger.onclick = (e) => { 
+            e.stopPropagation(); 
+            hamburger.classList.toggle('open'); 
+            navMenu.classList.toggle('open'); 
+            cartPopup.classList.remove('open'); 
+        };
         
-        // El icono del carrito ahora solo abre/cierra al click para móviles
-        document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); hamburger.classList.remove('open'); };
+        // Lógica del carrito: SOLO CLIC / TAP
+        document.getElementById('cart-icon').onclick = (e) => { 
+            e.stopPropagation(); 
+            cartPopup.classList.toggle('open'); 
+            navMenu.classList.remove('open'); 
+            hamburger.classList.remove('open'); 
+        };
         
+        // Cierre por clic/tap en el exterior
         document.onclick = (e) => { 
-            if(!navMenu.contains(e.target) && !hamburger.contains(e.target)) { navMenu.classList.remove('open'); hamburger.classList.remove('open'); }
-            // Si el click es fuera del contenedor del carrito, se cierra (Tap exterior)
-            if(!document.getElementById('cart-nav').contains(e.target)) cartPopup.classList.remove('open'); 
+            // Cerrar menú hamburguesa si se toca fuera
+            if(!navMenu.contains(e.target) && !hamburger.contains(e.target)) { 
+                navMenu.classList.remove('open'); 
+                hamburger.classList.remove('open'); 
+            }
+            // Cerrar carrito si se toca fuera de su contenedor
+            if(!document.getElementById('cart-nav').contains(e.target)) {
+                cartPopup.classList.remove('open'); 
+            }
         };
     </script>
 
