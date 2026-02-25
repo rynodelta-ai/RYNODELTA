@@ -53,18 +53,6 @@
             box-shadow: 0 0 30px var(--color-gold) !important;
         }
 
-        .btn-regresar::before, .buy-btn::before, .checkout-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-            transform: skewX(-20deg);
-            animation: radar-sweep 4s infinite;
-        }
-
         @keyframes radar-sweep {
             0% { left: -150%; }
             20% { left: 150%; }
@@ -125,21 +113,12 @@
         .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); font-size: 1.2em; }
         .cart-popup { position: absolute; top: 50px; right: 0; width: 280px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); }
         .cart-popup.open { transform: translateX(0); }
-        
-        .cart-example-item { display: flex; align-items: center; gap: 10px; padding: 15px 0; border-bottom: 1px solid #222; }
-        .cart-example-img { width: 50px; height: 50px; border: 1px solid var(--color-gold); object-fit: cover; }
-        .cart-example-info { flex-grow: 1; font-size: 0.8em; }
-        .cart-example-qty { display: flex; align-items: center; gap: 5px; margin-top: 5px; }
-        .qty-btn-static { background: #111; border: 1px solid var(--color-gold); color: var(--color-gold); padding: 0 8px; font-weight: 900; }
 
         /* BANNER (PROTEGIDO 16:9) */
         #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: #000; overflow: hidden; }
         .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
         .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 2; pointer-events: none; }
         
-        /* LÍNEA DIVISORIA */
-        .divider-line { width: 80%; height: 1px; background: rgba(197, 166, 124, 0.3); margin: 25px auto; box-shadow: 0 0 10px rgba(197, 166, 124, 0.4); }
-
         /* SECCIONES */
         #morrales-page, #quienes-somos-page, #servicios-page, #contacto-page, #accesorios-page, #politica-page { 
             display: none; 
@@ -149,16 +128,8 @@
             margin: 0 auto; 
         }
 
-        .container-regresar {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-bottom: 40px;
-            margin-top: 10px; 
-        }
+        .container-regresar { display: flex; justify-content: center; width: 100%; margin-bottom: 40px; margin-top: 10px; }
 
-        #categories-section { padding: 20px 10px; max-width: 1200px; margin: 0 auto; }
-        .categories-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
         .category-item { width: 100%; max-width: 480px; }
         .aspect-ratio-box { position: relative; width: 100%; padding-top: 45%; }
         .category-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: 0.6s; }
@@ -192,19 +163,7 @@
     <div id="cart-nav">
         <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">1</span></div>
         <div class="cart-popup" id="cart-popup">
-            <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; text-align:center; font-size: 1em;">TU EQUIPO</h3>
-            <div class="cart-example-item">
-                <img src="morral1.jpg" class="cart-example-img">
-                <div class="cart-example-info">
-                    <div style="font-weight: 900; color: #fff;">ASALTO 45L</div>
-                    <div class="cart-example-qty">
-                        <button class="qty-btn-static">-</button>
-                        <span>1</span>
-                        <button class="qty-btn-static">+</button>
-                    </div>
-                </div>
-                <div style="font-weight: 900; color: var(--color-gold);">$145.000</div>
-            </div>
+            <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; text-align:center;">TU EQUIPO</h3>
             <button class="checkout-btn" onclick="alert('Iniciando compra...')">COMPRAR EQUIPO</button>
         </div>
     </div>
@@ -214,60 +173,41 @@
         <div class="video-overlay"></div>
     </section>
 
-    <div class="divider-line"></div>
+    <div style="width: 80%; height: 1px; background: rgba(197,166,124,0.3); margin: 25px auto;"></div>
 
-    <section id="categories-section">
-        <div class="categories-container">
+    <section id="categories-section" style="padding:20px; max-width:1200px; margin:0 auto;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
             <div class="category-item" onclick="showPage('morrales-page')">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('morrales.jpg');">
-                        <div class="category-overlay"><h4 class="category-title">MORRALES</h4></div>
-                    </div>
-                </div>
+                <div class="aspect-ratio-box"><div class="category-image" style="background-image: url('morrales.jpg');"><div class="category-overlay"><h4 class="category-title">MORRALES</h4></div></div></div>
             </div>
             <div class="category-item" onclick="showPage('accesorios-page')">
-                <div class="aspect-ratio-box">
-                    <div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');">
-                        <div class="category-overlay"><h4 class="category-title">ACCESORIOS PARA ARMAS</h4></div>
-                    </div>
-                </div>
+                <div class="aspect-ratio-box"><div class="category-image" style="background-image: url('ACCESORIOS PARA ARMAS.jpg');"><div class="category-overlay"><h4 class="category-title">ACCESORIOS PARA ARMAS</h4></div></div></div>
             </div>
         </div>
     </section>
 
     <section id="morrales-page">
-        <div class="container-regresar">
-            <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
-        </div>
+        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
         <div id="morrales-mosaico" class="mosaico-grid">
             <div class="mosaico-item" onclick="verProducto('0001')">
                 <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #0001</span>
                 <img src="morral1.jpg" class="mosaico-img">
                 <p style="font-size:0.9em; font-weight:800; margin:0;">ASALTO 45L</p>
             </div>
+            <div class="mosaico-item" onclick="verProducto('0002')">
+                <span style="color:var(--color-gold); font-size:0.7em; font-weight:900;">ID: #0002</span>
+                <img src="morral2.jpg" class="mosaico-img">
+                <p style="font-size:0.9em; font-weight:800; margin:0;">COMPACTO 25L</p>
+            </div>
         </div>
         <div id="morrales-landing" style="display:none;"></div>
     </section>
 
-    <section id="quienes-somos-page" style="text-align:center;">
-        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
-    </section>
-
-    <section id="servicios-page" style="text-align:center;">
-        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
-    </section>
-
-    <section id="contacto-page" style="text-align:center;">
-        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
-    </section>
-
-    <section id="accesorios-page" style="text-align:center;">
-        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
-    </section>
-
-    <section id="politica-page" style="text-align:center;">
-        <div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div>
-    </section>
+    <section id="quienes-somos-page" style="text-align:center;"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="servicios-page" style="text-align:center;"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="contacto-page" style="text-align:center;"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="accesorios-page" style="text-align:center;"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="politica-page" style="text-align:center;"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
 
     <script>
         const navMenu = document.getElementById('nav-menu-list');
@@ -277,7 +217,6 @@
         function showPage(id) {
             document.getElementById('main-banner').style.display = 'none';
             document.getElementById('categories-section').style.display = 'none';
-            document.querySelector('.divider-line').style.display = 'none';
             document.querySelectorAll('section[id$="-page"]').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
             if(id === 'morrales-page') { 
@@ -289,25 +228,26 @@
             window.scrollTo(0,0);
         }
 
-        hamburger.onclick = (e) => { 
-            e.stopPropagation(); 
-            hamburger.classList.toggle('open'); 
-            navMenu.classList.toggle('open'); 
-            cartPopup.classList.remove('open'); 
-        };
-        
-        document.getElementById('cart-icon').onclick = (e) => { 
-            e.stopPropagation(); 
-            cartPopup.classList.toggle('open'); 
-            navMenu.classList.remove('open'); 
-            hamburger.classList.remove('open');
-        };
+        function verProducto(id) {
+            document.getElementById('morrales-mosaico').style.display = 'none';
+            const landing = document.getElementById('morrales-landing');
+            landing.style.display = 'block';
+            const p = id === '0001' ? {n:'Morral de Asalto 45L', i:'morral1.jpg', pr:'$145.000'} : {n:'Morral Compacto 25L', i:'morral2.jpg', pr:'$95.000'};
+            landing.innerHTML = `<div class="container-regresar"><button class="btn-regresar" onclick="showPage('morrales-page')">← VOLVER AL CATÁLOGO</button></div>
+                <div style="background:#0a0a0a; border:1px solid var(--color-gold); border-radius:8px; overflow:hidden; margin-top:20px;">
+                    <img src="${p.i}" style="width:100%; max-height:450px; object-fit:cover;">
+                    <div style="padding:25px; text-align:center;">
+                        <h2 style="color:#fff;">${p.n}</h2>
+                        <span style="font-size:2.2em; font-weight:900; color:#fff; display:block; margin-bottom:20px;">${p.pr}</span>
+                        <button class="buy-btn" onclick="alert('Equipo añadido')">AÑADIR AL EQUIPO</button>
+                    </div>
+                </div>`;
+        }
 
+        hamburger.onclick = (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
+        document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); hamburger.classList.remove('open'); };
         document.onclick = (e) => { 
-            if(!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                navMenu.classList.remove('open'); 
-                hamburger.classList.remove('open');
-            }
+            if(!navMenu.contains(e.target) && !hamburger.contains(e.target)) { navMenu.classList.remove('open'); hamburger.classList.remove('open'); }
             if(!cartPopup.contains(e.target)) cartPopup.classList.remove('open'); 
         };
     </script>
