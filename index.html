@@ -9,7 +9,6 @@
     
     <style>
         :root {
-            /* CAMBIO A GRIS NARDO TÁCTICO */
             --color-dark: #4C4C4C; 
             --color-gold: #C5A67C; 
             --promo-bar-height: 45px; 
@@ -63,8 +62,8 @@
             box-shadow: 0 0 25px rgba(197, 166, 124, 0.5);
         }
 
-        /* BARRA PROMOCIONAL */
-        #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: #000; z-index: 10000; border-bottom: 1px solid #111; line-height: var(--promo-bar-height); text-align: center; }
+        /* BARRA PROMOCIONAL UNIFICADA */
+        #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: var(--color-dark); z-index: 10000; border-bottom: 1px solid rgba(255,255,255,0.1); line-height: var(--promo-bar-height); text-align: center; }
 
         /* NAVEGACIÓN Y MENÚ HAMBURGUESA */
         #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
@@ -103,8 +102,8 @@
         
         .cart-total-section { margin-top: 15px; padding-top: 10px; border-top: 2px solid var(--color-gold); text-align: right; }
 
-        /* BANNER 16:9 PROTEGIDO */
-        #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: #000; overflow: hidden; }
+        /* BANNER UNIFICADO AL GRIS NARDO */
+        #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: var(--color-dark); overflow: hidden; }
         .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
         
         /* SECCIONES */
