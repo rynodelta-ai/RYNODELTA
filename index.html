@@ -21,79 +21,61 @@
             color: #E0E0E0; overflow-x: hidden !important; line-height: 1.6;
         }
 
-        /* --- BOTONES (RESTAURADOS V1.3) --- */
+        /* --- BOTONES CON RADAR Y HUNDIMIENTO (V1.3) --- */
         .btn-regresar, .buy-btn, .checkout-btn {
             position: relative; background: rgba(197, 166, 124, 0.1) !important;
             border: 2px solid var(--color-gold) !important; color: var(--color-gold) !important;
             padding: 14px 30px; cursor: pointer; font-weight: 900; text-transform: uppercase;
-            letter-spacing: 3px; font-size: 0.85em; border-radius: 4px; overflow: hidden;
-            transition: all 0.2s ease !important;
+            letter-spacing: 3px; font-size: 0.85em; border-radius: 4px; transition: all 0.2s ease !important;
+            box-shadow: 0 0 15px rgba(197, 166, 124, 0.2); display: block; width: fit-content; margin: 0 auto; overflow: hidden;
         }
         .btn-regresar::after, .buy-btn::after, .checkout-btn::after {
-            content: ''; position: absolute; top: 50%; left: 50%; width: 5px; height: 5px;
-            background: rgba(197, 166, 124, 0.5); opacity: 0; border-radius: 100%;
-            animation: radar-pulse 3s infinite; transform: translate(-50%, -50%);
+            content: ''; position: absolute; top: 50%; left: 50%; width: 5px; height: 5px; background: rgba(197, 166, 124, 0.5);
+            opacity: 0; border-radius: 100%; transform: scale(1, 1) translate(-50%); transform-origin: 50% 50%; animation: radar-pulse 3s infinite;
         }
         @keyframes radar-pulse { 0% { transform: scale(0); opacity: 0; } 5% { opacity: 0.5; } 100% { transform: scale(40); opacity: 0; } }
-        .btn-regresar:active, .buy-btn:active, .checkout-btn:active { transform: scale(0.92) !important; }
+        .btn-regresar:active, .buy-btn:active, .checkout-btn:active { transform: scale(0.92) !important; filter: brightness(0.8); }
 
-        /* --- MÓDULOS TÁCTICOS (REPARADOS Y AISLADOS) --- */
-        .category-item, .mosaico-item {
-            position: relative; background: rgba(0,0,0,0.5); 
-            border: 1px solid rgba(197, 166, 124, 0.2); border-radius: 4px;
-            overflow: hidden; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+        /* --- CLASE AISLADA: TARJETA TÁCTICA (CATEGORÍAS Y PRODUCTOS) --- */
+        .tactical-card {
+            position: relative; background: rgba(0,0,0,0.5); border: 1px solid rgba(197, 166, 124, 0.2);
+            border-radius: 4px; overflow: hidden; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
+        /* Esquinas permanentes solo para estas tarjetas */
+        .tactical-card::before { content: ""; position: absolute; top: 0; left: 0; width: 10px; height: 10px; border-top: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); z-index: 2; }
+        .tactical-card::after { content: ""; position: absolute; bottom: 0; right: 0; width: 10px; height: 10px; border-bottom: 2px solid var(--color-gold); border-right: 2px solid var(--color-gold); z-index: 2; }
+        
+        /* Animación de Tap / Presión */
+        .tactical-card:active { transform: scale(0.95); filter: brightness(1.3); }
 
-        /* Esquinas solo para items, no para el menú */
-        .category-item::before, .mosaico-item::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 8px; height: 8px;
-            border-top: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); z-index: 2;
-        }
-        .category-item::after, .mosaico-item::after {
-            content: ""; position: absolute; bottom: 0; right: 0; width: 8px; height: 8px;
-            border-bottom: 2px solid var(--color-gold); border-right: 2px solid var(--color-gold); z-index: 2;
-        }
+        /* --- GRID Y GEOMETRÍA --- */
+        .mosaico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+        .mosaico-img-square { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-bottom: 1px solid rgba(197, 166, 124, 0.2); }
 
-        /* Animación de Tap/Presión */
-        .category-item:active, .mosaico-item:active {
-            transform: scale(0.96);
-            filter: brightness(1.4);
-        }
-
-        /* --- GRID DE 2 COLUMNAS Y ICONOS CUADRADOS --- */
-        .mosaico-grid { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; 
-        }
-        .mosaico-img { 
-            width: 100%; aspect-ratio: 1 / 1; object-fit: cover; 
-            border-radius: 2px; margin-bottom: 8px; display: block;
-        }
-
-        /* --- MENÚ Y CARRITO (RESTAURADOS) --- */
+        /* --- MENÚ Y CARRITO (ESTRUCTURA PROTEGIDA V1.3) --- */
         #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: var(--color-dark); z-index: 10000; border-bottom: 1px solid rgba(255,255,255,0.1); line-height: var(--promo-bar-height); text-align: center; }
         #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
-        .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; }
+        .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
         .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; }
         .hamburger.open .line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.open .line:nth-child(2) { opacity: 0; }
         .hamburger.open .line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-        
-        .nav-menu { list-style: none; padding: 20px 0; margin: 0; position: absolute; top: 50px; left: 0; width: 260px; background-color: rgba(0, 0, 0, 0.98); border-top: 2px solid var(--color-gold); transform: translateX(-110%); transition: 0.5s; }
+        .nav-menu { list-style: none; padding: 20px 0; margin: 0; position: absolute; top: 50px; left: 0; width: 260px; background-color: rgba(0, 0, 0, 0.98); border-top: 2px solid var(--color-gold); transform: translateX(-110%); transition: 0.5s; box-shadow: 10px 0 20px rgba(0,0,0,0.8); }
         .nav-menu.open { transform: translateX(0); }
-        .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; border-bottom: 1px solid #111; cursor: pointer; }
+        .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; }
 
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
-        .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; }
-        .cart-popup { position: absolute; top: 50px; right: 0; width: 300px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s; padding: 20px; border-left: 2px solid var(--color-gold); }
+        .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
+        .cart-popup { position: absolute; top: 50px; right: 0; width: 310px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s; padding: 20px; border-left: 2px solid var(--color-gold); }
         .cart-popup.open { transform: translateX(0); }
         .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #222; }
         .cart-item-img { width: 45px; height: 45px; object-fit: cover; }
 
         #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); }
-        .banner-video { width: 100%; height: auto; display: block; }
-        #home-content { padding: 20px; }
-        footer { text-align: center; padding: 40px; color: #ccc; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.1); }
+        .banner-video { width: 100%; height: auto; display: block; aspect-ratio: 16/9; object-fit: cover; }
+        #morrales-page, #accesorios-page, #quienes-somos-page, #servicios-page, #contacto-page, #politica-page { display: none; padding: 120px 20px 60px; max-width: 1000px; margin: 0 auto; }
+        footer { text-align: center; padding: 40px; color: #ccc; font-size: 0.8em; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; }
     </style>
 </head>
 <body>
@@ -107,23 +89,23 @@
         <ul class="nav-menu" id="nav-menu-list">
             <li onclick="location.reload()">INICIO</li>
             <li onclick="showPage('quienes-somos-page')">QUIÉNES SOMOS</li>
+            <li onclick="showPage('servicios-page')">SERVICIOS</li>
             <li onclick="showPage('contacto-page')">CONTACTO</li>
+            <li onclick="showPage('politica-page')">POLÍTICA</li>
         </ul>
     </nav>
 
     <div id="cart-nav" onmouseleave="closeMenus()">
-        <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; padding:2px 5px; border-radius:50%; font-size:10px;">3</span></div>
+        <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:10px; padding:2px 5px; border-radius:50%; font-weight:900;">3</span></div>
         <div class="cart-popup" id="cart-popup">
-            <h3 style="color:var(--color-gold); text-align:center;">TU EQUIPO</h3>
+            <h3 style="color:var(--color-gold); text-align:center; font-size:0.9em; border-bottom:1px solid #333; padding-bottom:10px;">TU EQUIPO</h3>
             <div id="cart-items-container">
-                <div class="cart-item" data-price="145000">
-                    <img src="morral1.jpg" class="cart-item-img">
-                    <div style="flex-grow:1;"><p style="font-size:0.7em; margin:0;">ASALTO 45L</p></div>
-                    <button class="remove-btn" onclick="removeItem(this)" style="background:none; border:none; color:var(--color-gold);">🗑</button>
-                </div>
+                <div class="cart-item" data-price="145000"><img src="morral1.jpg" class="cart-item-img"><div style="flex-grow:1;"><p style="font-size:0.7em; margin:0; font-weight:900;">ASALTO 45L</p><div style="display:flex; align-items:center; gap:5px;"><button onclick="updateQty(this, -1)" style="background:none; border:1px solid var(--color-gold); color:var(--color-gold);">-</button><span class="qty-val">1</span><button onclick="updateQty(this, 1)" style="background:none; border:1px solid var(--color-gold); color:var(--color-gold);">+</button></div></div><button class="remove-btn" onclick="removeItem(this)" style="background:none; border:none; color:var(--color-gold);">🗑</button></div>
+                <div class="cart-item" data-price="85000"><img src="ACCESORIOS PARA ARMAS.jpg" class="cart-item-img"><div style="flex-grow:1;"><p style="font-size:0.7em; margin:0; font-weight:900;">GUANTES</p><div style="display:flex; align-items:center; gap:5px;"><button onclick="updateQty(this, -1)" style="background:none; border:1px solid var(--color-gold); color:var(--color-gold);">-</button><span class="qty-val">1</span><button onclick="updateQty(this, 1)" style="background:none; border:1px solid var(--color-gold); color:var(--color-gold);">+</button></div></div><button class="remove-btn" onclick="removeItem(this)" style="background:none; border:none; color:var(--color-gold);">🗑</button></div>
+                <div class="cart-item" data-price="95000"><img src="morral2.jpg" class="cart-item-img"><div style="flex-grow:1;"><p style="font-size:0.7em; margin:0; font-weight:900;">COMPACTO 25L</p><div style="display:flex; align-items:center; gap:5px;"><button onclick="updateQty(this, -1)" style="background:none; border:1px solid var(--color-gold); color:var(--color-gold);">-</button><span class="qty-val">1</span><button onclick="updateQty(this, 1)" style="background:none; border:1px solid var(--color-gold); color:var(--color-gold);">+</button></div></div><button class="remove-btn" onclick="removeItem(this)" style="background:none; border:none; color:var(--color-gold);">🗑</button></div>
             </div>
-            <div class="cart-total-section"><p>TOTAL: <span id="cart-subtotal">$325.000</span></p></div>
-            <button class="checkout-btn" style="width:100%;">COMPRAR</button>
+            <div class="cart-total-section"><p style="font-weight:900;">TOTAL: <span id="cart-subtotal">$325.000</span></p></div>
+            <button class="checkout-btn" style="width:100%;">COMPRAR EQUIPO</button>
         </div>
     </div>
 
@@ -131,37 +113,38 @@
         <video class="banner-video" autoplay muted loop playsinline><source src="VIDEO1.mp4" type="video/mp4"></video>
     </section>
 
-    <div id="home-content">
-        <div class="mosaico-grid" style="grid-template-columns: 1fr; gap: 25px;">
-            <div class="category-item" onclick="showPage('morrales-page')">
+    <div id="home-content" style="padding:20px;">
+        <div style="display:grid; grid-template-columns: 1fr; gap:25px;">
+            <div class="tactical-card" onclick="showPage('morrales-page')">
                 <img src="morrales.jpg" style="width:100%; height:180px; object-fit:cover; display:block;">
-                <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
-                    <h4 style="color:var(--color-gold); font-weight:900;">MORRALES</h4>
-                </div>
+                <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;"><h4 style="color:var(--color-gold); font-weight:900; letter-spacing:2px;">MORRALES</h4></div>
             </div>
-            <div class="category-item" onclick="showPage('accesorios-page')">
+            <div class="tactical-card" onclick="showPage('accesorios-page')">
                 <img src="ACCESORIOS PARA ARMAS.jpg" style="width:100%; height:180px; object-fit:cover; display:block;">
-                <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
-                    <h4 style="color:var(--color-gold); font-weight:900;">ACCESORIOS</h4>
-                </div>
+                <div style="position:absolute; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;"><h4 style="color:var(--color-gold); font-weight:900; letter-spacing:2px;">ACCESORIOS</h4></div>
             </div>
         </div>
     </div>
 
-    <section id="morrales-page" style="display:none; padding: 100px 20px;">
-        <button class="btn-regresar" onclick="location.reload()">← VOLVER</button>
-        <div class="mosaico-grid">
-            <div class="mosaico-item" onclick="verProducto('0001', 'morrales')">
-                <img src="morral1.jpg" class="mosaico-img">
-                <p style="font-size:0.8em; font-weight:800; margin:0;">ASALTO 45L</p>
+    <section id="morrales-page">
+        <button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button>
+        <div id="morrales-mosaico" class="mosaico-grid">
+            <div class="tactical-card" onclick="verProducto('0001', 'morrales')">
+                <img src="morral1.jpg" class="mosaico-img-square">
+                <p style="text-align:center; font-weight:800; font-size:0.75em; padding:10px 0;">ASALTO 45L</p>
             </div>
-            <div class="mosaico-item" onclick="verProducto('0002', 'morrales')">
-                <img src="morral2.jpg" class="mosaico-img">
-                <p style="font-size:0.8em; font-weight:800; margin:0;">COMPACTO 25L</p>
+            <div class="tactical-card" onclick="verProducto('0002', 'morrales')">
+                <img src="morral2.jpg" class="mosaico-img-square">
+                <p style="text-align:center; font-weight:800; font-size:0.75em; padding:10px 0;">COMPACTO 25L</p>
             </div>
         </div>
         <div id="morrales-landing" style="display:none;"></div>
     </section>
+
+    <section id="quienes-somos-page"><button class="btn-regresar" onclick="location.reload()">← VOLVER</button><h2 style="text-align:center; color:var(--color-gold);">QUIÉNES SOMOS</h2></section>
+    <section id="servicios-page"><button class="btn-regresar" onclick="location.reload()">← VOLVER</button><h2 style="text-align:center; color:var(--color-gold);">SERVICIOS</h2></section>
+    <section id="contacto-page"><button class="btn-regresar" onclick="location.reload()">← VOLVER</button><h2 style="text-align:center; color:var(--color-gold);">CONTACTO</h2></section>
+    <section id="politica-page"><button class="btn-regresar" onclick="location.reload()">← VOLVER</button><h2 style="text-align:center; color:var(--color-gold);">POLÍTICA</h2></section>
 
     <script>
         const navMenu = document.getElementById('nav-menu-list');
@@ -169,21 +152,43 @@
         const hamburger = document.getElementById('hamburger-icon');
 
         function closeMenus() { navMenu.classList.remove('open'); hamburger.classList.remove('open'); cartPopup.classList.remove('open'); }
-        
         hamburger.onclick = (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
         document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); hamburger.classList.remove('open'); };
+
+        function updateQty(btn, change) { 
+            const qtyElement = btn.parentElement.querySelector('.qty-val'); 
+            qtyElement.innerText = Math.max(1, parseInt(qtyElement.innerText) + change); 
+            calculateSubtotal(); 
+        }
+        function removeItem(btn) { 
+            btn.parentElement.parentElement.remove(); 
+            calculateSubtotal(); 
+            document.getElementById('cart-count').innerText = document.querySelectorAll('.cart-item').length; 
+        }
+        function calculateSubtotal() { 
+            let total = 0; 
+            document.querySelectorAll('.cart-item').forEach(item => { 
+                total += parseInt(item.getAttribute('data-price')) * parseInt(item.querySelector('.qty-val').innerText); 
+            }); 
+            document.getElementById('cart-subtotal').innerText = '$' + total.toLocaleString('es-CO'); 
+        }
 
         function showPage(id) {
             document.getElementById('main-banner').style.display = 'none';
             document.getElementById('home-content').style.display = 'none';
             document.querySelectorAll('section').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
-            closeMenus();
+            closeMenus(); window.scrollTo(0,0);
         }
 
         function verProducto(id, cat) {
             document.getElementById(cat + '-mosaico').style.display = 'none';
-            // Lógica de landing simplificada para mantener integridad
+            const landing = document.getElementById(cat + '-landing');
+            landing.style.display = 'block';
+            const p = {'0001':{n:'ASALTO 45L', i:'morral1.jpg', pr:'$145.000'},'0002':{n:'COMPACTO 25L', i:'morral2.jpg', pr:'$95.000'}}[id];
+            landing.innerHTML = `<button class="btn-regresar" onclick="document.getElementById('${cat}-mosaico').style.display='grid'; document.getElementById('${cat}-landing').style.display='none'">← CATÁLOGO</button>
+                <div class="tactical-card" style="margin-top:20px; text-align:center;"><img src="${p.i}" style="width:100%; max-height:400px; object-fit:cover;">
+                <div style="padding:20px;"><h2 style="color:#fff;">${p.n}</h2><span style="font-size:1.5em; color:var(--color-gold); font-weight:900;">${p.pr}</span><button class="buy-btn">AÑADIR AL EQUIPO</button></div></div>`;
         }
     </script>
 
