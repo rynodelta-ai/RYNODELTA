@@ -21,7 +21,7 @@
             color: #E0E0E0; overflow-x: hidden !important; line-height: 1.6;
         }
 
-        /* --- BOTONES TÁCTICOS --- */
+        /* --- BOTONES TÁCTICOS UNIFICADOS --- */
         .btn-regresar, .buy-btn, .checkout-btn {
             position: relative;
             background: rgba(197, 166, 124, 0.1) !important;
@@ -45,7 +45,8 @@
         .btn-regresar:hover, .buy-btn:hover, .checkout-btn:hover {
             background-color: var(--color-gold) !important;
             color: #000 !important;
-            transform: scale(0.95);
+            transform: scale(0.92) !important;
+            box-shadow: 0 0 30px var(--color-gold) !important;
         }
 
         .buy-btn, .checkout-btn { width: 100% !important; max-width: 400px; margin-top: 20px; }
@@ -64,7 +65,7 @@
         /* BARRA PROMOCIONAL */
         #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: #000; z-index: 10000; border-bottom: 1px solid #111; line-height: var(--promo-bar-height); text-align: center; }
 
-        /* NAVEGACIÓN */
+        /* NAVEGACIÓN Y MENÚ HAMBURGUESA ORIGINAL */
         #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
         .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
         .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; }
@@ -76,41 +77,44 @@
             list-style: none; padding: 20px 0; margin: 0; position: absolute; top: 50px; left: 0; width: 260px; 
             background-color: rgba(0, 0, 0, 0.98); border-top: 2px solid var(--color-gold); 
             transform: translateX(-110%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 10px 0 20px rgba(0,0,0,0.8);
         }
         .nav-menu.open { transform: translateX(0); }
-        .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; }
+        .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; transition: all 0.3s ease; }
+        .nav-menu li:hover { color: var(--color-gold); padding-left: 35px; background: rgba(197, 166, 124, 0.05); }
 
-        /* CARRITO (CLIC/TAP SOLAMENTE) */
+        /* CARRITO DINÁMICO */
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
         .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); font-size: 1.2em; }
         .cart-popup { position: absolute; top: 50px; right: 0; width: 310px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); }
         .cart-popup.open { transform: translateX(0); }
 
-        /* ESTILOS INTERNOS CARRITO */
         .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #222; }
         .cart-item-img { width: 45px; height: 45px; object-fit: cover; border: 1px solid #333; }
         .cart-item-info { flex-grow: 1; }
-        .cart-item-name { font-size: 0.75em; font-weight: 900; color: #fff; margin: 0; }
+        .cart-item-name { font-size: 0.75em; font-weight: 900; color: #fff; margin: 0; text-transform: uppercase; }
         .cart-controls { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
-        .qty-btn { background: none; border: 1px solid var(--color-gold); color: var(--color-gold); width: 20px; height: 20px; cursor: pointer; font-weight: 900; line-height: 1; }
+        .qty-btn { background: none; border: 1px solid var(--color-gold); color: var(--color-gold); width: 22px; height: 22px; cursor: pointer; font-weight: 900; line-height: 1; border-radius: 2px; }
         .qty-val { font-size: 0.8em; font-weight: 900; }
-        .remove-btn { background: none; border: none; color: var(--color-gold); cursor: pointer; font-size: 1.1em; margin-left: auto; }
+        .remove-btn { background: none; border: none; color: var(--color-gold); cursor: pointer; font-size: 1.1em; margin-left: auto; transition: 0.3s; }
+        .remove-btn:hover { color: #ff4444; transform: scale(1.1); }
         .cart-total-section { margin-top: 15px; padding-top: 10px; border-top: 2px solid var(--color-gold); text-align: right; }
 
-        /* BANNER */
+        /* BANNER 16:9 PROTEGIDO */
         #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: #000; overflow: hidden; }
         .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
         
         /* SECCIONES */
         #morrales-page, #accesorios-page, #quienes-somos-page, #servicios-page, #contacto-page, #politica-page { 
-            display: none; padding: 120px 20px 60px 20px; max-width: 1000px; margin: 0 auto; 
+            display: none; padding: 140px 20px 60px 20px; max-width: 1000px; margin: 0 auto; 
         }
+        .container-regresar { display: flex; justify-content: center; width: 100%; margin-bottom: 40px; margin-top: 10px; }
 
         .mosaico-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-top: 30px; }
         .mosaico-item { padding: 15px; text-align: center; }
         .mosaico-img { width: 100%; height: 160px; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
 
-        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; }
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; border-top: 1px solid #111; margin-top: 40px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -119,7 +123,7 @@
         <marquee scrollamount="4" style="color: var(--color-gold); font-weight: 900;">⚠️ ENVÍO GRATIS Y OBSEQUIO POR COMPRAS SUPERIORES A $80.000 ⚠️</marquee>
     </div>
 
-    <nav id="main-nav">
+    <nav id="main-nav" onmouseleave="closeMenus()">
         <div class="hamburger" id="hamburger-icon"><span class="line"></span><span class="line"></span><span class="line"></span></div>
         <ul class="nav-menu" id="nav-menu-list">
             <li onclick="location.reload()">INICIO</li>
@@ -130,7 +134,7 @@
         </ul>
     </nav>
 
-    <div id="cart-nav">
+    <div id="cart-nav" onmouseleave="closeMenus()">
         <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">2</span></div>
         <div class="cart-popup" id="cart-popup">
             <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; text-align:center; font-size: 0.9em;">TU EQUIPO</h3>
@@ -163,7 +167,7 @@
                 </div>
             </div>
             <div class="cart-total-section">
-                <p style="font-weight:900; color:#fff;">SUBTOTAL: <span id="cart-subtotal">$230.000</span></p>
+                <p style="font-weight:900; color:#fff; font-size: 1em;">SUBTOTAL: <span id="cart-subtotal">$230.000</span></p>
             </div>
             <button class="checkout-btn" onclick="alert('Iniciando compra...')">COMPRAR EQUIPO</button>
         </div>
@@ -228,21 +232,27 @@
         <div id="accesorios-landing" style="display:none;"></div>
     </section>
 
-    <section id="quienes-somos-page" style="text-align:center;"><button class="btn-regresar" onclick="location.reload()">VOLVER</button><h2 style="margin-top:20px;">QUIÉNES SOMOS</h2></section>
-    <section id="servicios-page" style="text-align:center;"><button class="btn-regresar" onclick="location.reload()">VOLVER</button><h2 style="margin-top:20px;">SERVICIOS</h2></section>
-    <section id="contacto-page" style="text-align:center;"><button class="btn-regresar" onclick="location.reload()">VOLVER</button><h2 style="margin-top:20px;">CONTACTO</h2></section>
-    <section id="politica-page" style="text-align:center;"><button class="btn-regresar" onclick="location.reload()">VOLVER</button><h2 style="margin-top:20px;">POLÍTICA</h2></section>
+    <section id="quienes-somos-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="servicios-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="contacto-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
+    <section id="politica-page"><div class="container-regresar"><button class="btn-regresar" onclick="location.reload()">← VOLVER AL INICIO</button></div></section>
 
     <script>
         const navMenu = document.getElementById('nav-menu-list');
         const cartPopup = document.getElementById('cart-popup');
         const hamburger = document.getElementById('hamburger-icon');
 
-        // LÓGICA CARRITO
+        // LÓGICA DE CIERRE AUTOMÁTICO (PC)
+        function closeMenus() {
+            navMenu.classList.remove('open');
+            hamburger.classList.remove('open');
+            cartPopup.classList.remove('open');
+        }
+
+        // LÓGICA DINÁMICA DEL CARRITO
         function updateQty(btn, change) {
             const qtyElement = btn.parentElement.querySelector('.qty-val');
-            let currentQty = Math.max(1, parseInt(qtyElement.innerText) + change);
-            qtyElement.innerText = currentQty;
+            qtyElement.innerText = Math.max(1, parseInt(qtyElement.innerText) + change);
             calculateSubtotal();
         }
 
@@ -260,52 +270,35 @@
             document.getElementById('cart-subtotal').innerText = '$' + total.toLocaleString('es-CO');
         }
 
-        // NAVEGACIÓN
+        // NAVEGACIÓN SPA
         function showPage(id) {
             document.getElementById('main-banner').style.display = 'none';
             document.getElementById('home-content').style.display = 'none';
             document.querySelectorAll('section[id$="-page"]').forEach(s => s.style.display = 'none');
             document.getElementById(id).style.display = 'block';
-            navMenu.classList.remove('open');
-            hamburger.classList.remove('open');
+            closeMenus();
             window.scrollTo(0,0);
         }
 
         function verProducto(id, cat) {
-            const mosaico = document.getElementById(cat + '-mosaico');
+            document.getElementById(cat + '-mosaico').style.display = 'none';
             const landing = document.getElementById(cat + '-landing');
-            mosaico.style.display = 'none';
             landing.style.display = 'block';
-            
-            // Simulación de datos para la restauración
-            const p = {
-                '0001': {n:'Morral de Asalto 45L', i:'morral1.jpg', pr:'$145.000'},
-                '0002': {n:'Morral Compacto 25L', i:'morral2.jpg', pr:'$95.000'},
-                '1001': {n:'Guantes Tácticos Reforzados', i:'ACCESORIOS PARA ARMAS.jpg', pr:'$85.000'}
-            }[id];
-
-            landing.innerHTML = `
-                <div class="container-regresar"><button class="btn-regresar" onclick="regresarMosaico('${cat}')">← VOLVER AL CATÁLOGO</button></div>
-                <div style="background:#0a0a0a; border:1px solid var(--color-gold); border-radius:8px; overflow:hidden; margin-top:20px; text-align:center;">
+            const p = {'0001':{n:'ASALTO 45L', i:'morral1.jpg', pr:'$145.000'},'0002':{n:'COMPACTO 25L', i:'morral2.jpg', pr:'$95.000'},'1001':{n:'GUANTES TÁCTICOS', i:'ACCESORIOS PARA ARMAS.jpg', pr:'$85.000'}}[id];
+            landing.innerHTML = `<div class="container-regresar"><button class="btn-regresar" onclick="document.getElementById('${cat}-mosaico').style.display='grid'; document.getElementById('${cat}-landing').style.display='none'">← VOLVER AL CATÁLOGO</button></div>
+                <div style="background:#0a0a0a; border:1px solid var(--color-gold); border-radius:8px; overflow:hidden; text-align:center;">
                     <img src="${p.i}" style="width:100%; max-height:450px; object-fit:cover;">
-                    <div style="padding:25px;">
-                        <h2 style="color:#fff;">${p.n}</h2>
-                        <span style="font-size:2em; font-weight:900; color:var(--color-gold); display:block; margin-bottom:20px;">${p.pr}</span>
-                        <button class="buy-btn" onclick="alert('Añadido al equipo')">AÑADIR AL EQUIPO</button>
-                    </div>
+                    <div style="padding:25px;"><h2 style="color:#fff;">${p.n}</h2><span style="font-size:2em; font-weight:900; color:var(--color-gold); display:block; margin-bottom:20px;">${p.pr}</span><button class="buy-btn" onclick="alert('Equipo añadido')">AÑADIR AL EQUIPO</button></div>
                 </div>`;
         }
 
-        function regresarMosaico(cat) {
-            document.getElementById(cat + '-mosaico').style.display = 'grid';
-            document.getElementById(cat + '-landing').style.display = 'none';
-        }
-
-        // EVENTOS CLIC
+        // EVENTOS DE APERTURA (CLIC)
         hamburger.onclick = (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
         document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); hamburger.classList.remove('open'); };
+        
+        // CIERRE POR CLIC EXTERNO (MÓVIL)
         document.onclick = (e) => { 
-            if(!navMenu.contains(e.target) && !hamburger.contains(e.target)) { navMenu.classList.remove('open'); hamburger.classList.remove('open'); }
+            if(!document.getElementById('main-nav').contains(e.target)) { navMenu.classList.remove('open'); hamburger.classList.remove('open'); }
             if(!document.getElementById('cart-nav').contains(e.target)) cartPopup.classList.remove('open'); 
         };
     </script>
