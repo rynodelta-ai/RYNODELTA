@@ -65,7 +65,7 @@
         /* BARRA PROMOCIONAL */
         #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: #000; z-index: 10000; border-bottom: 1px solid #111; line-height: var(--promo-bar-height); text-align: center; }
 
-        /* NAVEGACIÓN Y MENÚ HAMBURGUESA ORIGINAL */
+        /* NAVEGACIÓN Y MENÚ HAMBURGUESA */
         #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
         .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
         .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; }
@@ -96,8 +96,11 @@
         .cart-controls { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
         .qty-btn { background: none; border: 1px solid var(--color-gold); color: var(--color-gold); width: 22px; height: 22px; cursor: pointer; font-weight: 900; line-height: 1; border-radius: 2px; }
         .qty-val { font-size: 0.8em; font-weight: 900; }
-        .remove-btn { background: none; border: none; color: var(--color-gold); cursor: pointer; font-size: 1.1em; margin-left: auto; transition: 0.3s; }
+        
+        /* CANEQUITAS DE BASURA ESTILIZADAS */
+        .remove-btn { background: none; border: none; color: var(--color-gold); cursor: pointer; font-size: 1.2em; margin-left: auto; transition: 0.3s; padding: 5px; }
         .remove-btn:hover { color: #ff4444; transform: scale(1.1); }
+        
         .cart-total-section { margin-top: 15px; padding-top: 10px; border-top: 2px solid var(--color-gold); text-align: right; }
 
         /* BANNER 16:9 PROTEGIDO */
@@ -150,7 +153,7 @@
                             <span style="font-size: 0.7em; color:var(--color-gold); margin-left:5px;">$145.000</span>
                         </div>
                     </div>
-                    <button class="remove-btn" onclick="removeItem(this)">✕</button>
+                    <button class="remove-btn" onclick="removeItem(this)" title="Eliminar">🗑</button>
                 </div>
                 <div class="cart-item" data-price="85000">
                     <img src="ACCESORIOS PARA ARMAS.jpg" class="cart-item-img">
@@ -163,7 +166,7 @@
                             <span style="font-size: 0.7em; color:var(--color-gold); margin-left:5px;">$85.000</span>
                         </div>
                     </div>
-                    <button class="remove-btn" onclick="removeItem(this)">✕</button>
+                    <button class="remove-btn" onclick="removeItem(this)" title="Eliminar">🗑</button>
                 </div>
             </div>
             <div class="cart-total-section">
@@ -242,14 +245,12 @@
         const cartPopup = document.getElementById('cart-popup');
         const hamburger = document.getElementById('hamburger-icon');
 
-        // LÓGICA DE CIERRE AUTOMÁTICO (PC)
         function closeMenus() {
             navMenu.classList.remove('open');
             hamburger.classList.remove('open');
             cartPopup.classList.remove('open');
         }
 
-        // LÓGICA DINÁMICA DEL CARRITO
         function updateQty(btn, change) {
             const qtyElement = btn.parentElement.querySelector('.qty-val');
             qtyElement.innerText = Math.max(1, parseInt(qtyElement.innerText) + change);
@@ -270,7 +271,6 @@
             document.getElementById('cart-subtotal').innerText = '$' + total.toLocaleString('es-CO');
         }
 
-        // NAVEGACIÓN SPA
         function showPage(id) {
             document.getElementById('main-banner').style.display = 'none';
             document.getElementById('home-content').style.display = 'none';
@@ -292,11 +292,9 @@
                 </div>`;
         }
 
-        // EVENTOS DE APERTURA (CLIC)
         hamburger.onclick = (e) => { e.stopPropagation(); hamburger.classList.toggle('open'); navMenu.classList.toggle('open'); cartPopup.classList.remove('open'); };
         document.getElementById('cart-icon').onclick = (e) => { e.stopPropagation(); cartPopup.classList.toggle('open'); navMenu.classList.remove('open'); hamburger.classList.remove('open'); };
         
-        // CIERRE POR CLIC EXTERNO (MÓVIL)
         document.onclick = (e) => { 
             if(!document.getElementById('main-nav').contains(e.target)) { navMenu.classList.remove('open'); hamburger.classList.remove('open'); }
             if(!document.getElementById('cart-nav').contains(e.target)) cartPopup.classList.remove('open'); 
