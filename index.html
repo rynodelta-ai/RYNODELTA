@@ -43,7 +43,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Efecto Radar */
         .btn-regresar::after, .buy-btn::after, .checkout-btn::after {
             content: '';
             position: absolute;
@@ -65,7 +64,6 @@
             100% { transform: scale(40); opacity: 0; }
         }
 
-        /* Hundimiento */
         .btn-regresar:active, .buy-btn:active, .checkout-btn:active {
             transform: scale(0.92) !important;
             filter: brightness(0.8);
@@ -79,7 +77,6 @@
 
         .buy-btn, .checkout-btn { width: 100% !important; max-width: 400px; margin-top: 20px; }
 
-        /* --- CATEGORÍAS Y MOSAICO --- */
         .category-item, .mosaico-item {
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             cursor: pointer; background: rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden;
@@ -90,10 +87,8 @@
             box-shadow: 0 0 25px rgba(197, 166, 124, 0.5);
         }
 
-        /* BARRA PROMOCIONAL */
         #promo-bar { position: fixed; top: 0; width: 100%; height: var(--promo-bar-height); background: var(--color-dark); z-index: 10000; border-bottom: 1px solid rgba(255,255,255,0.1); line-height: var(--promo-bar-height); text-align: center; }
 
-        /* NAVEGACIÓN Y HAMBURGUESA */
         #main-nav { position: fixed; top: var(--promo-bar-height); left: 0; z-index: 9999; }
         .hamburger { padding: 15px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-around; width: 25px; height: 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 5px 0; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); }
         .line { display: block; width: 100%; height: 3px; background-color: var(--color-gold); transition: 0.3s; }
@@ -111,7 +106,6 @@
         .nav-menu li { padding: 15px 25px; color: #fff; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #111; cursor: pointer; transition: all 0.3s ease; }
         .nav-menu li:hover { color: var(--color-gold); padding-left: 35px; background: rgba(197, 166, 124, 0.05); }
 
-        /* CARRITO */
         #cart-nav { position: fixed; top: var(--promo-bar-height); right: 0; z-index: 9999; }
         .cart-icon { padding: 15px; cursor: pointer; background-color: rgba(0, 0, 0, 0.6); border-radius: 0 0 0 5px; box-shadow: 0 0 10px 2px rgba(197, 166, 124, 0.3); font-size: 1.2em; }
         .cart-popup { position: absolute; top: 50px; right: 0; width: 310px; background: rgba(0,0,0,0.98); transform: translateX(110%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1); padding: 20px; border-left: 2px solid var(--color-gold); }
@@ -128,11 +122,9 @@
         .remove-btn:hover { color: #ff4444; transform: scale(1.1); }
         .cart-total-section { margin-top: 15px; padding-top: 10px; border-top: 2px solid var(--color-gold); text-align: right; }
 
-        /* BANNER */
         #main-banner { position: relative; width: 100%; margin-top: var(--promo-bar-height); background: transparent !important; overflow: hidden; display: flex; justify-content: center; }
         .banner-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: transparent !important; }
         
-        /* SECCIONES */
         #morrales-page, #accesorios-page, #quienes-somos-page, #servicios-page, #contacto-page, #politica-page { 
             display: none; padding: 140px 20px 60px 20px; max-width: 1000px; margin: 0 auto; 
         }
@@ -162,7 +154,7 @@
     </nav>
 
     <div id="cart-nav" onmouseleave="closeMenus()">
-        <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">2</span></div>
+        <div class="cart-icon" id="cart-icon">🛒 <span id="cart-count" style="background:var(--color-gold); color:#000; font-size:0.6em; padding:2px 5px; border-radius:50%; font-weight:900;">3</span></div>
         <div class="cart-popup" id="cart-popup">
             <h3 style="color:var(--color-gold); border-bottom: 1px solid #333; padding-bottom: 10px; text-align:center; font-size: 0.9em;">TU EQUIPO</h3>
             <div id="cart-items-container">
@@ -171,9 +163,19 @@
                     <div class="cart-item-info"><p class="cart-item-name">ASALTO 45L</p><div class="cart-controls"><button class="qty-btn" onclick="updateQty(this, -1)">-</button><span class="qty-val">1</span><button class="qty-btn" onclick="updateQty(this, 1)">+</button><span style="font-size: 0.7em; color:var(--color-gold); margin-left:5px;">$145.000</span></div></div>
                     <button class="remove-btn" onclick="removeItem(this)">🗑</button>
                 </div>
+                <div class="cart-item" data-price="85000">
+                    <img src="ACCESORIOS PARA ARMAS.jpg" class="cart-item-img">
+                    <div class="cart-item-info"><p class="cart-item-name">GUANTES TÁCTICOS</p><div class="cart-controls"><button class="qty-btn" onclick="updateQty(this, -1)">-</button><span class="qty-val">1</span><button class="qty-btn" onclick="updateQty(this, 1)">+</button><span style="font-size: 0.7em; color:var(--color-gold); margin-left:5px;">$85.000</span></div></div>
+                    <button class="remove-btn" onclick="removeItem(this)">🗑</button>
+                </div>
+                <div class="cart-item" data-price="95000">
+                    <img src="morral2.jpg" class="cart-item-img">
+                    <div class="cart-item-info"><p class="cart-item-name">COMPACTO 25L</p><div class="cart-controls"><button class="qty-btn" onclick="updateQty(this, -1)">-</button><span class="qty-val">1</span><button class="qty-btn" onclick="updateQty(this, 1)">+</button><span style="font-size: 0.7em; color:var(--color-gold); margin-left:5px;">$95.000</span></div></div>
+                    <button class="remove-btn" onclick="removeItem(this)">🗑</button>
+                </div>
             </div>
             <div class="cart-total-section">
-                <p style="font-weight:900; color:#fff; font-size: 1em;">SUBTOTAL: <span id="cart-subtotal">$145.000</span></p>
+                <p style="font-weight:900; color:#fff; font-size: 1em;">SUBTOTAL: <span id="cart-subtotal">$325.000</span></p>
             </div>
             <button class="checkout-btn" onclick="alert('Iniciando compra...')">COMPRAR EQUIPO</button>
         </div>
